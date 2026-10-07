@@ -120,7 +120,7 @@ function streak(){
 }
 
 /* ---------- niveaux & XP ---------- */
-const LEVELS = [[0,'Chevreau stagiaire'],[150,'Chèvre clerc'],[400,'Chèvre juriste'],[800,'Chèvre notaire'],[1400,'LA GOAT'],[2200,'GOAT légendaire'],[3200,'GOAT éternelle']];
+const LEVELS = [[0,'Jade la Neuille'],[150,'Jade Chiki brrr'],[400,'Jadorlabite'],[800,'Chèvre notaire'],[1400,'LA GOAT'],[2200,'GOAT légendaire'],[3200,'GOAT éternelle']];
 function levelOf(xp){
   let i = 0; LEVELS.forEach((l, k) => { if (xp >= l[0]) i = k; });
   const cur = LEVELS[i][0], next = LEVELS[i + 1] ? LEVELS[i + 1][0] : null;
