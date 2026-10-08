@@ -36,7 +36,7 @@ JLG.widget('loi', el => {
   el.innerHTML = `<div class="w w-loi">
     <div class="w-head"><span class="eyebrow">Schéma animé</span><b>Comment naît une loi</b><span class="muted">Lance l’animation ou touche une étape.</span></div>
     <div class="btn-row"><button class="btn btn-sm btn-primary" data-play>${icon('play')}Lancer l’animation</button></div>
-    <ol class="proc">${P.map((p, i) => `<li class="proc-s${p.opt ? ' opt' : ''}" data-i="${i}"><button class="proc-dot" aria-label="Étape ${i + 1}">${i + 1}</button><div class="proc-c"><b>${p.t}</b>${p.opt ? ' <span class="tag plain">si besoin</span>' : ''}<p>${p.d}</p>${p.nav ? '<div class="pingpong"><span data-pp="0">Assemblée</span><i></i><span data-pp="1">Sénat</span></div>' : ''}</div></li>`).join('')}</ol></div>`;
+    <ol class="proc">${P.map((p, i) => `<li class="proc-s${p.opt ? ' is-opt' : ''}" data-i="${i}"><button class="proc-dot" aria-label="Étape ${i + 1}">${i + 1}</button><div class="proc-c"><b>${p.t}</b>${p.opt ? ' <span class="tag plain">si besoin</span>' : ''}<p>${p.d}</p>${p.nav ? '<div class="pingpong"><span data-pp="0">Assemblée</span><i></i><span data-pp="1">Sénat</span></div>' : ''}</div></li>`).join('')}</ol></div>`;
   let timer = null;
   const set = i => { $('.w-loi', el).classList.toggle('running', i >= 0); $$('.proc-s', el).forEach(s => { const k = +s.dataset.i; s.classList.toggle('on', k === i); s.classList.toggle('done', k < i); }); };
   const pp = () => { const sp = $$('[data-pp]', el); let n = 0; const t = setInterval(() => { sp.forEach((s, k) => s.classList.toggle('lit', k === n % 2)); n++; if (n > 5){ clearInterval(t); sp.forEach(s => s.classList.remove('lit')); } }, 260); };

@@ -6,9 +6,10 @@
    bloc script : JLG.subject(), JLG.chapter(), JLG.glossary(), JLG.log()
    ========================================================= */
 const JLG = window.JLG = window.JLG || {};
-JLG.subjects = []; JLG.chapters = []; JLG.gloss = []; JLG.logs = []; JLG.widgets = {};
+JLG.subjects = []; JLG.chapters = []; JLG.gloss = []; JLG.logs = []; JLG.widgets = {}; JLG.fiches = {};
 JLG.subject = s => { JLG.subjects.push(s); };
 JLG.chapter = c => { JLG.chapters.push(c); };
+JLG.fiche = (cid, cards) => { JLG.fiches[cid] = cards; };
 JLG.glossary = list => { JLG.gloss.push(...list); };
 JLG.log = l => { JLG.logs.push(l); };
 JLG.widget = (name, fn) => { JLG.widgets[name] = fn; };
@@ -18,7 +19,7 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const strip = s => String(s).replace(/<[^>]+>/g, '');
-const norm = s => strip(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const norm = s => strip(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function shuffle(a, rnd = Math.random){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function seeded(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 const pad2 = n => String(n).padStart(2, '0');
@@ -65,7 +66,14 @@ const IC = {
   tree:'<circle cx="12" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/><path d="M12 7v4M12 11H6v6M12 11h6v6"/>',
   doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>',
   euro:'<path d="M17 6.5A6.5 6.5 0 1 0 17 17.5"/><path d="M4 10.5h9M4 13.5h9"/>',
-  house:'<path d="M3 11 12 4l9 7"/><path d="M6 9.5V20h12V9.5"/><rect x="10" y="13" width="4" height="7"/>'
+  house:'<path d="M3 11 12 4l9 7"/><path d="M6 9.5V20h12V9.5"/><rect x="10" y="13" width="4" height="7"/>',
+  fiche:'<rect x="3" y="7" width="15" height="13" rx="2"/><path d="M6 11h9M6 14.5h9M6 18h5"/><path d="M7 4h12a2 2 0 0 1 2 2v10"/>',
+  eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  eyeoff:'<path d="M3 3l18 18"/><path d="M10.6 5.1A10.4 10.4 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.1M6.6 6.6A17.3 17.3 0 0 0 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>',
+  rings:'<circle cx="9" cy="14" r="5.5"/><circle cx="15" cy="10" r="5.5"/>',
+  family:'<circle cx="12" cy="4.5" r="2"/><circle cx="5" cy="19.5" r="2"/><circle cx="12" cy="19.5" r="2"/><circle cx="19" cy="19.5" r="2"/><path d="M12 6.5V12M5 17.5V12h14v5.5M12 12v5.5"/>',
+  ladder:'<path d="M6 3v18M18 3v18M6 7h12M6 12h12M6 17h12"/>',
+  split:'<path d="M12 3v6M12 9l-6 6v6M12 9l6 6v6"/>'
 };
 const icon = (n, cls = '') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n] || ''}</svg>`;
 
@@ -109,7 +117,7 @@ function sealSVG(opts = {}){
 
 /* ---------- état (progression locale) ---------- */
 const KEY = 'jlg.v1';
-const defaults = () => ({xp:0, days:{}, last:null, cards:{}, quiz:{}, sorts:{}, cases:{}, daily:{}, seenLog:null, theme:null});
+const defaults = () => ({xp:0, days:{}, last:null, cards:{}, quiz:{}, sorts:{}, cases:{}, daily:{}, fk:{}, ficheHide:false, seenLog:null, theme:null});
 let S = (function(){ try { const raw = localStorage.getItem(KEY); if (raw) return Object.assign(defaults(), JSON.parse(raw)); } catch(e){} return defaults(); })();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
 function markActive(){ S.days[dayKey()] = true; save(); }
@@ -199,5 +207,7 @@ function chapterProgress(c){
   if (c.quiz && c.quiz.length){ parts.push((S.quiz[c.id] && S.quiz[c.id].best) || 0); }
   if (c.sorts && c.sorts.length){ parts.push(c.sorts.reduce((a, g) => a + (S.sorts[g.id] || 0), 0) / c.sorts.length); }
   if (c.cases && c.cases.length){ parts.push(c.cases.filter(k => S.cases[k.id]).length / c.cases.length); }
+  if (c.fiche && c.fiche.length){ parts.push(c.fiche.filter(f => S.fk[c.id + ':' + f.id]).length / c.fiche.length); }
   return parts.length ? parts.reduce((a, b) => a + b, 0) / parts.length : 0;
 }
+const ficheCount = sid => { let n = 0, k = 0; chaptersOf(sid).forEach(c => (c.fiche || []).forEach(f => { n++; if (S.fk[c.id + ':' + f.id]) k++; })); return {n, k}; };

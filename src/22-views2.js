@@ -32,6 +32,10 @@ function viewTrain(a, b, opt){
     ${quick('outils-contenances', 'calc', 'Additions de contenances', 'Comme dans une vraie désignation.')}
     ${quick('outils-cadastre', 'map', 'Lire un plan cadastral', 'Section, numéro, contenance.')}
     ${chap('immo1') ? `<button class="quick" data-go="ch-immo1" data-open="maison"><span class="ico">${icon('house')}</span><span><b>La ferme aux immeubles</b><span>Nature, destination ou objet ? Trouve-les.</span></span></button>` : ''}
+    ${quick('outils-famille', 'family', 'Qui peut-on épouser ?', 'L’arbre des empêchements, mariage et PACS.')}
+    ${quick('outils-nullite', 'alert', 'Simulateur de nullité', 'Absolue ou relative, qui agit, quel délai.')}
+    ${quick('outils-pacs', 'split', 'Séparation ou indivision ?', 'Range les biens du couple pacsé.')}
+    ${quick('outils-couples', 'ladder', 'Concubinage, PACS, mariage', 'Compare les trois, critère par critère.')}
   </div>
   <div class="section-title"><h2>Cas pratiques corrigés</h2></div>
   <div class="case-list">${cases.map(({c, k}) => `<button class="case-card" data-go="ch-${c.id}-cas" data-open="${k.id}"><span class="eyebrow">${esc(c.kicker)} · ${esc(k.tag || '')}</span><b>${k.title}</b>${S.cases[k.id] ? '<span class="done">✓ Fait</span>' : ''}</button>`).join('')}</div>`;
@@ -47,6 +51,10 @@ const TOOLS = [
   {id:'cadastre', g:'Notariat & immobilier', t:'Lire un plan cadastral', d:'Touche une parcelle pour lire sa référence cadastrale.', w:'cadastre'},
   {id:'qualif', g:'Notariat & immobilier', t:'Qualifier une opération immobilière', d:'Réponds aux questions : l’arbre te donne la qualification.', w:'qualif'},
   {id:'ventil', g:'Notariat & immobilier', t:'Ventilation des meubles', d:'Pourquoi le notaire liste les meubles avec leur prix : calcule l’assiette taxable.', w:'ventil'},
+  {id:'couples', g:'Droit civil', t:'Concubinage, PACS ou mariage ?', d:'Compare les trois façons de vivre en couple, critère par critère.', w:'echelle'},
+  {id:'famille', g:'Droit civil', t:'Qui peut-on épouser ou pacser ?', d:'Touche un membre de la famille de Léa : interdit, dispense possible ou autorisé.', w:'famille'},
+  {id:'nullite', g:'Droit civil', t:'Simulateur de nullité du mariage', d:'Choisis une cause : type de nullité, qui peut agir, délai, effets.', w:'nullite'},
+  {id:'pacs', g:'Droit civil', t:'PACS : séparation ou indivision ?', d:'Change de régime et regarde les biens changer de propriétaire.', w:'pacsregime'},
   {id:'methode', g:'Méthode', t:'Méthode du cas pratique', d:'Les 5 étapes du raisonnement juridique, avec un exemple.', w:'methode'}
 ];
 function viewOutils(id){
@@ -91,19 +99,20 @@ function viewLexique(){
 function viewProgress(){
   const days = []; const d = new Date(); d.setDate(d.getDate() - 27);
   for (let i = 0; i < 28; i++){ days.push({k:dayKey(d), l:d.getDate()}); d.setDate(d.getDate() + 1); }
-  const rows = JLG.chapters.slice().sort((a, b) => (a.subject + a.order).localeCompare(b.subject + b.order)).map(c => {
+  const rows = JLG.chapters.slice().sort((a, b) => ((subj(a.subject) || {}).order || 0) - ((subj(b.subject) || {}).order || 0) || (a.order || 0) - (b.order || 0)).map(c => {
     const n = (c.flashcards || []).length, k = (c.flashcards || []).filter((f, i) => (S.cards[c.id + ':' + i] || 0) >= 2).length;
     const qb = S.quiz[c.id] ? Math.round(S.quiz[c.id].best * 100) + ' %' : '—';
     const gs = (c.sorts || []).filter(g => S.sorts[g.id] != null).length + '/' + (c.sorts || []).length;
     const cs = (c.cases || []).filter(x => S.cases[x.id]).length + '/' + (c.cases || []).length;
-    return [`<button class="crumbs" style="margin:0;color:var(--fg);text-decoration:underline;background:none;border:0;padding:0;cursor:pointer;font:inherit;font-weight:650" data-go="ch-${c.id}">${esc(c.kicker)} · ${c.title}</button>`, `${k}/${n}`, qb, gs, cs];
+    const fz = (c.fiche || []).filter(f => S.fk[c.id + ':' + f.id] === true).length + '/' + (c.fiche || []).length;
+    return [`<button class="crumbs" style="margin:0;color:var(--fg);text-decoration:underline;background:none;border:0;padding:0;cursor:pointer;font:inherit;font-weight:650" data-go="ch-${c.id}">${esc(c.kicker)} · ${c.title}</button>`, fz, `${k}/${n}`, qb, gs, cs];
   });
   return {html:`<div class="eyebrow">Ton parcours</div><h1 style="font-size:var(--fs-3xl);margin:6px 0 4px">Progression</h1>
   ${lvlCard()}
   <div class="section-title"><h2>Tes 4 dernières semaines</h2></div>
   <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:420px">${days.map(x => `<span title="${x.k}" style="aspect-ratio:1;border-radius:8px;display:grid;place-items:center;font-family:var(--font-mono);font-size:.7rem;background:${S.days[x.k] ? 'var(--accent)' : 'var(--surface-2)'};color:${S.days[x.k] ? 'var(--accent-ink)' : 'var(--faint)'};border:1px solid var(--line)">${x.l}</span>`).join('')}</div>
   <div class="section-title"><h2>Par chapitre</h2></div>
-  ${block({t:'table', head:['Chapitre', 'Cartes', 'Meilleur quiz', 'Jeux', 'Cas'], rows})}
+  ${block({t:'table', head:['Chapitre', 'Fiche', 'Cartes', 'Meilleur quiz', 'Jeux', 'Cas'], rows})}
   <div class="section-title"><h2>Recommencer à zéro</h2></div>
   <div class="panel" id="resetBox"><p class="muted">Efface l’XP, les cartes et les scores enregistrés sur cet appareil.</p><div class="btn-row" style="margin-top:12px"><button class="btn btn-sm" id="resetAsk">Tout réinitialiser</button></div></div>`,
   mount(v){

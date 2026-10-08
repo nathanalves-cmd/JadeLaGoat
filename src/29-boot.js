@@ -1,6 +1,7 @@
 
 /* =================== DÉMARRAGE =================== */
 function boot(data){
+  JLG.chapters.forEach(c => { if (JLG.fiches[c.id]) c.fiche = JLG.fiches[c.id]; });
   $('#brandSeal').innerHTML = sealSVG({ring:false});
   renderNav(); applyTheme(); updateChip();
   $('#themeBtn').addEventListener('click', () => { S.theme = curTheme() === 'dark' ? 'light' : 'dark'; save(); applyTheme(); });

@@ -19,19 +19,21 @@ def block(tag, label, body):
 
 # Ordre des cours : ajouter ici chaque nouveau chapitre (fichiers dans src/).
 CHAPTERS = [
-    ("efd1", ["31a-efd1.js", "31b-efd1.js"]),
-    ("efd2", ["32a-efd2.js", "32b-efd2.js"]),
-    ("immo1", ["33a-immo1.js", "33b-immo1.js", "33c-immo1.js"]),
+    ("efd1", ["31a-efd1.js", "31b-efd1.js", "31c-efd1-fiche.js"]),
+    ("efd2", ["32a-efd2.js", "32b-efd2.js", "32c-efd2-fiche.js"]),
+    ("immo1", ["33a-immo1.js", "33b-immo1.js", "33c-immo1.js", "33d-immo1-fiche.js"]),
+    ("civ1", ["35a-civ1.js", "35b-civ1.js", "35c-civ1-fiche.js"]),
+    ("civ2", ["36a-civ2.js", "36b-civ2.js", "36c-civ2.js", "36d-civ2-fiche.js"]),
 ]
 
-css = "\n".join(r(n) for n in ["01-base.css", "02-pages.css", "03-games.css", "04-widgets.css"])
+css = "\n".join(r(n) for n in ["01-base.css", "02-pages.css", "03-games.css", "04-widgets.css", "05-fiches-civ.css"])
 engine = "\n".join(r(n) for n in ["20-core.js", "21-views.js", "22-views2.js", "23-games.js",
-                                   "24-widgets-a.js", "25-widgets-b.js", "26-widgets-c.js", "29-boot.js"])
+                                   "24-widgets-a.js", "25-widgets-b.js", "26-widgets-c.js", "27-fiches.js", "28-widgets-civ.js", "29-boot.js"])
 courses = "".join([
     "<!-- ═════════ CONTENU DES COURS : un bloc par chapitre ═════════ -->\n",
-    block("MATIERES", "efd immo", r("30-subjects.js")),
+    block("MATIERES", "efd immo civ", r("30-subjects.js")),
     *[block("CHAPITRE", cid, "".join(r(f) for f in files)) for cid, files in CHAPTERS],
-    block("LEXIQUE", "tous", r("34-glossary.js")),
+    block("LEXIQUE", "tous", r("34-glossary.js") + r("34b-glossary-civ.js")),
     "<!-- ▼ JLG:NOUVEAUX-COURS ▼ -->\n<!-- ▲ JLG:NOUVEAUX-COURS ▲ -->\n",
 ])
 engine_tag = "<!-- ═════════ MOTEUR DU SITE ═════════ -->\n<script>\n" + engine + "\n</script>\n"

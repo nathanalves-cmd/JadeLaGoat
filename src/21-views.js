@@ -1,7 +1,7 @@
 
 /* =================== NAVIGATION =================== */
-const TABS = [['home','Accueil','home'],['cours','Cours','book'],['train',"S'entraîner",'bolt'],['outils','Outils','tools'],['lexique','Lexique','az']];
-function navFor(r){ if (r === 'cours' || r.indexOf('ch-') === 0 || r.indexOf('sub-') === 0) return 'cours'; if (r.indexOf('train') === 0) return 'train'; if (r.indexOf('outils') === 0) return 'outils'; if (r === 'lexique') return 'lexique'; if (r === 'progres') return ''; return 'home'; }
+const TABS = [['home','Accueil','home'],['cours','Cours','book'],['fiches','Fiches','fiche'],['train',"S'entraîner",'bolt'],['outils','Outils','tools'],['lexique','Lexique','az']];
+function navFor(r){ if (r === 'cours' || r.indexOf('ch-') === 0 || r.indexOf('sub-') === 0) return 'cours'; if (r.indexOf('fiches') === 0) return 'fiches'; if (r.indexOf('train') === 0) return 'train'; if (r.indexOf('outils') === 0) return 'outils'; if (r === 'lexique') return 'lexique'; if (r === 'progres') return ''; return 'home'; }
 function renderNav(){
   $('#tabbar').innerHTML = TABS.map(([r, l, i]) => `<button data-go="${r}">${icon(i)}<span>${l}</span></button>`).join('');
   $('#topnav').innerHTML = TABS.map(([r, l]) => `<button data-go="${r}">${l}</button>`).join('');
@@ -17,6 +17,7 @@ function go(r, opt = {}){
     case 'cours': out = viewCours(); break;
     case 'sub': out = subj(p[1]) ? viewSubject(p[1]) : null; break;
     case 'ch': out = chap(p[1]) ? viewChapter(p[1], p[2] || 'fiche', opt) : null; break;
+    case 'fiches': out = viewFiches(p[1], p[2]); break;
     case 'train': out = viewTrain(p[1], p[2], opt); break;
     case 'outils': out = viewOutils(p[1]); break;
     case 'lexique': out = viewLexique(opt); break;
@@ -119,7 +120,7 @@ function subjectPanel(s){
   return `<article class="subject">
     <div class="subject-head"><span class="subject-code">${esc(s.code)}</span><h3>${s.title}</h3><p class="muted">${s.desc}</p></div>
     ${cs.length ? cs.map(chapRow).join('') : '<div class="empty" style="margin:16px">Les cours de cette matière arrivent bientôt.</div>'}
-    <div class="subject-foot"><button class="btn btn-sm" data-go="train-exam-${s.id}">${icon('trophy')}Examen blanc</button><button class="btn btn-sm btn-ghost" data-go="sub-${s.id}">Voir la matière</button></div>
+    <div class="subject-foot">${ficheCount(s.id).n ? `<button class="btn btn-sm" data-go="fiches-${s.id}">${icon('fiche')}Fiche</button>` : ''}<button class="btn btn-sm" data-go="train-exam-${s.id}">${icon('trophy')}Examen blanc</button><button class="btn btn-sm btn-ghost" data-go="sub-${s.id}">Voir la matière</button></div>
   </article>`;
 }
 function allTraps(){ const t = []; JLG.chapters.forEach(c => (c.traps || []).forEach(x => t.push({c, x}))); return t; }
@@ -150,8 +151,10 @@ function viewHome(){
   ${allTraps().length ? `<div class="section-title"><h2>Le piège du jour</h2></div>${trapOfDay()}` : ''}
   <div class="section-title"><h2>Raccourcis</h2></div>
   <div class="quick-grid stagger">
+    ${quick('fiches', 'fiche', 'Fiches à apprendre', 'Une fiche par matière, avec le mode cache.')}
     ${quick('train-daily', 'bolt', 'Défi du jour', '5 questions tirées de tous tes cours.')}
     ${quick('train', 'cards', 'Flashcards & jeux', 'Retourne les cartes, trie, gagne de l’XP.')}
+    ${quick('outils-famille', 'family', 'Qui peut-on épouser ?', 'L’arbre des empêchements, mariage et PACS.')}
     ${quick('outils-galerie', 'doc', 'Clauses « désignation »', 'Les modèles du cours, surlignés.')}
     ${quick('outils-convert', 'calc', 'Convertisseur ha · a · ca', 'Les m² en hectares, ares, centiares.')}
     ${quick('outils-methode', 'scale', 'Méthode du cas pratique', 'Les 5 étapes pour ne jamais sécher.')}
@@ -166,7 +169,7 @@ const quick = (r, ic, t, s) => `<button class="quick" data-go="${r}"><span class
 /* =================== COURS & MATIÈRE =================== */
 function viewCours(){
   return {html:`<div class="eyebrow">Programme</div><h1 style="font-size:var(--fs-3xl);margin:8px 0 10px">Tes cours</h1>
-  <p class="lead">Chaque matière a ses chapitres. Dans chaque chapitre : la fiche, les flashcards, le quiz, les jeux et les cas pratiques.</p>
+  <p class="lead">Chaque matière a ses chapitres. Dans chaque chapitre : le cours, la fiche à apprendre, les flashcards, le quiz, les jeux et les cas pratiques.</p>
   <div class="subjects stagger" style="margin-top:24px">${sortedSubjects().map(subjectPanel).join('')}</div>`};
 }
 function viewSubject(sid){
@@ -174,12 +177,12 @@ function viewSubject(sid){
   return {html:`<div class="crumbs"><button data-go="cours">Cours</button><span>/</span><span>${esc(s.short)}</span></div>
   <div class="chap-head"><span class="subject-code">${esc(s.code)}</span><h1>${s.title}</h1><p class="lead">${s.desc}</p></div>
   <div class="subject stagger" style="margin-top:22px">${cs.map(chapRow).join('') || '<div class="empty" style="margin:16px">Les cours arrivent bientôt.</div>'}</div>
-  <div class="btn-row" style="margin-top:18px"><button class="btn btn-primary" data-go="train-exam-${sid}">${icon('trophy')}Lancer l’examen blanc</button></div>`};
+  <div class="btn-row" style="margin-top:18px">${ficheCount(sid).n ? `<button class="btn btn-primary" data-go="fiches-${sid}">${icon('fiche')}Apprendre la fiche</button>` : ''}<button class="btn" data-go="train-exam-${sid}">${icon('trophy')}Lancer l’examen blanc</button></div>`};
 }
 
 /* =================== CHAPITRE =================== */
-const CTABS = [['fiche','Fiche','book'],['cartes','Flashcards','cards'],['quiz','Quiz','target'],['jeux','Jeux','grid'],['cas','Cas pratiques','scale']];
-function tabCount(c, t){ return t === 'cartes' ? (c.flashcards || []).length : t === 'quiz' ? (c.quiz || []).length : t === 'jeux' ? (c.sorts || []).length + (c.extraGames || []).length : t === 'cas' ? (c.cases || []).length : null; }
+const CTABS = [['fiche','Cours','book'],['revision','Fiche','fiche'],['cartes','Flashcards','cards'],['quiz','Quiz','target'],['jeux','Jeux','grid'],['cas','Cas pratiques','scale']];
+function tabCount(c, t){ return t === 'revision' ? (c.fiche || []).length : t === 'cartes' ? (c.flashcards || []).length : t === 'quiz' ? (c.quiz || []).length : t === 'jeux' ? (c.sorts || []).length + (c.extraGames || []).length : t === 'cas' ? (c.cases || []).length : null; }
 function viewChapter(cid, tab, opt){
   const c = chap(cid), s = subj(c.subject);
   const tabs = CTABS.filter(([t]) => t === 'fiche' || tabCount(c, t));
@@ -198,6 +201,7 @@ function viewChapter(cid, tab, opt){
       $$('.tabs [role=tab]', v).forEach(b => b.setAttribute('aria-selected', b.dataset.tab === t));
       panel.innerHTML = ''; panel.className = 'tab-panel view-enter';
       if (t === 'fiche') renderFiche(panel, c, o.open);
+      else if (t === 'revision') renderRevision(panel, c);
       else if (t === 'cartes') runCards(panel, c.flashcards.map((f, i) => ({c, i, f})), {title:c.title});
       else if (t === 'quiz') quizHome(panel, c);
       else if (t === 'jeux') gamesHome(panel, c, o.open);
@@ -206,6 +210,7 @@ function viewChapter(cid, tab, opt){
       try { history.replaceState({r}, '', '#' + r); } catch(e){}
     };
     $('.tabs', v).addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; show(b.dataset.tab); const top = $('.tabs', v).getBoundingClientRect().top + scrollY - 70; if (scrollY > top) window.scrollTo({top, behavior: reduced() ? 'auto' : 'smooth'}); });
+    panel.addEventListener('click', e => { const b = e.target.closest('[data-tab-go]'); if (!b) return; const t = $(`.tabs [data-tab="${b.dataset.tabGo}"]`, v); if (t) t.click(); });
     show(tab, opt);
   }};
 }
@@ -219,8 +224,7 @@ function renderFiche(panel, c, open){
   </div>
   ${c.sections.map(s => `<section class="sec" id="sec-${s.id}"><div class="sec-head"><span class="sec-num">${s.n}</span>${s.eyebrow ? `<span class="eyebrow">${s.eyebrow}</span>` : '<span></span>'}<h2>${s.title}</h2></div><div class="blocks col">${s.blocks.map(block).join('')}</div></section>`).join('')}
   ${c.essentials ? `<div class="essentials col"><h2>${icon('crown')}L’essentiel à retenir</h2><ol>${c.essentials.map(e => `<li>${e}</li>`).join('')}</ol></div>` : ''}
-  <div class="next-cta">${tabCount(c, 'cartes') ? `<button class="btn btn-primary" data-tab-go="cartes">${icon('cards')}Passer aux flashcards</button>` : ''}${tabCount(c, 'quiz') ? `<button class="btn" data-tab-go="quiz">${icon('target')}Faire le quiz</button>` : ''}</div>`;
+  <div class="next-cta">${tabCount(c, 'revision') ? `<button class="btn btn-primary" data-tab-go="revision">${icon('fiche')}Apprendre la fiche</button>` : ''}${tabCount(c, 'cartes') ? `<button class="btn${tabCount(c, 'revision') ? '' : ' btn-primary'}" data-tab-go="cartes">${icon('cards')}Passer aux flashcards</button>` : ''}${tabCount(c, 'quiz') ? `<button class="btn" data-tab-go="quiz">${icon('target')}Faire le quiz</button>` : ''}</div>`;
   mountWidgets(panel); bindChips(panel);
   $('.toc', panel).addEventListener('click', e => { const b = e.target.closest('[data-sec]'); if (!b) return; const el = $('#sec-' + b.dataset.sec, panel); if (el) el.scrollIntoView({behavior: reduced() ? 'auto' : 'smooth', block:'start'}); });
-  panel.addEventListener('click', e => { const b = e.target.closest('[data-tab-go]'); if (!b) return; const t = $(`.tabs [data-tab="${b.dataset.tabGo}"]`); if (t) t.click(); });
 }
