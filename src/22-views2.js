@@ -6,10 +6,10 @@ function viewTrain(a, b, opt){
     mount(v){
       const d = new Date(); const rnd = seeded(d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate());
       const qs = shuffle(allQuestions(), rnd).slice(0, 5);
-      runQuiz($('#tp', v), qs, {kind:'daily', title:'Défi du jour', onDone(sc, tot, ev){ const first = S.daily[dayKey()] == null; S.daily[dayKey()] = sc; save(); if (first) addXP(40, ev); }});
+      runQuiz($('#tp', v), qs, {kind:'daily', title:'Défi du jour', onDone(sc, tot, ev){ const first = S.daily[dayKey()] == null; S.daily[dayKey()] = sc; save(); if (first){ addXP(40, ev); quest('daily'); } }});
     }};
   if (a === 'exam' && subj(b)) { const s = subj(b); return {html:`<div class="crumbs"><button data-go="train">S’entraîner</button><span>/</span><span>Examen blanc</span></div><div class="eyebrow">${esc(s.code)}</div><h1 style="font-size:var(--fs-3xl);margin:6px 0 8px">Examen blanc</h1><p class="lead" style="margin-bottom:20px">${esc(s.title)} · 20 questions tirées au hasard, note sur 20.</p><div id="tp"></div>`,
-    mount(v){ const qs = shuffle(allQuestions(c => c.subject === s.id)).slice(0, 20); runQuiz($('#tp', v), qs, {kind:'exam', title:'Examen blanc', timer:true}); }}; }
+    mount(v){ const qs = shuffle(allQuestions(c => c.subject === s.id)).slice(0, 20); runQuiz($('#tp', v), qs, {kind:'exam', title:'Examen blanc', timer:true, onDone(){ quest('exam'); }}); }}; }
   if (a === 'cards' && subj(b)) { const s = subj(b); return {html:`<div class="crumbs"><button data-go="train">S’entraîner</button><span>/</span><span>Flashcards</span></div><div class="eyebrow">${esc(s.code)}</div><h1 style="font-size:var(--fs-3xl);margin:6px 0 18px">Toutes les cartes</h1><div id="tp"></div>`,
     mount(v){ const deck = []; chaptersOf(s.id).forEach(c => (c.flashcards || []).forEach((f, i) => deck.push({c, i, f}))); runCards($('#tp', v), deck, {title:s.short}); }}; }
 
@@ -22,6 +22,8 @@ function viewTrain(a, b, opt){
     <div class="panel" style="display:grid;gap:10px"><div class="eyebrow">${icon('bolt', 'sr-only')}Défi du jour</div><h3>${daily != null ? `Fait : ${daily}/5 ✓` : '5 questions, toutes matières'}</h3><p class="muted">Le même défi toute la journée. +40 XP la première fois.</p><div><button class="btn btn-primary" data-go="train-daily">${icon('play')}${daily != null ? 'Le refaire' : 'Relever le défi'}</button></div></div>
     <div class="panel" style="display:grid;gap:10px"><div class="eyebrow">Examens blancs</div><h3>Note sur 20, chrono lancé</h3><p class="muted">20 questions au hasard dans une matière.</p><div class="btn-row">${sortedSubjects().map(s => `<button class="btn btn-sm" data-go="train-exam-${s.id}">${icon('trophy')}${esc(s.short)}</button>`).join('')}</div></div>
   </div>
+  <div class="section-title"><h2>Quêtes du jour</h2><button class="btn btn-sm btn-ghost" data-go="progres">Le jeu</button></div>
+  ${questsCard()}
   <div class="section-title"><h2>Flashcards</h2></div>
   <div class="subjects">${sortedSubjects().map(s => `<article class="subject"><div class="subject-head"><span class="subject-code">${esc(s.code)}</span><h3>${esc(s.short)}</h3></div>${chaptersOf(s.id).map(c => { const n = (c.flashcards || []).length; const k = (c.flashcards || []).filter((f, i) => (S.cards[c.id + ':' + i] || 0) >= 2).length; return `<button class="chap-row" data-go="ch-${c.id}-cartes"><span class="chap-num">${esc(c.num)}</span><span style="min-width:0"><span class="t">${c.title}</span><span class="s">${k}/${n} cartes maîtrisées</span><span class="meter"><i style="width:${n ? Math.round(k / n * 100) : 0}%"></i></span></span><span class="arrow">${icon('arrow')}</span></button>`; }).join('')}<div class="subject-foot"><button class="btn btn-sm" data-go="train-cards-${s.id}">${icon('cards')}Mélanger toute la matière</button></div></article>`).join('')}</div>
   <div class="section-title"><h2>Jeux de tri</h2></div>
@@ -32,6 +34,7 @@ function viewTrain(a, b, opt){
     ${quick('outils-contenances', 'calc', 'Additions de contenances', 'Comme dans une vraie désignation.')}
     ${quick('outils-cadastre', 'map', 'Lire un plan cadastral', 'Section, numéro, contenance.')}
     ${chap('immo1') ? `<button class="quick" data-go="ch-immo1" data-open="maison"><span class="ico">${icon('house')}</span><span><b>La ferme aux immeubles</b><span>Nature, destination ou objet ? Trouve-les.</span></span></button>` : ''}
+    ${chap('immo2') ? [['chaine', 'clock', 'Remonte la chaîne des propriétaires', 'L’ordre des actes, l’effet relatif, l’origine.'], ['prescription', 'scale', 'Usucapion : prescrit ou pas ?', 'Bonne foi, juste titre, tolérance.'], ['etages', 'house', 'Qui a le droit de… ?', 'Usufruitier, nu-propriétaire ou usager ?'], ['voisinage', 'tree', 'Le voisin a-t-il le droit ?', 'Arbres, haies et fenêtres.']].map(([w, ic, t, d]) => `<button class="quick" data-go="ch-immo2-jeux" data-open="${w}"><span class="ico">${icon(ic)}</span><span><b>${t}</b><span>${d}</span></span></button>`).join('') : ''}
     ${quick('outils-famille', 'family', 'Qui peut-on épouser ?', 'L’arbre des empêchements, mariage et PACS.')}
     ${quick('outils-nullite', 'alert', 'Simulateur de nullité', 'Absolue ou relative, qui agit, quel délai.')}
     ${quick('outils-pacs', 'split', 'Séparation ou indivision ?', 'Range les biens du couple pacsé.')}
@@ -47,10 +50,17 @@ const TOOLS = [
   {id:'convert', g:'Notariat & immobilier', t:'Convertisseur ha · a · ca', d:'Passe des m² aux hectares, ares et centiares, comme dans un acte.', w:'convert'},
   {id:'contenances', g:'Notariat & immobilier', t:'Additions de contenances', d:'Additionne des parcelles et retrouve le total à l’are près.', w:'trainer'},
   {id:'clause', g:'Notariat & immobilier', t:'Générateur de clause « désignation »', d:'Remplis les champs : la clause s’écrit toute seule, avec les 4 mentions obligatoires.', w:'builder'},
-  {id:'galerie', g:'Notariat & immobilier', t:'Galerie des clauses du cours', d:'Les modèles de ton cours. Active le surligneur pour repérer les mentions obligatoires.', w:'gallery'},
+  {id:'galerie', g:'Notariat & immobilier', t:'Galerie des clauses du cours', d:'Désignation, effet relatif, origine de propriété et autres clauses : les modèles de ton cours, avec le surligneur.', w:'gallery'},
   {id:'cadastre', g:'Notariat & immobilier', t:'Lire un plan cadastral', d:'Touche une parcelle pour lire sa référence cadastrale.', w:'cadastre'},
   {id:'qualif', g:'Notariat & immobilier', t:'Qualifier une opération immobilière', d:'Réponds aux questions : l’arbre te donne la qualification.', w:'qualif'},
   {id:'ventil', g:'Notariat & immobilier', t:'Ventilation des meubles', d:'Pourquoi le notaire liste les meubles avec leur prix : calcule l’assiette taxable.', w:'ventil'},
+  {id:'effetrel', g:'Immobilier · Séance 2', t:'Générateur de clause « effet relatif »', d:'Dis comment le vendeur a eu le bien : la clause s’écrit, avec « bureau des hypothèques » avant 2013.', w:'effetrel'},
+  {id:'chaine', g:'Immobilier · Séance 2', t:'La chaîne des propriétaires (30 ans)', d:'Effet relatif ou origine de propriété ? La frise de la vente DITCH.', w:'chaine'},
+  {id:'bareme', g:'Immobilier · Séance 2', t:'Barème de l’usufruit (art. 669 CGI)', d:'L’âge de l’usufruitier fait la valeur de l’usufruit et de la nue-propriété.', w:'bareme'},
+  {id:'etages', g:'Immobilier · Séance 2', t:'Qui a quoi ? La maison en trois étages', d:'Usus, fructus, abusus : plein propriétaire, usufruitier, nu-propriétaire, usager.', w:'etages'},
+  {id:'usucapion', g:'Immobilier · Séance 2', t:'Simulateur d’usucapion', d:'Bonne foi, juste titre, simple tolérance : 10 ans, 30 ans ou jamais.', w:'prescription'},
+  {id:'voisinage', g:'Immobilier · Séance 2', t:'Distances entre voisins', d:'Plantations et fenêtres : ce que dit le Code civil.', w:'voisinage'},
+  {id:'sol', g:'Immobilier · Séance 2', t:'Du ciel au sous-sol (art. 552)', d:'La coupe d’un terrain : ce que le propriétaire peut faire au-dessus et en dessous.', w:'sol'},
   {id:'couples', g:'Droit civil', t:'Concubinage, PACS ou mariage ?', d:'Compare les trois façons de vivre en couple, critère par critère.', w:'echelle'},
   {id:'famille', g:'Droit civil', t:'Qui peut-on épouser ou pacser ?', d:'Touche un membre de la famille de Léa : interdit, dispense possible ou autorisé.', w:'famille'},
   {id:'nullite', g:'Droit civil', t:'Simulateur de nullité du mariage', d:'Choisis une cause : type de nullité, qui peut agir, délai, effets.', w:'nullite'},
@@ -92,34 +102,5 @@ function viewLexique(){
     $('#glq', v).addEventListener('input', e => { q = e.target.value.trim(); draw(); });
     $('#glf', v).addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; f = b.dataset.f; $$('#glf button', v).forEach(x => x.setAttribute('aria-pressed', x === b)); draw(); });
     draw();
-  }};
-}
-
-/* =================== PROGRESSION =================== */
-function viewProgress(){
-  const days = []; const d = new Date(); d.setDate(d.getDate() - 27);
-  for (let i = 0; i < 28; i++){ days.push({k:dayKey(d), l:d.getDate()}); d.setDate(d.getDate() + 1); }
-  const rows = JLG.chapters.slice().sort((a, b) => ((subj(a.subject) || {}).order || 0) - ((subj(b.subject) || {}).order || 0) || (a.order || 0) - (b.order || 0)).map(c => {
-    const n = (c.flashcards || []).length, k = (c.flashcards || []).filter((f, i) => (S.cards[c.id + ':' + i] || 0) >= 2).length;
-    const qb = S.quiz[c.id] ? Math.round(S.quiz[c.id].best * 100) + ' %' : '—';
-    const gs = (c.sorts || []).filter(g => S.sorts[g.id] != null).length + '/' + (c.sorts || []).length;
-    const cs = (c.cases || []).filter(x => S.cases[x.id]).length + '/' + (c.cases || []).length;
-    const fz = (c.fiche || []).filter(f => S.fk[c.id + ':' + f.id] === true).length + '/' + (c.fiche || []).length;
-    return [`<button class="crumbs" style="margin:0;color:var(--fg);text-decoration:underline;background:none;border:0;padding:0;cursor:pointer;font:inherit;font-weight:650" data-go="ch-${c.id}">${esc(c.kicker)} · ${c.title}</button>`, fz, `${k}/${n}`, qb, gs, cs];
-  });
-  return {html:`<div class="eyebrow">Ton parcours</div><h1 style="font-size:var(--fs-3xl);margin:6px 0 4px">Progression</h1>
-  ${lvlCard()}
-  <div class="section-title"><h2>Tes 4 dernières semaines</h2></div>
-  <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:420px">${days.map(x => `<span title="${x.k}" style="aspect-ratio:1;border-radius:8px;display:grid;place-items:center;font-family:var(--font-mono);font-size:.7rem;background:${S.days[x.k] ? 'var(--accent)' : 'var(--surface-2)'};color:${S.days[x.k] ? 'var(--accent-ink)' : 'var(--faint)'};border:1px solid var(--line)">${x.l}</span>`).join('')}</div>
-  <div class="section-title"><h2>Par chapitre</h2></div>
-  ${block({t:'table', head:['Chapitre', 'Fiche', 'Cartes', 'Meilleur quiz', 'Jeux', 'Cas'], rows})}
-  <div class="section-title"><h2>Recommencer à zéro</h2></div>
-  <div class="panel" id="resetBox"><p class="muted">Efface l’XP, les cartes et les scores enregistrés sur cet appareil.</p><div class="btn-row" style="margin-top:12px"><button class="btn btn-sm" id="resetAsk">Tout réinitialiser</button></div></div>`,
-  mount(v){
-    $('#resetAsk', v).addEventListener('click', () => {
-      $('#resetBox', v).innerHTML = `<p><b>Sûre ?</b> Toute la progression de cet appareil sera effacée.</p><div class="btn-row" style="margin-top:12px"><button class="btn btn-sm" id="resetNo">Annuler</button><button class="btn btn-sm btn-primary" id="resetYes">Oui, effacer</button></div>`;
-      $('#resetNo', v).onclick = () => go('progres', {silent:true, keepScroll:true});
-      $('#resetYes', v).onclick = () => { const th = S.theme; S = defaults(); S.theme = th; save(); updateChip(); toast('Progression effacée'); go('progres', {silent:true}); };
-    });
   }};
 }

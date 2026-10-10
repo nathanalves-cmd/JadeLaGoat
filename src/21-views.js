@@ -92,19 +92,6 @@ function stats(){
   const cards = allCards(); const known = cards.filter(x => (S.cards[x.c.id + ':' + x.i] || 0) >= 2).length;
   return {cards:cards.length, known, streak:streak(), lv:levelOf(S.xp)};
 }
-function lvlCard(){
-  const st = stats(), lv = st.lv;
-  return `<div class="lvl-card">
-    <div class="lvl-top"><div class="lvl-badge">${lv.n}</div><div><div class="eyebrow">Ton niveau</div><div class="lvl-name">${esc(lv.name)}</div></div></div>
-    <span class="meter" aria-hidden="true"><i style="width:${Math.round(lv.pct * 100)}%"></i></span>
-    <div class="lvl-meta"><span><b>${fmtNum(S.xp)}</b> XP</span>${lv.next ? `<span>Encore <b>${fmtNum(lv.next - S.xp)}</b> XP avant « ${esc(LEVELS[lv.i + 1][1])} »</span>` : '<span>Niveau maximum atteint</span>'}</div>
-    <div class="stat-row">
-      <div class="stat"><b>${st.streak}</b><span>${st.streak > 1 ? 'jours d’affilée' : 'jour de série'}</span></div>
-      <div class="stat"><b>${st.known}/${st.cards}</b><span>cartes maîtrisées</span></div>
-      <div class="stat"><b>${JLG.chapters.length}</b><span>${JLG.chapters.length > 1 ? 'cours en ligne' : 'cours en ligne'}</span></div>
-    </div>
-  </div>`;
-}
 function chapRow(c){
   const pct = Math.round(chapterProgress(c) * 100);
   const nC = (c.flashcards || []).length, nQ = (c.quiz || []).length;
@@ -137,7 +124,7 @@ function viewHome(){
     <div class="hero-seal" aria-hidden="true">${sealSVG()}</div>
     <div>
       <div class="eyebrow">BTS <b>Collaborateur juriste notarial</b> · 2026-2027</div>
-      <h1 class="hero-title"><span class="l1">${chars('Jade')}</span><span class="l2">la <em>${chars('Goat', .55)}</em></span></h1>
+      <h1 class="hero-title" aria-label="Alves Cances"><span class="l1">${chars('Alves')}</span><span class="l2"><em>${chars('Cances', .62)}</em></span></h1>
       <p class="hero-sub">Ton QG de révision : des fiches claires, des schémas animés, des quiz, des flashcards, des jeux et des cas pratiques corrigés.</p>
       <div class="hero-cta btn-row">
         ${lastC ? `<button class="btn btn-primary" data-go="${S.last}">${icon('play')}Reprendre : ${esc(lastC.short || lastC.title)}</button>` : `<button class="btn btn-primary" data-go="cours">${icon('book')}Commencer les cours</button>`}
@@ -146,6 +133,7 @@ function viewHome(){
     </div>
   </section>
   ${lvlCard()}
+  ${questsCard()}
   <div class="section-title"><h2>Tes matières</h2><button class="btn btn-sm btn-ghost" data-go="cours">Tout voir</button></div>
   <div class="subjects stagger">${sortedSubjects().map(subjectPanel).join('')}</div>
   ${allTraps().length ? `<div class="section-title"><h2>Le piège du jour</h2></div>${trapOfDay()}` : ''}
@@ -153,9 +141,13 @@ function viewHome(){
   <div class="quick-grid stagger">
     ${quick('fiches', 'fiche', 'Fiches à apprendre', 'Une fiche par matière, avec le mode cache.')}
     ${quick('train-daily', 'bolt', 'Défi du jour', '5 questions tirées de tous tes cours.')}
+    ${quick('progres', 'trophy', 'Le jeu', '12 niveaux, des coffres, des jokers et des quêtes.')}
     ${quick('train', 'cards', 'Flashcards & jeux', 'Retourne les cartes, trie, gagne de l’XP.')}
+    ${quick('outils-effetrel', 'pen', 'Clause « effet relatif »', 'Le générateur, avec le bon vocabulaire.')}
+    ${quick('outils-chaine', 'clock', 'La chaîne des propriétaires', 'Remonter 30 ans pour l’origine de propriété.')}
+    ${quick('outils-bareme', 'euro', 'Barème de l’usufruit', 'L’article 669 du CGI, en un curseur.')}
+    ${quick('outils-galerie', 'doc', 'Les clauses du cours', 'Désignation, effet relatif, origine, autres clauses.')}
     ${quick('outils-famille', 'family', 'Qui peut-on épouser ?', 'L’arbre des empêchements, mariage et PACS.')}
-    ${quick('outils-galerie', 'doc', 'Clauses « désignation »', 'Les modèles du cours, surlignés.')}
     ${quick('outils-convert', 'calc', 'Convertisseur ha · a · ca', 'Les m² en hectares, ares, centiares.')}
     ${quick('outils-methode', 'scale', 'Méthode du cas pratique', 'Les 5 étapes pour ne jamais sécher.')}
     ${quick('lexique', 'az', 'Lexique', 'Tous les mots-clés, définis simplement.')}

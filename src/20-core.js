@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 /* =========================================================
-   JADE LA GOAT — moteur
+   ALVES CANCES — moteur (anciennement « Jade la Goat »)
    Les cours sont déclarés plus bas, chacun dans son propre
    bloc script : JLG.subject(), JLG.chapter(), JLG.glossary(), JLG.log()
    ========================================================= */
@@ -73,7 +73,16 @@ const IC = {
   rings:'<circle cx="9" cy="14" r="5.5"/><circle cx="15" cy="10" r="5.5"/>',
   family:'<circle cx="12" cy="4.5" r="2"/><circle cx="5" cy="19.5" r="2"/><circle cx="12" cy="19.5" r="2"/><circle cx="19" cy="19.5" r="2"/><path d="M12 6.5V12M5 17.5V12h14v5.5M12 12v5.5"/>',
   ladder:'<path d="M6 3v18M18 3v18M6 7h12M6 12h12M6 17h12"/>',
-  split:'<path d="M12 3v6M12 9l-6 6v6M12 9l6 6v6"/>'
+  split:'<path d="M12 3v6M12 9l-6 6v6M12 9l6 6v6"/>',
+  half:'<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17"/><path d="M12 3.5a8.5 8.5 0 0 0 0 17z" fill="currentColor" stroke="none"/>',
+  heart:'<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20z"/>',
+  shield:'<path d="M12 3l7.5 3v5.5c0 4.8-3.3 8.3-7.5 9.8-4.2-1.5-7.5-5-7.5-9.8V6z"/><path d="M8.8 12.2l2.3 2.3 4.2-4.6"/>',
+  gift:'<rect x="3.5" y="9" width="17" height="11.5" rx="1.5"/><path d="M2.5 9h19M12 9v11.5"/><path d="M12 9C9 9 7 7.6 7 6a2 2 0 0 1 3.6-1.2L12 7l1.4-2.2A2 2 0 0 1 17 6c0 1.6-2 3-5 3z"/>',
+  star:'<path d="M12 3.2l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z"/>',
+  volume:'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4.5 4.5 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/>',
+  mute:'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/>',
+  lock:'<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>',
+  quest:'<path d="M6 3.5h9l3 3v14H6z"/><path d="M9 10l1.8 1.8L14.5 8M9 15.5h6"/>'
 };
 const icon = (n, cls = '') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n] || ''}</svg>`;
 
@@ -90,26 +99,41 @@ function waxPath(cx, cy, r, bumps = 14, amp = .055, seed = 3){
   }
   return d + 'Z';
 }
+/* Les skins du sceau se débloquent en montant de niveau (voir le jeu). */
+const SKINS = [
+  {id:'amethyste', l:'Améthyste', lv:1, g:['#C6AEFF', '#7C4DFF', '#3A138F'], dk:'#1A0646', inn:'#5B2BD6', t:'#F3EDFF', m:'#F8F4FF'},
+  {id:'lavande', l:'Lavande', lv:3, g:['#FBF7FF', '#C9B3FF', '#7457CF'], dk:'#2E1A66', inn:'#A88BF0', t:'#2A1660', m:'#FFFFFF'},
+  {id:'rubis', l:'Rubis', lv:5, g:['#FFB8C9', '#E0245E', '#6E0727'], dk:'#3A0315', inn:'#B0123F', t:'#FFE8EE', m:'#FFF5F7'},
+  {id:'or', l:'Or', lv:7, g:['#FFF4C2', '#E8B73A', '#8A5A00'], dk:'#4A2F00', inn:'#C9921C', t:'#3D2600', m:'#FFFBEA'},
+  {id:'holo', l:'Holographique', lv:9, g:['#B8F4FF', '#C69CFF', '#FF9CD6'], dk:'#3A1F6E', inn:'#9D7BFF', t:'#2A1660', m:'#FFFFFF', holo:true},
+  {id:'twingo', l:'TwingoPrime', lv:12, g:['#FFF36B', '#FF8A3D', '#E0245E'], dk:'#5A0A22', inn:'#FF5A36', t:'#3A0A18', m:'#FFFFFF', race:true}
+];
+const skinOf = id => SKINS.find(k => k.id === id) || SKINS[0];
 function sealSVG(opts = {}){
   const id = 'sg' + Math.random().toString(36).slice(2, 7);
   const ring = opts.ring !== false;
-  return `<svg viewBox="0 0 200 200" role="img" aria-label="Sceau de Jade la Goat">
+  const sk = skinOf(opts.skin || (S && S.skin));
+  const wax = waxPath(100, 100, 88, 13, .05, 7);
+  return `<svg viewBox="0 0 200 200" role="img" aria-label="Sceau d’Alves Cances"${sk.holo ? ' class="seal-holo"' : ''}>
   <defs>
-    <radialGradient id="${id}a" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="#C6AEFF"/><stop offset=".45" stop-color="#7C4DFF"/><stop offset="1" stop-color="#3A138F"/></radialGradient>
-    <radialGradient id="${id}b" cx="50%" cy="50%" r="50%"><stop offset=".7" stop-color="#2A0C6E" stop-opacity="0"/><stop offset="1" stop-color="#1A0646" stop-opacity=".55"/></radialGradient>
+    <radialGradient id="${id}a" cx="38%" cy="32%" r="75%"><stop offset="0" stop-color="${sk.g[0]}"/><stop offset=".45" stop-color="${sk.g[1]}"/><stop offset="1" stop-color="${sk.g[2]}"/></radialGradient>
+    <radialGradient id="${id}b" cx="50%" cy="50%" r="50%"><stop offset=".7" stop-color="${sk.dk}" stop-opacity="0"/><stop offset="1" stop-color="${sk.dk}" stop-opacity=".55"/></radialGradient>
     <path id="${id}c" d="M100 100 m-68 0 a68 68 0 1 1 136 0 a68 68 0 1 1 -136 0"/>
   </defs>
-  <g class="seal-ripple"><circle cx="100" cy="100" r="86" fill="none" stroke="#9D7BFF" stroke-width="2" opacity=".6"/></g>
+  <g class="seal-ripple"><circle cx="100" cy="100" r="86" fill="none" stroke="${sk.g[1]}" stroke-width="2" opacity=".6"/></g>
   <g class="seal-stamp">
-    <path d="${waxPath(100, 104, 88, 13, .05, 7)}" fill="#1A0646" opacity=".35"/>
-    <path d="${waxPath(100, 100, 88, 13, .05, 7)}" fill="url(#${id}a)"/>
-    <path d="${waxPath(100, 100, 88, 13, .05, 7)}" fill="url(#${id}b)"/>
-    <circle cx="100" cy="100" r="62" fill="none" stroke="#E9DEFF" stroke-opacity=".55" stroke-width="1.4"/>
-    <circle cx="100" cy="100" r="55" fill="#5B2BD6" fill-opacity=".35" stroke="#2A0C6E" stroke-opacity=".5" stroke-width="1"/>
-    ${ring ? `<g class="seal-ring"><text font-family="JetBrains Mono, monospace" font-size="9.6" letter-spacing="3.1" fill="#F3EDFF" fill-opacity=".85"><textPath href="#${id}c">JADE LA GOAT · BTS NOTARIAT · SCEAU OFFICIEL ·</textPath></text></g>` : ''}
-    <path d="M78 66 C70 52 74 40 86 36 C80 46 82 56 90 62 M122 66 C130 52 126 40 114 36 C120 46 118 56 110 62" fill="none" stroke="#F3EDFF" stroke-width="3.2" stroke-linecap="round"/>
-    <text x="100" y="128" text-anchor="middle" font-family="Bodoni Moda, Didot, Georgia, serif" font-style="italic" font-weight="800" font-size="64" fill="#F8F4FF">J</text>
-    <text x="100" y="146" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8.5" letter-spacing="2.6" fill="#E9DEFF">LA GOAT</text>
+    <path d="${waxPath(100, 104, 88, 13, .05, 7)}" fill="${sk.dk}" opacity=".35"/>
+    <path d="${wax}" fill="url(#${id}a)"/>
+    <path d="${wax}" fill="url(#${id}b)"/>
+    <circle cx="100" cy="100" r="62" fill="none" stroke="${sk.t}" stroke-opacity=".55" stroke-width="1.4"/>
+    <circle cx="100" cy="100" r="55" fill="${sk.inn}" fill-opacity=".35" stroke="${sk.dk}" stroke-opacity=".5" stroke-width="1"/>
+    ${sk.race ? `<path d="M52 150 L96 52 M66 156 L110 58" stroke="${sk.m}" stroke-opacity=".22" stroke-width="7"/>` : ''}
+    ${ring ? `<g class="seal-ring"><text font-family="JetBrains Mono, monospace" font-size="9.3" letter-spacing="2.9" fill="${sk.t}" fill-opacity=".85"><textPath href="#${id}c">ALVES CANCES · BTS NOTARIAT · SCEAU OFFICIEL ·</textPath></text></g>` : ''}
+    <path d="M81 72 L84.5 56 L92.5 64.5 L100 50 L107.5 64.5 L115.5 56 L119 72 Z" fill="${sk.m}" fill-opacity=".94"/>
+    <rect x="80" y="73.5" width="40" height="4" rx="1.5" fill="${sk.m}" fill-opacity=".94"/>
+    <circle cx="100" cy="50" r="2.6" fill="${sk.m}"/><circle cx="84.5" cy="56" r="2" fill="${sk.m}"/><circle cx="115.5" cy="56" r="2" fill="${sk.m}"/>
+    <text x="100" y="127" text-anchor="middle" font-family="Bodoni Moda, Didot, Georgia, serif" font-style="italic" font-weight="800" font-size="50" letter-spacing="-1.5" fill="${sk.m}">AC</text>
+    <text x="100" y="146" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="2.6" fill="${sk.t}">NOTARIAT</text>
     <path d="M64 70 Q100 30 136 70" fill="none" stroke="#FFFFFF" stroke-opacity=".18" stroke-width="10" stroke-linecap="round"/>
   </g>
 </svg>`;
@@ -117,8 +141,10 @@ function sealSVG(opts = {}){
 
 /* ---------- état (progression locale) ---------- */
 const KEY = 'jlg.v1';
-const defaults = () => ({xp:0, days:{}, last:null, cards:{}, quiz:{}, sorts:{}, cases:{}, daily:{}, fk:{}, ficheHide:false, seenLog:null, theme:null});
-let S = (function(){ try { const raw = localStorage.getItem(KEY); if (raw) return Object.assign(defaults(), JSON.parse(raw)); } catch(e){} return defaults(); })();
+const defaults = () => ({xp:0, days:{}, last:null, cards:{}, quiz:{}, sorts:{}, cases:{}, daily:{}, fk:{}, ficheHide:false, seenLog:null, theme:null,
+  inv:{ff:0, sc:0, boost:0, shield:0}, skin:'amethyste', sound:true, boostUntil:0, lvlSeen:0, prest:0, gameV:0, dq:null});
+let FRESH = true;
+let S = (function(){ try { const raw = localStorage.getItem(KEY); if (raw){ FRESH = false; const o = Object.assign(defaults(), JSON.parse(raw)); o.inv = Object.assign({ff:0, sc:0, boost:0, shield:0}, o.inv || {}); return o; } } catch(e){} return defaults(); })();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
 function markActive(){ S.days[dayKey()] = true; save(); }
 function streak(){
@@ -128,21 +154,45 @@ function streak(){
 }
 
 /* ---------- niveaux & XP ---------- */
-const LEVELS = [[0,'Jade la Neuille'],[150,'Jade Chiki brrr'],[400,'Jadorlabite'],[800,'Chèvre notaire'],[1400,'LA GOAT'],[2200,'GOAT légendaire'],[3200,'GOAT éternelle']];
+/* 12 niveaux, de plus en plus durs : l’écart entre deux paliers grandit à chaque fois. */
+const LEVELS = [
+  {x:0, name:'Jade la Neuille', tier:0},
+  {x:150, name:'Jade Chiki brrr', tier:0},
+  {x:400, name:'Jadorlabite', tier:0},
+  {x:800, name:'JadorLaVody', tier:1},
+  {x:1400, name:'JadeLaSDF', tier:1},
+  {x:2300, name:'MarlèneLaMadeleine', tier:1},
+  {x:3500, name:'JadeSousLigamentsCroisés', tier:2},
+  {x:5100, name:'LaMeilleureCoachHandball', tier:2},
+  {x:7200, name:'LaMeilleureNotaire', tier:2},
+  {x:9900, name:'LeDaronSousdrift', tier:3},
+  {x:13400, name:'LaPoloDelabrée', tier:3},
+  {x:17900, name:'LaTwingoPrime', tier:4}
+];
+const TIERS = [{id:'bronze', l:'Bronze'}, {id:'argent', l:'Argent'}, {id:'or', l:'Or'}, {id:'diamant', l:'Diamant'}, {id:'legende', l:'Légende'}];
+const BONUS = [0, 5, 8, 12, 15, 20, 25, 30, 35, 40, 45, 50];
+const PRESTIGE = 5000;
 function levelOf(xp){
-  let i = 0; LEVELS.forEach((l, k) => { if (xp >= l[0]) i = k; });
-  const cur = LEVELS[i][0], next = LEVELS[i + 1] ? LEVELS[i + 1][0] : null;
-  return {i, n:i + 1, name:LEVELS[i][1], cur, next, pct: next ? (xp - cur) / (next - cur) : 1};
+  let i = 0; LEVELS.forEach((l, k) => { if (xp >= l.x) i = k; });
+  const L = LEVELS[i], cur = L.x, next = LEVELS[i + 1] ? LEVELS[i + 1].x : null;
+  const stars = next ? 0 : Math.floor((xp - cur) / PRESTIGE);
+  return {i, n:i + 1, name:L.name, tier:L.tier, bonus:BONUS[i], cur, next, stars,
+    nextStar: next ? null : cur + (stars + 1) * PRESTIGE,
+    pct: next ? (xp - cur) / (next - cur) : ((xp - cur) % PRESTIGE) / PRESTIGE};
 }
-function addXP(n, ev){
-  const before = levelOf(S.xp).i;
-  S.xp += n; markActive(); popXP('+' + n + ' XP', ev); updateChip();
-  const after = levelOf(S.xp).i;
-  if (after > before) setTimeout(() => levelUp(after), 450);
+const nameHTML = s => esc(s).replace(/([a-zà-öø-ÿ])([A-ZÀ-ÖØ-Þ])/g, '$1<wbr>$2');
+const boostOn = () => Date.now() < (S.boostUntil || 0);
+function xpGain(n){ const lv = levelOf(S.xp); let g = n * (1 + lv.bonus / 100); if (boostOn()) g *= 2; return Math.max(1, Math.round(g)); }
+function addXP(n, ev, opt = {}){
+  const g = opt.raw ? n : xpGain(n);
+  S.xp += g; markActive(); popXP('+' + g + ' XP', ev, g > n); updateChip();
+  if (!opt.noQuest) quest('xp', g);
+  checkLevel();
+  return g;
 }
-function popXP(txt, ev){
+function popXP(txt, ev, boosted){
   if (reduced()) return;
-  const el = document.createElement('div'); el.className = 'xp-pop'; el.textContent = txt;
+  const el = document.createElement('div'); el.className = 'xp-pop' + (boosted ? ' boosted' : ''); el.textContent = txt;
   let x = innerWidth / 2, y = innerHeight / 2;
   if (ev && ev.clientX != null && (ev.clientX || ev.clientY)){ x = ev.clientX; y = ev.clientY; }
   else if (ev && ev.target && ev.target.getBoundingClientRect){ const r = ev.target.getBoundingClientRect(); x = r.left + r.width / 2; y = r.top; }
@@ -150,16 +200,9 @@ function popXP(txt, ev){
   document.body.appendChild(el); setTimeout(() => el.remove(), 1200);
 }
 function updateChip(){
-  const lv = levelOf(S.xp);
-  $$('.xp-chip').forEach(c => { c.innerHTML = `<span class="lvl">${lv.n}</span><span>${esc(lv.name)}</span><span class="xpv">${fmtNum(S.xp)} XP</span>`; c.setAttribute('aria-label', `Niveau ${lv.n}, ${lv.name}, ${S.xp} XP — voir ma progression`); });
-}
-function levelUp(i){
-  confetti(160);
-  modal(`<div class="crown">${sealSVG({ring:false})}</div>
-    <span class="eyebrow">Niveau ${i + 1} débloqué</span>
-    <h3>${esc(LEVELS[i][1])}</h3>
-    <p class="muted">${i >= 4 ? 'Tu es officiellement la GOAT. Le Code civil tremble.' : 'Tu montes en grade. Prochain palier : ' + esc((LEVELS[i + 1] || LEVELS[i])[1]) + '.'}</p>
-    <button class="btn btn-primary" data-close>Continuer</button>`);
+  const lv = levelOf(S.xp), T = TIERS[lv.tier];
+  $$('.xp-chip').forEach(c => { c.dataset.tier = T.id; c.innerHTML = `<span class="lvl">${lv.n}</span><span class="lname">${esc(lv.name)}${lv.stars ? ' ★' + lv.stars : ''}</span><span class="xpv">${fmtNum(S.xp)} XP</span>`; c.setAttribute('aria-label', `Niveau ${lv.n}, ${lv.name}, ${S.xp} XP : voir mes récompenses`); });
+  if (typeof updateBoostPill === 'function') updateBoostPill();
 }
 
 /* ---------- toasts, modale, confettis ---------- */
@@ -174,6 +217,7 @@ function modal(html){
 }
 function confetti(n = 120){
   if (reduced()) return;
+  if (n >= 100 && S.lvlSeen >= 9) setTimeout(() => fireworks(3), 250);
   const fx = $('#fx'); const cv = document.createElement('canvas'); fx.appendChild(cv);
   const dpr = Math.min(2, devicePixelRatio || 1); cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
   const ctx = cv.getContext('2d'); ctx.scale(dpr, dpr);

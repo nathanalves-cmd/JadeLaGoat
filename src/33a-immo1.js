@@ -94,7 +94,7 @@ JLG.chapter({
       {t:'tip', k:'info', h:'Le plan cadastral a une finalité essentiellement <b>fiscale</b> : il n’a pas vocation à garantir un droit de propriété.'},
       {t:'h3', h:'Les modèles de clauses du cours'},
       {t:'p', h:'Choisis un modèle et active le surligneur : chaque mention obligatoire prend sa couleur.'},
-      {t:'widget', w:'gallery'},
+      {t:'widget', w:'gallery', o:{set:'designation'}},
       {t:'tip', k:'astuce', title:'Reconnaître une copropriété', h:'Des <b>lots numérotés</b>, chacun avec une <b>quote-part des parties communes</b> en tantièmes (ex. : 175/10 000es), et un <b>règlement de copropriété avec état descriptif de division</b> publié au SPF.'},
       {t:'tip', k:'notaire', title:'Les conventions de l’acte', h:'Communes en MAJUSCULES, numéros de lots en lettres puis en chiffres (« Lot numéro VINGT-CINQ (25) »), montants en lettres puis en chiffres, contenances au format 00 ha 00 a 00 ca, et la formule finale : « tel que le bien existe, s’étend, se poursuit et comporte, avec toutes ses aisances et dépendances, sans aucune exception ni réserve ».'},
       {t:'h3', h:'À toi de rédiger'},

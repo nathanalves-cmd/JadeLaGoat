@@ -15,6 +15,7 @@ function boot(data){
   if (hot && hot.snapshot) try { hot.snapshot(() => ({route:ROUTE})); } catch(e){}
   let start = (data && data.route) || (location.hash || '').slice(1) || 'home';
   if (!/^[A-Za-z0-9._~-]+$/.test(start)) start = 'home';
+  gameInit();
   go(start, {silent:true});
 }
 JLG.boot = function(){

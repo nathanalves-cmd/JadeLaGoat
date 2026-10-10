@@ -124,21 +124,41 @@ JLG.widget('builder', el => {
   rows(); draw();
 });
 
-/* Galerie des clauses du cours (surligneur) */
-JLG.widget('gallery', el => {
-  const list = []; JLG.chapters.forEach(c => (c.clauses || []).forEach(k => list.push(Object.assign({cid:c.id}, k))));
-  if (!list.length){ el.innerHTML = '<div class="empty">Aucune clause pour l’instant.</div>'; return; }
-  const HL = [['nat', 'Nature'], ['sit', 'Situation'], ['con', 'Contenance'], ['cad', 'Cadastre'], ['meu', 'Meubles'], ['cop', 'Copropriété / lots']];
+/* Galerie des clauses du cours (surligneur), par jeux de clauses */
+const GSETS = {
+  designation:{l:'Désignation', head:'Désignation', hl:[['nat', 'Nature'], ['sit', 'Situation'], ['con', 'Contenance'], ['cad', 'Cadastre'], ['meu', 'Meubles'], ['cop', 'Copropriété / lots']]},
+  effet:{l:'Effet relatif', head:'Effet relatif', hl:[['act', 'Nature de l’acte'], ['not', 'Notaire'], ['dat', 'Date de l’acte'], ['pub', 'Publication']]},
+  origine:{l:'Origine de propriété', head:'Origine de propriété', hl:[['act', 'Nature de l’acte'], ['not', 'Notaire'], ['dat', 'Date de l’acte'], ['pub', 'Publication']]},
+  autres:{l:'Autres clauses', head:'Clause', hl:[['tex', 'Textes de loi'], ['ref', 'Références'], ['dec', 'Déclarations']]}
+};
+JLG.widget('gallery', (el, o) => {
+  const all = []; JLG.chapters.forEach(c => (c.clauses || []).forEach(k => all.push(Object.assign({cid:c.id}, k))));
+  if (!all.length){ el.innerHTML = '<div class="empty">Aucune clause pour l’instant.</div>'; return; }
+  const setOf = k => k.set || 'designation';
+  const sets = Object.keys(GSETS).filter(s => all.some(k => setOf(k) === s));
+  const fixed = o.set && sets.includes(o.set);
+  let cur = fixed ? o.set : sets[0], list = [];
   el.innerHTML = `<div class="w w-gal">
-    <div class="gal-pick"><label for="gal-s" class="eyebrow">Choisis un modèle</label><select id="gal-s">${list.map((k, i) => `<option value="${i}">${k.t}</option>`).join('')}</select></div>
-    <div class="hl-tog" role="group" aria-label="Surligneur">${HL.map(h => `<button aria-pressed="true" data-h="${h[0]}"><i class="hl-sw hl-${h[0]}"></i>${h[1]}</button>`).join('')}</div>
-    <article class="acte-paper hl-on-nat hl-on-sit hl-on-con hl-on-cad hl-on-meu hl-on-cop" id="gal-out"></article>
-    <p class="w-note" id="gal-note"></p></div>`;
-  const out = $('#gal-out', el);
-  const show = i => { const k = list[i]; out.innerHTML = `<div class="ap-h">${k.head || 'Désignation'}</div>${k.h}`; $('#gal-note', el).innerHTML = k.note || ''; out.classList.remove('flash'); void out.offsetWidth; out.classList.add('flash'); };
-  $('#gal-s', el).addEventListener('change', e => show(+e.target.value));
-  $('.hl-tog', el).addEventListener('click', e => { const b = e.target.closest('[data-h]'); if (!b) return; const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on); out.classList.toggle('hl-on-' + b.dataset.h, on); });
-  show(0);
+    ${!fixed && sets.length > 1 ? `<div class="seg-ctrl gal-sets" role="tablist" aria-label="Type de clause">${sets.map(s => `<button role="tab" data-set="${s}">${GSETS[s].l}</button>`).join('')}</div>` : ''}
+    <div class="gal-pick"><label for="gal-s-${cur}" class="eyebrow">Choisis un modèle</label><select class="gal-s" id="gal-s-${cur}"></select></div>
+    <div class="hl-tog" role="group" aria-label="Surligneur"></div>
+    <article class="acte-paper gal-out"></article>
+    <p class="w-note gal-note"></p></div>`;
+  const out = $('.gal-out', el), sel = $('.gal-s', el), tog = $('.hl-tog', el);
+  const show = i => { const k = list[i]; out.innerHTML = `<div class="ap-h">${k.head || GSETS[cur].head}</div>${k.h}`; $('.gal-note', el).innerHTML = k.note || ''; out.classList.remove('flash'); void out.offsetWidth; out.classList.add('flash'); };
+  const useSet = s => {
+    cur = s; list = all.filter(k => setOf(k) === s);
+    $$('.gal-sets button', el).forEach(b => b.setAttribute('aria-selected', b.dataset.set === s));
+    sel.innerHTML = list.map((k, i) => `<option value="${i}">${k.t}</option>`).join('');
+    const hl = GSETS[s].hl;
+    tog.innerHTML = hl.map(h => `<button aria-pressed="true" data-h="${h[0]}"><i class="hl-sw hl-${h[0]}"></i>${h[1]}</button>`).join('');
+    out.className = 'acte-paper gal-out ' + hl.map(h => 'hl-on-' + h[0]).join(' ');
+    show(0);
+  };
+  sel.addEventListener('change', e => show(+e.target.value));
+  tog.addEventListener('click', e => { const b = e.target.closest('[data-h]'); if (!b) return; const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on); out.classList.toggle('hl-on-' + b.dataset.h, on); });
+  const ss = $('.gal-sets', el); if (ss) ss.addEventListener('click', e => { const b = e.target.closest('[data-set]'); if (b) useSet(b.dataset.set); });
+  useSet(cur);
 });
 
 /* Ventilation des meubles */

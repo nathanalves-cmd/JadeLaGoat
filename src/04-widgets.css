@@ -136,7 +136,7 @@ span.meter{display:block}
 .acte-lines i{display:block;height:6px;border-radius:3px;background:#E6DEF1;width:100%}
 .acte-sign{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--font-display);font-style:italic;font-size:.82rem;color:#6D6380}
 .acte-slot{position:relative;width:96px;height:30px;border-bottom:1px solid #B9AED0}
-.stamped .acte-slot::after{content:"Me J. la Goat";position:absolute;left:0;bottom:3px;font-family:var(--font-display);font-style:italic;font-weight:700;font-size:.9rem;color:#3D1494;white-space:nowrap;clip-path:inset(0 100% 0 0);animation:sign 1s .15s var(--ease) forwards}
+.stamped .acte-slot::after{content:"Me Alves Cances";position:absolute;left:0;bottom:3px;font-family:var(--font-display);font-style:italic;font-weight:700;font-size:.9rem;color:#3D1494;white-space:nowrap;clip-path:inset(0 100% 0 0);animation:sign 1s .15s var(--ease) forwards}
 @keyframes sign{to{clip-path:inset(0 0 0 0)}}
 .acte-seal{position:absolute;right:10px;bottom:46px;width:88px;height:88px;opacity:0;pointer-events:none}
 .stamped .acte-seal{animation:sealDrop .75s var(--spring) .45s forwards}

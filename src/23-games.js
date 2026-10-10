@@ -46,7 +46,7 @@ function runCards(el, deck, opt = {}){
     function decide(k, ev){
       if (locked) return; locked = true;
       const v = box(x); S.cards[key(x)] = k ? Math.min(3, Math.max(2, v + 1)) : 1; save();
-      if (k){ known++; addXP(4, ev || {target:card}); } else { review++; addXP(1, ev || {target:card}); }
+      if (k){ known++; addXP(4, ev || {target:card}); quest('card'); } else { review++; addXP(1, ev || {target:card}); }
       card.style.transform = ''; card.classList.add(k ? 'fly-right' : 'fly-left');
       setTimeout(() => { idx++; draw(); }, reduced() ? 0 : 380);
     }
@@ -80,7 +80,8 @@ function quizHome(el, c){
 }
 function runQuiz(el, qs, opt = {}){
   if (!qs.length){ el.innerHTML = '<div class="empty">Pas encore de questions ici.</div>'; return; }
-  let i = 0, score = 0; const wrong = []; const t0 = Date.now(); let tick;
+  let i = 0, score = 0, armed = false; const wrong = []; const t0 = Date.now(); let tick;
+  const jokers = opt.kind !== 'exam';
   const items = qs.map(q => { if (q.tf) return Object.assign({}, q); const ord = shuffle(q.o.map((_, k) => k)); return Object.assign({}, q, {opts:ord.map(k => q.o[k]), ans:ord.indexOf(q.a)}); });
   const fmtT = ms => { const s = Math.floor(ms / 1000); return Math.floor(s / 60) + ':' + pad2(s % 60); };
   if (opt.timer){ tick = setInterval(() => { if (!el.isConnected) return clearInterval(tick); const t = $('#qt', el); if (t) t.textContent = fmtT(Date.now() - t0); }, 1000); }
@@ -90,18 +91,39 @@ function runQuiz(el, qs, opt = {}){
     el.innerHTML = `<div class="quiz">
       <div class="qbar"><span class="qn">${i + 1}/${items.length}</span><span class="meter"><i style="width:${i / items.length * 100}%"></i></span>${opt.timer ? `<span class="qn" id="qt">${fmtT(Date.now() - t0)}</span>` : ''}<span class="qn">${score} ✓</span></div>
       <div class="qcard"><div class="qk"><span class="eyebrow">${q.tf ? 'Vrai ou faux ?' : 'Une seule bonne réponse'}${ch && opt.kind !== 'chapter' ? ' · ' + esc(ch.kicker) : ''}</span></div>
+      ${jokers ? jokerBar(q, armed) : ''}
       <div class="qt">${q.q}</div>
       ${q.tf ? `<div class="tf"><button class="opt" data-v="1">Vrai</button><button class="opt" data-v="0">Faux</button></div>` : `<div class="opts">${q.opts.map((o, k) => `<button class="opt" data-v="${k}"><span class="ol">${'ABCDE'[k]}</span><span>${o}</span></button>`).join('')}</div>`}
       <div id="qx"></div></div></div>`;
     $$('.opt', el).forEach(b => b.addEventListener('click', e => answer(b, e)));
+    bindJk(q);
+  }
+  function bindJk(q){
+    const jb = $('.jk-bar', el); if (!jb) return;
+    jb.addEventListener('click', e => {
+      const b = e.target.closest('[data-jk]'); if (!b || b.disabled) return;
+      if (b.dataset.jk === 'ff'){ if (useFifty(el, q)){ b.disabled = true; $('b', b).textContent = S.inv.ff || 0; } return; }
+      armed = !armed && S.inv.sc > 0;
+      jb.outerHTML = jokerBar(q, armed);
+      if (armed){ sfx('coin'); toast('Seconde chance armée !'); }
+      bindJk(q);
+    });
   }
   function answer(b, e){
     const q = items[i]; const v = +b.dataset.v;
     const isAns = xv => q.tf ? (xv === 1) === q.a : xv === q.ans;
     const right = isAns(v);
+    if (!right && armed && !q._sc && S.inv.sc > 0){
+      armed = false; q._sc = true; S.inv.sc--; save(); sfx('coin');
+      b.classList.add('is-wrong'); b.disabled = true;
+      const jb = $('.jk-bar', el); if (jb){ jb.outerHTML = jokerBar(q, false); const nb = $('.jk-bar', el); if (nb) $$('[data-jk]', nb).forEach(x => { x.disabled = true; }); }
+      $('#qx', el).innerHTML = `<div class="expl sc-note"><div class="verdict">${icon('heart')}Seconde chance !</div><p>Ce n’est pas ça… mais ton joker te sauve : choisis une autre réponse.</p></div>`;
+      return;
+    }
     $$('.opt', el).forEach(x => { x.disabled = true; if (isAns(+x.dataset.v)) x.classList.add('is-right'); else if (x !== b) x.classList.add('dim'); });
+    $$('.jk-bar [data-jk]', el).forEach(x => { x.disabled = true; });
     if (!right) b.classList.add('is-wrong');
-    if (right){ score++; addXP(10, e); } else wrong.push(q);
+    if (right){ score++; addXP(q._sc ? 5 : 10, e); quest('quiz'); } else wrong.push(q);
     const good = q.tf ? (q.a ? 'Vrai' : 'Faux') : q.opts[q.ans];
     $('#qx', el).innerHTML = `<div class="expl"><div class="verdict ${right ? 'good' : 'bad'}">${right ? pick(['Exact !', 'Bien vu.', 'Parfait.', 'Oui, c’est ça !']) : 'Pas tout à fait…'}</div>${right ? '' : `<p><b>Bonne réponse :</b> ${good}</p>`}${q.e ? `<p>${q.e}</p>` : ''}</div>
       <div class="qnext"><button class="btn btn-primary" id="qn">${i + 1 < items.length ? 'Question suivante' : 'Voir mon résultat'}${icon('arrow')}</button></div>`;
@@ -112,7 +134,7 @@ function runQuiz(el, qs, opt = {}){
     clearInterval(tick);
     const tot = items.length, p = score / tot, pct = Math.round(p * 100);
     const note = Math.round(p * 40) / 2;
-    const msg = p >= .9 ? 'Niveau GOAT. Rien à redire.' : p >= .7 ? 'Très solide. Encore un petit effort.' : p >= .5 ? 'En bonne voie. Relis les points ratés.' : 'On reprend la fiche et on y retourne. Tu vas l’avoir.';
+    const msg = p >= .9 ? 'Digne de LaMeilleureNotaire. Rien à redire.' : p >= .7 ? 'Très solide. Encore un petit effort.' : p >= .5 ? 'En bonne voie. Relis les points ratés.' : 'On reprend la fiche et on y retourne. Tu vas l’avoir.';
     const C = 2 * Math.PI * 70;
     el.innerHTML = `<div class="result">
       <div class="eyebrow">${esc(opt.title || 'Quiz')}</div>
@@ -141,13 +163,16 @@ function gamesHome(el, c, open){
   const games = c.sorts || [];
   const extra = c.extraGames || [];
   if (open){ const g = games.find(x => x.id === open); if (g) return runSort(el, g, c); }
+  const openX = open && extra.find(x => x.w === open);
   el.innerHTML = `<p class="lead" style="margin-bottom:18px">Une carte apparaît, tu choisis la bonne catégorie. Chaque erreur est expliquée.</p>
   <div class="game-list stagger">${games.map(g => `<button class="quick" data-g="${g.id}"><span class="ico">${icon('grid')}</span><span><b>${g.title}</b><span>${g.items.length} cartes · ${g.cats.length} catégories${S.sorts[g.id] != null ? ` · record ${Math.round(S.sorts[g.id] * 100)} %` : ''}</span></span></button>`).join('')}
   ${extra.map(x => `<button class="quick" data-x="${x.w}"><span class="ico">${icon(x.icon || 'sparkle')}</span><span><b>${x.title}</b><span>${x.sub}</span></span></button>`).join('')}</div><div id="xg"></div>`;
   el.onclick = e => {
     const b = e.target.closest('[data-g]'); if (b){ runSort(el, games.find(x => x.id === b.dataset.g), c); return; }
-    const x = e.target.closest('[data-x]'); if (x){ const slot = $('#xg', el); slot.innerHTML = `<div class="section-title"><h2>${extra.find(k => k.w === x.dataset.x).title}</h2></div><div data-w="${x.dataset.x}" data-o='{"mode":"defi"}'></div>`; mountWidgets(slot); slot.scrollIntoView({behavior: reduced() ? 'auto' : 'smooth'}); }
+    const x = e.target.closest('[data-x]'); if (x) openExtra(x.dataset.x);
   };
+  function openExtra(w){ const slot = $('#xg', el); slot.innerHTML = `<div class="section-title"><h2>${extra.find(k => k.w === w).title}</h2></div><div data-w="${w}" data-o='{"mode":"defi"}'></div>`; mountWidgets(slot); setTimeout(() => slot.scrollIntoView({behavior: reduced() ? 'auto' : 'smooth'}), 60); }
+  if (openX) openExtra(openX.w);
 }
 function runSort(el, g, c){
   el.onclick = null;
@@ -179,7 +204,7 @@ function runSort(el, g, c){
   }
   function end(){
     const p = score / items.length; const prev = S.sorts[g.id];
-    S.sorts[g.id] = Math.max(prev || 0, p); save(); addXP(20, {target:el});
+    S.sorts[g.id] = Math.max(prev || 0, p); save(); addXP(20, {target:el}); quest('sort');
     if (p >= .8) confetti(110);
     el.innerHTML = `<div class="result"><div class="eyebrow">${g.title}</div><h3>${Math.round(p * 100)} % de bonnes réponses</h3><p class="muted">${score}/${items.length}${prev != null ? ` · record : ${Math.round(Math.max(prev, p) * 100)} %` : ''}</p>
       ${misses.length ? `<div class="mistakes"><div class="eyebrow">Les pièges du jour</div>${misses.map(m => `<div class="mistake"><b>${m.t} → ${g.cats.find(k => k.id === m.c).l}</b>${m.w || ''}</div>`).join('')}</div>` : ''}
@@ -215,7 +240,7 @@ function runCase(el, k, c){
     const nx = $(`[data-reveal="${n + 1}"]`, el); if (nx) nx.disabled = false;
     if (shown === k.steps.length) $('#cdone', el).hidden = false;
   });
-  $('#cok', el).onclick = e => { if (!S.cases[k.id]){ S.cases[k.id] = true; save(); addXP(30, e); confetti(80); } else toast('Déjà validé, bravo !'); casesHome(el, c); };
+  $('#cok', el).onclick = e => { if (!S.cases[k.id]){ S.cases[k.id] = true; save(); addXP(30, e); confetti(80); } else toast('Déjà validé, bravo !'); quest('case'); casesHome(el, c); };
 }
 
 /* =================== MÉTHODE (widget) =================== */

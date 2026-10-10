@@ -70,7 +70,7 @@ function bindFiches(box){
       const seal = $('.br-seal', card);
       if (now && !seal){ card.insertAdjacentHTML('beforeend', `<div class="br-seal stamp" aria-hidden="true">${sealSVG({ring:false})}</div>`); }
       if (!now && seal) seal.remove();
-      if (now && was === undefined) addXP(8, e);
+      if (now && was === undefined){ addXP(8, e); quest('stamp'); }
       updateFicheCounts(box);
       if (now){
         const sec = card.closest('.fz-chap') || zone;
