@@ -2399,7 +2399,7 @@ function runQuiz(el, qs, opt = {}){
     if (p >= .8) confetti(130);
     if (opt.onDone) opt.onDone(score, tot, {target:rn});
     $('#qr', el).onclick = () => opt.again ? opt.again() : runQuiz(el, shuffle(qs), opt);
-    const w = $('#qw', el); if (w) w.onclick = () => runQuiz(el, wrong.map(q => Object.assign({}, q)), Object.assign({}, opt, {onDone:null, again:null, title:'Mes erreurs'}));
+    const w = $('#qw', el); if (w) w.onclick = () => runQuiz(el, wrong.map(q => Object.assign({}, q, {_sc:false, _ff:false})), Object.assign({}, opt, {onDone:null, again:null, title:'Mes erreurs'}));
     window.scrollTo({top:Math.max(0, el.getBoundingClientRect().top + scrollY - 120), behavior: reduced() ? 'auto' : 'smooth'});
   }
   draw();
