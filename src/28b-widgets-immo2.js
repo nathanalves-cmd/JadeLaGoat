@@ -50,7 +50,7 @@ JLG.widget('prescription', (el, o) => {
   if (o.mode === 'defi'){
     const list = shuffle(PRES_CASES).slice(0, 5); let i = 0, sc = 0;
     const draw = () => {
-      if (i >= list.length){ el.innerHTML = `<div class="w w-pres">${head}<div class="result" style="padding:18px"><h3>${sc}/${list.length}</h3><p class="muted">${sc === list.length ? 'Parfait : tu raisonnes comme un notaire.' : 'Retiens : 10 ans = bonne foi ET juste titre ; tolérance = jamais.'}</p><button class="btn btn-primary" data-again>${icon('refresh')}Rejouer</button></div></div>`; if (sc === list.length) confetti(70); $('[data-again]', el).onclick = () => { list.splice(0, list.length, ...shuffle(PRES_CASES).slice(0, 5)); i = 0; sc = 0; draw(); }; return; }
+      if (i >= list.length){ el.innerHTML = `<div class="w w-pres">${head}<div class="result" style="padding:18px"><h2>${sc}/${list.length}</h2><p class="muted">${sc === list.length ? 'Parfait : tu raisonnes comme un notaire.' : 'Retiens : 10 ans = bonne foi ET juste titre ; tolérance = jamais.'}</p><button class="btn btn-primary" data-again>${icon('refresh')}Rejouer</button></div></div>`; if (sc === list.length) confetti(70); $('[data-again]', el).onclick = () => { list.splice(0, list.length, ...shuffle(PRES_CASES).slice(0, 5)); i = 0; sc = 0; draw(); }; return; }
       const c = list[i];
       el.innerHTML = `<div class="w w-pres">${head}<div class="qbar"><span class="qn">${i + 1}/${list.length}</span><span class="meter"><i style="width:${i / list.length * 100}%"></i></span><span class="qn">${sc} ✓</span></div>
         <div class="enonce pr-case"><div class="ek">Situation</div><p>${c.t}</p></div>
@@ -187,7 +187,7 @@ JLG.widget('etages', (el, o) => {
     let list = shuffle(pool).slice(0, 8), i = 0, sc = 0;
     const head = `<div class="w-head"><span class="eyebrow">Défi</span><b>Qui a le droit de… ?</b><span class="muted">Oui, non, ou seulement avec l’accord de l’autre ?</span></div>`;
     const draw = () => {
-      if (i >= list.length){ el.innerHTML = `<div class="w w-eta">${head}<div class="result" style="padding:18px"><h3>${sc}/${list.length}</h3><p class="muted">${sc >= 7 ? 'Usus, fructus, abusus : tu maîtrises.' : 'Revois la maison en trois étages, puis rejoue.'}</p><button class="btn btn-primary" data-again>${icon('refresh')}Rejouer</button></div></div>`; if (sc === list.length) confetti(70); $('[data-again]', el).onclick = () => { list = shuffle(pool).slice(0, 8); i = 0; sc = 0; draw(); }; return; }
+      if (i >= list.length){ el.innerHTML = `<div class="w w-eta">${head}<div class="result" style="padding:18px"><h2>${sc}/${list.length}</h2><p class="muted">${sc >= 7 ? 'Usus, fructus, abusus : tu maîtrises.' : 'Revois la maison en trois étages, puis rejoue.'}</p><button class="btn btn-primary" data-again>${icon('refresh')}Rejouer</button></div></div>`; if (sc === list.length) confetti(70); $('[data-again]', el).onclick = () => { list = shuffle(pool).slice(0, 8); i = 0; sc = 0; draw(); }; return; }
       const it = list[i], a = ETA_A[it.ai], h = ETA_H[it.h], good = a.v[it.h];
       el.innerHTML = `<div class="w w-eta">${head}<div class="qbar"><span class="qn">${i + 1}/${list.length}</span><span class="meter"><i style="width:${i / list.length * 100}%"></i></span><span class="qn">${sc} ✓</span></div>
         <div class="enonce"><div class="ek">${h.l}</div><p class="eta-q">${h.q} peut-il ${a.q} ?</p></div>
@@ -278,7 +278,7 @@ JLG.widget('voisinage', (el, o) => {
     let list = shuffle(VOI_CASES).slice(0, 6), i = 0, sc = 0;
     const head = `<div class="w-head"><span class="eyebrow">Défi</span><b>Le voisin a-t-il le droit ?</b><span class="muted">Autorisé ou interdit ? Les distances du Code civil.</span></div>`;
     const draw = () => {
-      if (i >= list.length){ el.innerHTML = `<div class="w w-voi">${head}<div class="result" style="padding:18px"><h3>${sc}/${list.length}</h3><p class="muted">Retiens : 2 m / 0,50 m pour les plantations, 1,90 m / 0,60 m pour les vues.</p><button class="btn btn-primary" data-again>${icon('refresh')}Rejouer</button></div></div>`; if (sc === list.length) confetti(70); $('[data-again]', el).onclick = () => { list = shuffle(VOI_CASES).slice(0, 6); i = 0; sc = 0; draw(); }; return; }
+      if (i >= list.length){ el.innerHTML = `<div class="w w-voi">${head}<div class="result" style="padding:18px"><h2>${sc}/${list.length}</h2><p class="muted">Retiens : 2 m / 0,50 m pour les plantations, 1,90 m / 0,60 m pour les vues.</p><button class="btn btn-primary" data-again>${icon('refresh')}Rejouer</button></div></div>`; if (sc === list.length) confetti(70); $('[data-again]', el).onclick = () => { list = shuffle(VOI_CASES).slice(0, 6); i = 0; sc = 0; draw(); }; return; }
       const c = list[i];
       el.innerHTML = `<div class="w w-voi">${head}<div class="qbar"><span class="qn">${i + 1}/${list.length}</span><span class="meter"><i style="width:${i / list.length * 100}%"></i></span><span class="qn">${sc} ✓</span></div>
         <div class="enonce"><div class="ek">Situation</div><p>${c.t}</p></div>
@@ -530,7 +530,7 @@ JLG.widget('chaine', (el, o) => {
     const draw = () => {
       if (r >= rounds.length){
         const tot = rounds.length * 3;
-        el.innerHTML = `<div class="w w-ch">${head}<div class="result" style="padding:18px"><h3>${sc}/${tot}</h3><p class="muted">${sc === tot ? 'Chaîne parfaite : tu peux rédiger l’origine de propriété.' : 'Rappel : l’effet relatif cite le dernier titre ; l’origine remonte jusqu’à un titre de plus de 30 ans.'}</p><button class="btn btn-primary" data-again>${icon('refresh')}Rejouer</button></div></div>`;
+        el.innerHTML = `<div class="w w-ch">${head}<div class="result" style="padding:18px"><h2>${sc}/${tot}</h2><p class="muted">${sc === tot ? 'Chaîne parfaite : tu peux rédiger l’origine de propriété.' : 'Rappel : l’effet relatif cite le dernier titre ; l’origine remonte jusqu’à un titre de plus de 30 ans.'}</p><button class="btn btn-primary" data-again>${icon('refresh')}Rejouer</button></div></div>`;
         if (sc === tot) confetti(80);
         $('[data-again]', el).onclick = () => { r = 0; step = 0; sc = 0; order = []; picked = []; chosen = -1; fb = ''; rounds.splice(0, rounds.length, ...shuffle(CH_SC)); draw(); };
         return;

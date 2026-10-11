@@ -13,12 +13,28 @@ function viewTrain(a, b, opt){
   if (a === 'cards' && subj(b)) { const s = subj(b); return {html:`<div class="crumbs"><button data-go="train">S’entraîner</button><span>/</span><span>Flashcards</span></div><div class="eyebrow">${esc(s.code)}</div><h1 style="font-size:var(--fs-3xl);margin:6px 0 18px">Toutes les cartes</h1><div id="tp"></div>`,
     mount(v){ const deck = []; chaptersOf(s.id).forEach(c => (c.flashcards || []).forEach((f, i) => deck.push({c, i, f}))); runCards($('#tp', v), deck, {title:s.short}); }}; }
 
+  if (a === 'revision') return {html:`<div class="crumbs"><button data-go="train">S’entraîner</button><span>/</span><span>Révision du jour</span></div><div class="eyebrow">${fmtDate(dayKey())} · révision espacée</div><h1 style="font-size:var(--fs-3xl);margin:6px 0 8px">Révision du jour</h1><p class="lead" style="margin-bottom:20px">D’abord les cartes à revoir aujourd’hui, puis quelques nouvelles. Glisse à droite si tu savais, à gauche sinon : une carte ratée repasse en fin de paquet.</p><div id="tp"></div>`,
+    mount(v){
+      const q = srsQueue(); const deck = q.due.concat(q.fresh);
+      if (!deck.length){ $('#tp', v).innerHTML = `<div class="result"><div class="eyebrow">Révision du jour</div><h2>Tout est à jour ✓</h2><p class="muted">${q.next ? 'Prochaine révision ' + whenTxt(q.next) + '. ' : ''}Profites-en pour le défi du jour ou un nouveau chapitre.</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" data-go="train-daily">${icon('bolt')}Défi du jour</button><button class="btn" data-go="cours">${icon('book')}Les cours</button></div></div>`; return; }
+      runCards($('#tp', v), deck, {title:'Révision du jour', srs:true, keepOrder:true, requeue:true});
+    }};
+  if (a === 'erreurs') return {html:`<div class="crumbs"><button data-go="train">S’entraîner</button><span>/</span><span>Points faibles</span></div><div class="eyebrow">Tes erreurs, gardées pour toi</div><h1 style="font-size:var(--fs-3xl);margin:6px 0 8px">Mes points faibles</h1><p class="lead" style="margin-bottom:20px">Les questions que tu as ratées dans les quiz, le défi du jour et les examens blancs. Une bonne réponse en efface une erreur.</p><div id="tp"></div>`,
+    mount(v){
+      const L = errList();
+      if (!L.length){ $('#tp', v).innerHTML = `<div class="result"><div class="eyebrow">Points faibles</div><h2>Aucune erreur en attente ✓</h2><p class="muted">Dès que tu rates une question dans un quiz, elle arrive ici pour que tu la retravailles.</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" data-go="train-daily">${icon('bolt')}Défi du jour</button></div></div>`; return; }
+      runQuiz($('#tp', v), shuffle(L.slice(0, 20).map(x => x.q)), {kind:'errors', title:'Mes points faibles', again:() => go('train-erreurs'), onDone(){ const n = errList().length; setTimeout(() => toast(n ? `Encore ${plural(n, 'point faible', 'points faibles')} à retravailler` : 'Plus aucun point faible. Bravo !'), 1400); }});
+    }};
+
   const daily = S.daily[dayKey()];
+  const sq = srsQueue(), nRev = sq.nDue + sq.nFresh, nErr = errList().length;
   const games = []; const cases = [];
   JLG.chapters.forEach(c => { (c.sorts || []).forEach(g => games.push({c, g})); (c.cases || []).forEach(k => cases.push({c, k})); });
   const html = `<div class="eyebrow">Entraînement</div><h1 style="font-size:var(--fs-3xl);margin:6px 0 10px">S’entraîner</h1>
   <p class="lead">Chaque bonne réponse rapporte de l’XP. Un peu chaque jour vaut mieux que tout la veille.</p>
-  <div class="mode-grid" style="margin-top:22px">
+  <h2 class="sr-only">Les modes d’entraînement</h2><div class="mode-grid" style="margin-top:22px">
+    <div class="panel" style="display:grid;gap:10px"><div class="eyebrow">Révision espacée</div><h3>${nRev ? plural(nRev, 'carte') + ' à réviser' : 'Tout est à jour ✓'}</h3><p class="muted">Tes flashcards reviennent juste avant que tu les oublies : 1 jour, 2, 4, 8, 16, 32.</p><div><button class="btn btn-primary" data-go="train-revision">${icon('cards')}${nRev ? 'Réviser maintenant' : 'Voir la révision'}</button></div></div>
+    <div class="panel" style="display:grid;gap:10px"><div class="eyebrow">Points faibles</div><h3>${nErr ? plural(nErr, 'question ratée', 'questions ratées') : 'Aucune erreur en attente'}</h3><p class="muted">Chaque question ratée reste ici jusqu’à ce que tu la réussisses.</p><div><button class="btn" data-go="train-erreurs"${nErr ? '' : ' disabled'}>${icon('target')}Retravailler</button></div></div>
     <div class="panel" style="display:grid;gap:10px"><div class="eyebrow">${icon('bolt', 'sr-only')}Défi du jour</div><h3>${daily != null ? `Fait : ${daily}/5 ✓` : '5 questions, toutes matières'}</h3><p class="muted">Le même défi toute la journée. +40 XP la première fois.</p><div><button class="btn btn-primary" data-go="train-daily">${icon('play')}${daily != null ? 'Le refaire' : 'Relever le défi'}</button></div></div>
     <div class="panel" style="display:grid;gap:10px"><div class="eyebrow">Examens blancs</div><h3>Note sur 20, chrono lancé</h3><p class="muted">20 questions au hasard dans une matière.</p><div class="btn-row">${sortedSubjects().map(s => `<button class="btn btn-sm" data-go="train-exam-${s.id}">${icon('trophy')}${esc(s.short)}</button>`).join('')}</div></div>
   </div>
@@ -85,14 +101,15 @@ function viewOutils(id){
 }
 
 /* =================== LEXIQUE =================== */
-function viewLexique(){
+function viewLexique(opt = {}){
   return {html:`<div class="eyebrow">Vocabulaire</div><h1 style="font-size:var(--fs-3xl);margin:6px 0 10px">Lexique</h1><p class="lead">Les mots-clés de tes cours, définis simplement. Tape un mot pour filtrer.</p>
   <div class="search" style="margin-top:20px">${icon('search')}<label class="sr-only" for="glq">Rechercher un mot</label><input id="glq" type="search" placeholder="servitude, CSI, usufruit…" autocomplete="off"></div>
   <div class="filters" id="glf"><button aria-pressed="true" data-f="">Tout</button>${sortedSubjects().map(s => `<button aria-pressed="false" data-f="${s.id}">${esc(s.short)}</button>`).join('')}</div>
   <p class="muted" id="glc" style="font-size:.85rem"></p>
   <div class="gl" id="glList"></div>`,
   mount(v){
-    let f = '', q = '';
+    let f = '', q = String(opt.q || '');
+    if (q) $('#glq', v).value = q;
     const list = JLG.gloss.slice().sort((a, b) => a.t.localeCompare(b.t, 'fr', {sensitivity:'base'}));
     const hi = s => { if (!q) return s; const i = norm(s).indexOf(norm(q)); if (i < 0) return s; return s.slice(0, i) + '<mark>' + s.slice(i, i + q.length) + '</mark>' + s.slice(i + q.length); };
     const draw = () => {

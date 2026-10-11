@@ -1,0 +1,15 @@
+/* Alves Cances : hors ligne. Version 735f11a567 (générée par build.py). */
+const V = 'ac-735f11a567';
+const CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'fonts/bodoni-moda-latin-opsz-normal.woff2', 'fonts/bodoni-moda-latin-opsz-italic.woff2', 'fonts/bricolage-grotesque-latin-opsz-normal.woff2', 'fonts/jetbrains-mono-latin-wght-normal.woff2'];
+self.addEventListener('install', e => { e.waitUntil(caches.open(V).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
+self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('ac-') && k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
+self.addEventListener('fetch', e => {
+  const r = e.request; if (r.method !== 'GET') return;
+  const u = new URL(r.url); if (u.origin !== location.origin) return;
+  if (r.mode === 'navigate' || u.pathname.endsWith('/') || u.pathname.endsWith('.html')) {
+    e.respondWith(fetch(r).then(res => { if (res.ok) { const cp = res.clone(); caches.open(V).then(c => c.put('index.html', cp)); } return res; })
+      .catch(() => caches.match('index.html').then(m => m || caches.match('./'))));
+    return;
+  }
+  e.respondWith(caches.match(r).then(m => m || fetch(r).then(res => { if (res.ok) { const cp = res.clone(); caches.open(V).then(c => c.put(r, cp)); } return res; })));
+});

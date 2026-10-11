@@ -9,10 +9,12 @@ function renderNav(){
 function setNav(r){ const t = navFor(r); $$('#tabbar button, #topnav button').forEach(b => { if (b.getAttribute('data-go') === t) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }); }
 
 let ROUTE = 'home';
+const oopsCard = () => `<div class="result" style="margin-top:20px"><div class="eyebrow">Oups</div><h2>Cette page n’a pas pu s’afficher</h2><p class="muted">Ta progression est intacte. Reviens à l’accueil et réessaie.</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" data-go="home">${icon('home')}Retour à l’accueil</button></div></div>`;
 function go(r, opt = {}){
   r = String(r || 'home');
   const p = r.split('-');
   let out;
+  try {
   switch (p[0]){
     case 'cours': out = viewCours(); break;
     case 'sub': out = subj(p[1]) ? viewSubject(p[1]) : null; break;
@@ -24,6 +26,7 @@ function go(r, opt = {}){
     case 'progres': out = viewProgress(); break;
     case 'home': out = viewHome(); break;
   }
+  } catch(err){ console.error(err); out = {html:oopsCard()}; }
   if (!out){ r = 'home'; out = viewHome(); }
   ROUTE = r;
   if (!opt.silent){ try { if (location.hash.slice(1) !== r) history.pushState({r}, '', '#' + r); } catch(e){} }
@@ -31,9 +34,11 @@ function go(r, opt = {}){
   const v = $('#view');
   v.innerHTML = `<div class="wrap view-enter">${out.html}</div>`;
   mountWidgets(v);
-  if (out.mount) out.mount(v);
+  if (out.mount) { try { out.mount(v); } catch(err){ console.error(err); $('.wrap', v).insertAdjacentHTML('beforeend', oopsCard()); } }
   setNav(r);
+  const h1 = $('h1', v); document.title = r === 'home' || !h1 ? 'Alves Cances' : clean(h1.textContent) + ' · Alves Cances';
   if (!opt.keepScroll) window.scrollTo(0, 0);
+  if (!opt.silent && !v.contains(document.activeElement)) try { v.focus({preventScroll:true}); } catch(e){}
 }
 function mountWidgets(root){
   $$('[data-w]', root).forEach(el => {
@@ -55,8 +60,8 @@ function block(b){
     case 'tip': { const d = TIP[b.k] || TIP.info; return `<div class="tip ${b.k}"><div class="ti">${icon(d[1])}</div><div><div class="tt">${b.title || d[0]}</div><div class="tb">${b.h}</div></div></div>`; }
     case 'quote': return `<figure class="quote" style="margin:0"><div class="ref">${b.ref}</div><blockquote class="qt" style="margin:0">${b.h}</blockquote></figure>`;
     case 'list': return `<ul class="list${b.num ? ' num' : ''}">${b.items.map(i => `<li>${i}</li>`).join('')}</ul>`;
-    case 'table': return `<div class="tbl"><table>${b.head ? `<thead><tr>${b.head.map(h => `<th>${h}</th>`).join('')}</tr></thead>` : ''}<tbody>${b.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-    case 'vs': return `<div class="vs">${[b.a, b.b].map(c => `<div class="vs-col"><h4>${c.title}</h4><ul>${c.items.map(i => `<li>${i}</li>`).join('')}</ul></div>`).join('')}<span class="vs-badge">vs</span></div>`;
+    case 'table': return `<div class="tbl" tabindex="0" role="region" aria-label="${esc('Tableau' + (b.head ? ' : ' + strip(b.head.filter(Boolean).join(', ')) : ''))}"><table>${b.head ? `<thead><tr>${b.head.map(h => h ? `<th>${h}</th>` : '<td></td>').join('')}</tr></thead>` : ''}<tbody>${b.rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    case 'vs': return `<div class="vs">${[b.a, b.b].map(c => `<div class="vs-col"><p class="vs-t" role="heading" aria-level="3">${c.title}</p><ul>${c.items.map(i => `<li>${i}</li>`).join('')}</ul></div>`).join('')}<span class="vs-badge" aria-hidden="true">vs</span></div>`;
     case 'chips': { CHIPS.push(b.groups); return `<div class="chips-wrap" data-cd="${CHIPS.length - 1}">${b.groups.map((g, gi) => `<div class="chips-group" data-cg="${gi}">${g.label ? `<div class="chips-label">${g.label}</div>` : ''}<div class="chips">${g.items.map((it, ii) => `<button class="chip" aria-expanded="false" data-ci="${ii}">${it.l}</button>`).join('')}</div><div class="chip-slot"></div></div>`).join('')}</div>`; }
     case 'tree': return `<div class="tree">${treeNode(b.root)}</div>`;
     case 'steps': return `<ol class="steps">${b.items.map(i => `<li><div><b>${i.l}</b>${i.h ? `<span class="muted">${i.h}</span>` : ''}</div></li>`).join('')}</ol>`;
@@ -128,12 +133,14 @@ function viewHome(){
       <p class="hero-sub">Ton QG de révision : des fiches claires, des schémas animés, des quiz, des flashcards, des jeux et des cas pratiques corrigés.</p>
       <div class="hero-cta btn-row">
         ${lastC ? `<button class="btn btn-primary" data-go="${S.last}">${icon('play')}Reprendre : ${esc(lastC.short || lastC.title)}</button>` : `<button class="btn btn-primary" data-go="cours">${icon('book')}Commencer les cours</button>`}
-        <button class="btn" data-go="train-daily">${icon('bolt')}Défi du jour${S.daily[dayKey()] != null ? ' ✓' : ''}</button>
+        <button class="btn" data-go="train-revision">${icon('cards')}Révision du jour</button>
       </div>
+      <button class="search-cta" data-search>${icon('search')}<span>Rechercher une notion, un article, un mot…</span><kbd>Ctrl K</kbd></button>
     </div>
   </section>
+  ${planCard()}
   ${lvlCard()}
-  ${questsCard()}
+  ${questsCard(2)}
   <div class="section-title"><h2>Tes matières</h2><button class="btn btn-sm btn-ghost" data-go="cours">Tout voir</button></div>
   <div class="subjects stagger">${sortedSubjects().map(subjectPanel).join('')}</div>
   ${allTraps().length ? `<div class="section-title"><h2>Le piège du jour</h2></div>${trapOfDay()}` : ''}
@@ -163,7 +170,7 @@ const quick = (r, ic, t, s) => `<button class="quick" data-go="${r}"><span class
 function viewCours(){
   return {html:`<div class="eyebrow">Programme</div><h1 style="font-size:var(--fs-3xl);margin:8px 0 10px">Tes cours</h1>
   <p class="lead">Chaque matière a ses chapitres. Dans chaque chapitre : le cours, la fiche à apprendre, les flashcards, le quiz, les jeux et les cas pratiques.</p>
-  <div class="subjects stagger" style="margin-top:24px">${sortedSubjects().map(subjectPanel).join('')}</div>`};
+  <h2 class="sr-only">Les matières</h2><div class="subjects stagger" style="margin-top:24px">${sortedSubjects().map(subjectPanel).join('')}</div>`};
 }
 function viewSubject(sid){
   const s = subj(sid), cs = chaptersOf(sid);
@@ -193,7 +200,7 @@ function viewChapter(cid, tab, opt){
     const show = (t, o = {}) => {
       $$('.tabs [role=tab]', v).forEach(b => b.setAttribute('aria-selected', b.dataset.tab === t));
       panel.innerHTML = ''; panel.className = 'tab-panel view-enter';
-      if (t === 'fiche') renderFiche(panel, c, o.open);
+      if (t === 'fiche') renderFiche(panel, c, o.open, o.sec);
       else if (t === 'revision') renderRevision(panel, c);
       else if (t === 'cartes') runCards(panel, c.flashcards.map((f, i) => ({c, i, f})), {title:c.title});
       else if (t === 'quiz') quizHome(panel, c);
@@ -207,15 +214,16 @@ function viewChapter(cid, tab, opt){
     show(tab, opt);
   }};
 }
-function renderFiche(panel, c, open){
+function renderFiche(panel, c, open, sec){
   if (open) setTimeout(() => { const w = $(`[data-w="${open}"]`, panel); if (w) w.scrollIntoView({block:'center'}); }, 80);
+  if (sec) setTimeout(() => { const el = $('#sec-' + sec, panel); if (el){ el.scrollIntoView({block:'start'}); el.classList.add('sec-flash'); } }, 80);
   panel.innerHTML = `<div class="col">
     ${c.intro ? `<p class="lead">${c.intro}</p>` : ''}
     ${c.objectives ? `<div class="objectives"><div class="eyebrow">Objectifs</div><ul>${c.objectives.map(o => `<li>${o}</li>`).join('')}</ul></div>` : ''}
     ${c.prereq ? `<p class="muted" style="font-size:.9rem;margin-top:10px"><b>Prérequis :</b> ${c.prereq}</p>` : ''}
     <nav class="toc" aria-label="Plan du chapitre">${c.sections.map(s => `<button data-sec="${s.id}"><b>${s.n}</b>${strip(s.title)}</button>`).join('')}</nav>
   </div>
-  ${c.sections.map(s => `<section class="sec" id="sec-${s.id}"><div class="sec-head"><span class="sec-num">${s.n}</span>${s.eyebrow ? `<span class="eyebrow">${s.eyebrow}</span>` : '<span></span>'}<h2>${s.title}</h2></div><div class="blocks col">${s.blocks.map(block).join('')}</div></section>`).join('')}
+  ${c.sections.map(s => `<section class="sec" id="sec-${s.id}"><div class="sec-head"><span class="sec-num">${s.n}</span>${s.eyebrow ? `<span class="eyebrow">${s.eyebrow}</span>` : '<span></span>'}<h2>${s.title}</h2>${speakBtn('sec|' + c.id + '|' + s.id, 'Écouter cette partie')}</div><div class="blocks col">${s.blocks.map(block).join('')}</div></section>`).join('')}
   ${c.essentials ? `<div class="essentials col"><h2>${icon('crown')}L’essentiel à retenir</h2><ol>${c.essentials.map(e => `<li>${e}</li>`).join('')}</ol></div>` : ''}
   <div class="next-cta">${tabCount(c, 'revision') ? `<button class="btn btn-primary" data-tab-go="revision">${icon('fiche')}Apprendre la fiche</button>` : ''}${tabCount(c, 'cartes') ? `<button class="btn${tabCount(c, 'revision') ? '' : ' btn-primary'}" data-tab-go="cartes">${icon('cards')}Passer aux flashcards</button>` : ''}${tabCount(c, 'quiz') ? `<button class="btn" data-tab-go="quiz">${icon('target')}Faire le quiz</button>` : ''}</div>`;
   mountWidgets(panel); bindChips(panel);

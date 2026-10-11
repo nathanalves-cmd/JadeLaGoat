@@ -10,13 +10,13 @@ function runCards(el, deck, opt = {}){
   function start(onlyWeak){
     let d = onlyWeak ? deck.filter(x => box(x) < 2) : deck.slice();
     if (!d.length) d = deck.slice();
-    queue = shuffle(d).sort((a, b) => box(a) - box(b)); idx = 0; known = 0; review = 0; draw();
+    queue = opt.keepOrder ? d.slice() : shuffle(d).sort((a, b) => box(a) - box(b)); idx = 0; known = 0; review = 0; draw();
   }
   function draw(){
     if (idx >= queue.length) return finish();
     const x = queue[idx]; const [b1, b2, b3] = counts();
     el.innerHTML = `<div class="deck-wrap">
-      <div class="deck-top"><span>Carte <b>${idx + 1}</b>/${queue.length}</span><span class="boxes" aria-label="Avancement"><span><i></i>${b1}</span><span><i class="b2"></i>${b2}</span><span><i class="b3"></i>${b3} maîtrisées</span></span></div>
+      <div class="deck-top"><span>Carte <b>${idx + 1}</b>/${queue.length}${x._rq ? ' <span class="tag warn">2e passage</span>' : ''}</span><span class="boxes" aria-label="Avancement"><span><i></i>${b1}</span><span><i class="b2"></i>${b2}</span><span><i class="b3"></i>${b3} maîtrisées</span></span>${speakBtn('card', 'Écouter la carte')}</div>
       <div class="deck">
         <div class="deck-ghost g2"></div><div class="deck-ghost"></div>
         <span class="swipe-tag ko">À revoir</span><span class="swipe-tag ok">Je savais</span>
@@ -45,7 +45,8 @@ function runCards(el, deck, opt = {}){
     $$('.deck-actions [data-k]', el).forEach(b => b.addEventListener('click', e => decide(+b.dataset.k, e)));
     function decide(k, ev){
       if (locked) return; locked = true;
-      const v = box(x); S.cards[key(x)] = k ? Math.min(3, Math.max(2, v + 1)) : 1; save();
+      const v = box(x); S.cards[key(x)] = k ? Math.min(3, Math.max(2, v + 1)) : 1; srsMark(key(x), !!k); save();
+      if (!k && opt.requeue && !x._rq) queue.push(Object.assign({}, x, {_rq:true}));
       if (k){ known++; addXP(4, ev || {target:card}); quest('card'); } else { review++; addXP(1, ev || {target:card}); }
       card.style.transform = ''; card.classList.add(k ? 'fly-right' : 'fly-left');
       setTimeout(() => { idx++; draw(); }, reduced() ? 0 : 380);
@@ -53,16 +54,30 @@ function runCards(el, deck, opt = {}){
     card.focus({preventScroll:true});
   }
   function finish(){
+    if (opt.srs) return finishSrs();
     const weak = deck.filter(x => box(x) < 2).length;
     if (review === 0) confetti(90);
     el.innerHTML = `<div class="result">
       <div class="eyebrow">${esc(opt.title || 'Flashcards')}</div>
-      <h3>${review === 0 ? 'Sans faute !' : 'Paquet terminé'}</h3>
+      <h2>${review === 0 ? 'Sans faute !' : 'Paquet terminé'}</h2>
       <p class="muted">${known} su${known > 1 ? 'es' : 'e'} · ${review} à revoir · ${deck.length - weak}/${deck.length} cartes maîtrisées au total</p>
       <div class="btn-row" style="justify-content:center">${weak ? `<button class="btn btn-primary" id="cw">${icon('refresh')}Revoir les ${weak} cartes fragiles</button>` : ''}<button class="btn" id="ca">${icon('cards')}Tout repasser</button></div>
     </div>`;
     const w = $('#cw', el); if (w) w.onclick = () => start(true);
     $('#ca', el).onclick = () => start(false);
+  }
+  function finishSrs(){
+    const q = srsQueue(); const left = q.nDue + q.nFresh;
+    if (!review) confetti(90);
+    if (!el.__bonus){ el.__bonus = true; addXP(15, {target:el}); }
+    el.innerHTML = `<div class="result">
+      <div class="eyebrow">Révision du jour</div>
+      <h2>${review === 0 ? 'Sans faute !' : 'Révision terminée'}</h2>
+      <p class="muted">${known} su${known > 1 ? 'es' : 'e'} · ${review} à revoir · ${left ? plural(left, 'carte') + ' encore prête' + (left > 1 ? 's' : '') + ' pour aujourd’hui' : 'tout est à jour' + (q.next ? ', prochaine révision ' + whenTxt(q.next) : '')}</p>
+      <p class="faint" style="font-size:.86rem;max-width:46ch;margin:0 auto">Chaque carte sue revient de plus en plus tard : 1 jour, 2, 4, 8, 16, puis 32. C’est comme ça qu’on retient pour l’examen.</p>
+      <div class="btn-row" style="justify-content:center">${left ? `<button class="btn btn-primary" id="cr">${icon('refresh')}Continuer (${left})</button>` : ''}<button class="btn" data-go="home">${icon('home')}Retour à l’accueil</button></div>
+    </div>`;
+    const c = $('#cr', el); if (c) c.onclick = () => runCards(el, q.due.concat(q.fresh), opt);
   }
   start(false);
 }
@@ -71,7 +86,7 @@ function runCards(el, deck, opt = {}){
 function quizHome(el, c){
   const best = S.quiz[c.id];
   el.innerHTML = `<div class="quiz"><div class="panel" style="display:grid;gap:12px">
-    <div class="eyebrow">Quiz · ${esc(c.kicker)}</div><h3>${c.quiz.length} questions sur « ${strip(c.title)} »</h3>
+    <div class="eyebrow">Quiz · ${esc(c.kicker)}</div><h2 style="font-size:var(--fs-xl)">${c.quiz.length} questions sur « ${strip(c.title)} »</h2>
     <p class="muted">QCM et vrai/faux, corrigés et expliqués. +10 XP par bonne réponse.${best ? ` Ton meilleur score : <b>${Math.round(best.best * 100)} %</b>.` : ''}</p>
     <div class="btn-row"><button class="btn btn-primary" id="qa">${icon('play')}Quiz complet</button>${c.quiz.length > 10 ? `<button class="btn" id="qq">${icon('bolt')}Version rapide (10)</button>` : ''}</div></div></div>`;
   const run = n => { const qs = shuffle(c.quiz.map((q, i) => Object.assign({cid:c.id, qi:i}, q))).slice(0, n); runQuiz(el, qs, {kind:'chapter', title:c.title, onDone(sc, tot){ const p = sc / tot; const prev = S.quiz[c.id] || {best:0, runs:0}; S.quiz[c.id] = {best:Math.max(prev.best, p), runs:prev.runs + 1}; save(); }, again: () => quizHome(el, c)}); };
@@ -124,6 +139,7 @@ function runQuiz(el, qs, opt = {}){
     $$('.jk-bar [data-jk]', el).forEach(x => { x.disabled = true; });
     if (!right) b.classList.add('is-wrong');
     if (right){ score++; addXP(q._sc ? 5 : 10, e); quest('quiz'); } else wrong.push(q);
+    errMark(q, right && !q._sc);
     const good = q.tf ? (q.a ? 'Vrai' : 'Faux') : q.opts[q.ans];
     $('#qx', el).innerHTML = `<div class="expl"><div class="verdict ${right ? 'good' : 'bad'}">${right ? pick(['Exact !', 'Bien vu.', 'Parfait.', 'Oui, c’est ça !']) : 'Pas tout à fait…'}</div>${right ? '' : `<p><b>Bonne réponse :</b> ${good}</p>`}${q.e ? `<p>${q.e}</p>` : ''}</div>
       <div class="qnext"><button class="btn btn-primary" id="qn">${i + 1 < items.length ? 'Question suivante' : 'Voir mon résultat'}${icon('arrow')}</button></div>`;
@@ -206,7 +222,7 @@ function runSort(el, g, c){
     const p = score / items.length; const prev = S.sorts[g.id];
     S.sorts[g.id] = Math.max(prev || 0, p); save(); addXP(20, {target:el}); quest('sort');
     if (p >= .8) confetti(110);
-    el.innerHTML = `<div class="result"><div class="eyebrow">${g.title}</div><h3>${Math.round(p * 100)} % de bonnes réponses</h3><p class="muted">${score}/${items.length}${prev != null ? ` · record : ${Math.round(Math.max(prev, p) * 100)} %` : ''}</p>
+    el.innerHTML = `<div class="result"><div class="eyebrow">${g.title}</div><h2>${Math.round(p * 100)} % de bonnes réponses</h2><p class="muted">${score}/${items.length}${prev != null ? ` · record : ${Math.round(Math.max(prev, p) * 100)} %` : ''}</p>
       ${misses.length ? `<div class="mistakes"><div class="eyebrow">Les pièges du jour</div>${misses.map(m => `<div class="mistake"><b>${m.t} → ${g.cats.find(k => k.id === m.c).l}</b>${m.w || ''}</div>`).join('')}</div>` : ''}
       <div class="btn-row" style="justify-content:center"><button class="btn btn-primary" id="sr">${icon('refresh')}Rejouer</button><button class="btn" id="so">Autres jeux</button></div></div>`;
     $('#sr', el).onclick = () => runSort(el, g, c); $('#so', el).onclick = () => gamesHome(el, c);

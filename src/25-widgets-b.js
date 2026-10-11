@@ -26,7 +26,7 @@ JLG.widget('maison', (el, o) => {
   el.innerHTML = `<div class="w w-farm">
     <div class="w-head"><span class="eyebrow">Illustration interactive</span><b>La ferme aux immeubles</b><span class="muted">${o.mode === 'defi' ? 'Touche un numéro et classe-le.' : 'Touche un numéro pour savoir ce que c’est.'}</span></div>
     <div class="seg-ctrl" role="tablist"><button role="tab" data-mode="explore">Explorer</button><button role="tab" data-mode="defi">Défi : à toi de classer</button></div>
-    <div class="farm-wrap"><svg class="farm" viewBox="0 0 400 270" role="img" aria-label="Une ferme avec une maison, un tracteur, des animaux, un champ et un acte d’usufruit">
+    <div class="farm-wrap"><svg class="farm" viewBox="0 0 400 270" role="group" aria-label="Une ferme avec une maison, un tracteur, des animaux, un champ et un acte d’usufruit">
       <defs><clipPath id="${uid}b"><circle r="40"/></clipPath></defs>
       <rect x="0" y="0" width="400" height="270" rx="16" fill="var(--il-sky)"/>
       <circle cx="182" cy="26" r="11" fill="var(--accent)" opacity=".8"/>
@@ -127,7 +127,7 @@ JLG.widget('cadastre', el => {
   el.innerHTML = `<div class="w w-cad">
     <div class="w-head"><span class="eyebrow">Plan schématique</span><b>Extrait de plan cadastral · Section AB</b><span class="muted">Exemple inspiré du cours (PULNOY, AB 325). Touche une parcelle.</span></div>
     <div class="seg-ctrl" role="tablist"><button role="tab" data-m="lire">Lire le plan</button><button role="tab" data-m="trouve">Trouve la parcelle</button></div>
-    <div class="cad-wrap"><svg class="cad" viewBox="0 0 360 270" role="img" aria-label="Plan cadastral schématique de la section AB">
+    <div class="cad-wrap"><svg class="cad" viewBox="0 0 360 270" role="group" aria-label="Plan cadastral schématique de la section AB">
       <defs><pattern id="${uid}h" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="var(--fg)" stroke-width="1.2" opacity=".55"/></pattern></defs>
       <rect x="0" y="0" width="360" height="270" rx="14" fill="var(--surface)"/>
       <polygon points="20,200 340,200 340,226 20,226" fill="var(--surface-3)"/><text x="180" y="217" text-anchor="middle" font-size="9" font-style="italic" fill="var(--muted)" font-family="var(--font-display)">Allée des Mimosas</text>

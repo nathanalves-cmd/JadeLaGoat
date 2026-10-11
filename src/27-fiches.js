@@ -8,7 +8,7 @@ function ficheItem(it){
   if (it.a != null) return `<div class="fi fi-art"><span class="fi-ref">${it.a}</span>${cacheSpan(it.v)}</div>`;
   if (it.kv) return `<dl class="fi fi-kv">${it.kv.map(([k, v]) => `<div><dt>${k}</dt><dd>${cacheSpan(v)}</dd></div>`).join('')}</dl>`;
   if (it.l != null) { const tag = it.num ? 'ol' : 'ul'; return `<div class="fi fi-list"><div class="fi-lab">${it.l}</div><${tag}>${it.items.map(x => `<li>${cacheSpan(x)}</li>`).join('')}</${tag}></div>`; }
-  if (it.tab) return `<div class="fi fi-tab"><table>${it.tab.head ? `<thead><tr>${it.tab.head.map(h => `<th>${h}</th>`).join('')}</tr></thead>` : ''}<tbody>${it.tab.rows.map(r => `<tr>${r.map((c, i) => `<td>${i ? cacheSpan(c) : `<b>${c}</b>`}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  if (it.tab) return `<div class="fi fi-tab"><table>${it.tab.head ? `<thead><tr>${it.tab.head.map(h => h ? `<th>${h}</th>` : '<td></td>').join('')}</tr></thead>` : ''}<tbody>${it.tab.rows.map(r => `<tr>${r.map((c, i) => `<td>${i ? cacheSpan(c) : `<b>${c}</b>`}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
   if (it.m != null) return `<div class="fi fi-memo">${icon('sparkle')}<span>${it.m}</span></div>`;
   if (it.p != null) return `<div class="fi fi-piege">${icon('alert')}<span>${it.p}</span></div>`;
   if (it.x != null) return `<p class="fi fi-x">${it.x}</p>`;
@@ -17,7 +17,7 @@ function ficheItem(it){
 function ficheCard(c, f, i){
   const k = isKnown(c, f);
   return `<article class="bristol${k ? ' known' : ''}" id="fc-${c.id}-${f.id}" data-key="${fkKey(c, f)}">
-    <header class="br-head"><span class="br-num">${i + 1}</span><h3>${f.t}</h3></header>
+    <header class="br-head"><span class="br-num">${i + 1}</span><h3>${f.t}</h3>${speakBtn('fiche|' + c.id + '|' + f.id, 'Écouter la carte')}</header>
     <div class="br-body">${f.items.map(ficheItem).join('')}</div>
     <footer class="br-foot"><button class="br-know" aria-pressed="${k}">${icon('check')}<span>${k ? 'Je la connais' : 'Je la connais ?'}</span></button></footer>
     ${k ? `<div class="br-seal" aria-hidden="true">${sealSVG({ring:false})}</div>` : ''}
@@ -28,6 +28,7 @@ function ficheBar(cs, sticky){
   return `${sticky ? jump('fz-jump-row') : ''}<div class="fz-bar${sticky ? ' sticky' : ''}">
     <button class="fz-mode" aria-pressed="${!!S.ficheHide}"><span class="fz-ic">${icon(S.ficheHide ? 'eyeoff' : 'eye')}</span><span>Mode cache</span><i class="fz-sw" aria-hidden="true"></i></button>
     <button class="btn btn-sm btn-ghost fz-all" ${S.ficheHide ? '' : 'hidden'}>Tout révéler</button>
+    <button class="btn btn-sm btn-ghost fz-print" data-print>${icon('doc')}Imprimer</button>
     ${jump('fz-jump-bar')}
   </div>`;
 }
@@ -113,7 +114,7 @@ function viewFiches(sid, cid){
 function renderRevision(panel, c){
   const s = subj(c.subject);
   const box = document.createElement('div'); box.className = 'fz-box';
-  box.innerHTML = `<p class="lead" style="margin-bottom:14px">La fiche à apprendre de ce chapitre. Active le mode cache pour t’interroger, puis tamponne chaque carte que tu connais.</p>
+  box.innerHTML = `<h2 class="sr-only">La fiche du chapitre</h2><p class="lead" style="margin-bottom:14px">La fiche à apprendre de ce chapitre. Active le mode cache pour t’interroger, puis tamponne chaque carte que tu connais.</p>
     ${ficheBar([c], false)}
     <div class="fiches${S.ficheHide ? ' hide-on' : ''}"><div class="fz-cards">${c.fiche.map((f, i) => ficheCard(c, f, i)).join('')}</div></div>
     <div class="next-cta"><button class="btn btn-primary" data-tab-go="cartes">${icon('cards')}Passer aux flashcards</button><button class="btn" data-go="fiches-${s.id}">${icon('fiche')}Toute la fiche ${esc(s.short)}</button></div>`;

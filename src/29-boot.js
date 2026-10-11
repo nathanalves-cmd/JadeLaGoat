@@ -5,6 +5,17 @@ function boot(data){
   $('#brandSeal').innerHTML = sealSVG({ring:false});
   renderNav(); applyTheme(); updateChip();
   $('#themeBtn').addEventListener('click', () => { S.theme = curTheme() === 'dark' ? 'light' : 'dark'; save(); applyTheme(); });
+  $('#searchBtn').innerHTML = icon('search');
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-search]')){ e.preventDefault(); openSearch(); return; }
+    if (e.target.closest('[data-print]')){ e.preventDefault(); window.print(); }
+  });
+  document.addEventListener('keydown', e => {
+    const t = e.target, typing = t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));
+    if ((e.key === 'k' || e.key === 'K') && (e.ctrlKey || e.metaKey)){ e.preventDefault(); openSearch(); }
+    else if (e.key === '/' && !typing && !e.ctrlKey && !e.metaKey && !e.altKey){ e.preventDefault(); openSearch(); }
+  });
+  swInit(); a11yObserve();
   document.addEventListener('click', e => {
     const g = e.target.closest('[data-go]'); if (!g) return;
     e.preventDefault(); go(g.dataset.go, {open:g.dataset.open});

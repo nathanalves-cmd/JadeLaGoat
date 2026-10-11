@@ -76,7 +76,7 @@ JLG.widget('famille', (el, o) => {
       <div class="seg-ctrl" role="tablist" aria-label="Type d’union"><button role="tab" data-m="mariage">Mariage</button><button role="tab" data-m="pacs">PACS</button></div>
       <div class="fam-dead"><span class="muted">Le mari de Léa :</span><div class="seg-mini" role="group" aria-label="Situation du mari de Léa"><button data-d="0" aria-pressed="true">Divorcés</button><button data-d="1" aria-pressed="false">Décédé</button></div></div>
     </div>
-    <div class="fam-wrap"><svg class="fam" viewBox="0 0 410 330" role="img" aria-label="Arbre généalogique de Léa">
+    <div class="fam-wrap"><svg class="fam" viewBox="0 0 410 330" role="group" aria-label="Arbre généalogique de Léa">
       <rect x="0" y="0" width="410" height="330" rx="16" fill="var(--bg-2)"/>
       <text x="402" y="18" text-anchor="end" class="fam-cap">Famille par alliance</text>
       <text x="8" y="322" class="fam-cap">Famille par le sang</text>

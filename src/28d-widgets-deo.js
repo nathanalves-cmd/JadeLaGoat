@@ -120,7 +120,7 @@ JLG.widget('opposabilite', (el, o) => {
     };
     const end = () => {
       if (score >= 4) confetti(90); addXP(10, {target:el});
-      el.innerHTML = `<div class="result"><div class="eyebrow">La course à la publication</div><h3>${score}/${N} bons verdicts</h3><p class="muted">${score === N ? 'Parfait : l’article 1198 n’a plus de secret pour toi.' : 'Retiens : le premier qui publie l’emporte… s’il est de bonne foi.'}</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" id="opr">${icon('refresh')}Rejouer</button></div></div>`;
+      el.innerHTML = `<div class="result"><div class="eyebrow">La course à la publication</div><h2>${score}/${N} bons verdicts</h2><p class="muted">${score === N ? 'Parfait : l’article 1198 n’a plus de secret pour toi.' : 'Retiens : le premier qui publie l’emporte… s’il est de bonne foi.'}</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" id="opr">${icon('refresh')}Rejouer</button></div></div>`;
       $('#opr', el).onclick = () => { k = 0; score = 0; draw(); };
     };
     return draw();
@@ -205,7 +205,7 @@ JLG.widget('etude', (el, o) => {
     };
     const end = () => {
       const p = score / list.length; if (p >= .8) confetti(90); addXP(10, {target:el});
-      el.innerHTML = `<div class="result"><div class="eyebrow">Le dossier fait le tour de l’étude</div><h3>${score}/${list.length} dossiers bien envoyés</h3><p class="muted">${p === 1 ? 'Tu connais l’étude comme ta poche.' : 'Trouver, préparer, signer, publier, facturer : un verbe par métier.'}</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" id="etr">${icon('refresh')}Rejouer</button></div></div>`;
+      el.innerHTML = `<div class="result"><div class="eyebrow">Le dossier fait le tour de l’étude</div><h2>${score}/${list.length} dossiers bien envoyés</h2><p class="muted">${p === 1 ? 'Tu connais l’étude comme ta poche.' : 'Trouver, préparer, signer, publier, facturer : un verbe par métier.'}</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" id="etr">${icon('refresh')}Rejouer</button></div></div>`;
       $('#etr', el).onclick = start;
     };
     return start();

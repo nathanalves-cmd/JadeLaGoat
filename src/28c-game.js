@@ -330,7 +330,7 @@ function questsHTML(){
   return `<div class="q-list">${D.list.map((q, i) => { const d = qDef(q.k); const done = D.p[i] >= q.n, claimed = !!D.c[i]; return `<div class="q-item${done ? ' done' : ''}${claimed ? ' claimed' : ''}"><span class="q-ic">${icon(d.ic)}</span><div class="q-body"><b>${d.t(q.n)}</b><span class="meter"><i style="width:${Math.round(D.p[i] / q.n * 100)}%"></i></span><span class="q-n">${fmtNum(D.p[i])} / ${fmtNum(q.n)}</span></div>${claimed ? `<span class="q-ok">${icon('check')}</span>` : done ? `<button class="btn btn-sm btn-primary q-claim" data-claim="${i}">+${rw} XP</button>` : `<span class="q-rw">+${rw} XP</span>`}</div>`; }).join('')}</div>
     <div class="q-chest${all ? (D.chest ? ' got' : ' ready') : ''}">${icon('gift')}<span>${D.chest ? 'Coffre du jour ouvert. Reviens demain !' : all ? 'Les 3 quêtes sont faites : ton coffre du jour arrive !' : `Finis les 3 quêtes : coffre du jour avec ${1 + Math.floor(levelOf(S.xp).i / 4)} objet${Math.floor(levelOf(S.xp).i / 4) ? 's' : ''}.`}</span></div>`;
 }
-function questsCard(){ return `<section class="q-card" aria-label="Quêtes du jour"><div class="q-head"><div><div class="eyebrow">${icon('quest', 'sr-only')}Quêtes du jour</div><h3>Trois missions, une récompense</h3></div><span class="tag plain">Nouvelles demain</span></div><div class="q-slot">${questsHTML()}</div></section>`; }
+function questsCard(h = 3){ return `<section class="q-card" aria-label="Quêtes du jour"><div class="q-head"><div><div class="eyebrow">${icon('quest', 'sr-only')}Quêtes du jour</div><h${h} class="q-title">Trois missions, une récompense</h${h}></div><span class="tag plain">Nouvelles demain</span></div><div class="q-slot">${questsHTML()}</div></section>`; }
 function refreshQuests(){ $$('.q-slot').forEach(s => { s.innerHTML = questsHTML(); }); }
 function claimQuest(i, ev){
   const D = questsToday(); const q = D.list[i]; if (!q || D.c[i] || D.p[i] < q.n) return;
@@ -402,6 +402,11 @@ function viewProgress(){
   <div class="fx-list">${fxs}</div>
   <div class="section-title"><h2>Réglages</h2></div>
   <div class="panel set-row"><button class="btn btn-sm" data-sound aria-pressed="${!!S.sound}">${icon(S.sound ? 'volume' : 'mute')}${S.sound ? 'Son activé' : 'Son coupé'}</button><button class="btn btn-sm" data-replay>${icon('play')}Rejouer l’animation de mon niveau</button></div>
+  <div class="panel set-grid">
+    <div class="set-item"><div><b>Thème</b><span class="muted">Automatique : comme ton téléphone.</span></div><div class="seg-ctrl" role="tablist" aria-label="Thème">${[['auto', 'Auto'], ['dark', 'Sombre'], ['light', 'Clair']].map(([v, l]) => `<button role="tab" data-theme-set="${v}" aria-selected="${(S.theme || 'auto') === v}">${l}</button>`).join('')}</div></div>
+    <div class="set-item"><div><b>Sauvegarder ma progression</b><span class="muted">Ta progression vit sur cet appareil. Garde une copie, ou passe-la sur un autre téléphone.</span></div><div class="btn-row"><button class="btn btn-sm" data-backup>${icon('doc')}Télécharger</button><button class="btn btn-sm btn-ghost" data-restore>${icon('refresh')}Restaurer</button></div></div>
+    ${installItem()}
+  </div>
   <div class="section-title"><h2>Tes 4 dernières semaines</h2></div>
   <div class="cal">${days.map(x => `<span title="${x.k}${S.days[x.k] === 'sh' ? ' : protégé par un bouclier' : ''}" class="${S.days[x.k] === 'sh' ? 'sh' : S.days[x.k] ? 'on' : ''}">${S.days[x.k] === 'sh' ? icon('shield') : x.l}</span>`).join('')}</div>
   <div class="section-title"><h2>Par chapitre</h2></div>

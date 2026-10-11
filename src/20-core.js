@@ -142,7 +142,8 @@ function sealSVG(opts = {}){
 /* ---------- état (progression locale) ---------- */
 const KEY = 'jlg.v1';
 const defaults = () => ({xp:0, days:{}, last:null, cards:{}, quiz:{}, sorts:{}, cases:{}, daily:{}, fk:{}, ficheHide:false, seenLog:null, theme:null,
-  inv:{ff:0, sc:0, boost:0, shield:0}, skin:'amethyste', sound:true, boostUntil:0, lvlSeen:0, prest:0, gameV:0, dq:null});
+  inv:{ff:0, sc:0, boost:0, shield:0}, skin:'amethyste', sound:true, boostUntil:0, lvlSeen:0, prest:0, gameV:0, dq:null,
+  srs:null, srsNew:null, err:{}});
 let FRESH = true;
 let S = (function(){ try { const raw = localStorage.getItem(KEY); if (raw){ FRESH = false; const o = Object.assign(defaults(), JSON.parse(raw)); o.inv = Object.assign({ff:0, sc:0, boost:0, shield:0}, o.inv || {}); return o; } } catch(e){} return defaults(); })();
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }

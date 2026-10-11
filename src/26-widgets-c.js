@@ -145,7 +145,7 @@ JLG.widget('gallery', (el, o) => {
     <article class="acte-paper gal-out"></article>
     <p class="w-note gal-note"></p></div>`;
   const out = $('.gal-out', el), sel = $('.gal-s', el), tog = $('.hl-tog', el);
-  const show = i => { const k = list[i]; out.innerHTML = `<div class="ap-h">${k.head || GSETS[cur].head}</div>${k.h}`; $('.gal-note', el).innerHTML = k.note || ''; out.classList.remove('flash'); void out.offsetWidth; out.classList.add('flash'); };
+  const show = i => { const k = list[i]; out.innerHTML = `<div class="ap-h">${k.head || GSETS[cur].head}</div>${k.h}`; $('.gal-note', el).innerHTML = k.note || ''; out.classList.remove('flash'); void out.offsetWidth; out.classList.add('flash'); $$('.ap-tbl', out).forEach(t => { t.tabIndex = 0; t.setAttribute('role', 'region'); t.setAttribute('aria-label', 'Tableau de la clause'); }); };
   const useSet = s => {
     cur = s; list = all.filter(k => setOf(k) === s);
     $$('.gal-sets button', el).forEach(b => b.setAttribute('aria-selected', b.dataset.set === s));

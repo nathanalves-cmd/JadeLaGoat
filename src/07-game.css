@@ -40,7 +40,7 @@
 /* Quêtes du jour */
 .q-card{margin-top:14px;padding:16px;border-radius:var(--r-l);background:var(--surface);border:1px solid var(--line);display:grid;gap:12px}
 .q-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.q-head h3{font-size:1.15rem;margin-top:3px}
+.q-head .q-title{font-size:1.15rem;margin-top:3px}
 .q-list{display:grid;gap:8px}
 .q-item{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border-radius:14px;background:var(--bg-2);border:1px solid var(--line);transition:border-color .3s,background .3s}
 .q-ic{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--accent-soft);color:var(--accent)}
