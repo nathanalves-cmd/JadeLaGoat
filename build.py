@@ -58,8 +58,11 @@ def font_css(embed):
 def head_without_google():
     return re.sub(r'<link rel="(preconnect|stylesheet)" href="https://fonts\.g[^"]*"[^>]*>\n?', "", r("00-head.html"))
 
-# 1) Artifact
-artifact = "".join([r("00-head.html"), "<style>\n", css, "\n</style>\n", r("10-shell.html"), engine_tag, courses, boot])
+# 1) Artifact : la copie claude.ai ne peut pas télécharger de fichier, on retire la sauvegarde (bloc « sauvegarde » de 28e-plus.js).
+engine_artifact, n_backup = re.subn(r"/\* ▼ sauvegarde ▼ \*/\n.*?/\* ▲ sauvegarde ▲ \*/\n", "const inArtifact = () => true;\n", engine, flags=re.S)
+assert n_backup == 1, "bloc « sauvegarde » introuvable dans 28e-plus.js"
+artifact_engine_tag = "<!-- ═════════ MOTEUR DU SITE ═════════ -->\n<script>\n" + engine_artifact + "\n</script>\n"
+artifact = "".join([r("00-head.html"), "<style>\n", css, "\n</style>\n", r("10-shell.html"), artifact_engine_tag, courses, boot])
 (ROOT / "dist").mkdir(exist_ok=True)
 (ROOT / "dist" / "alves-cances.html").write_text(artifact, encoding="utf-8")
 

@@ -5303,7 +5303,9 @@ document.addEventListener('click', e => { const b = e.target.closest('[data-spea
 window.addEventListener('hashchange', speakStop);
 
 /* =================== SAUVEGARDE / RESTAURATION de la progression =================== */
-/* Dans la copie claude.ai (artifact, affichée dans un cadre), le téléchargement n’est pas permis : on n’y propose pas la sauvegarde. */
+/* Dans la copie claude.ai (artifact, affichée dans un cadre), le téléchargement n’est pas permis :
+   build.py remplace tout ce bloc par « inArtifact = () => true » dans cette copie. */
+/* ▼ sauvegarde ▼ */
 const inArtifact = () => {
   try { if (window.self !== window.top) return true; } catch(e){ return true; }
   return !!(window.claude && window.claude.hot) || /claude(usercontent)?\.(ai|com)$/.test(location.hostname);
@@ -5330,7 +5332,10 @@ function backupRestore(file){
 }
 document.addEventListener('click', e => {
   if (e.target.closest('[data-backup]')){ backupDownload(); return; }
-  if (e.target.closest('[data-restore]')){ const i = document.createElement('input'); i.type = 'file'; i.accept = '.json,application/json'; i.onchange = () => { if (i.files && i.files[0]) backupRestore(i.files[0]); }; i.click(); return; }
+  if (e.target.closest('[data-restore]')){ const i = document.createElement('input'); i.type = 'file'; i.accept = '.json,application/json'; i.onchange = () => { if (i.files && i.files[0]) backupRestore(i.files[0]); }; i.click(); }
+});
+/* ▲ sauvegarde ▲ */
+document.addEventListener('click', e => {
   const th = e.target.closest('[data-theme-set]'); if (th){ const v = th.dataset.themeSet; S.theme = v === 'auto' ? null : v; save(); applyTheme(); $$('[data-theme-set]').forEach(b => b.setAttribute('aria-selected', b === th)); }
 });
 
