@@ -4764,7 +4764,7 @@ function viewProgress(){
   <div class="panel set-row"><button class="btn btn-sm" data-sound aria-pressed="${!!S.sound}">${icon(S.sound ? 'volume' : 'mute')}${S.sound ? 'Son activé' : 'Son coupé'}</button><button class="btn btn-sm" data-replay>${icon('play')}Rejouer l’animation de mon niveau</button></div>
   <div class="panel set-grid">
     <div class="set-item"><div><b>Thème</b><span class="muted">Automatique : comme ton téléphone.</span></div><div class="seg-ctrl" role="tablist" aria-label="Thème">${[['auto', 'Auto'], ['dark', 'Sombre'], ['light', 'Clair']].map(([v, l]) => `<button role="tab" data-theme-set="${v}" aria-selected="${(S.theme || 'auto') === v}">${l}</button>`).join('')}</div></div>
-    <div class="set-item"><div><b>Sauvegarder ma progression</b><span class="muted">Ta progression vit sur cet appareil. Garde une copie, ou passe-la sur un autre téléphone.</span></div><div class="btn-row"><button class="btn btn-sm" data-backup>${icon('doc')}Télécharger</button><button class="btn btn-sm btn-ghost" data-restore>${icon('refresh')}Restaurer</button></div></div>
+    ${inArtifact() ? '' : `<div class="set-item"><div><b>Sauvegarder ma progression</b><span class="muted">Ta progression vit sur cet appareil. Garde une copie, ou passe-la sur un autre téléphone.</span></div><div class="btn-row"><button class="btn btn-sm" data-backup>${icon('doc')}Télécharger</button><button class="btn btn-sm btn-ghost" data-restore>${icon('refresh')}Restaurer</button></div></div>`}
     ${installItem()}
   </div>
   <div class="section-title"><h2>Tes 4 dernières semaines</h2></div>
@@ -5303,6 +5303,8 @@ document.addEventListener('click', e => { const b = e.target.closest('[data-spea
 window.addEventListener('hashchange', speakStop);
 
 /* =================== SAUVEGARDE / RESTAURATION de la progression =================== */
+/* Dans la copie claude.ai (artifact), le téléchargement n’est pas permis : on n’y propose pas la sauvegarde. */
+const inArtifact = () => !!(window.claude && (window.claude.hot || window.claude.downloads)) || /claude(usercontent)?\.(ai|com)$/.test(location.hostname);
 function backupDownload(){
   try {
     const data = JSON.stringify(Object.assign({_app:'alves-cances', _date:new Date().toISOString()}, S), null, 0);
