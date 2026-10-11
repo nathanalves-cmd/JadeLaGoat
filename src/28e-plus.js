@@ -195,8 +195,11 @@ document.addEventListener('click', e => { const b = e.target.closest('[data-spea
 window.addEventListener('hashchange', speakStop);
 
 /* =================== SAUVEGARDE / RESTAURATION de la progression =================== */
-/* Dans la copie claude.ai (artifact), le téléchargement n’est pas permis : on n’y propose pas la sauvegarde. */
-const inArtifact = () => !!(window.claude && (window.claude.hot || window.claude.downloads)) || /claude(usercontent)?\.(ai|com)$/.test(location.hostname);
+/* Dans la copie claude.ai (artifact, affichée dans un cadre), le téléchargement n’est pas permis : on n’y propose pas la sauvegarde. */
+const inArtifact = () => {
+  try { if (window.self !== window.top) return true; } catch(e){ return true; }
+  return !!(window.claude && window.claude.hot) || /claude(usercontent)?\.(ai|com)$/.test(location.hostname);
+};
 function backupDownload(){
   try {
     const data = JSON.stringify(Object.assign({_app:'alves-cances', _date:new Date().toISOString()}, S), null, 0);
