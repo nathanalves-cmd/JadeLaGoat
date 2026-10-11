@@ -1611,6 +1611,181 @@ html.lu-lock{overflow:hidden}
 /* toasts : centrés, sur une ou deux lignes, jamais coupés */
 .toast{width:max-content;max-width:min(520px,calc(100vw - 32px));text-align:center;border-radius:18px;line-height:1.35}
 
+/* ——— Déontologie (bloc 1) : délégation, duel des actes, course à la publication, l’étude, les professions ——— */
+
+/* 1. La journée de l’étude */
+.dl-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.dl-row{padding:12px 14px;border-radius:var(--r-m);background:var(--bg-2);border:1px solid var(--line);transition:border-color .3s,box-shadow .3s}
+.dl-row.on{border-color:var(--accent-line);box-shadow:0 0 0 3px var(--accent-soft)}
+.dl-head{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;width:100%;padding:0;border:0;background:none;text-align:left;cursor:pointer}
+.dl-h{display:grid;place-items:center;min-width:48px;padding:4px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-family:var(--font-mono);font-size:.72rem;font-weight:700;border:1px solid var(--accent-line)}
+.dl-txt b{display:block;font-weight:680;line-height:1.25}
+.dl-txt span{display:block;font-size:.84rem;line-height:1.35;color:var(--muted);margin-top:2px}
+.dl-lane{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;margin-top:12px}
+.dl-from{display:flex;align-items:center;gap:6px}
+.dl-from svg{width:26px;height:26px;flex:0 0 auto}
+.dl-from i{font-style:normal;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.dl-track{position:relative;height:2px;margin-inline:6px;background:repeating-linear-gradient(90deg,var(--line-2) 0 6px,transparent 6px 12px)}
+.dl-track::after{content:"";position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--accent-deep),var(--accent));border-radius:2px}
+.dl-lane.go .dl-track::after{animation:dlTrail 1s var(--ease) forwards}
+.dl-pk{position:absolute;left:0;top:50%;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-family:var(--font-mono);font-size:.74rem;font-weight:800;font-style:normal;opacity:0;transform:translate(-50%,-50%) scale(.5);box-shadow:0 0 0 5px var(--accent-soft),0 8px 20px -6px var(--glow);pointer-events:none}
+.dl-lane.go .dl-pk{animation:dlFly 1s var(--ease) forwards}
+.dl-to{padding:5px 11px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);font-size:.78rem;font-weight:680;white-space:nowrap;transition:background .3s,color .3s,border-color .3s}
+.dl-lane.hit .dl-to{background:var(--accent);color:var(--accent-ink);border-color:transparent;animation:dlHit .6s var(--spring)}
+.dl-body p{margin-top:10px;font-size:.93rem;animation:rise .4s var(--ease) both}
+@keyframes dlFly{0%{left:0;opacity:0;transform:translate(-50%,-50%) scale(.5)}14%{opacity:1;transform:translate(-50%,-50%) scale(1)}86%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{left:100%;opacity:0;transform:translate(-50%,-50%) scale(.6)}}
+@keyframes dlTrail{to{width:100%}}
+@keyframes dlHit{0%{box-shadow:0 0 0 0 var(--glow)}45%{transform:scale(1.14)}100%{transform:none;box-shadow:0 0 0 12px transparent}}
+@media (max-width:420px){.dl-from i{display:none}.dl-to{font-size:.72rem;padding:4px 9px}}
+
+/* 2. Le duel des actes */
+.du-rounds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+@media (min-width:640px){.du-rounds{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.du-rounds button{display:grid;gap:2px;padding:8px 11px;border-radius:14px;border:1px solid var(--line-2);background:var(--bg-2);color:var(--muted);text-align:left;font-size:.84rem;font-weight:640;line-height:1.25;cursor:pointer;transition:all .25s var(--ease)}
+.du-rounds button .mono{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.du-rounds button.done .mono::after{content:" ✓";color:var(--good)}
+.du-rounds button[aria-selected="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--fg)}
+.du-arena{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:stretch}
+@media (min-width:640px){.du-arena{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}}
+.du-card{position:relative;display:grid;align-content:start;gap:10px;padding:14px;border-radius:var(--r-m);background:var(--bg-2);border:1px solid var(--line);transition:transform .45s var(--spring),opacity .3s,border-color .3s,box-shadow .3s}
+.du-top{display:flex;align-items:center;gap:10px;padding-right:26px}
+.du-top b{display:block;font-family:var(--font-display);font-size:1.12rem;line-height:1.15}
+.du-top span span{font-size:.8rem;color:var(--muted)}
+.du-badge{display:grid;place-items:center;flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--surface-3);font-family:var(--font-mono);font-size:.68rem;font-weight:800;color:var(--muted)}
+.du-badge.seal{background:none}
+.du-badge.seal svg{width:42px;height:42px}
+.du-hp{display:block;height:7px;border-radius:7px;background:var(--surface-3);overflow:hidden}
+.du-hp i{display:block;height:100%;width:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent-deep),var(--accent));transition:width .9s var(--ease)}
+.du-a .du-hp i{background:linear-gradient(90deg,var(--bad),var(--warn))}
+.du-say{font-size:.93rem;line-height:1.5}
+.du-say.in{animation:rise .4s var(--ease) both}
+.du-res{position:absolute;top:10px;right:12px;font-size:1.5rem;font-weight:800;line-height:1;opacity:0;transform:scale(2.2);transition:opacity .25s,transform .45s var(--spring)}
+.du-card.win{border-color:var(--good);box-shadow:0 0 0 3px var(--good-soft),0 16px 36px -20px var(--glow);transform:translateY(-3px)}
+.du-card.win .du-res{opacity:1;transform:none;color:var(--good)}
+.du-card.lose{opacity:.74}
+.du-card.lose .du-res{opacity:1;transform:none;color:var(--bad)}
+.du-vs{display:grid;place-items:center;font-family:var(--font-display);font-style:italic;font-weight:800;font-size:1.5rem;color:var(--accent);text-shadow:0 0 18px var(--glow)}
+.du-arena.fight .du-a{animation:duLeft .5s var(--ease)}
+.du-arena.fight .du-b{animation:duRight .5s var(--ease)}
+.du-arena.fight .du-a.lose{animation:shake .45s ease}
+.du-arena.fight .du-vs{animation:bump .5s var(--spring)}
+@keyframes duLeft{45%{transform:translate(8px,4px) rotate(1deg)}}
+@keyframes duRight{45%{transform:translate(-8px,-4px) rotate(-1deg)}}
+@media (max-width:639px){@keyframes duLeft{45%{transform:translateY(8px)}}@keyframes duRight{45%{transform:translateY(-8px)}}}
+.du-score{display:flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-mono)}
+.du-score span{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.du-score b{font-size:1.5rem}
+.du-score em{font-style:normal;font-size:.72rem;font-weight:700;color:var(--muted)}
+.du-score .du-sa{color:var(--bad)} .du-score .du-sb{color:var(--good)}
+.du-score i{font-style:normal;color:var(--faint)}
+.du-pitch{padding:14px 16px;border-radius:var(--r-m);border:1px dashed var(--accent-line);background:var(--accent-soft);animation:rise .45s var(--ease) both}
+.du-pitch p{margin-top:6px}
+
+/* 3. La course à la publication */
+.w-op{--op-a:var(--accent);--op-b:#5CC8E0}
+:root[data-theme="light"] .w-op{--op-b:#0E7F99}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .w-op{--op-b:#0E7F99}}
+.op-board{position:relative;display:grid;gap:12px;padding:14px 12px 12px;border-radius:var(--r-m);background:var(--bg-2);border:1px solid var(--line)}
+.op-ruler,.op-lane{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;align-items:center}
+.op-name{font-weight:700;font-size:.86rem}
+.op-a .op-name{color:var(--op-a)} .op-b .op-name{color:var(--op-b)}
+.op-rail{position:relative;height:36px;margin-inline:14px}
+.op-ruler .op-rail{height:16px}
+.op-ruler i{position:absolute;top:0;transform:translateX(-50%);font-family:var(--font-mono);font-size:.62rem;font-style:normal;color:var(--faint)}
+.op-now{position:absolute;top:16px;width:2px;height:104px;margin-left:-1px;background:var(--fg);opacity:0;z-index:3;pointer-events:none;box-shadow:0 0 12px var(--glow);border-radius:2px}
+.op-board.playing .op-now{opacity:.8}
+.op-lane .op-rail::before{content:"";position:absolute;left:-14px;right:-14px;top:50%;height:2px;background:var(--line-2);transform:translateY(-50%)}
+.op-bar{position:absolute;top:50%;height:10px;transform:translateY(-50%);border-radius:10px;border:1px dashed var(--warn);background:repeating-linear-gradient(-45deg,var(--warn-soft) 0 5px,transparent 5px 10px)}
+.op-mk{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid var(--line-2);background:var(--surface);color:var(--muted);font-family:var(--font-mono);font-size:.56rem;font-weight:800;transition:transform .35s var(--spring),background .25s,color .25s,border-color .25s}
+.op-mk i{font-style:normal}
+.op-sign{width:16px;height:16px;background:var(--c);border-color:var(--c)}
+.op-pub{border-color:var(--c);color:var(--c)}
+.op-a{--c:var(--op-a)} .op-b{--c:var(--op-b)}
+.op-mk.lit{background:var(--c);border-color:var(--c);color:var(--accent-ink);transform:translate(-50%,-50%) scale(1.14)}
+.op-sign.lit{transform:translate(-50%,-50%) scale(1.35);box-shadow:0 0 0 5px color-mix(in srgb,var(--c) 25%,transparent)}
+.op-crown{position:absolute;left:50%;top:-24px;width:24px;height:24px;color:var(--warn);transform:translateX(-50%) scale(0);transition:transform .5s var(--spring)}
+.op-crown svg{width:24px;height:24px;fill:var(--warn-soft)}
+.op-lane.won .op-pub{background:var(--c);border-color:var(--c);color:var(--accent-ink);box-shadow:0 0 0 5px color-mix(in srgb,var(--c) 22%,transparent)}
+.op-lane.won .op-crown{transform:translateX(-50%) scale(1)}
+.op-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;font-size:.74rem;color:var(--muted)}
+.op-legend span{display:inline-flex;align-items:center;gap:6px}
+.op-legend i{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line-2);font-style:normal;font-size:.5rem;font-weight:800;font-family:var(--font-mono)}
+.op-legend .lg-s{width:12px;height:12px;background:var(--accent);border-color:var(--accent)}
+.op-legend .lg-p{width:auto;padding:0 5px;border-radius:9px;border-color:var(--accent);color:var(--accent)}
+.op-legend .lg-r{width:22px;height:8px;border-radius:8px;border:1px dashed var(--warn);background:repeating-linear-gradient(-45deg,var(--warn-soft) 0 4px,transparent 4px 8px)}
+.op-ctrl{display:grid;gap:12px}
+.op-range{display:grid;gap:4px;font-size:.92rem}
+.op-range output{font-family:var(--font-mono);font-weight:800;color:var(--accent)}
+.op-range input{width:100%;accent-color:var(--accent);height:26px;cursor:pointer}
+.op-faith{justify-self:start;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--line-2);background:var(--bg-2);font-size:.86rem;font-weight:640;cursor:pointer;transition:all .25s var(--ease);text-align:left}
+.op-faith svg{width:18px;height:18px;flex:0 0 auto}
+.op-faith[aria-pressed="true"]{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.op-q{font-size:.97rem}
+.op-pick .btn{flex:1 1 140px}
+
+/* 4. Le parcours du dossier */
+.et-desks{position:relative;list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.et-desk{position:relative;z-index:1;display:grid;grid-template-columns:46px minmax(0,1fr);gap:0 12px;align-items:center;padding:0 8px 0 0;border-radius:var(--r-m);transition:background .3s}
+.et-desk:not(:last-child)::before{content:"";position:absolute;z-index:-1;left:22px;top:46px;bottom:-12px;width:2px;border-radius:2px;background:linear-gradient(var(--accent-deep),var(--accent)) top left/100% 0% no-repeat,var(--line-2);transition:background-size .7s var(--ease)}
+.et-desk.done:not(:last-child)::before{background-size:100% 100%,auto}
+.et-av{grid-row:1;grid-column:1;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;border:2px solid var(--line-2);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .45s var(--spring)}
+.et-av svg{width:20px;height:20px}
+.et-role{grid-row:1;grid-column:2;min-width:0}
+.et-desk.is-not .et-av{border-color:var(--accent-line)}
+.et-desk.on .et-av{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:scale(1.12);box-shadow:0 0 0 6px var(--accent-soft),0 0 26px var(--glow)}
+.et-desk.done .et-av{border-color:var(--accent);color:var(--accent)}
+.et-role b{display:block;font-weight:700;font-size:.96rem;line-height:1.2}
+.et-verb{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.et-task{grid-row:2;grid-column:2;margin:0;max-height:0;opacity:0;overflow:hidden;font-size:.9rem;color:var(--muted);transition:max-height .5s var(--ease),opacity .4s,margin .4s}
+.et-desk.on .et-task,.et-desk.done .et-task{max-height:180px;opacity:1;margin-top:4px}
+.et-desk.on .et-task{color:var(--fg)}
+.et-file{position:absolute;left:30px;top:-8px;z-index:2;display:grid;place-items:center;width:26px;height:26px;border-radius:7px;background:var(--warn);color:#3D2600;opacity:0;transform:translateY(-12px) scale(.4);box-shadow:0 6px 14px -6px rgba(0,0,0,.5);pointer-events:none}
+.et-file svg{width:15px;height:15px}
+.et-desk.on .et-file{animation:etFile .6s var(--spring) forwards}
+.et-stamp{position:absolute;right:10px;top:-4px;width:46px;height:46px;opacity:0;transform:scale(1.5) rotate(-30deg);pointer-events:none;filter:drop-shadow(0 6px 12px var(--glow))}
+.et-stamp svg{width:100%;height:100%}
+.et-desk.on.is-not .et-stamp{animation:etStamp .5s .8s cubic-bezier(.2,1.6,.4,1) forwards}
+.et-desk.done.is-not .et-stamp,.et-desks.finished .is-not .et-stamp{opacity:1;transform:scale(1) rotate(-12deg)}
+@keyframes etFile{to{opacity:1;transform:none}}
+@keyframes etStamp{to{opacity:1;transform:scale(1) rotate(-12deg)}}
+@media (min-width:760px){
+  .et-desks{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  .et-desk{grid-template-columns:1fr;justify-items:center;align-content:start;text-align:center;padding:0 4px}
+  .et-desk:not(:last-child)::before{left:calc(50% + 28px);top:22px;bottom:auto;width:calc(100% + 10px - 56px);height:2px;background:linear-gradient(90deg,var(--accent-deep),var(--accent)) top left/0% 100% no-repeat,var(--line-2)}
+  .et-desk.done:not(:last-child)::before{background-size:100% 100%,auto}
+  .et-av,.et-role,.et-task{grid-column:1}
+  .et-role{grid-row:2;margin-top:8px}
+  .et-task{grid-row:3}
+  .et-file{left:calc(50% + 10px);top:-8px}
+  .et-stamp{right:auto;left:calc(50% - 66px);top:-6px}
+}
+.et-desks.pick .et-desk::before{display:none}
+.et-desks.pick .et-desk{padding:8px 10px;border:1px solid var(--line);background:var(--bg-2);cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .25s var(--spring)}
+.et-desks.pick .et-desk:hover{border-color:var(--accent-line)}
+.et-desks.pick .et-desk:active{transform:scale(.97)}
+.et-desks.pick .et-task,.et-desks.pick .et-file,.et-desks.pick .et-stamp{display:none}
+@media (min-width:760px){.et-desks.pick .et-desk{padding:12px 6px}}
+.et-desk.got{border-color:var(--good)!important;box-shadow:0 0 0 3px var(--good-soft)}
+.et-desk.got .et-av{background:var(--good);border-color:var(--good);color:#fff;transform:scale(1.08)}
+.et-desk.nope{border-color:var(--bad)!important;animation:shake .45s ease}
+.w-et.defi .et-q{font-family:var(--font-display);font-size:1.3rem}
+
+/* 5. Les professions du droit */
+.pr-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:760px){.pr-cols{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.pr-col{display:grid;align-content:start;gap:8px;padding:12px;border-radius:var(--r-m);background:var(--bg-2);border:1px solid var(--line)}
+.pr-col.me{border-color:var(--accent-line);box-shadow:0 0 0 3px var(--accent-soft)}
+.pr-top{display:flex;align-items:center;gap:8px}
+.pr-top b{font-size:.92rem;line-height:1.2}
+.pr-av{display:grid;place-items:center;flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--surface-3);color:var(--accent)}
+.pr-av svg{width:17px;height:17px}
+.pr-v{font-size:.9rem;line-height:1.45}
+.pr-v.in{animation:rise .45s var(--ease) backwards}
+.pr-v.big{font-family:var(--font-display);font-style:italic;font-weight:700;font-size:1.45rem;line-height:1.1;color:var(--accent)}
+.pr-yn{display:inline-grid;place-items:center;width:20px;height:20px;margin-right:6px;border-radius:50%;font-size:.7rem;font-weight:800;vertical-align:1px}
+.pr-yn.y{background:var(--good-soft);color:var(--good)}
+.pr-yn.n{background:var(--bad-soft);color:var(--bad)}
+
 </style>
 <div class="app" id="app">
   <header class="topbar">
@@ -2034,6 +2209,7 @@ function viewHome(){
     ${quick('train-daily', 'bolt', 'Défi du jour', '5 questions tirées de tous tes cours.')}
     ${quick('progres', 'trophy', 'Le jeu', '12 niveaux, des coffres, des jokers et des quêtes.')}
     ${quick('train', 'cards', 'Flashcards & jeux', 'Retourne les cartes, trie, gagne de l’XP.')}
+    ${quick('outils-duel', 'seal', 'Le duel des actes', 'Sous seing privé contre acte authentique.')}
     ${quick('outils-effetrel', 'pen', 'Clause « effet relatif »', 'Le générateur, avec le bon vocabulaire.')}
     ${quick('outils-chaine', 'clock', 'La chaîne des propriétaires', 'Remonter 30 ans pour l’origine de propriété.')}
     ${quick('outils-bareme', 'euro', 'Barème de l’usufruit', 'L’article 669 du CGI, en un curseur.')}
@@ -2149,6 +2325,7 @@ function viewTrain(a, b, opt){
     ${quick('outils-cadastre', 'map', 'Lire un plan cadastral', 'Section, numéro, contenance.')}
     ${chap('immo1') ? `<button class="quick" data-go="ch-immo1" data-open="maison"><span class="ico">${icon('house')}</span><span><b>La ferme aux immeubles</b><span>Nature, destination ou objet ? Trouve-les.</span></span></button>` : ''}
     ${chap('immo2') ? [['chaine', 'clock', 'Remonte la chaîne des propriétaires', 'L’ordre des actes, l’effet relatif, l’origine.'], ['prescription', 'scale', 'Usucapion : prescrit ou pas ?', 'Bonne foi, juste titre, tolérance.'], ['etages', 'house', 'Qui a le droit de… ?', 'Usufruitier, nu-propriétaire ou usager ?'], ['voisinage', 'tree', 'Le voisin a-t-il le droit ?', 'Arbres, haies et fenêtres.']].map(([w, ic, t, d]) => `<button class="quick" data-go="ch-immo2-jeux" data-open="${w}"><span class="ico">${icon(ic)}</span><span><b>${t}</b><span>${d}</span></span></button>`).join('') : ''}
+    ${chap('deo1') ? [['opposabilite', 'clock', 'La course à la publication', 'Deux acheteurs, une maison : qui l’emporte ?'], ['etude', 'doc', 'Le dossier fait le tour de l’étude', 'Envoie chaque tâche au bon bureau.']].map(([w, ic, t, d]) => `<button class="quick" data-go="ch-deo1-jeux" data-open="${w}"><span class="ico">${icon(ic)}</span><span><b>${t}</b><span>${d}</span></span></button>`).join('') : ''}
     ${quick('outils-famille', 'family', 'Qui peut-on épouser ?', 'L’arbre des empêchements, mariage et PACS.')}
     ${quick('outils-nullite', 'alert', 'Simulateur de nullité', 'Absolue ou relative, qui agit, quel délai.')}
     ${quick('outils-pacs', 'split', 'Séparation ou indivision ?', 'Range les biens du couple pacsé.')}
@@ -2179,6 +2356,11 @@ const TOOLS = [
   {id:'famille', g:'Droit civil', t:'Qui peut-on épouser ou pacser ?', d:'Touche un membre de la famille de Léa : interdit, dispense possible ou autorisé.', w:'famille'},
   {id:'nullite', g:'Droit civil', t:'Simulateur de nullité du mariage', d:'Choisis une cause : type de nullité, qui peut agir, délai, effets.', w:'nullite'},
   {id:'pacs', g:'Droit civil', t:'PACS : séparation ou indivision ?', d:'Change de régime et regarde les biens changer de propriétaire.', w:'pacsregime'},
+  {id:'delegation', g:'Déontologie', t:'La journée de l’étude au service de l’État', d:'Les tâches que l’État délègue au notaire : taxes, Télé@ctes, Perval, déclaration de succession.', w:'delegation'},
+  {id:'duel', g:'Déontologie', t:'Le duel des actes', d:'Acte sous signature privée contre acte authentique, en quatre manches.', w:'authentique'},
+  {id:'publication', g:'Déontologie', t:'La course à la publication (art. 1198)', d:'Deux acheteurs, une maison : le premier qui publie l’emporte, s’il est de bonne foi.', w:'opposabilite'},
+  {id:'etude', g:'Déontologie', t:'Le parcours d’un dossier dans l’étude', d:'Négociateur, collaborateur, notaire, formaliste, comptable-taxateur : qui fait quoi.', w:'etude'},
+  {id:'professions', g:'Déontologie', t:'Notaire, avocat, juge, commissaire de justice', d:'Le comparateur des professions du droit.', w:'pros'},
   {id:'methode', g:'Méthode', t:'Méthode du cas pratique', d:'Les 5 étapes du raisonnement juridique, avec un exemple.', w:'methode'}
 ];
 function viewOutils(id){
@@ -4483,6 +4665,263 @@ function gameInit(){
 }
 
 
+/* =================== SCHÉMAS — DÉONTOLOGIE (bloc 1) =================== */
+const later = (el, fn, ms) => setTimeout(() => { if (el.isConnected) fn(); }, reduced() ? 0 : ms);
+
+/* 1. La journée de l’étude au service de l’État (délégation de service public) */
+JLG.widget('delegation', el => {
+  const M = [
+    {h:'9 h', t:'Collecter les taxes', s:'pour le service de la publicité foncière', pk:'€', to:'SPF', d:'À la vente, le client remet au notaire les droits et taxes dus (droits d’enregistrement, taxe de publicité foncière, contribution de sécurité immobilière). Le notaire les reverse à l’État : il joue le rôle de percepteur.'},
+    {h:'11 h', t:'Envoyer l’acte par Télé@ctes', s:'pour mettre à jour le fichier immobilier', pk:'@', to:'Fichier immobilier', d:'Après la signature, l’étude transmet l’acte par voie électronique au service de la publicité foncière. Le fichier immobilier est mis à jour : chacun peut savoir qui est propriétaire.'},
+    {h:'14 h', t:'Renseigner Perval', s:'la base des prix de l’immobilier', pk:'%', to:'Perval', d:'L’étude transmet le prix et les caractéristiques de chaque vente. Ces données nourrissent les statistiques officielles des prix (les indices Notaires-Insee). Depuis la loi du 28 mars 2011, c’est une mission de service public.'},
+    {h:'17 h', t:'Déposer la déclaration de succession', s:'pour l’administration fiscale', pk:'DS', to:'Impôts', d:'Après un décès, le notaire établit la déclaration de succession, calcule les droits dus par les héritiers et la dépose à l’administration fiscale.'}
+  ];
+  el.innerHTML = `<div class="w w-dl">
+    <div class="w-head"><span class="eyebrow">Schéma animé</span><b>La journée de l’étude au service de l’État</b><span class="muted">Quatre tâches qu’une administration ferait sinon elle-même. Touche une mission, ou lance la journée.</span></div>
+    <ol class="dl-list">${M.map((m, i) => `<li class="dl-row" data-i="${i}">
+      <button class="dl-head" aria-expanded="false"><span class="dl-h">${m.h}</span><span class="dl-txt"><b>${m.t}</b><span>${m.s}</span></span></button>
+      <div class="dl-lane" aria-hidden="true"><span class="dl-from">${sealSVG({ring:false})}<i>Étude</i></span><span class="dl-track"><i class="dl-pk">${m.pk}</i></span><span class="dl-to">${esc(m.to)}</span></div>
+      <div class="dl-body" hidden><p>${m.d}</p></div></li>`).join('')}</ol>
+    <div class="btn-row"><button class="btn btn-sm btn-primary" data-play>${icon('play')}Lancer la journée</button></div>
+    <p class="w-note">L’État ne paie pas le notaire pour ces tâches : elles font partie de la mission de service public qu’il a acceptée en devenant officier public.</p></div>`;
+  const seen = new Set(); let timer = null;
+  const send = (i, ev) => {
+    const row = $(`.dl-row[data-i="${i}"]`, el); if (!row) return;
+    const lane = $('.dl-lane', row), body = $('.dl-body', row), head = $('.dl-head', row);
+    lane.classList.remove('go', 'hit'); void lane.offsetWidth; lane.classList.add('go');
+    head.setAttribute('aria-expanded', 'true'); row.classList.add('on');
+    later(el, () => { lane.classList.add('hit'); body.hidden = false; if (!seen.has(i)){ seen.add(i); addXP(2, ev || {target:head}); } }, 1050);
+  };
+  el.addEventListener('click', e => {
+    const h = e.target.closest('.dl-head');
+    if (h){ clearTimeout(timer); const row = h.closest('.dl-row'); if (h.getAttribute('aria-expanded') === 'true'){ h.setAttribute('aria-expanded', 'false'); $('.dl-body', row).hidden = true; row.classList.remove('on'); return; } send(+row.dataset.i, e); return; }
+    if (e.target.closest('[data-play]')){
+      clearTimeout(timer);
+      $$('.dl-row', el).forEach(r => { r.classList.remove('on'); $('.dl-head', r).setAttribute('aria-expanded', 'false'); $('.dl-body', r).hidden = true; $('.dl-lane', r).classList.remove('go', 'hit'); });
+      const run = i => { if (i >= M.length || !el.isConnected) return; send(i); const r = $(`.dl-row[data-i="${i}"]`, el).getBoundingClientRect(); if (i && (r.bottom > innerHeight - 90)) $(`.dl-row[data-i="${i}"]`, el).scrollIntoView({block:'center', behavior: reduced() ? 'auto' : 'smooth'}); timer = setTimeout(() => run(i + 1), reduced() ? 200 : 1700); };
+      run(0);
+    }
+  });
+});
+
+/* 2. Le duel : acte sous signature privée contre acte authentique */
+JLG.widget('authentique', el => {
+  const R = [
+    {k:'La date', l:'On conteste la date', a:'Sa date peut être contestée par les tiers : elle ne devient certaine qu’à l’enregistrement, au décès d’un signataire, ou si un acte authentique la reprend.', b:'<b>Date certaine</b> dès la signature : elle fait foi, la preuve est simplifiée.'},
+    {k:'La preuve', l:'On conteste le contenu', a:'Il suffit de désavouer son écriture ou sa signature : le juge doit alors procéder à une vérification d’écriture.', b:'Ce que le notaire a constaté fait foi <b>jusqu’à inscription de faux</b>. C’est à celui qui conteste de prouver.'},
+    {k:'L’exécution', l:'Le débiteur ne paie pas', a:'Il faut d’abord un procès pour obtenir un jugement, puis le faire exécuter. Des mois de perdus.', b:'Avec la <b>copie exécutoire</b>, un commissaire de justice agit directement, sans passer par le tribunal.'},
+    {k:'La publicité', l:'On veut publier la vente', a:'Impossible tel quel : pour être publiée au fichier immobilier, la vente doit résulter d’un acte authentique (art. 710-1).', b:'Le notaire publie l’acte au SPF : la vente devient <b>opposable aux tiers</b>.'}
+  ];
+  el.innerHTML = `<div class="w w-du">
+    <div class="w-head"><span class="eyebrow">Le duel des actes</span><b>Sous signature privée, ou chez le notaire ?</b><span class="muted">Choisis une manche : les deux actes s’affrontent.</span></div>
+    <div class="du-rounds" role="tablist" aria-label="Manches">${R.map((r, i) => `<button role="tab" aria-selected="false" data-r="${i}"><span class="mono">Manche ${i + 1}</span>${r.l}</button>`).join('')}</div>
+    <div class="du-arena">
+      <article class="du-card du-a"><div class="du-top"><span class="du-badge">SSP</span><span><b>Acte sous signature privée</b><span>signé entre les parties</span></span></div><span class="du-hp" aria-hidden="true"><i></i></span><p class="du-say">Signé à la maison, sans officier public.</p><span class="du-res" aria-hidden="true"></span></article>
+      <span class="du-vs" aria-hidden="true">VS</span>
+      <article class="du-card du-b"><div class="du-top"><span class="du-badge seal">${sealSVG({ring:false})}</span><span><b>Acte authentique</b><span>reçu par le notaire</span></span></div><span class="du-hp" aria-hidden="true"><i></i></span><p class="du-say">Reçu par un officier public, avec les solennités requises.</p><span class="du-res" aria-hidden="true"></span></article>
+    </div>
+    <div class="du-score" aria-live="polite"><em>Sous seing privé</em><b class="du-sa">0</b><i>–</i><b class="du-sb">0</b><em>Authentique</em></div>
+    <div class="du-pitch" hidden></div></div>`;
+  const won = new Set(); const A = $('.du-a', el), B = $('.du-b', el);
+  const play = (i, ev) => {
+    $$('.du-rounds button', el).forEach(b => b.setAttribute('aria-selected', +b.dataset.r === i));
+    [A, B].forEach(c => c.classList.remove('clash', 'win', 'lose'));
+    const arena = $('.du-arena', el); arena.classList.remove('fight'); void arena.offsetWidth; arena.classList.add('fight');
+    $('.du-say', A).innerHTML = R[i].a; $('.du-say', B).innerHTML = R[i].b;
+    $$('.du-say', el).forEach(s => { s.classList.remove('in'); void s.offsetWidth; s.classList.add('in'); });
+    later(el, () => {
+      B.classList.add('win'); A.classList.add('lose');
+      $('.du-res', A).textContent = '✗'; $('.du-res', B).textContent = '✓';
+      if (!won.has(i)){ won.add(i); $('.du-rounds [data-r="' + i + '"]', el).classList.add('done'); }
+      const n = won.size; $('.du-sb', el).textContent = n;
+      $('.du-hp i', A).style.width = (100 - n * 25) + '%';
+      if (n === R.length && !el.__done){
+        el.__done = true; const p = $('.du-pitch', el); p.hidden = false;
+        p.innerHTML = `<div class="eyebrow">KO en 4 manches · ce que tu dis au client</div><p>« L’acte reçu par le notaire a une <b>date</b> que personne ne peut contester, il <b>fait foi</b> jusqu’à inscription de faux, il se fait <b>exécuter sans procès</b>, et il peut être <b>publié</b> pour vous protéger contre tous. »</p>`;
+        confetti(70); addXP(10, ev || {target:p});
+      }
+    }, 520);
+  };
+  $('.du-rounds', el).addEventListener('click', e => { const b = e.target.closest('[data-r]'); if (b) play(+b.dataset.r, e); });
+});
+
+/* 3. La course à la publication (art. 1198) — simulateur, ou défi en 5 manches */
+JLG.widget('opposabilite', (el, o) => {
+  const D = 30, SA = 3, SB = 10;
+  const pos = d => ((d - 1) / (D - 1) * 100).toFixed(2) + '%';
+  const verdict = (a, b, bad) => {
+    if (a === b) return {w:null, t:'Publiés le même jour : c’est l’ordre de dépôt au service de la publicité foncière qui départage. La morale : on publie au plus vite !'};
+    if (a < b) return {w:'a', t:`Anna a publié la première (jour ${a}) : elle est préférée. Bruno ne peut rien lui opposer ; il peut seulement se retourner contre M. Roux.`};
+    if (bad) return {w:'a', t:`Bruno a publié le premier (jour ${b}), mais il <b>savait</b> que la maison était déjà vendue : il est de mauvaise foi, l’article 1198 ne le protège pas. Anna, la première acheteuse, l’emporte.`};
+    return {w:'b', t:`Bruno a signé après Anna, mais il a publié le premier (jour ${b}) et il est de bonne foi : il est préféré (art. 1198), même si son droit est postérieur. Anna peut seulement agir contre M. Roux.`};
+  };
+  const lane = (who, name, s, p) => `<div class="op-lane op-${who}"><span class="op-name">${name}</span><span class="op-rail">
+      <span class="op-bar" style="left:${pos(s)};width:calc(${pos(p)} - ${pos(s)})"></span>
+      <span class="op-mk op-sign" style="left:${pos(s)}" title="Signature"></span>
+      <span class="op-mk op-pub" style="left:${pos(p)}" title="Publication"><i>SPF</i><em class="op-crown" aria-hidden="true">${icon('crown')}</em></span></span></div>`;
+  const ruler = () => `<div class="op-ruler" aria-hidden="true"><span class="op-name"></span><span class="op-rail">${[1, 5, 10, 15, 20, 25, 30].map(d => `<i style="left:${pos(d)}">${d}</i>`).join('')}<b class="op-now"></b></span></div>`;
+  const board = (a, b) => `<div class="op-board">${ruler()}${lane('a', 'Anna', SA, a)}${lane('b', 'Bruno', SB, b)}<p class="op-legend"><span><i class="lg-s"></i> signature</span><span><i class="lg-p">SPF</i> publication</span><span><i class="lg-r"></i> la maison reste saisissable par les créanciers du vendeur</span></p></div>`;
+  const crown = (w) => { $$('.op-lane', el).forEach(l => l.classList.toggle('won', !!w && l.classList.contains('op-' + w))); };
+
+  if (o.mode === 'defi'){
+    const rnd = () => { const a = 4 + Math.floor(Math.random() * 27); let b; do { b = 11 + Math.floor(Math.random() * 20); } while (b === a); return {a, b, bad: Math.random() < .3}; };
+    let k = 0, score = 0, cur = null;
+    const N = 5;
+    const draw = () => {
+      if (k >= N) return end();
+      cur = rnd();
+      el.innerHTML = `<div class="w w-op"><div class="w-head"><span class="eyebrow">Défi · manche ${k + 1}/${N}</span><b>Qui est propriétaire à l’égard des tiers ?</b><span class="muted">M. Roux a vendu sa maison à Anna (jour ${SA}), puis à Bruno (jour ${SB}).</span></div>
+        ${board(cur.a, cur.b)}
+        <p class="op-q">${cur.bad ? '⚠️ Bruno <b>savait</b> que la maison était déjà vendue.' : 'Bruno ignorait tout de la première vente.'} Anna publie le jour <b>${cur.a}</b>, Bruno le jour <b>${cur.b}</b>.</p>
+        <div class="btn-row op-pick"><button class="btn" data-p="a">Anna</button><button class="btn" data-p="b">Bruno</button></div>
+        <div class="op-verdict" aria-live="polite"></div></div>`;
+      $('.op-pick', el).addEventListener('click', e => {
+        const b = e.target.closest('[data-p]'); if (!b) return;
+        const v = verdict(cur.a, cur.b, cur.bad); const ok = b.dataset.p === v.w;
+        $$('.op-pick button', el).forEach(x => { x.disabled = true; if (x.dataset.p === v.w) x.classList.add('btn-primary'); });
+        if (ok){ score++; addXP(5, e); } crown(v.w);
+        $('.op-verdict', el).innerHTML = `<div class="expl"><div class="verdict ${ok ? 'good' : 'bad'}">${ok ? 'Exact !' : 'Raté…'}</div><p>${v.t}</p></div><div class="qnext"><button class="btn btn-primary" id="opn">${k + 1 < N ? 'Manche suivante' : 'Résultat'}${icon('arrow')}</button></div>`;
+        $('#opn', el).onclick = () => { k++; draw(); };
+      });
+    };
+    const end = () => {
+      if (score >= 4) confetti(90); addXP(10, {target:el});
+      el.innerHTML = `<div class="result"><div class="eyebrow">La course à la publication</div><h3>${score}/${N} bons verdicts</h3><p class="muted">${score === N ? 'Parfait : l’article 1198 n’a plus de secret pour toi.' : 'Retiens : le premier qui publie l’emporte… s’il est de bonne foi.'}</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" id="opr">${icon('refresh')}Rejouer</button></div></div>`;
+      $('#opr', el).onclick = () => { k = 0; score = 0; draw(); };
+    };
+    return draw();
+  }
+
+  let a = 21, b = 14, bad = false, played = false;
+  el.innerHTML = `<div class="w w-op">
+    <div class="w-head"><span class="eyebrow">Simulateur · art. 1198 C. civ.</span><b>La course à la publication</b><span class="muted">M. Roux vend sa maison à Anna le jour ${SA}, puis la revend à Bruno le jour ${SB}. Règle les publications et regarde qui l’emporte.</span></div>
+    <div class="op-slot"></div>
+    <div class="op-ctrl">
+      <label class="op-range"><span>Publication de l’acte d’<b>Anna</b> : jour <output id="opa">${a}</output></span><input type="range" min="${SA + 1}" max="${D}" value="${a}" data-who="a" aria-label="Jour de publication de l’acte d’Anna"></label>
+      <label class="op-range"><span>Publication de l’acte de <b>Bruno</b> : jour <output id="opb">${b}</output></span><input type="range" min="${SB + 1}" max="${D}" value="${b}" data-who="b" aria-label="Jour de publication de l’acte de Bruno"></label>
+      <button class="op-faith" aria-pressed="false">${icon('eye')}Bruno savait que la maison était déjà vendue</button>
+    </div>
+    <div class="op-verdict" aria-live="polite"></div>
+    <div class="btn-row"><button class="btn btn-sm btn-primary" data-play>${icon('play')}Rejouer le mois</button></div></div>`;
+  const update = (anim) => {
+    $('.op-slot', el).innerHTML = board(a, b);
+    const v = verdict(a, b, bad);
+    const risk = a - SA;
+    const show = () => { crown(v.w); $('.op-verdict', el).innerHTML = `<div class="w-card"><b class="w-t">${v.w ? (v.w === 'a' ? 'Anna' : 'Bruno') + ' l’emporte' : 'Égalité'}</b><p>${v.t}</p><p class="w-note" style="margin-top:8px">Pendant ${risk} jour${risk > 1 ? 's' : ''}, entre sa signature et sa publication, la maison d’Anna est restée saisissable par les créanciers de M. Roux.</p></div>`; };
+    if (!anim || reduced()){ show(); return; }
+    const now = $('.op-now', el); $('.op-board', el).classList.add('playing'); $('.op-verdict', el).innerHTML = '';
+    const t0 = performance.now(), dur = 2600;
+    (function step(t){
+      if (!el.isConnected) return;
+      const k = Math.min(1, (t - t0) / dur), day = 1 + k * (D - 1);
+      now.style.left = pos(day);
+      $$('.op-mk', el).forEach(m => { const d = parseFloat(m.style.left) / 100 * (D - 1) + 1; m.classList.toggle('lit', day >= d - .01); });
+      if (k < 1) requestAnimationFrame(step); else { $('.op-board', el).classList.remove('playing'); show(); }
+    })(t0);
+  };
+  el.addEventListener('input', e => { const r = e.target.closest('input[type=range]'); if (!r) return; if (r.dataset.who === 'a') a = +r.value; else b = +r.value; $('#op' + r.dataset.who, el).textContent = r.value; update(false); });
+  el.addEventListener('click', e => {
+    const f = e.target.closest('.op-faith'); if (f){ bad = !bad; f.setAttribute('aria-pressed', bad); update(false); return; }
+    if (e.target.closest('[data-play]')){ update(true); if (!played){ played = true; addXP(3, e); } }
+  });
+  update(false);
+});
+
+/* 4. Le parcours d’un dossier dans l’étude — animation, ou défi « envoie le dossier au bon bureau » */
+JLG.widget('etude', (el, o) => {
+  const DK = [
+    {id:'neg', r:'Négociateur', v:'Trouver', ic:'house', t:'Il estime la maison, organise les visites et trouve l’acheteur.'},
+    {id:'col', r:'Collaborateur', v:'Préparer', ic:'pen', t:'Il réunit les pièces, demande l’EHF et le certificat d’urbanisme, et rédige le projet d’acte.'},
+    {id:'not', r:'Notaire', v:'Signer', ic:'seal', t:'Il conseille les parties, vérifie leur identité, signe et appose son sceau : l’acte devient authentique.'},
+    {id:'for', r:'Formaliste', v:'Publier', ic:'doc', t:'Il envoie l’acte au SPF par Télé@ctes et reçoit l’état sur formalité.'},
+    {id:'com', r:'Comptable-taxateur', v:'Facturer', ic:'euro', t:'Il établit la facture et reverse à l’État les taxes collectées.'}
+  ];
+  const desks = (cls) => `<ol class="et-desks ${cls || ''}">${DK.map((d, i) => `<li class="et-desk${d.id === 'not' ? ' is-not' : ''}" data-i="${i}" data-d="${d.id}">
+      <button class="et-av" aria-label="${esc(d.r)}">${icon(d.ic)}</button>
+      <span class="et-role"><b>${d.r}</b><span class="et-verb">${d.v}</span></span>
+      <span class="et-file" aria-hidden="true">${icon('fiche')}</span>
+      ${d.id === 'not' ? `<span class="et-stamp" aria-hidden="true">${sealSVG({ring:false})}</span>` : ''}
+      <p class="et-task">${d.t}</p></li>`).join('')}</ol>`;
+
+  if (o.mode === 'defi'){
+    const T = [
+      ['Le client veut faire estimer sa maison', 'neg'], ['Il faut organiser trois visites samedi', 'neg'],
+      ['Demander l’état hypothécaire hors formalité (EHF)', 'col'], ['Rédiger le projet d’acte de vente', 'col'], ['Le client appelle pour savoir où en est son dossier', 'col'],
+      ['Le jour J : vérifier l’identité des parties et signer l’acte', 'not'], ['Conseiller les deux parties sur une clause délicate', 'not'],
+      ['Envoyer l’acte signé au SPF par Télé@ctes', 'for'], ['Déposer une pièce au greffe après la signature', 'for'],
+      ['Calculer les taxes à reverser à l’État', 'com'], ['Établir la facture du client', 'com'], ['Préparer la paie de fin de mois', 'com']
+    ];
+    let list = [], k = 0, score = 0, lock = false;
+    const start = () => { list = shuffle(T).slice(0, 8); k = 0; score = 0; draw(); };
+    const draw = () => {
+      if (k >= list.length) return end();
+      lock = false;
+      el.innerHTML = `<div class="w w-et defi">
+        <div class="w-head"><span class="eyebrow">Défi · tâche ${k + 1}/${list.length} · ${score} ✓</span><b class="et-q">${list[k][0]}</b><span class="muted">Touche le bureau qui s’en occupe.</span></div>
+        ${desks('pick')}<div class="et-fb" aria-live="polite"></div></div>`;
+      $('.et-desks', el).addEventListener('click', e => {
+        const d = e.target.closest('.et-desk'); if (!d || lock) return; lock = true;
+        const want = list[k][1], ok = d.dataset.d === want, good = $(`.et-desk[data-d="${want}"]`, el);
+        good.classList.add('got'); if (!ok) d.classList.add('nope');
+        if (ok){ score++; addXP(5, e); }
+        const who = DK.find(x => x.id === want);
+        $('.et-fb', el).innerHTML = `<div class="expl"><div class="verdict ${ok ? 'good' : 'bad'}">${ok ? pick(['Bien envoyé !', 'Exact.', 'Oui !']) : 'Non : c’est le ' + who.r.toLowerCase()}</div><p>${who.t}</p></div><div class="qnext"><button class="btn btn-primary" id="etn">${k + 1 < list.length ? 'Tâche suivante' : 'Résultat'}${icon('arrow')}</button></div>`;
+        $('#etn', el).onclick = () => { k++; draw(); };
+      });
+    };
+    const end = () => {
+      const p = score / list.length; if (p >= .8) confetti(90); addXP(10, {target:el});
+      el.innerHTML = `<div class="result"><div class="eyebrow">Le dossier fait le tour de l’étude</div><h3>${score}/${list.length} dossiers bien envoyés</h3><p class="muted">${p === 1 ? 'Tu connais l’étude comme ta poche.' : 'Trouver, préparer, signer, publier, facturer : un verbe par métier.'}</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" id="etr">${icon('refresh')}Rejouer</button></div></div>`;
+      $('#etr', el).onclick = start;
+    };
+    return start();
+  }
+
+  el.innerHTML = `<div class="w w-et">
+    <div class="w-head"><span class="eyebrow">Schéma animé</span><b>Le parcours d’un dossier de vente</b><span class="muted">Suis le dossier de bureau en bureau, ou touche un métier. Un seul bureau a le sceau.</span></div>
+    ${desks()}
+    <div class="btn-row"><button class="btn btn-sm btn-primary" data-play>${icon('play')}Lancer le dossier</button></div>
+    <p class="w-note">Tous travaillent sous la responsabilité du notaire, mais <b>seul le notaire authentifie</b>.</p></div>`;
+  const list = $('.et-desks', el); let timer = null, played = false;
+  const set = i => {
+    $$('.et-desk', el).forEach((d, k) => { d.classList.toggle('on', k === i); d.classList.toggle('done', i >= 0 && k < i); });
+  };
+  const run = i => { if (i >= DK.length || !el.isConnected){ if (i >= DK.length) list.classList.add('finished'); return; } set(i); const d = $(`.et-desk[data-i="${i}"]`, el), r = d.getBoundingClientRect(); if (i && (r.bottom > innerHeight - 90 || r.top < 100)) d.scrollIntoView({block:'center', behavior: reduced() ? 'auto' : 'smooth'}); timer = setTimeout(() => run(i + 1), reduced() ? 300 : (DK[i].id === 'not' ? 2100 : 1500)); };
+  el.addEventListener('click', e => {
+    if (e.target.closest('[data-play]')){ clearTimeout(timer); list.classList.remove('finished'); set(-1); later(el, () => run(0), 120); if (!played){ played = true; addXP(3, e); } return; }
+    const d = e.target.closest('.et-desk'); if (d){ clearTimeout(timer); list.classList.remove('finished'); set(+d.dataset.i); }
+  });
+  set(-1);
+});
+
+/* 5. Les professions du droit : comparateur */
+JLG.widget('pros', el => {
+  const P = [['not', 'Notaire', 'seal'], ['avo', 'Avocat', 'scale'], ['jug', 'Juge', 'trophy'], ['cj', 'Commissaire de justice', 'doc']];
+  const C = [
+    {k:'En un verbe', big:true, v:['Prévenir', 'Défendre', 'Trancher', 'Exécuter']},
+    {k:'Pour qui ?', v:['Pour les deux parties : il est impartial.', 'Pour son seul client.', 'Pour personne : il départage les parties en appliquant le droit.', 'Pour le créancier qui le mandate, ou en exécution d’une décision.']},
+    {k:'Quand ?', v:['Avant le conflit, pour l’éviter.', 'Avant ou pendant le conflit.', 'Quand le conflit est né.', 'Après : pour faire exécuter.']},
+    {k:'Au tribunal ?', v:['Il ne représente pas ses clients en justice.', 'Il représente son client et plaide.', 'Il rend la décision.', 'Il fait exécuter la décision.']},
+    {k:'Service public ?', y:[1, 0, 1, 1], v:['Oui : l’authenticité des actes.', 'Non : profession libérale, auxiliaire de justice.', 'Oui : rendre la justice.', 'Oui : officier public et ministériel.']},
+    {k:'Acte authentique ?', y:[1, 0, 1, 1], v:['Oui : c’est le cœur de son métier.', 'Non : ses actes restent sous signature privée.', 'Oui : ses jugements sont authentiques.', 'Oui, pour les actes de sa fonction.']}
+  ];
+  el.innerHTML = `<div class="w w-pr">
+    <div class="w-head"><span class="eyebrow">Comparateur</span><b>Notaire, avocat, juge, commissaire de justice</b><span class="muted">Pose une question : les quatre répondent.</span></div>
+    <div class="ech-crit pr-crit" role="tablist" aria-label="Question">${C.map((c, i) => `<button role="tab" aria-selected="false" data-c="${i}">${c.k}</button>`).join('')}</div>
+    <div class="pr-cols">${P.map(([id, n, ic]) => `<div class="pr-col${id === 'not' ? ' me' : ''}" data-p="${id}"><div class="pr-top"><span class="pr-av">${icon(ic)}</span><b>${n}</b></div><div class="pr-v" aria-live="polite"></div></div>`).join('')}</div></div>`;
+  const show = i => {
+    $$('.pr-crit button', el).forEach(b => b.setAttribute('aria-selected', +b.dataset.c === i));
+    $$('.pr-col', el).forEach((col, j) => {
+      const v = $('.pr-v', col), c = C[i];
+      v.className = 'pr-v' + (c.big ? ' big' : ''); void v.offsetWidth; v.classList.add('in'); v.style.animationDelay = (j * 70) + 'ms';
+      v.innerHTML = (c.y ? `<span class="pr-yn ${c.y[j] ? 'y' : 'n'}">${c.y[j] ? '✓' : '✗'}</span>` : '') + c.v[j];
+    });
+  };
+  $('.pr-crit', el).addEventListener('click', e => { const b = e.target.closest('[data-c]'); if (b) show(+b.dataset.c); });
+  show(0);
+});
+
+
 /* =================== DÉMARRAGE =================== */
 function boot(data){
   JLG.chapters.forEach(c => { if (JLG.fiches[c.id]) c.fiche = JLG.fiches[c.id]; });
@@ -4511,17 +4950,19 @@ JLG.go = go;
 
 </script>
 <!-- ═════════ CONTENU DES COURS : un bloc par chapitre ═════════ -->
-<!-- ▼ JLG:MATIERES efd immo civ ▼ -->
+<!-- ▼ JLG:MATIERES efd immo civ deo ▼ -->
 <script>
 JLG.subject({id:'efd', order:1, code:'BTS CJN · EFD', short:'Droit fondamental', title:'Éléments fondamentaux du droit', desc:'La règle de droit, ses sources, son application dans l’espace et dans le temps, et les droits dont chaque personne est titulaire.'});
 JLG.subject({id:'immo', order:2, code:'Activité 1 · Immobilier', short:'Droit immobilier', title:'Pratique des opérations immobilières', desc:'Les opérations sur les immeubles et le rôle du notaire, les sortes d’immeubles, le droit de propriété et ses démembrements, la division du sol, et les clauses « désignation », « effet relatif » et « origine de propriété ».'});
 JLG.subject({id:'civ', order:3, code:'Activité 1 · Droit civil', short:'Droit civil', title:'Droit civil : le couple', desc:'Concubinage, PACS et mariage : les conditions, les formalités, les effets, et ce que le notaire doit vérifier.'});
+JLG.subject({id:'deo', order:4, code:'Bloc 1 · Activité 1', short:'Déontologie', title:'Accompagner le client selon les règles déontologiques', desc:'Le notaire, officier public et ministériel : sa mission de service public, l’acte authentique et ses effets, l’opposabilité, les métiers de l’étude et les autres professions du droit.'});
 JLG.log({date:'2026-10-06', items:['Ouverture du site : bienvenue Jade !', 'Éléments fondamentaux du droit · Chapitre 1 : Les droits objectifs', 'Éléments fondamentaux du droit · Chapitre 2 : Les droits subjectifs', 'Pratique des opérations immobilières · Séance 1 : Les opérations immobilières et le rôle du notaire']});
 JLG.log({date:'2026-10-08', items:['Nouvelle matière : Droit civil', 'Droit civil · Partie 1 : Le concubinage et le PACS', 'Droit civil · Partie 2 : Le mariage', 'Nouvel onglet Fiches : une fiche bristol à apprendre par matière, avec le mode cache', 'Nouveaux outils : l’arbre des empêchements, le comparateur des couples, le simulateur de nullité']});
 JLG.log({date:'2026-10-10', items:['Le site devient « Alves Cances »', 'Pratique des opérations immobilières · Séance 2 : la nature des biens immobiliers et les titulaires des droits', 'Nouveau : le jeu des 12 niveaux, avec une animation à chaque niveau, des coffres, des jokers, des boosters et 3 quêtes par jour', 'Nouveaux outils : générateur « effet relatif », chaîne des propriétaires sur 30 ans, barème de l’usufruit, simulateur d’usucapion, distances entre voisins, coupe du sol']});
+JLG.log({date:'2026-10-11', items:['Nouvelle matière : Accompagner le client selon les règles déontologiques (bloc 1)', 'Déontologie · Chapitre 1 : Le notaire et l’authenticité des actes', 'Nouveaux schémas : la journée de l’étude au service de l’État, le duel des actes, la course à la publication, le parcours du dossier, les professions du droit']});
 
 </script>
-<!-- ▲ JLG:MATIERES efd immo civ ▲ -->
+<!-- ▲ JLG:MATIERES efd immo civ deo ▲ -->
 <!-- ▼ JLG:CHAPITRE efd1 ▼ -->
 <script>
 JLG.chapter({
@@ -5119,7 +5560,7 @@ JLG.chapter({
   kicker:'Séance 1', short:'Opérations immobilières & notaire', title:'Les opérations immobilières et le rôle du notaire', titleHtml:'Les opérations immobilières <em>et le rôle du notaire</em>',
   intro:'Une opération immobilière, c’est le quotidien d’une étude. Ici, tu apprends à la qualifier, à savoir quand le notaire est obligatoire, à reconnaître les trois sortes d’immeubles, et à rédiger une clause « désignation ».',
   objectives:['Définir et qualifier une opération immobilière', 'Appréhender la diversité des opérations immobilières', 'Présenter le rôle du notaire dans une opération immobilière', 'Savoir rédiger une clause « désignation »'],
-  prereq:'le statut d’officier public et ministériel et la mission de service public du notaire (Bloc 1, Activité 1) ; les biens (Bloc 7, Notion 6).',
+  prereq:'le statut d’officier public et ministériel et la mission de service public du notaire (<a href="#ch-deo1" data-go="ch-deo1">Déontologie, chapitre 1</a>) ; les biens (Bloc 7, Notion 6).',
   traps:[
     {t:'1 hectare = 10 000 m²', h:'Et non 1 000 m², comme l’écrit par erreur le rappel de ton cours. 1 ha = 100 a = 10 000 m² ; 1 a = 100 m² ; 1 ca = 1 m².'},
     {t:'CSI = contribution de SÉCURITÉ immobilière', h:'Ton cours l’appelle une fois « contribution sociale immobilière » : c’est une coquille. Le bon nom est contribution de sécurité immobilière.'},
@@ -6572,6 +7013,332 @@ JLG.fiche('civ2', [
 
 </script>
 <!-- ▲ JLG:CHAPITRE civ2 ▲ -->
+<!-- ▼ JLG:CHAPITRE deo1 ▼ -->
+<script>
+JLG.chapter({
+  id:'deo1', subject:'deo', order:1, num:'1', added:'2026-10-11', minutes:30,
+  kicker:'Chapitre 1', short:'Le notaire et l’authenticité', title:'Le notaire et l’authenticité des actes', titleHtml:'Le notaire <em>et l’authenticité des actes</em>',
+  intro:'Activité 1 : expliquer au client le statut d’officier public et ministériel et la mission de service public du notaire. Ce chapitre répond aux questions qu’un client pose à l’étude : qui est le notaire, pourquoi son acte vaut plus qu’un contrat signé entre soi, à quoi sert la publicité foncière, et qui fait quoi dans l’étude.',
+  objectives:['Comprendre le principe d’une mission de service public', 'Comprendre l’intérêt de l’authentification', 'Comprendre l’opposabilité des actes notariés', 'Identifier les différents métiers du notariat', 'Distinguer le notaire des autres professions du droit'],
+  prereq:'aucun, c’est la porte d’entrée du métier. Tu retrouveras ces notions partout : l’acte authentique et la publicité foncière en immobilier (séances 1 et 2), le PACS notarié et le contrat de mariage en droit civil.',
+  traps:[
+    {t:'Officier public ≠ fonctionnaire', h:'Le notaire est nommé par le garde des Sceaux et exerce une mission de service public, mais il n’est pas payé par l’État : ses clients le rémunèrent, et c’est sa propre responsabilité qu’il engage, pas celle de l’État.'},
+    {t:'Force probante : seulement ce que le notaire a constaté', h:'L’acte fait foi jusqu’à inscription de faux pour ce que le notaire a fait ou vu lui-même (la date, la présence et la signature des parties). Les déclarations des parties n’ont pas forcément cette force.'},
+    {t:'Acte authentique raté ≠ acte nul', h:'S’il manque une formalité (par exemple la signature du notaire), l’acte n’est pas authentique, mais il vaut comme écrit sous signature privée s’il a été signé par les parties (art. 1370 C. civ.).'},
+    {t:'Signature ≠ opposabilité', h:'Entre le vendeur et l’acheteur, la vente est parfaite dès la signature. Pour les tiers, elle n’existe qu’à partir de sa publication au service de la publicité foncière.'},
+    {t:'Double vente : le premier qui publie gagne', h:'Entre deux acheteurs du même immeuble, celui qui publie le premier son acte authentique est préféré, même s’il a signé après, à condition d’être de bonne foi (art. 1198 C. civ.).'},
+    {t:'Le clerc ne peut pas authentifier', h:'Collaborateur, formaliste, comptable-taxateur, négociateur : ils préparent et suivent le dossier sous la responsabilité du notaire. Seul le notaire confère l’authenticité.'},
+    {t:'Impartial, le notaire ne plaide pas', h:'Le notaire conseille les deux parties à la fois. L’avocat défend un seul client et peut le représenter devant le tribunal, ce que le notaire ne fait pas.'},
+    {t:'Grosse = copie exécutoire', h:'Le texte de 1945 parle de « grosses et expéditions ». Aujourd’hui on dit copie exécutoire (elle permet l’exécution forcée) et copie authentique. L’original conservé à l’étude, c’est la minute.'}
+  ],
+  sections:[
+    {id:'notaire', n:'1', eyebrow:'Qui est le notaire ?', title:'Un officier public et ministériel', blocks:[
+      {t:'quote', ref:'Ordonnance du 2 novembre 1945, article 1er', h:'« Les notaires sont les officiers publics, établis pour recevoir tous les actes et contrats auxquels les parties doivent ou veulent faire donner le caractère d’authenticité attaché aux actes de l’autorité publique, et pour en assurer la date, en conserver le dépôt, en délivrer des grosses et expéditions. »'},
+      {t:'chips', groups:[{label:'Décortique la définition : 4 verbes', items:[
+        {l:'Recevoir', h:'Les actes que les parties <b>doivent</b> rendre authentiques (la loi l’impose : vente d’immeuble, donation, contrat de mariage) ou <b>veulent</b> rendre authentiques (elles le choisissent : un bail, une reconnaissance de dette).'},
+        {l:'Assurer la date', h:'La date de l’acte est certaine : personne ne peut prétendre qu’il a été signé un autre jour.'},
+        {l:'Conserver', h:'Le notaire garde l’original de l’acte, la <b>minute</b>, dans les archives de l’étude.'},
+        {l:'Délivrer des copies', h:'Des <b>copies authentiques</b> (les anciennes « expéditions ») et des <b>copies exécutoires</b> (les anciennes « grosses »), qui permettent de faire exécuter l’acte.'}]}]},
+      {t:'tip', k:'prof', title:'Le vocabulaire de 1945', h:'Ton cours modernise la fin du texte : les « grosses » s’appellent aujourd’hui des <b>copies exécutoires</b>, les « expéditions » des <b>copies authentiques</b>. Retiens les deux : les vieux mots apparaissent encore dans les actes anciens.'},
+      {t:'h3', h:'Son statut', small:'NOMMÉ · ASSERMENTÉ · CONTRÔLÉ'},
+      {t:'list', items:['Il est <b>nommé par le garde des Sceaux</b>, ministre de la Justice, par un <b>arrêté</b> publié au <b>Journal officiel</b>.', 'Il <b>prête serment</b> : c’est seulement alors qu’il devient définitivement notaire.', 'Il exerce une <b>mission de service public</b>, sous le contrôle de l’<b>autorité judiciaire</b> et des <b>instances professionnelles</b> du notariat.', 'Il exerce <b>à titre individuel</b>, <b>en société</b> avec des associés, ou comme <b>notaire salarié</b>.']},
+      {t:'tip', k:'prof', title:'Officier public ET ministériel', h:'Les deux mots ont un sens. <b>Officier public</b> : il exerce une parcelle de l’autorité de l’État, puisqu’il rend les actes authentiques. <b>Ministériel</b> : il est titulaire d’un <b>office</b> (sa « charge »), attribué par le ministre de la Justice. Depuis la loi Macron du 6 août 2015, de nouveaux offices sont créés dans des zones d’installation libre et attribués par tirage au sort.'},
+      {t:'vs', a:{title:'Un fonctionnaire', items:['Employé par l’État ou une collectivité', 'Payé par l’administration', 'Ses fautes de service engagent en principe l’administration']}, b:{title:'Le notaire', items:['Nommé par l’État, mais <b>indépendant</b> : souvent un professionnel libéral', 'Payé par <b>ses clients</b>, selon un tarif fixé par l’État ; le notaire salarié est payé par le notaire associé qui l’emploie', 'Ses fautes engagent <b>sa propre responsabilité</b>, jamais celle de l’État']}},
+      {t:'tip', k:'piege', title:'La phrase à ne jamais laisser passer', h:'« Le notaire, c’est un fonctionnaire. » <b>Faux.</b> Il est nommé par l’État et remplit une mission de service public, mais il n’est pas payé par l’État et il répond lui-même de ses erreurs, avec son assurance de responsabilité civile professionnelle.'},
+      {t:'h3', h:'La prestation notariale', small:'DEUX FONCTIONS'},
+      {t:'def', term:'Prestation notariale', h:'Le produit de deux fonctions confiées au notaire : une fonction d’<b>authentification</b> (il établit des actes authentiques) et une fonction de <b>conseil</b> auprès des particuliers, ses clients.'},
+      {t:'vs', a:{title:'Authentifier', items:['Il établit des <b>actes authentiques</b>', 'Il leur donne date certaine, force probante et force exécutoire']}, b:{title:'Conseiller', items:['Il éclaire ses clients sur la portée de leurs engagements', 'Il les oriente vers la solution la plus adaptée et la moins coûteuse']}},
+      {t:'h3', h:'Une mission de service public déléguée', small:'COMPÉTENCE'},
+      {t:'def', term:'Mission de service public', h:'Une activité d’intérêt général que l’État confie à une personne qui n’est pas une administration. Pour le notaire : le <b>service public de l’authenticité</b> des actes, et des tâches que l’administration ferait sinon elle-même.'},
+      {t:'p', h:'Ton cours cite quatre exemples de cette délégation. Lance la journée de l’étude pour les voir partir vers l’État :'},
+      {t:'widget', w:'delegation'},
+      {t:'tip', k:'notaire', h:'Tu feras toi-même ces gestes à l’étude : préparer la déclaration de succession, envoyer l’acte par Télé@ctes, renseigner les données de la vente. Ce ne sont pas des formalités « en plus » : c’est la partie service public du métier.'}
+    ]},
+    {id:'authenticite', n:'2', eyebrow:'Pourquoi l’acte notarié est plus fort', title:'L’acte authentique', blocks:[
+      {t:'def', term:'Acte authentique', ref:'Art. 1369 C. civ.', h:'Un acte reçu par un <b>officier public compétent</b>, dans le respect des <b>formalités légales</b>.'},
+      {t:'quote', ref:'Article 1369 du Code civil (al. 1)', h:'« L’acte authentique est celui qui a été reçu, avec les solennités requises, par un officier public ayant compétence et qualité pour instrumenter. »'},
+      {t:'def', term:'Solennité', h:'Une formalité imposée par la loi. Un acte <b>solennel</b> n’est valable que s’il respecte la forme exigée : la donation ou le contrat de mariage doivent ainsi être reçus par un notaire.'},
+      {t:'p', h:'Le notaire n’est pas le seul officier public. Sont aussi des actes authentiques :'},
+      {t:'list', items:['les <b>actes administratifs</b> établis par les préfets ;', 'les actes des représentants des collectivités territoriales, comme les <b>actes d’état civil</b> dressés par le maire (naissance, mariage) ;', 'les <b>jugements</b> des tribunaux.']},
+      {t:'h3', h:'Le jour de la signature', small:'3 CONDITIONS'},
+      {t:'widget', w:'proc', o:{eyebrow:'Schéma animé', title:'Ce qui rend l’acte authentique', sub:'Les trois conditions, au moment de la signature.', steps:[
+        {t:'Les parties sont présentes', d:'Le notaire peut vérifier leur identité, leur capacité (majeur ? protégé ?) et leurs pouvoirs (par exemple, le gérant qui signe pour une société).'},
+        {t:'Le notaire est présent', d:'Il exerce son devoir de conseil, veille au bon équilibre du contrat et s’assure que chacun consent réellement et valablement.'},
+        {t:'Le notaire signe et appose son sceau', d:'En sa qualité d’officier public, il confère l’authenticité à l’acte et s’engage sur son contenu et sur sa date.', tag:'authenticité'}]}},
+      {t:'tip', k:'prof', title:'Et à distance ?', h:'Aujourd’hui, la signature se fait souvent sur tablette : c’est l’<b>acte authentique électronique</b>. Et depuis un décret du 20 novembre 2020, un client peut signer une <b>procuration notariée à distance</b>, par visioconférence avec le notaire.'},
+      {t:'h3', h:'Ce que l’authenticité apporte', small:'DATE · PREUVE · EXÉCUTION'},
+      {t:'widget', w:'sceau'},
+      {t:'acc', items:[
+        {l:'Date certaine', h:'L’acte authentique existe dès sa signature, et sa date fait foi : personne ne peut la contester. La preuve en est simplifiée.'},
+        {l:'Force probante', h:'L’acte fait foi <b>jusqu’à inscription de faux</b> pour les faits que le notaire déclare avoir personnellement accomplis ou constatés. Les déclarations des parties ne bénéficient pas forcément de cette force. C’est à celui qui conteste l’acte de prouver qu’il est faux : l’acte authentique est un <b>instrument de preuve</b>.'},
+        {l:'Force exécutoire', h:'Le créancier qui produit un acte notarié contenant une obligation de payer peut en poursuivre l’exécution <b>sans passer par le tribunal</b> : il lui suffit de mandater un commissaire de justice (l’ancien huissier).'}]},
+      {t:'quote', ref:'Article 1371 du Code civil (al. 1)', h:'« L’acte authentique fait foi jusqu’à inscription de faux de ce que l’officier public dit avoir personnellement accompli ou constaté. »'},
+      {t:'def', term:'Inscription de faux', h:'La procédure spéciale, lourde, qu’il faut engager devant le juge pour contester ce qu’un officier public a constaté dans un acte authentique.'},
+      {t:'tip', k:'memo', h:'Les 3 effets de l’authenticité : <b>D.P.E.</b>, comme le diagnostic, mais pour les actes. <b>D</b>ate certaine, force <b>P</b>robante, force <b>E</b>xécutoire.'},
+      {t:'tip', k:'ex', title:'La force exécutoire en vrai', h:'Mme Garnier loue son studio par un <b>bail notarié</b>. Son locataire ne paie plus. Avec la <b>copie exécutoire</b> du bail, elle mandate directement un commissaire de justice, qui peut saisir pour récupérer les loyers : pas besoin d’un procès pour obtenir un jugement.'},
+      {t:'tip', k:'prof', h:'Une limite à connaître : pour <b>expulser</b> le locataire, il faut quand même une décision de justice. Le bail notarié sert à récupérer l’argent, pas à vider le logement.'},
+      {t:'quote', ref:'Article 1370 du Code civil', h:'« L’acte qui n’est point authentique du fait de l’incompétence ou de l’incapacité de l’officier, ou par un défaut de forme, vaut comme écrit sous signature privée, s’il a été signé des parties. »'},
+      {t:'tip', k:'piege', h:'L’acte auquel il manque la signature du notaire n’est pas « rien » : il perd son authenticité, mais il <b>vaut comme écrit sous signature privée</b> s’il a été signé par les parties. Il perd seulement les super-pouvoirs de l’acte authentique.'},
+      {t:'p', h:'Le meilleur moyen de comprendre l’intérêt de l’authentification ? Opposer les deux actes, situation par situation :'},
+      {t:'widget', w:'authentique'}
+    ]},
+    {id:'opposabilite', n:'3', eyebrow:'Les tiers', title:'L’opposabilité des actes notariés', blocks:[
+      {t:'p', h:'Une fois l’acte authentique signé, le notaire doit le rendre <b>opposable aux tiers</b>. Un acte notarié ne se limite pas aux parties qui l’ont signé : il peut produire des effets à l’égard de tous, sous certaines conditions.'},
+      {t:'def', term:'Opposabilité', h:'La qualité d’un acte qui s’impose aux <b>tiers</b>, c’est-à-dire aux personnes qui ne l’ont pas signé (créanciers, autres acheteurs, banques, administration) : ils ne peuvent pas faire comme s’il n’existait pas.'},
+      {t:'vs', a:{title:'Les actes publiés', items:['Vente immobilière, hypothèque, servitude…', 'Opposables aux tiers <b>à compter de leur publication</b> au service de la publicité foncière (SPF)']}, b:{title:'Les actes non publiés au SPF', items:['Contrat de mariage, donation entre époux…', 'Opposables selon des règles propres : souvent dès leur signature, parfois après une formalité à l’état civil']}},
+      {t:'tip', k:'prof', title:'Précision sur ton cours', h:'Ton cours range le contrat de mariage et la donation entre époux parmi les mentions en marge. En pratique, le <b>contrat de mariage</b> est mentionné dans l’<b>acte de mariage</b> (un changement de régime, lui, est mentionné en marge), et la <b>donation entre époux</b> est inscrite au <b>fichier central des dispositions de dernières volontés</b> (FCDDV). En marge de l’acte de naissance, on trouve surtout le mariage, le PACS et le divorce.'},
+      {t:'widget', w:'proc', o:{eyebrow:'Schéma animé', title:'De la signature à l’opposabilité', sub:'Le parcours d’une vente, en trois temps.', steps:[
+        {t:'La signature de l’acte de vente', d:'Entre le vendeur et l’acheteur, la vente est parfaite : l’acheteur devient propriétaire. Mais vis-à-vis des tiers, personne n’est encore censé savoir que la maison a changé de main.', tag:'effet entre les parties'},
+        {t:'La publicité foncière', d:'Le notaire transmet l’acte au service de la publicité foncière par Télé@ctes. L’acte est inscrit au fichier immobilier.'},
+        {t:'L’opposabilité aux tiers', d:'Les créanciers du vendeur ne peuvent plus saisir la maison, sortie de son patrimoine. En cas de double vente, l’acheteur qui a publié le premier est préféré. Et chacun peut vérifier qui est propriétaire.', tag:'opposable à tous'}]}},
+      {t:'quote', ref:'Article 1198 du Code civil (al. 2)', h:'« Lorsque deux acquéreurs successifs de droits portant sur un même immeuble tiennent leur droit d’une même personne, celui qui a, le premier, publié son titre d’acquisition passé en la forme authentique au fichier immobilier est préféré, même si son droit est postérieur, à condition qu’il soit de bonne foi. »'},
+      {t:'p', h:'Ce n’est pas la date de la signature qui compte face aux tiers, c’est la date de la <b>publication</b>. À toi de jouer :'},
+      {t:'widget', w:'opposabilite'},
+      {t:'h3', h:'Prouver cette compétence à l’étude', small:'LES TÂCHES'},
+      {t:'p', h:'Toute l’équipe travaille à l’opposabilité de l’acte, avant et après la signature :'},
+      {t:'steps', items:[
+        {l:'Les formalités préalables', h:' — Demander le certificat d’urbanisme (CU), qui dit notamment s’il existe un droit de préemption urbain (DPU) ; demander au SPF l’état hypothécaire hors formalité (EHF) : hypothèques, servitudes…'},
+        {l:'La vérification des titres et des droits', h:' — Contrôler la propriété du vendeur (la chaîne de propriété) et les charges qui pèsent sur le bien : hypothèques et servitudes (EHF), droits de préemption (CU).'},
+        {l:'La rédaction de l’acte authentique', h:' — Le notaire confère l’authenticité par sa signature : force probante et force exécutoire.'},
+        {l:'La publication au SPF', h:' — Transmettre par voie électronique la partie normalisée de l’acte (Télé@ctes) et payer les droits d’enregistrement et la taxe de publicité foncière.'},
+        {l:'Les mentions à l’état civil', h:' — Pour les actes qui touchent à l’état des personnes (changement de régime matrimonial, divorce…), pour que les tiers, banques ou administrations, ne puissent pas les ignorer.'},
+        {l:'Les attestations', h:' — Remettre les attestations (attestation de propriété immobilière après un décès…) et recevoir par Télé@ctes l’état sur formalité (ESF), qui prouve la publication.'}]},
+      {t:'tip', k:'memo', title:'EHF ou ESF ?', h:'<b>H</b>ors formalité, c’est <b>avant</b> : on le demande pour voir les charges du bien. <b>S</b>ur formalité, c’est <b>après</b> : il arrive une fois l’acte publié, et il le prouve.'}
+    ]},
+    {id:'etude', n:'4', eyebrow:'Qui fait quoi ?', title:'Les métiers de l’étude notariale', blocks:[
+      {t:'p', h:'Dans une étude, plusieurs professionnels interviennent à différentes étapes du dossier, <b>sous la responsabilité du notaire</b>. Mais aucun d’eux n’a le pouvoir d’<b>authentifier</b> un acte : seul le notaire le peut.'},
+      {t:'widget', w:'etude'},
+      {t:'table', head:['Métier', 'Ce qu’il fait', 'Quand'], rows:[
+        ['<b>Collaborateur</b> ou clerc de notaire', 'Technicien du droit : il rédige les actes, rassemble les pièces administratives, suit les dossiers et le lien avec les clients', 'Avant la signature, et tout au long du dossier'],
+        ['<b>Formaliste</b>', 'Il accomplit les formalités postérieures à la signature : dépôts auprès des administrations (SPF, greffe…)', 'Après la signature'],
+        ['<b>Comptable-taxateur</b>', 'Il établit la facture des actes, calcule la part d’impôts à reverser à l’État et tient la comptabilité de l’étude, dont la paie', 'Pendant et après le dossier'],
+        ['<b>Négociateur</b> immobilier', 'Il vend ou loue des biens : estimation, visites, états des lieux', 'Avant l’acte, s’il y a une négociation'],
+        ['<b>Le notaire</b>', 'Il conseille, vérifie et signe : lui seul confère l’authenticité', 'Au cœur du dossier']]},
+      {t:'tip', k:'memo', title:'Un verbe par métier', h:'<b>Trouver</b> l’acheteur (négociateur), <b>préparer</b> l’acte (collaborateur), <b>signer</b> (notaire), <b>publier</b> (formaliste), <b>facturer</b> (comptable-taxateur).'},
+      {t:'tip', k:'notaire', h:'C’est le métier que tu prépares : <b>collaborateur juriste notarial</b>. Tu rédigeras des actes et suivras des dossiers de A à Z, mais la signature qui rend l’acte authentique restera toujours celle du notaire.'}
+    ]},
+    {id:'professions', n:'5', eyebrow:'Ne pas confondre', title:'Le notaire et les autres professions du droit', blocks:[
+      {t:'widget', w:'pros'},
+      {t:'h3', h:'Le notaire et l’avocat'},
+      {t:'vs', a:{title:'Le notaire', items:['<b>Impartial</b> : il peut agir dans l’intérêt des deux parties à la fois', 'Il veille à l’équilibre de leurs accords et au respect des intérêts de chacune', 'Il ne représente pas ses clients devant le tribunal', 'Lui seul confère l’authenticité à l’acte']}, b:{title:'L’avocat', items:['Il prend position : il défend <b>uniquement</b> les intérêts de son client', 'Il peut le représenter et plaider devant le tribunal en cas de contestation', 'Son intervention ne remplace jamais celle du notaire pour l’acte authentique']}},
+      {t:'quote', ref:'Article 710-1 du Code civil (al. 1)', h:'« Tout acte ou droit doit, pour donner lieu aux formalités de publicité foncière, résulter d’un acte reçu en la forme authentique par un notaire exerçant en France, d’une décision juridictionnelle ou d’un acte authentique émanant d’une autorité administrative. »'},
+      {t:'tip', k:'prof', title:'Précision sur ton cours', h:'Ton cours dit que seul le notaire permet « le transfert de propriété ». Plus exactement : entre le vendeur et l’acheteur, la propriété passe dès leur accord (art. 1196). Ce que l’avocat ne peut pas faire, c’est l’<b>acte authentique</b> exigé pour <b>publier</b> la vente (art. 710-1), donc pour la rendre opposable à tous.'},
+      {t:'h3', h:'Le notaire et le magistrat'},
+      {t:'vs', a:{title:'Le magistrat (le juge)', items:['Il a lui aussi une mission de service public', 'Fonction <b>juridictionnelle</b> : il tranche les litiges en appliquant le droit', 'Il intervient quand le conflit est né']}, b:{title:'Le notaire', items:['Mission de service public', 'Mission de <b>prévention</b> des litiges, par le conseil et la médiation', 'Il intervient avant, pour éviter le conflit']}},
+      {t:'tip', k:'memo', h:'Le juge <b>tranche</b> le conflit, le notaire l’<b>évite</b>. C’est pour cela qu’on surnomme le notaire « le magistrat de l’amiable ».'},
+      {t:'h3', h:'Le notaire et le commissaire de justice'},
+      {t:'p', h:'Le <b>commissaire de justice</b> est né le 1er juillet 2022 de la fusion des <b>huissiers de justice</b> et des <b>commissaires-priseurs judiciaires</b>. Ses rôles les plus importants pour le notaire :'},
+      {t:'list', items:['<b>Faire exécuter</b> les décisions de justice et les actes ou titres exécutoires, comme la copie exécutoire d’un acte notarié : il procède au recouvrement forcé de la créance, par exemple en saisissant les biens du débiteur.', '<b>Faire des inventaires</b>, fixer les prix et <b>vendre aux enchères publiques</b> des meubles destinés à la vente en vertu de la loi ou d’une décision de justice.']},
+      {t:'def', term:'Titre exécutoire', h:'Un écrit qui permet au créancier d’obtenir le recouvrement forcé de sa créance, par exemple par la saisie des biens du débiteur : un jugement, ou la copie exécutoire d’un acte notarié.'},
+      {t:'tip', k:'notaire', h:'Le notaire et le commissaire de justice travaillent souvent en équipe : le notaire crée le titre (l’acte authentique avec sa force exécutoire), le commissaire de justice le fait exécuter si le débiteur ne paie pas.'}
+    ]}
+  ],
+  essentials:[
+    'Le notaire est un <b>officier public et ministériel</b>, nommé par arrêté du garde des Sceaux publié au Journal officiel, qui prête serment.',
+    'Il exerce une <b>mission de service public</b> (l’authenticité des actes) sous le contrôle de l’autorité judiciaire et de sa profession, mais il n’est <b>pas fonctionnaire</b> : payé par ses clients, il engage sa propre responsabilité.',
+    'La <b>prestation notariale</b> = authentification + conseil. L’État lui délègue aussi des tâches : taxes envoyées au SPF, Télé@ctes, Perval, déclaration de succession.',
+    'L’<b>acte authentique</b> est reçu par un officier public compétent, avec les solennités requises (art. 1369) : parties présentes, notaire présent, signature et sceau du notaire.',
+    'Ses effets : <b>date certaine</b>, <b>force probante</b> jusqu’à inscription de faux (art. 1371), <b>force exécutoire</b>. Mal formé, il vaut écrit sous signature privée s’il est signé des parties (art. 1370).',
+    'Signé, l’acte lie les parties ; <b>publié</b> au SPF, il devient <b>opposable aux tiers</b>. En cas de double vente, le premier qui publie de bonne foi l’emporte (art. 1198).',
+    'À l’étude, le <b>collaborateur</b> prépare, le <b>formaliste</b> publie, le <b>comptable-taxateur</b> facture et calcule les taxes, le <b>négociateur</b> vend ou loue. Seul le notaire authentifie.',
+    'Le notaire est <b>impartial</b> (l’avocat défend un seul client), il <b>prévient</b> les litiges (le juge les tranche), et le <b>commissaire de justice</b> exécute les titres exécutoires.'
+  ],
+  extraGames:[
+    {w:'opposabilite', title:'La course à la publication', sub:'Deux acheteurs, une seule maison : à toi de dire qui l’emporte.', icon:'clock'},
+    {w:'etude', title:'Le dossier fait le tour de l’étude', sub:'Une tâche s’affiche : envoie le dossier au bon bureau.', icon:'doc'}
+  ],
+  flashcards:[
+    {q:'Comment l’ordonnance du 2 novembre 1945 définit-elle le notaire ?', a:'L’officier public établi pour recevoir les actes et contrats auxquels les parties doivent ou veulent donner le caractère d’authenticité, en assurer la date, en conserver le dépôt et en délivrer des copies.'},
+    {q:'Qui nomme le notaire, et comment ?', a:'Le garde des Sceaux, ministre de la Justice, par un arrêté publié au Journal officiel.'},
+    {q:'À quel moment devient-on définitivement notaire ?', a:'Après avoir prêté serment, une fois nommé.'},
+    {q:'Le notaire est-il un fonctionnaire ?', a:'Non. Il exerce une mission de service public, mais il est indépendant, payé par ses clients, et il n’engage pas la responsabilité de l’État.'},
+    {q:'Qui contrôle le notaire ?', a:'L’autorité judiciaire et les instances professionnelles du notariat.'},
+    {q:'De quelles façons peut-on exercer comme notaire ?', a:'À titre individuel, en société, ou comme notaire salarié.'},
+    {q:'Qui rémunère le notaire salarié ?', a:'Le notaire associé qui l’emploie. Le notaire libéral, lui, est rémunéré par ses clients.'},
+    {q:'Officier public, officier ministériel : que veulent dire ces deux mots ?', a:'Officier public : il rend les actes authentiques au nom de l’autorité publique. Officier ministériel : il est titulaire d’un office (une charge) attribué par le ministre de la Justice.'},
+    {q:'Quel service public le notaire assure-t-il ?', a:'Le service public de l’authenticité des actes.'},
+    {q:'Qu’est-ce que la prestation notariale ?', a:'Le produit de deux fonctions : l’authentification des actes et le conseil aux clients.'},
+    {q:'Cite les tâches que l’État délègue au notaire (ton cours).', a:'Envoyer les taxes au SPF, mettre à jour le fichier immobilier par Télé@ctes, alimenter la base Perval, déposer la déclaration de succession.'},
+    {q:'Qu’est-ce que Perval ?', a:'La base des prix immobiliers du notariat (hors Île-de-France, où c’est la base BIEN), alimentée par les notaires après chaque vente. Depuis 2011, c’est une mission de service public.'},
+    {q:'Qu’est-ce que Télé@ctes ?', a:'La plateforme qui permet au notaire d’envoyer les actes au service de la publicité foncière par voie électronique, et de recevoir l’état sur formalité.'},
+    {q:'Quelle est la définition de l’acte authentique (art. 1369 C. civ.) ?', a:'L’acte reçu, avec les solennités requises, par un officier public ayant compétence et qualité pour instrumenter.'},
+    {q:'Qu’est-ce qu’une solennité ?', a:'Une formalité imposée par la loi. Un acte solennel n’est valable que dans la forme exigée (ex. : la donation, reçue par un notaire).'},
+    {q:'À part le notaire, qui établit des actes authentiques ?', a:'Les préfets (actes administratifs), le maire pour l’état civil, les tribunaux (jugements).'},
+    {q:'Les 3 conditions de l’authenticité au moment de la signature ?', a:'Les parties sont présentes, le notaire est présent, le notaire signe et appose son sceau.'},
+    {q:'Pourquoi les parties doivent-elles être présentes à la signature ?', a:'Pour que le notaire vérifie leur identité, leur capacité et leurs pouvoirs.'},
+    {q:'Pourquoi le notaire doit-il être présent ?', a:'Pour exercer son devoir de conseil, veiller à l’équilibre du contrat et s’assurer d’un consentement réel et juridiquement valable.'},
+    {q:'Que produit la signature du notaire ?', a:'Avec l’apposition du sceau, elle confère l’authenticité à l’acte : le notaire s’engage sur son contenu et sur sa date.'},
+    {q:'Les 3 effets de l’authenticité ?', a:'Date certaine, force probante, force exécutoire. Mémo : D.P.E.'},
+    {q:'Qu’est-ce que la date certaine ?', a:'La date de l’acte fait foi : elle ne peut pas être contestée, ce qui simplifie la preuve.'},
+    {q:'Jusqu’où va la force probante de l’acte authentique ?', a:'Il fait foi jusqu’à inscription de faux de ce que le notaire dit avoir personnellement accompli ou constaté (art. 1371).'},
+    {q:'Les déclarations des parties ont-elles la même force probante ?', a:'Pas nécessairement : seuls les faits accomplis ou constatés par le notaire font foi jusqu’à inscription de faux.'},
+    {q:'Qui doit prouver qu’un acte authentique est faux ?', a:'Celui qui le conteste.'},
+    {q:'Qu’est-ce que l’inscription de faux ?', a:'La procédure spéciale, devant le juge, pour contester ce qu’un officier public a constaté dans un acte authentique.'},
+    {q:'Que devient un acte auquel il manque une formalité, comme la signature du notaire ?', a:'Il n’est pas authentique, mais il vaut comme écrit sous signature privée s’il a été signé par les parties (art. 1370).'},
+    {q:'Qu’est-ce que la force exécutoire ?', a:'Le créancier qui détient un acte notarié contenant une obligation de payer peut le faire exécuter sans passer par le tribunal, en mandatant un commissaire de justice.'},
+    {q:'Minute, copie authentique, copie exécutoire ?', a:'Minute : l’original, conservé par le notaire. Copie authentique : la copie certifiée (ex-expédition). Copie exécutoire : la copie qui permet l’exécution forcée (ex-grosse).'},
+    {q:'Qu’est-ce que l’opposabilité ?', a:'La qualité d’un acte qui s’impose aux tiers : ceux qui ne l’ont pas signé ne peuvent pas l’ignorer.'},
+    {q:'Quand une vente immobilière devient-elle opposable aux tiers ?', a:'À compter de sa publication au service de la publicité foncière.'},
+    {q:'Entre le vendeur et l’acheteur, quand la vente est-elle parfaite ?', a:'Dès la signature : l’acheteur devient propriétaire, même avant la publication.'},
+    {q:'Que dit l’article 1198 du Code civil sur la double vente d’un immeuble ?', a:'Celui des deux acheteurs qui a publié le premier son titre authentique au fichier immobilier est préféré, même si son droit est postérieur, à condition d’être de bonne foi.'},
+    {q:'Que change la publication pour les créanciers du vendeur ?', a:'Ils ne peuvent plus saisir l’immeuble : il est sorti du patrimoine du vendeur.'},
+    {q:'EHF et ESF ?', a:'EHF : état hypothécaire hors formalité, demandé avant la vente pour voir les hypothèques et servitudes. ESF : état sur formalité, reçu après la publication, qui la prouve.'},
+    {q:'Quel est le rôle du collaborateur (ou clerc) de notaire ?', a:'Technicien du droit, il rédige les actes, rassemble les pièces administratives, suit les dossiers et le lien avec les clients.'},
+    {q:'Quel est le rôle du formaliste ?', a:'Les formalités postérieures à la signature : les dépôts auprès des administrations (SPF, greffe…).'},
+    {q:'Quel est le rôle du comptable-taxateur ?', a:'Il facture les actes, calcule la part d’impôts à reverser à l’État et tient la comptabilité de l’étude, dont la paie.'},
+    {q:'Quel est le rôle du négociateur immobilier ?', a:'Vendre ou louer des biens : estimation, visites, états des lieux.'},
+    {q:'Un collaborateur peut-il authentifier un acte ?', a:'Non. Ils interviennent tous sous la responsabilité du notaire, mais seul le notaire confère l’authenticité.'},
+    {q:'Notaire et avocat : la grande différence ?', a:'Le notaire est impartial et conseille les deux parties ; l’avocat défend un seul client et peut le représenter devant le tribunal.'},
+    {q:'Notaire et juge : la différence ?', a:'Le juge tranche les litiges (fonction juridictionnelle) ; le notaire les prévient par le conseil et la médiation. Tous deux ont une mission de service public.'},
+    {q:'Qu’est-ce qu’un commissaire de justice ?', a:'Le professionnel né le 1er juillet 2022 de la fusion des huissiers de justice et des commissaires-priseurs judiciaires.'},
+    {q:'Quels rôles du commissaire de justice comptent pour le notaire ?', a:'Faire exécuter les décisions de justice et les titres exécutoires (saisies), faire des inventaires, estimer et vendre aux enchères publiques des meubles.'},
+    {q:'Qu’est-ce qu’un titre exécutoire ?', a:'Un écrit qui permet au créancier d’obtenir le recouvrement forcé de sa créance : un jugement, ou la copie exécutoire d’un acte notarié.'}
+  ],
+  quiz:[
+    {q:'Le notaire est nommé par…', o:['le président de la République', 'le garde des Sceaux', 'le préfet', 'le maire'], a:1, e:'Par un arrêté du garde des Sceaux, ministre de la Justice, publié au Journal officiel.'},
+    {q:'Le notaire est un fonctionnaire.', tf:true, a:false, e:'Il exerce une mission de service public, mais il est indépendant, payé par ses clients, et il n’engage pas la responsabilité de l’État.'},
+    {q:'La nomination du notaire prend la forme…', o:['d’un décret du Premier ministre', 'd’un arrêté publié au Journal officiel', 'd’un jugement', 'd’un vote de la chambre des notaires'], a:1},
+    {q:'Le nouveau notaire devient définitivement notaire…', o:['dès la publication de l’arrêté', 'après avoir prêté serment', 'après un an d’exercice', 'après sa première signature'], a:1},
+    {q:'En principe, qui rémunère le notaire libéral ?', o:['L’État', 'Ses clients', 'La commune', 'La chambre des notaires'], a:1},
+    {q:'Les fautes du notaire engagent…', o:['la responsabilité de l’État', 'sa propre responsabilité', 'celle du ministre de la Justice', 'personne'], a:1},
+    {q:'La prestation notariale réunit…', o:['l’authentification et le conseil', 'la plaidoirie et le conseil', 'le jugement et l’exécution', 'la vente et la location'], a:0},
+    {q:'Laquelle n’est PAS une tâche que l’État délègue au notaire, selon ton cours ?', o:['Envoyer les taxes au SPF', 'Mettre à jour le fichier immobilier par Télé@ctes', 'Juger un litige entre voisins', 'Alimenter la base Perval'], a:2, e:'Juger, c’est le rôle du magistrat.'},
+    {q:'L’acte authentique est reçu…', o:['par les parties seules', 'par un officier public compétent, avec les solennités requises', 'par un avocat', 'par n’importe quel juriste'], a:1, e:'Article 1369 du Code civil.'},
+    {q:'Lequel de ces actes n’est PAS authentique ?', o:['Un acte de naissance dressé par le maire', 'Un jugement', 'Un bail signé par le propriétaire et le locataire seuls', 'Un acte de vente notarié'], a:2},
+    {q:'Le jour de la signature, le notaire vérifie l’identité, la capacité et…', o:['le salaire des parties', 'les pouvoirs des parties', 'le casier judiciaire', 'le prix du marché'], a:1},
+    {q:'Ce qui confère l’authenticité à l’acte, c’est…', o:['la signature des parties', 'la signature du notaire et l’apposition de son sceau', 'l’enregistrement aux impôts', 'la publication au SPF'], a:1},
+    {q:'Les 3 effets de l’authenticité sont…', o:['date certaine, force probante, force exécutoire', 'gratuité, rapidité, secret', 'opposabilité, publicité, taxation', 'nullité, caducité, résolution'], a:0},
+    {q:'Ce que le notaire a lui-même constaté fait foi…', o:['jusqu’à preuve contraire', 'jusqu’à inscription de faux', 'pendant 5 ans', 'jusqu’à la publication'], a:1, e:'Article 1371 du Code civil.'},
+    {q:'Les déclarations des parties ont toujours la même force probante que les constatations du notaire.', tf:true, a:false, e:'Seuls les faits que le notaire a personnellement accomplis ou constatés font foi jusqu’à inscription de faux.'},
+    {q:'Un client conteste un acte authentique. Qui doit prouver qu’il est faux ?', o:['Le notaire', 'Celui qui conteste', 'Le juge', 'Personne'], a:1},
+    {q:'Un acte auquel il manque la signature du notaire, mais signé par les parties…', o:['est nul', 'vaut comme écrit sous signature privée', 'reste authentique', 'doit être publié quand même'], a:1, e:'Article 1370 du Code civil.'},
+    {q:'Grâce à la force exécutoire, le créancier…', o:['doit d’abord obtenir un jugement', 'peut mandater un commissaire de justice sans passer par le tribunal', 'peut saisir lui-même les biens', 'doit attendre un an'], a:1},
+    {q:'Pour faire saisir son locataire qui ne paie plus, le bailleur d’un bail notarié utilise…', o:['la minute', 'la copie exécutoire', 'l’état sur formalité', 'le certificat d’urbanisme'], a:1},
+    {q:'L’ancien nom de la copie exécutoire est…', o:['l’expédition', 'la grosse', 'la minute', 'le répertoire'], a:1},
+    {q:'Une vente immobilière devient opposable aux tiers…', o:['dès la signature', 'à compter de sa publication au SPF', 'dès le paiement du prix', 'au bout de 30 ans'], a:1},
+    {q:'Entre le vendeur et l’acheteur, la vente est parfaite dès la signature.', tf:true, a:true},
+    {q:'Deux acheteurs successifs d’un même immeuble : lequel est préféré ?', o:['Celui qui a signé le premier', 'Celui qui a publié le premier son titre authentique, s’il est de bonne foi', 'Celui qui a payé le plus cher', 'Le plus âgé'], a:1, e:'Article 1198 du Code civil.'},
+    {q:'L’acte de vente est publié. Les créanciers du vendeur…', o:['peuvent encore saisir la maison', 'ne peuvent plus la saisir', 'deviennent propriétaires', 'doivent signer l’acte'], a:1},
+    {q:'Avant la vente, pour connaître les hypothèques et les servitudes, l’étude demande…', o:['un état hypothécaire hors formalité (EHF)', 'un état sur formalité (ESF)', 'un extrait Kbis', 'un acte de naissance'], a:0},
+    {q:'L’état sur formalité (ESF) prouve…', o:['que l’acte a été publié', 'que le vendeur est majeur', 'que le prix est payé', 'que le bien n’a aucune servitude'], a:0},
+    {q:'Qui accomplit les formalités après la signature (SPF, greffe) ?', o:['Le négociateur', 'Le formaliste', 'Le comptable-taxateur', 'Le juge'], a:1},
+    {q:'Le comptable-taxateur…', o:['rédige les actes', 'facture les actes et calcule les impôts à reverser à l’État', 'fait visiter les biens', 'signe les actes'], a:1},
+    {q:'Le négociateur immobilier…', o:['authentifie les ventes', 'estime, fait visiter, vend ou loue des biens', 'tranche les litiges', 'calcule la paie'], a:1},
+    {q:'Un collaborateur de notaire peut authentifier un acte en l’absence du notaire.', tf:true, a:false, e:'Seul le notaire confère l’authenticité.'},
+    {q:'Contrairement à l’avocat, le notaire…', o:['défend un seul client', 'est impartial et conseille les deux parties', 'plaide devant le tribunal', 'n’a aucune mission de service public'], a:1},
+    {q:'Le juge tranche les litiges ; le notaire…', o:['les provoque', 'les prévient par le conseil et la médiation', 'les juge en appel', 'les exécute'], a:1},
+    {q:'Le commissaire de justice est né de la fusion…', o:['des notaires et des avocats', 'des huissiers de justice et des commissaires-priseurs judiciaires', 'des juges et des greffiers', 'des clercs et des formalistes'], a:1},
+    {q:'Pour être opposable, le contrat de mariage doit être publié au service de la publicité foncière.', tf:true, a:false, e:'Ce n’est pas un acte publié au SPF : il est mentionné dans l’acte de mariage.'}
+  ],
+  sorts:[
+    {id:'deo1_s1', title:'Qui fait quoi à l’étude ?', intro:'Chaque tâche a son professionnel. À qui revient-elle ?', cats:[{id:'not', l:'Notaire'}, {id:'col', l:'Collaborateur'}, {id:'for', l:'Formaliste'}, {id:'com', l:'Comptable-taxateur'}, {id:'neg', l:'Négociateur'}], items:[
+      {e:'✍️', t:'Signer l’acte et apposer le sceau', c:'not', w:'Seul le notaire confère l’authenticité.'},
+      {e:'🤝', t:'Conseiller les deux parties le jour de la vente, en restant impartial', c:'not', w:'Le devoir de conseil du notaire, au moment de la signature.'},
+      {e:'🆔', t:'Vérifier, à la signature, l’identité et la capacité des parties', c:'not', w:'C’est l’une des trois conditions de l’authenticité : parties et notaire présents.'},
+      {e:'📝', t:'Rédiger le projet d’acte de vente', c:'col', w:'Le collaborateur, technicien du droit, rédige les actes.'},
+      {e:'📂', t:'Réunir les pièces administratives du dossier', c:'col', w:'Il rassemble les pièces nécessaires avant la signature.'},
+      {e:'📞', t:'Suivre le dossier et répondre aux questions du client', c:'col', w:'Le suivi des dossiers et le lien avec les clients.'},
+      {e:'🏛️', t:'Déposer l’acte signé au service de la publicité foncière', c:'for', w:'Une formalité postérieure à la signature : c’est le formaliste.'},
+      {e:'🗂️', t:'Accomplir un dépôt au greffe après la signature', c:'for', w:'Les dépôts auprès des administrations, après l’acte.'},
+      {e:'🧾', t:'Établir la facture de l’acte', c:'com', w:'La facturation des actes notariés.'},
+      {e:'💶', t:'Calculer la part d’impôts à reverser à l’État', c:'com', w:'Il calcule les taxes que le notaire collecte pour l’État.'},
+      {e:'💼', t:'Préparer la paie des salariés de l’étude', c:'com', w:'La comptabilité générale de l’étude, dont la paie.'},
+      {e:'🏡', t:'Estimer une maison et organiser les visites', c:'neg', w:'Le négociateur vend ou loue des biens.'},
+      {e:'🔑', t:'Faire l’état des lieux d’un appartement loué par l’étude', c:'neg', w:'Estimation, visites, états des lieux : le négociateur.'}]},
+    {id:'deo1_s2', title:'Authentique ou pas ?', intro:'Cet acte est-il un acte authentique ?', cats:[{id:'aut', l:'Authentique'}, {id:'non', l:'Pas authentique'}], items:[
+      {e:'🏠', t:'Un acte de vente reçu et signé par le notaire', c:'aut', w:'Reçu par un officier public compétent, avec les solennités requises.'},
+      {e:'⚖️', t:'Un jugement du tribunal judiciaire', c:'aut', w:'Les jugements sont des actes authentiques.'},
+      {e:'👶', t:'Un acte de naissance dressé par l’officier de l’état civil', c:'aut', w:'Le maire, officier de l’état civil, établit des actes authentiques.'},
+      {e:'🏛️', t:'Un arrêté du préfet', c:'aut', w:'Un acte administratif établi par le préfet.'},
+      {e:'🎁', t:'Une donation reçue par le notaire', c:'aut', w:'Elle doit même obligatoirement l’être : c’est un acte solennel.'},
+      {e:'💸', t:'Une reconnaissance de dette signée chez le notaire, qui la signe aussi', c:'aut', w:'Les parties ont voulu l’authenticité : avec sa copie exécutoire, le créancier pourra faire saisir sans procès.'},
+      {e:'🔑', t:'Un bail signé par le propriétaire et le locataire, sans notaire', c:'non', w:'Un acte sous signature privée.'},
+      {e:'📄', t:'Une promesse de vente signée à l’agence immobilière', c:'non', w:'Un avant-contrat sous signature privée.'},
+      {e:'✒️', t:'Un acte notarié auquel il manque la signature du notaire', c:'non', w:'Défaut de forme : il vaut seulement écrit sous signature privée, s’il est signé des parties (art. 1370).'},
+      {e:'💼', t:'Un contrat de travail signé avec l’employeur', c:'non', w:'Un acte sous signature privée.'}]},
+    {id:'deo1_s3', title:'Ça fait foi jusqu’à quoi ?', intro:'L’acte authentique ne prouve pas tout avec la même force. Ce qu’il contient fait foi…', cats:[{id:'faux', l:'Jusqu’à inscription de faux'}, {id:'pc', l:'Jusqu’à preuve contraire'}], items:[
+      {e:'📅', t:'La date de l’acte', c:'faux', w:'Le notaire l’atteste lui-même : date certaine.'},
+      {e:'🧍', t:'La présence des parties devant le notaire', c:'faux', w:'Un fait que le notaire a personnellement constaté.'},
+      {e:'✍️', t:'Les signatures des parties, apposées devant le notaire', c:'faux', w:'Le notaire les a vues être apposées.'},
+      {e:'📍', t:'Le lieu où l’acte a été signé', c:'faux', w:'Le notaire le constate lui-même.'},
+      {e:'📖', t:'La lecture de l’acte aux parties par le notaire', c:'faux', w:'Un fait que le notaire a personnellement accompli.'},
+      {e:'💬', t:'La déclaration du vendeur : « la maison n’a jamais été inondée »', c:'pc', w:'Le notaire constate que le vendeur l’a dit, pas que c’est vrai.'},
+      {e:'💍', t:'Ce que les parties déclarent sur leur situation de famille', c:'pc', w:'Une déclaration des parties : elle peut être combattue par la preuve contraire.'},
+      {e:'🏷️', t:'La sincérité du prix déclaré par les parties', c:'pc', w:'Le notaire constate le prix annoncé, il ne peut pas garantir qu’il est sincère.'},
+      {e:'🔑', t:'La déclaration qu’aucun bail n’est en cours sur le bien', c:'pc', w:'Une simple déclaration du vendeur.'}]},
+    {id:'deo1_s4', title:'Notaire, avocat, juge ou commissaire de justice ?', intro:'Qui est-ce ?', cats:[{id:'not', l:'Notaire'}, {id:'avo', l:'Avocat'}, {id:'jug', l:'Juge'}, {id:'cj', l:'Commissaire de justice'}], items:[
+      {e:'🤝', t:'Il conseille les deux parties en restant impartial', c:'not', w:'L’impartialité est la marque du notaire.'},
+      {e:'🔏', t:'Il confère l’authenticité à un acte de vente', c:'not', w:'Seul le notaire le peut, pour un acte de vente.'},
+      {e:'🕊️', t:'Il prévient les litiges par le conseil et la médiation', c:'not', w:'Le « magistrat de l’amiable ».'},
+      {e:'🗣️', t:'Il plaide devant le tribunal pour son client', c:'avo', w:'L’avocat représente son client en justice.'},
+      {e:'🛡️', t:'Il défend uniquement les intérêts de son client', c:'avo', w:'L’avocat prend position pour une seule partie.'},
+      {e:'⚖️', t:'Il tranche un litige en appliquant le droit', c:'jug', w:'La fonction juridictionnelle du magistrat.'},
+      {e:'📜', t:'Il rend un jugement', c:'jug', w:'Le jugement est lui-même un acte authentique.'},
+      {e:'📦', t:'Il saisit les biens d’un débiteur grâce à un titre exécutoire', c:'cj', w:'Il fait exécuter les jugements et les copies exécutoires.'},
+      {e:'🔨', t:'Il vend des meubles aux enchères publiques sur décision de justice', c:'cj', w:'L’héritage des anciens commissaires-priseurs judiciaires.'},
+      {e:'📋', t:'Il dresse un inventaire et fixe le prix des meubles', c:'cj', w:'Inventaires et prisées : un rôle du commissaire de justice.'}]}
+  ],
+  cases:[
+    {id:'deo1_c1', title:'« Le notaire, c’est un fonctionnaire ! »', tag:'Statut · expliquer au client', facts:['M. Benali attend à l’accueil de l’étude pour signer l’achat de son appartement. Il te lance : « De toute façon, le notaire, c’est un fonctionnaire. S’il fait une erreur, c’est l’État qui paiera. Et puis pourquoi je le paie, alors ? »'], q:'Que lui réponds-tu ?', steps:[
+      {l:'Les faits', h:'Un client confond le statut du notaire avec celui d’un agent de l’État, et s’interroge sur sa rémunération et sa responsabilité.'},
+      {l:'Le problème de droit', h:'Le notaire est-il un agent de l’État ? Qui le rémunère, et qui répond de ses fautes ?'},
+      {l:'Les règles applicables', h:'<p>Le notaire est un <b>officier public et ministériel</b>, nommé par arrêté du garde des Sceaux publié au Journal officiel, qui prête serment. Il exerce une <b>mission de service public</b> : le service public de l’authenticité, sous le contrôle de l’autorité judiciaire et de sa profession.</p><p>Mais il <b>n’est pas fonctionnaire</b> : il conserve son indépendance, il est rémunéré par ses clients, et il n’engage pas la responsabilité de l’État.</p>'},
+      {l:'L’application aux faits', h:'M. Benali a raison sur un point : le notaire tient son pouvoir de l’État. Mais il paie le notaire parce que c’est lui, le client, qui bénéficie de la prestation : l’authentification et le conseil. Et en cas d’erreur, c’est le notaire qui répond.'},
+      {l:'La conclusion', h:'<p>Ce que tu peux lui dire : <b>« Le notaire est nommé par l’État et exerce une mission de service public : c’est pour cela que son acte a une valeur particulière. Mais ce n’est pas un fonctionnaire : vous le rémunérez selon un tarif fixé par l’État, et c’est lui qui répond de ses erreurs, avec son assurance. »</b></p>'}]},
+    {id:'deo1_c2', title:'Le locataire qui ne paie plus', tag:'Force exécutoire', facts:['Mme Garnier loue un studio à Hugo. Le bail a été reçu par Maître Morel, notaire. Depuis quatre mois, Hugo ne paie plus son loyer.', 'Mme Garnier est découragée : une amie lui a dit qu’il faudrait un procès de plusieurs mois avant de pouvoir récupérer quoi que ce soit.'], q:'Comment Mme Garnier peut-elle récupérer ses loyers impayés ?', steps:[
+      {l:'Les faits', h:'Une bailleresse, titulaire d’un bail notarié, n’est plus payée par son locataire.'},
+      {l:'Le problème de droit', h:'Le créancier qui détient un acte notarié doit-il obtenir un jugement pour faire exécuter l’obligation de payer qu’il contient ?'},
+      {l:'Les règles applicables', h:'L’acte authentique a <b>force exécutoire</b> : le créancier qui produit un acte notarié contenant une obligation de payer peut en poursuivre l’exécution sans recourir aux tribunaux. Il mandate un <b>commissaire de justice</b> avec la <b>copie exécutoire</b> de l’acte.'},
+      {l:'L’application aux faits', h:'Le bail a été reçu par un notaire : c’est un acte authentique, qui contient l’obligation de payer le loyer. Mme Garnier peut demander à Maître Morel la copie exécutoire du bail.'},
+      {l:'La conclusion', h:'<p>Mme Garnier n’a pas besoin de procès pour récupérer l’argent : avec la copie exécutoire, elle mandate un commissaire de justice, qui peut procéder à une saisie.</p><p><b>Le + du prof :</b> pour expulser Hugo, en revanche, il faudra une décision de justice.</p>'}]},
+    {id:'deo1_c3', title:'Une maison, deux acheteurs', tag:'Opposabilité · art. 1198', facts:['Le 3 mars, M. Roux vend sa maison à Anna, chez Maître Leroy. Le 10 mars, il la revend à Bruno, chez un autre notaire. Bruno ignore tout de la première vente.', 'L’acte de Bruno est publié au service de la publicité foncière le 14 mars ; celui d’Anna, le 21 mars.'], q:'Qui est propriétaire de la maison à l’égard des tiers ?', steps:[
+      {l:'Les faits', h:'Un même vendeur vend deux fois le même immeuble à deux acheteurs différents ; le second acheteur publie son acte avant le premier.'},
+      {l:'Le problème de droit', h:'Entre deux acquéreurs successifs d’un même immeuble, lequel est préféré ?'},
+      {l:'Les règles applicables', h:'<p>La signature produit ses effets entre les parties ; la <b>publication</b> au SPF rend l’acte <b>opposable aux tiers</b>.</p><p>Art. 1198 al. 2 C. civ. : celui qui a, le premier, publié son titre d’acquisition passé en la forme authentique est préféré, <b>même si son droit est postérieur</b>, à condition qu’il soit de <b>bonne foi</b>.</p>'},
+      {l:'L’application aux faits', h:'Bruno a signé après Anna, mais il a publié le premier (14 mars contre 21 mars). Il ignorait la première vente : il est de bonne foi.'},
+      {l:'La conclusion', h:'<p><b>Bruno est préféré.</b> Anna ne peut pas lui opposer son achat ; elle peut seulement agir contre M. Roux pour obtenir réparation.</p><p>Si Bruno avait su que la maison était déjà vendue, il n’aurait pas été protégé. Et c’est pour cela que l’étude publie les actes au plus vite.</p>'}]},
+    {id:'deo1_c4', title:'Vendre son terrain avec son avocat ?', tag:'Notaire et avocat', facts:['Mme Petit veut vendre un terrain à son voisin. Pour économiser, elle propose de faire rédiger la vente par son avocat, sans passer chez le notaire.', 'Le voisin hésite et te demande si la vente sera « valable et protégée ».'], q:'Que lui expliques-tu ?', steps:[
+      {l:'Les faits', h:'Une vente d’immeuble envisagée par un acte rédigé par un avocat, sans notaire.'},
+      {l:'Le problème de droit', h:'Une vente d’immeuble conclue sans acte authentique peut-elle être opposable aux tiers ?'},
+      {l:'Les règles applicables', h:'<p>Entre les parties, la propriété se transfère dès leur accord (art. 1196 C. civ.).</p><p>Mais pour être publié au fichier immobilier, un acte doit être reçu <b>en la forme authentique</b> par un notaire (art. 710-1 C. civ.). Seule la publication rend la vente <b>opposable aux tiers</b>. L’avocat, lui, défend les intérêts de son client et ne peut pas conférer l’authenticité.</p>'},
+      {l:'L’application aux faits', h:'L’acte de l’avocat lierait Mme Petit et son voisin. Mais il ne pourrait pas être publié : pour les tiers, Mme Petit resterait propriétaire. Ses créanciers pourraient encore saisir le terrain, et un autre acheteur qui publierait avant lui serait préféré.'},
+      {l:'La conclusion', h:'La vente serait valable entre eux, mais <b>pas protégée</b>. Pour qu’elle soit opposable à tous, il faut un acte authentique, publié par le notaire. Rien n’empêche chacun d’avoir aussi son avocat pour le conseiller.'}]}
+  ]
+});
+
+JLG.fiche('deo1', [
+  {id:'notaire', t:'Le notaire', items:[
+    {d:'Notaire', v:'Officier public et ministériel établi pour recevoir les actes auxquels les parties doivent ou veulent donner l’authenticité, en assurer la date, en conserver le dépôt et en délivrer des copies.'},
+    {a:'Ordonnance du 2 novembre 1945, art. 1er', v:'La définition du notaire. « Grosses et expéditions » = copies exécutoires et copies authentiques.'},
+    {kv:[['Nommé par', 'Le garde des Sceaux (arrêté au JO), puis il prête serment'], ['Contrôlé par', 'L’autorité judiciaire et les instances du notariat'], ['Exerce', 'Seul, en société ou comme notaire salarié']]},
+    {p:'Pas un fonctionnaire : payé par ses clients, il engage sa propre responsabilité, pas celle de l’État.'}]},
+  {id:'service', t:'La mission de service public', items:[
+    {d:'Mission de service public', v:'Le notaire assure, par délégation de l’État, le service public de l’authenticité des actes.'},
+    {d:'Prestation notariale', v:'Deux fonctions : l’authentification des actes et le conseil aux clients.'},
+    {l:'Les tâches déléguées', items:['Envoyer les taxes au SPF', 'Mettre à jour le fichier immobilier (Télé@ctes)', 'Alimenter la base Perval', 'Déposer la déclaration de succession']}]},
+  {id:'acte', t:'L’acte authentique', items:[
+    {a:'Art. 1369 C. civ.', v:'L’acte reçu, avec les solennités requises, par un officier public ayant compétence et qualité pour instrumenter.'},
+    {l:'Le jour de la signature', num:true, items:['Les parties sont présentes : identité, capacité, pouvoirs', 'Le notaire est présent : conseil, équilibre, consentement', 'Le notaire signe et appose son sceau']},
+    {x:'Autres actes authentiques : les actes du préfet, l’état civil dressé par le maire, les jugements.'}]},
+  {id:'effets', t:'Les effets de l’authenticité', items:[
+    {tab:{head:['Effet', 'Ce que ça veut dire'], rows:[['Date certaine', 'La date de l’acte fait foi'], ['Force probante', 'Foi jusqu’à inscription de faux pour ce que le notaire a fait ou constaté (art. 1371)'], ['Force exécutoire', 'Exécution par commissaire de justice, sans passer par le tribunal']]}},
+    {m:'D.P.E. : Date certaine, force Probante, force Exécutoire.'},
+    {a:'Art. 1370 C. civ.', v:'L’acte qui n’est pas authentique par défaut de forme vaut écrit sous signature privée, s’il est signé des parties.'},
+    {kv:[['Minute', 'L’original, conservé à l’étude'], ['Copie exécutoire', 'Ex-« grosse » : elle permet l’exécution forcée']]}]},
+  {id:'opposabilite', t:'L’opposabilité', items:[
+    {d:'Opposabilité', v:'L’acte s’impose aux tiers : ceux qui ne l’ont pas signé ne peuvent pas l’ignorer.'},
+    {kv:[['Signature', 'Effet entre les parties : la vente est parfaite'], ['Publication au SPF', 'L’acte devient opposable aux tiers'], ['Double vente', 'Le premier qui publie, de bonne foi, l’emporte (art. 1198)']]},
+    {kv:[['EHF', 'Avant la vente : hypothèques, servitudes'], ['ESF', 'Après la publication : il la prouve']]},
+    {p:'Contrat de mariage, donation entre époux : pas publiés au SPF, ils ont leurs propres règles.'}]},
+  {id:'metiers', t:'Les métiers et les professions', items:[
+    {tab:{head:['Qui', 'Rôle'], rows:[['Collaborateur (clerc)', 'Rédige, réunit les pièces, suit le dossier'], ['Formaliste', 'Formalités après la signature (SPF, greffe)'], ['Comptable-taxateur', 'Facture, calcule les taxes, tient la paie'], ['Négociateur', 'Estime, fait visiter, vend ou loue']]}},
+    {kv:[['Avocat', 'Défend un seul client, plaide'], ['Juge', 'Tranche les litiges'], ['Commissaire de justice', 'Exécute les titres, inventaires, enchères']]},
+    {m:'Le notaire prévient, l’avocat défend, le juge tranche, le commissaire de justice exécute.'},
+    {p:'Seul le notaire authentifie. Il est impartial : il conseille les deux parties.'}]}
+]);
+
+</script>
+<!-- ▲ JLG:CHAPITRE deo1 ▲ -->
 <!-- ▼ JLG:LEXIQUE tous ▼ -->
 <script>
 JLG.glossary([
@@ -6640,9 +7407,9 @@ JLG.glossary([
   {s:'efd', t:'Vie privée', d:'Sphère protégée par l’article 9 du Code civil : vie sentimentale et familiale, santé, domicile, correspondances, patrimoine des particuliers…', ref:'Art. 9 C. civ.'},
   /* —— Pratique des opérations immobilières —— */
   {s:'immo', t:'Acquisition', d:'Le fait de devenir propriétaire d’un bien : par achat, donation, succession…'},
-  {s:'immo', t:'Acte authentique', d:'Acte reçu par un officier public compétent, comme le notaire, dans les formes requises. Il a force probante, date certaine et force exécutoire.'},
-  {s:'immo', t:'Acte notarié', d:'Acte authentique reçu par un notaire, revêtu de sa signature et de son sceau.'},
-  {s:['immo', 'civ'], t:'Acte sous signature privée', d:'Acte rédigé et signé par les parties elles-mêmes, sans officier public. Il n’a pas de force exécutoire, ni, par lui-même, de date certaine.'},
+  {s:['immo', 'deo'], t:'Acte authentique', d:'Acte reçu par un officier public compétent, comme le notaire, dans les formes requises. Il a force probante, date certaine et force exécutoire.'},
+  {s:['immo', 'deo'], t:'Acte notarié', d:'Acte authentique reçu par un notaire, revêtu de sa signature et de son sceau.'},
+  {s:['immo', 'civ', 'deo'], t:'Acte sous signature privée', d:'Acte rédigé et signé par les parties elles-mêmes, sans officier public. Il n’a pas de force exécutoire, ni, par lui-même, de date certaine.'},
   {s:'immo', t:'Avant-contrat', d:'Contrat qui prépare la vente : promesse unilatérale ou synallagmatique de vente, promesse unilatérale d’achat, contrat de réservation.'},
   {s:'immo', t:'Bail', d:'Contrat par lequel un bailleur laisse l’usage d’un bien à un locataire contre un loyer. Notarié obligatoirement s’il dépasse 12 ans.'},
   {s:'immo', t:'Bien immeuble', d:'Bien qui ne peut pas être déplacé : immeuble par nature, par destination ou par l’objet.', ref:'Art. 517 C. civ.'},
@@ -6656,16 +7423,16 @@ JLG.glossary([
   {s:'immo', t:'Copropriété', d:'Immeuble bâti divisé en lots, chacun composé d’une partie privative et d’une quote-part des parties communes (les tantièmes). Loi du 10 juillet 1965.'},
   {s:'immo', t:'CSI', d:'Contribution de sécurité immobilière : taxe perçue lors de la publication des actes au service de la publicité foncière.'},
   {s:'immo', t:'CUO / CUI', d:'Certificat d’urbanisme opérationnel (projet de construction) ou informatif (bien déjà bâti), demandé à la mairie du lieu de l’immeuble.'},
-  {s:['immo', 'civ'], t:'Date certaine', d:'Une date qui ne peut pas être contestée : c’est l’un des effets de l’acte authentique.'},
-  {s:'immo', t:'Débours', d:'Les sommes avancées par le notaire pour le compte de son client (frais de pièces et de formalités).'},
+  {s:['immo', 'civ', 'deo'], t:'Date certaine', d:'Une date qui ne peut pas être contestée : c’est l’un des effets de l’acte authentique.'},
+  {s:['immo', 'deo'], t:'Débours', d:'Les sommes avancées par le notaire pour le compte de son client (frais de pièces et de formalités).'},
   {s:'immo', t:'Déclaration préalable', d:'Autorisation d’urbanisme simplifiée pour les petits travaux ou ouvrages, sous certains seuils de surface.'},
   {s:'immo', t:'Diagnostics', d:'Documents techniques à fournir pour vendre un immeuble bâti : plomb (CREP), amiante, électricité, gaz, DPE, assainissement, bruit…'},
   {s:['immo', 'civ'], t:'Donation', d:'Contrat par lequel une personne transfère gratuitement un bien à une autre, qui l’accepte. L’acte notarié est obligatoire.'},
-  {s:'immo', t:'Émoluments', d:'La rémunération du notaire, fixée par un tarif réglementé.'},
+  {s:['immo', 'deo'], t:'Émoluments', d:'La rémunération du notaire, fixée par un tarif réglementé.'},
   {s:'immo', t:'État daté', d:'Document établi par le syndic pour la vente d’un lot de copropriété : il récapitule les sommes dues par le vendeur.'},
-  {s:'immo', t:'Force exécutoire', d:'La possibilité de faire exécuter un acte comme un jugement, sans repasser devant le juge.'},
-  {s:'immo', t:'Force probante', d:'La valeur de preuve d’un acte. L’acte authentique fait foi de ce que le notaire a constaté.'},
-  {s:'immo', t:'Formalités', d:'Les démarches avant la signature (demandes de pièces) et après (publication, déclarations) d’un acte.'},
+  {s:['immo', 'deo'], t:'Force exécutoire', d:'La possibilité de faire exécuter un acte comme un jugement, sans repasser devant le juge.'},
+  {s:['immo', 'deo'], t:'Force probante', d:'La valeur de preuve d’un acte. L’acte authentique fait foi de ce que le notaire a constaté.'},
+  {s:['immo', 'deo'], t:'Formalités', d:'Les démarches avant la signature (demandes de pièces) et après (publication, déclarations) d’un acte.'},
   {s:'immo', t:'Immeuble par destination', d:'Meuble rattaché à un immeuble par nature dont il est l’accessoire : même propriétaire et attache voulue. Ex. : cuisine intégrée, cheptel.', ref:'Art. 524 C. civ.'},
   {s:'immo', t:'Immeuble par l’objet', d:'Droit portant sur un immeuble : usufruit, nue-propriété, servitude, action en revendication.', ref:'Art. 526 C. civ.'},
   {s:'immo', t:'Immeuble par nature', d:'Le sol et ce qui y est durablement fixé : bâtiments, arbres, récoltes sur pied, tuyaux…', ref:'Art. 518 C. civ.'},
@@ -6676,13 +7443,13 @@ JLG.glossary([
   {s:'immo', t:'Mairie', d:'L’interlocuteur pour l’urbanisme (certificats, permis) et le titulaire possible du droit de préemption urbain.'},
   {s:'immo', t:'Matrice cadastrale', d:'Document écrit qui regroupe les relevés de propriété d’un même propriétaire dans une commune. Délivrée au propriétaire ou à son mandataire.'},
   {s:'immo', t:'Meubles meublants', d:'Les meubles qui garnissent un logement (électroménager, mobilier…). Listés et estimés à part dans l’acte, ils sortent de l’assiette des taxes.'},
-  {s:'immo', t:'Minute', d:'L’original d’un acte authentique, conservé par le notaire.'},
+  {s:['immo', 'deo'], t:'Minute', d:'L’original d’un acte authentique, conservé par le notaire.'},
   {s:'immo', t:'Mutation à titre gratuit', d:'Transfert de propriété sans contrepartie financière : donation, succession, legs.'},
   {s:'immo', t:'Mutation à titre onéreux', d:'Transfert de propriété contre un prix ou une soulte : vente, échange.'},
-  {s:'immo', t:'Notaire', d:'Officier public et ministériel qui conseille les parties, authentifie les actes, les conserve et collecte certaines taxes pour l’État.'},
-  {s:'immo', t:'Officier public', d:'Personne investie par l’État du pouvoir de donner aux actes le caractère authentique.'},
+  {s:['immo', 'deo'], t:'Notaire', d:'Officier public et ministériel qui conseille les parties, authentifie les actes, les conserve et collecte certaines taxes pour l’État.'},
+  {s:['immo', 'deo'], t:'Officier public', d:'Personne investie par l’État du pouvoir de donner aux actes le caractère authentique.'},
   {s:'immo', t:'Opération immobilière', d:'Action relative à un immeuble, réalisée par une ou plusieurs personnes.'},
-  {s:['immo', 'civ'], t:'Opposabilité', d:'L’effet d’un acte qui s’impose aux tiers. Pour une mutation immobilière, elle résulte de la publication au SPF.'},
+  {s:['immo', 'civ', 'deo'], t:'Opposabilité', d:'L’effet d’un acte qui s’impose aux tiers. Pour une mutation immobilière, elle résulte de la publication au SPF.'},
   {s:'immo', t:'Permis d’aménager', d:'Autorisation d’urbanisme nécessaire pour créer un lotissement.'},
   {s:'immo', t:'Permis de construire', d:'Autorisation d’urbanisme nécessaire pour construire, par exemple un immeuble vendu en l’état futur d’achèvement.'},
   {s:'immo', t:'Plan cadastral', d:'Document graphique de la commune découpée en sections (lettres) et en parcelles (numéros). Accessible à tous ; il ne prouve pas la propriété.'},
@@ -6690,11 +7457,11 @@ JLG.glossary([
   {s:'immo', t:'Propriété immobilière', d:'Le droit de propriété qui porte sur un immeuble.'},
   {s:'immo', t:'SAFER', d:'Société d’aménagement foncier et d’établissement rural : elle peut préempter les parcelles agricoles.'},
   {s:'immo', t:'Soulte', d:'Somme d’argent versée pour compenser une différence de valeur, dans un échange ou un partage.'},
-  {s:'immo', t:'SPF', d:'Service de la publicité foncière : il publie les actes relatifs aux immeubles pour les rendre opposables aux tiers. Anciennement « bureau des hypothèques ».'},
+  {s:['immo', 'deo'], t:'SPF', d:'Service de la publicité foncière : il publie les actes relatifs aux immeubles pour les rendre opposables aux tiers. Anciennement « bureau des hypothèques ».'},
   {s:['immo', 'civ'], t:'Succession', d:'La transmission du patrimoine d’une personne décédée à ses héritiers ou légataires.'},
   {s:'immo', t:'Tantièmes', d:'La quote-part des parties communes attachée à un lot de copropriété. Ex. : 175/10 000es.'},
   {s:['immo', 'civ'], t:'Testament', d:'Acte par lequel une personne dispose de ses biens pour après sa mort. Il est révocable jusqu’au décès.'},
-  {s:'immo', t:'TPF', d:'Taxe de publicité foncière : perçue par le notaire pour le compte de l’État lors de la publication d’une mutation.'},
+  {s:['immo', 'deo'], t:'TPF', d:'Taxe de publicité foncière : perçue par le notaire pour le compte de l’État lors de la publication d’une mutation.'},
   {s:'immo', t:'Transfert de propriété', d:'Le passage de la propriété d’un bien d’une personne à une autre.'},
   {s:'immo', t:'VEFA', d:'Vente en l’état futur d’achèvement : vente d’un immeuble à construire, que l’acquéreur paie au fur et à mesure des travaux.'},
   {s:'immo', t:'ZAC', d:'Zone d’aménagement concerté : zone dans laquelle une collectivité publique décide de réaliser ou faire réaliser l’aménagement et l’équipement des terrains.'}
@@ -6712,7 +7479,7 @@ JLG.glossary([
   {s:'civ', t:'Clandestinité', d:'Le fait de célébrer un mariage sans la publicité requise. Cause de nullité absolue, appréciée par le juge (art. 191).'},
   {s:['civ', 'immo'], t:'Clause d’emploi ou de remploi', d:'Mention dans un acte d’achat indiquant que le bien est payé avec des fonds personnels : il reste personnel et n’entre pas dans l’indivision ou la communauté.'},
   {s:'civ', t:'Collatéraux', d:'Les parents qui descendent d’un ancêtre commun sans descendre l’un de l’autre : frères, sœurs, oncles, neveux, cousins.'},
-  {s:['civ', 'immo'], t:'Commissaire de justice', d:'Profession née le 1er juillet 2022 de la fusion des huissiers de justice et des commissaires-priseurs judiciaires. Il signifie les actes, comme une opposition au mariage.'},
+  {s:['civ', 'immo', 'deo'], t:'Commissaire de justice', d:'Profession née le 1er juillet 2022 de la fusion des huissiers de justice et des commissaires-priseurs judiciaires. Il signifie les actes, comme une opposition au mariage.'},
   {s:'civ', t:'Communauté de vie', d:'L’obligation pour les époux de vivre ensemble (art. 215). Ils peuvent toutefois avoir des domiciles distincts (art. 108).', ref:'Art. 215 C. civ.'},
   {s:'civ', t:'Concubinage', d:'Une union de fait, caractérisée par une vie commune stable et continue, entre deux personnes qui vivent en couple.', ref:'Art. 515-8 C. civ.'},
   {s:'civ', t:'Concubin notoire', d:'Le concubin dont la vie commune est connue de tous. S’il vivait avec le locataire depuis au moins un an, le bail peut lui être transféré.'},
@@ -6735,7 +7502,7 @@ JLG.glossary([
   {s:'civ', t:'Mariage blanc', d:'Un mariage contracté dans un but étranger au mariage, comme obtenir la nationalité. Nul pour défaut de consentement.'},
   {s:'civ', t:'Mariage posthume', d:'Un mariage autorisé par le Président de la République après le décès d’un futur époux qui avait accompli les formalités. Pas de droits de succession pour le survivant.', ref:'Art. 171 C. civ.'},
   {s:'civ', t:'Mariage putatif', d:'Un mariage annulé dont un époux au moins était de bonne foi : les effets passés sont maintenus en sa faveur.', ref:'Art. 201 C. civ.'},
-  {s:'civ', t:'Mention en marge', d:'L’inscription, dans la marge de l’acte de naissance, d’un événement : mariage, PACS, divorce. Elle informe les tiers.'},
+  {s:['civ', 'deo'], t:'Mention en marge', d:'L’inscription, dans la marge de l’acte de naissance, d’un événement : mariage, PACS, divorce. Elle informe les tiers.'},
   {s:'civ', t:'Mineur émancipé', d:'Un mineur libéré de l’autorité parentale, par le mariage ou par décision du juge à partir de 16 ans. Il ne peut pourtant pas conclure de PACS.'},
   {s:'civ', t:'Ministère public', d:'Les magistrats (procureur de la République) qui défendent l’intérêt de la société. Il peut s’opposer à un mariage ou en demander la nullité.'},
   {s:'civ', t:'Nullité absolue', d:'Sanction d’une règle d’ordre public (âge, bigamie, inceste, absence de consentement…). Tout intéressé et le ministère public peuvent agir, pendant 30 ans.'},
@@ -6759,7 +7526,7 @@ JLG.glossary([
   {s:'immo', t:'ABF', d:'Architecte des Bâtiments de France : il donne son avis sur les travaux et les divisions aux abords des monuments historiques et dans les sites protégés.'},
   {s:'immo', t:'Absoluité', d:'Le caractère absolu du droit de propriété : la plénitude des pouvoirs du propriétaire sur son bien, dans les limites des lois et des règlements.', ref:'Art. 544 C. civ.'},
   {s:'immo', t:'Action en revendication', d:'L’action en justice par laquelle le propriétaire réclame son bien à celui qui le possède. Elle est imprescriptible.', ref:'Art. 2227 C. civ.'},
-  {s:'immo', t:'Attestation de propriété immobilière', d:'L’acte notarié qui constate, après un décès, la transmission des immeubles aux héritiers. Elle est publiée au SPF : c’est le titre des héritiers.'},
+  {s:['immo', 'deo'], t:'Attestation de propriété immobilière', d:'L’acte notarié qui constate, après un décès, la transmission des immeubles aux héritiers. Elle est publiée au SPF : c’est le titre des héritiers.'},
   {s:'immo', t:'Attribut', d:'Chacun des trois pouvoirs du propriétaire : l’usus (utiliser), le fructus (percevoir les fruits) et l’abusus (disposer).'},
   {s:'immo', t:'Bornage', d:'La fixation des limites entre deux terrains voisins par un géomètre-expert, matérialisée par des bornes.', ref:'Art. 646 C. civ.'},
   {s:'immo', t:'BRS', d:'Bail réel solidaire : un organisme de foncier solidaire loue le terrain à un ménage, qui achète le logement bâti dessus et paie une redevance. La revente est plafonnée.'},
@@ -6777,14 +7544,14 @@ JLG.glossary([
   {s:'immo', t:'DIA', d:'Déclaration d’intention d’aliéner : elle informe la commune titulaire du droit de préemption urbain de la vente projetée. Son silence pendant 2 mois vaut renonciation.'},
   {s:'immo', t:'Division parcellaire', d:'Le découpage d’une parcelle en plusieurs : document d’arpentage du géomètre-expert, nouveaux numéros cadastraux, puis acte publié au SPF.'},
   {s:'immo', t:'Document d’arpentage', d:'Le document établi par un géomètre-expert pour diviser une parcelle ou modifier ses limites ; le cadastre attribue ensuite les nouveaux numéros.'},
-  {s:'immo', t:'DPU', d:'Droit de préemption urbain : le droit de la commune d’acheter en priorité un bien vendu dans certaines zones.', ref:'Art. L.211-1 et s. C. urb.'},
+  {s:['immo', 'deo'], t:'DPU', d:'Droit de préemption urbain : le droit de la commune d’acheter en priorité un bien vendu dans certaines zones.', ref:'Art. L.211-1 et s. C. urb.'},
   {s:'immo', t:'Droit de propriété', d:'Le droit réel le plus complet : jouir et disposer d’une chose de la manière la plus absolue, sans faire un usage interdit par les lois et les règlements.', ref:'Art. 544 C. civ.'},
   {s:'immo', t:'Droit réel accessoire', d:'Un droit réel qui garantit le paiement d’une créance : hypothèque, gage, nantissement.'},
   {s:'immo', t:'Droit réel principal', d:'Un droit réel qui porte sur la chose elle-même : la pleine propriété et ses démembrements.'},
   {s:'immo', t:'DUH', d:'Droit d’usage et d’habitation : droit réel temporaire ou viager d’occuper le bien d’autrui (usus), sans en percevoir les fruits ni en disposer.'},
   {s:'immo', t:'Effet relatif', d:'La clause de l’acte (partie normalisée) qui cite le titre du vendeur ou du donateur : la dernière mutation et ses références de publication au SPF.', ref:'Art. 3 décret 4 janv. 1955'},
   {s:'immo', t:'État des risques (ERP)', d:'Le document annexé à la vente ou au bail qui informe des risques : inondation, séisme, mouvement de terrain, mines, radon…'},
-  {s:'immo', t:'État hypothécaire (EH)', d:'Le document délivré par le SPF qui liste les actes publiés et les charges (hypothèques, servitudes) d’un immeuble. Lui seul fait foi, pas le cadastre.'},
+  {s:['immo', 'deo'], t:'État hypothécaire (EH)', d:'Le document délivré par le SPF qui liste les actes publiés et les charges (hypothèques, servitudes) d’un immeuble. Lui seul fait foi, pas le cadastre.'},
   {s:'immo', t:'Étude de sol G1', d:'L’étude géotechnique préalable, obligatoire pour vendre un terrain à bâtir situé en zone d’argiles (retrait-gonflement moyen ou fort).'},
   {s:'immo', t:'Exclusivité', d:'Le caractère exclusif du droit de propriété : le propriétaire peut interdire aux autres l’usage de son bien.'},
   {s:'immo', t:'Expropriation', d:'La privation forcée de la propriété pour cause d’utilité publique, contre une juste et préalable indemnité.', ref:'Art. 545 C. civ.'},
@@ -6811,6 +7578,35 @@ JLG.glossary([
   {s:'immo', t:'Usucapant', d:'Le possesseur qui devient propriétaire par prescription acquisitive.'},
   {s:'immo', t:'Usucapion', d:'Un autre nom de la prescription acquisitive : devenir propriétaire par une possession de 10 ou 30 ans.', ref:'Art. 2272 C. civ.'},
   {s:'immo', t:'Viager occupé', d:'La vente d’un logement dont le vendeur garde le droit d’habiter jusqu’à son décès. L’acheteur paie un bouquet, puis une rente.'}
+]);
+
+JLG.glossary([
+  /* —— Accompagner le client selon les règles déontologiques · Chapitre 1 —— */
+  {s:'deo', t:'Acte authentique électronique', d:'Acte authentique établi et signé sur support électronique, souvent sur tablette, avec la même valeur que l’acte papier.'},
+  {s:'deo', t:'Collaborateur de notaire (clerc)', d:'Technicien du droit qui rédige les actes, rassemble les pièces, suit les dossiers et le lien avec les clients, sous la responsabilité du notaire. Il ne peut pas authentifier.'},
+  {s:'deo', t:'Comptable-taxateur', d:'Il établit la facture des actes, calcule la part d’impôts que le notaire reverse à l’État et tient la comptabilité de l’étude, dont la paie.'},
+  {s:'deo', t:'Copie authentique', d:'Copie certifiée conforme d’un acte notarié. Le texte de 1945 l’appelle « expédition ».'},
+  {s:'deo', t:'Copie exécutoire', d:'Copie d’un acte notarié revêtue de la formule exécutoire : elle permet au créancier de faire exécuter l’acte par un commissaire de justice. Ancien nom : la « grosse ».'},
+  {s:['deo', 'civ'], t:'Déclaration de succession', d:'Document déposé à l’administration fiscale après un décès pour calculer les droits de succession. Le notaire l’établit et la dépose pour les héritiers.'},
+  {s:'deo', t:'Devoir de conseil', d:'L’obligation du notaire d’éclairer ses clients sur la portée et les conséquences de leurs engagements, et de veiller à l’équilibre du contrat.'},
+  {s:'deo', t:'État sur formalité (ESF)', d:'Document délivré par le service de la publicité foncière, reçu par Télé@ctes, qui prouve que l’acte a bien été publié.'},
+  {s:['deo', 'civ'], t:'FCDDV', d:'Fichier central des dispositions de dernières volontés : le notaire y inscrit les testaments et les donations entre époux, pour qu’on les retrouve au décès.'},
+  {s:['deo', 'immo'], t:'Fichier immobilier', d:'Le fichier tenu par le service de la publicité foncière, où sont publiés les actes relatifs aux immeubles. Il permet à chacun de savoir qui est propriétaire.'},
+  {s:'deo', t:'Formaliste', d:'Le professionnel de l’étude chargé des formalités postérieures à la signature : dépôts auprès des administrations (SPF, greffe…).'},
+  {s:'deo', t:'Garde des Sceaux', d:'Le ministre de la Justice. Il nomme les notaires par arrêté publié au Journal officiel.'},
+  {s:'deo', t:'Impartialité', d:'L’absence de parti pris. Le notaire est impartial : il conseille les deux parties à l’acte, à la différence de l’avocat qui défend un seul client.'},
+  {s:'deo', t:'Inscription de faux', d:'La procédure spéciale, devant le juge, pour contester ce qu’un officier public a constaté dans un acte authentique.', ref:'Art. 1371 C. civ.'},
+  {s:'deo', t:'Magistrat', d:'Le juge (ou le procureur). Il exerce une mission de service public : le juge tranche les litiges en appliquant le droit.'},
+  {s:'deo', t:'Mission de service public', d:'Une activité d’intérêt général que l’État confie à une personne qui n’est pas une administration. Celle du notaire : l’authenticité des actes.'},
+  {s:'deo', t:'Négociateur immobilier', d:'Le professionnel de l’étude qui vend ou loue des biens : estimation, visites, états des lieux.'},
+  {s:'deo', t:'Officier ministériel', d:'Le titulaire d’un office (une « charge ») attribué par le ministre de la Justice. Le notaire est à la fois officier public et officier ministériel.'},
+  {s:'deo', t:'Perval', d:'La base de données des prix immobiliers du notariat (hors Île-de-France, où c’est la base BIEN), alimentée par les notaires après chaque vente.'},
+  {s:'deo', t:'Prestation de serment', d:'L’engagement solennel du notaire nommé, qui lui permet de devenir définitivement notaire.'},
+  {s:'deo', t:'Prestation notariale', d:'Le produit de deux fonctions du notaire : l’authentification des actes et le conseil aux clients.'},
+  {s:['deo', 'civ'], t:'Solennité', d:'Une formalité imposée par la loi. Un acte solennel n’est valable que dans la forme exigée : la donation et le contrat de mariage doivent être reçus par un notaire.'},
+  {s:['deo', 'immo'], t:'Télé@ctes', d:'La plateforme qui permet au notaire d’envoyer les actes au service de la publicité foncière par voie électronique, et de recevoir l’état sur formalité.'},
+  {s:['deo', 'immo', 'civ'], t:'Tiers', d:'Toute personne qui n’est pas partie à un acte : créanciers, autres acheteurs, banques, administration. L’opposabilité dit quand un acte s’impose à eux.'},
+  {s:'deo', t:'Titre exécutoire', d:'Un écrit qui permet au créancier d’obtenir le recouvrement forcé de sa créance, par exemple par une saisie : un jugement, ou la copie exécutoire d’un acte notarié.'}
 ]);
 
 </script>

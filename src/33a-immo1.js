@@ -3,7 +3,7 @@ JLG.chapter({
   kicker:'Séance 1', short:'Opérations immobilières & notaire', title:'Les opérations immobilières et le rôle du notaire', titleHtml:'Les opérations immobilières <em>et le rôle du notaire</em>',
   intro:'Une opération immobilière, c’est le quotidien d’une étude. Ici, tu apprends à la qualifier, à savoir quand le notaire est obligatoire, à reconnaître les trois sortes d’immeubles, et à rédiger une clause « désignation ».',
   objectives:['Définir et qualifier une opération immobilière', 'Appréhender la diversité des opérations immobilières', 'Présenter le rôle du notaire dans une opération immobilière', 'Savoir rédiger une clause « désignation »'],
-  prereq:'le statut d’officier public et ministériel et la mission de service public du notaire (Bloc 1, Activité 1) ; les biens (Bloc 7, Notion 6).',
+  prereq:'le statut d’officier public et ministériel et la mission de service public du notaire (<a href="#ch-deo1" data-go="ch-deo1">Déontologie, chapitre 1</a>) ; les biens (Bloc 7, Notion 6).',
   traps:[
     {t:'1 hectare = 10 000 m²', h:'Et non 1 000 m², comme l’écrit par erreur le rappel de ton cours. 1 ha = 100 a = 10 000 m² ; 1 a = 100 m² ; 1 ca = 1 m².'},
     {t:'CSI = contribution de SÉCURITÉ immobilière', h:'Ton cours l’appelle une fois « contribution sociale immobilière » : c’est une coquille. Le bon nom est contribution de sécurité immobilière.'},

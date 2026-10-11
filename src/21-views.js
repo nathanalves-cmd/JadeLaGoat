@@ -143,6 +143,7 @@ function viewHome(){
     ${quick('train-daily', 'bolt', 'Défi du jour', '5 questions tirées de tous tes cours.')}
     ${quick('progres', 'trophy', 'Le jeu', '12 niveaux, des coffres, des jokers et des quêtes.')}
     ${quick('train', 'cards', 'Flashcards & jeux', 'Retourne les cartes, trie, gagne de l’XP.')}
+    ${quick('outils-duel', 'seal', 'Le duel des actes', 'Sous seing privé contre acte authentique.')}
     ${quick('outils-effetrel', 'pen', 'Clause « effet relatif »', 'Le générateur, avec le bon vocabulaire.')}
     ${quick('outils-chaine', 'clock', 'La chaîne des propriétaires', 'Remonter 30 ans pour l’origine de propriété.')}
     ${quick('outils-bareme', 'euro', 'Barème de l’usufruit', 'L’article 669 du CGI, en un curseur.')}

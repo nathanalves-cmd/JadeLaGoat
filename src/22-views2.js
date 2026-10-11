@@ -35,6 +35,7 @@ function viewTrain(a, b, opt){
     ${quick('outils-cadastre', 'map', 'Lire un plan cadastral', 'Section, numéro, contenance.')}
     ${chap('immo1') ? `<button class="quick" data-go="ch-immo1" data-open="maison"><span class="ico">${icon('house')}</span><span><b>La ferme aux immeubles</b><span>Nature, destination ou objet ? Trouve-les.</span></span></button>` : ''}
     ${chap('immo2') ? [['chaine', 'clock', 'Remonte la chaîne des propriétaires', 'L’ordre des actes, l’effet relatif, l’origine.'], ['prescription', 'scale', 'Usucapion : prescrit ou pas ?', 'Bonne foi, juste titre, tolérance.'], ['etages', 'house', 'Qui a le droit de… ?', 'Usufruitier, nu-propriétaire ou usager ?'], ['voisinage', 'tree', 'Le voisin a-t-il le droit ?', 'Arbres, haies et fenêtres.']].map(([w, ic, t, d]) => `<button class="quick" data-go="ch-immo2-jeux" data-open="${w}"><span class="ico">${icon(ic)}</span><span><b>${t}</b><span>${d}</span></span></button>`).join('') : ''}
+    ${chap('deo1') ? [['opposabilite', 'clock', 'La course à la publication', 'Deux acheteurs, une maison : qui l’emporte ?'], ['etude', 'doc', 'Le dossier fait le tour de l’étude', 'Envoie chaque tâche au bon bureau.']].map(([w, ic, t, d]) => `<button class="quick" data-go="ch-deo1-jeux" data-open="${w}"><span class="ico">${icon(ic)}</span><span><b>${t}</b><span>${d}</span></span></button>`).join('') : ''}
     ${quick('outils-famille', 'family', 'Qui peut-on épouser ?', 'L’arbre des empêchements, mariage et PACS.')}
     ${quick('outils-nullite', 'alert', 'Simulateur de nullité', 'Absolue ou relative, qui agit, quel délai.')}
     ${quick('outils-pacs', 'split', 'Séparation ou indivision ?', 'Range les biens du couple pacsé.')}
@@ -65,6 +66,11 @@ const TOOLS = [
   {id:'famille', g:'Droit civil', t:'Qui peut-on épouser ou pacser ?', d:'Touche un membre de la famille de Léa : interdit, dispense possible ou autorisé.', w:'famille'},
   {id:'nullite', g:'Droit civil', t:'Simulateur de nullité du mariage', d:'Choisis une cause : type de nullité, qui peut agir, délai, effets.', w:'nullite'},
   {id:'pacs', g:'Droit civil', t:'PACS : séparation ou indivision ?', d:'Change de régime et regarde les biens changer de propriétaire.', w:'pacsregime'},
+  {id:'delegation', g:'Déontologie', t:'La journée de l’étude au service de l’État', d:'Les tâches que l’État délègue au notaire : taxes, Télé@ctes, Perval, déclaration de succession.', w:'delegation'},
+  {id:'duel', g:'Déontologie', t:'Le duel des actes', d:'Acte sous signature privée contre acte authentique, en quatre manches.', w:'authentique'},
+  {id:'publication', g:'Déontologie', t:'La course à la publication (art. 1198)', d:'Deux acheteurs, une maison : le premier qui publie l’emporte, s’il est de bonne foi.', w:'opposabilite'},
+  {id:'etude', g:'Déontologie', t:'Le parcours d’un dossier dans l’étude', d:'Négociateur, collaborateur, notaire, formaliste, comptable-taxateur : qui fait quoi.', w:'etude'},
+  {id:'professions', g:'Déontologie', t:'Notaire, avocat, juge, commissaire de justice', d:'Le comparateur des professions du droit.', w:'pros'},
   {id:'methode', g:'Méthode', t:'Méthode du cas pratique', d:'Les 5 étapes du raisonnement juridique, avec un exemple.', w:'methode'}
 ];
 function viewOutils(id){

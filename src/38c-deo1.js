@@ -1,0 +1,75 @@
+  sorts:[
+    {id:'deo1_s1', title:'Qui fait quoi à l’étude ?', intro:'Chaque tâche a son professionnel. À qui revient-elle ?', cats:[{id:'not', l:'Notaire'}, {id:'col', l:'Collaborateur'}, {id:'for', l:'Formaliste'}, {id:'com', l:'Comptable-taxateur'}, {id:'neg', l:'Négociateur'}], items:[
+      {e:'✍️', t:'Signer l’acte et apposer le sceau', c:'not', w:'Seul le notaire confère l’authenticité.'},
+      {e:'🤝', t:'Conseiller les deux parties le jour de la vente, en restant impartial', c:'not', w:'Le devoir de conseil du notaire, au moment de la signature.'},
+      {e:'🆔', t:'Vérifier, à la signature, l’identité et la capacité des parties', c:'not', w:'C’est l’une des trois conditions de l’authenticité : parties et notaire présents.'},
+      {e:'📝', t:'Rédiger le projet d’acte de vente', c:'col', w:'Le collaborateur, technicien du droit, rédige les actes.'},
+      {e:'📂', t:'Réunir les pièces administratives du dossier', c:'col', w:'Il rassemble les pièces nécessaires avant la signature.'},
+      {e:'📞', t:'Suivre le dossier et répondre aux questions du client', c:'col', w:'Le suivi des dossiers et le lien avec les clients.'},
+      {e:'🏛️', t:'Déposer l’acte signé au service de la publicité foncière', c:'for', w:'Une formalité postérieure à la signature : c’est le formaliste.'},
+      {e:'🗂️', t:'Accomplir un dépôt au greffe après la signature', c:'for', w:'Les dépôts auprès des administrations, après l’acte.'},
+      {e:'🧾', t:'Établir la facture de l’acte', c:'com', w:'La facturation des actes notariés.'},
+      {e:'💶', t:'Calculer la part d’impôts à reverser à l’État', c:'com', w:'Il calcule les taxes que le notaire collecte pour l’État.'},
+      {e:'💼', t:'Préparer la paie des salariés de l’étude', c:'com', w:'La comptabilité générale de l’étude, dont la paie.'},
+      {e:'🏡', t:'Estimer une maison et organiser les visites', c:'neg', w:'Le négociateur vend ou loue des biens.'},
+      {e:'🔑', t:'Faire l’état des lieux d’un appartement loué par l’étude', c:'neg', w:'Estimation, visites, états des lieux : le négociateur.'}]},
+    {id:'deo1_s2', title:'Authentique ou pas ?', intro:'Cet acte est-il un acte authentique ?', cats:[{id:'aut', l:'Authentique'}, {id:'non', l:'Pas authentique'}], items:[
+      {e:'🏠', t:'Un acte de vente reçu et signé par le notaire', c:'aut', w:'Reçu par un officier public compétent, avec les solennités requises.'},
+      {e:'⚖️', t:'Un jugement du tribunal judiciaire', c:'aut', w:'Les jugements sont des actes authentiques.'},
+      {e:'👶', t:'Un acte de naissance dressé par l’officier de l’état civil', c:'aut', w:'Le maire, officier de l’état civil, établit des actes authentiques.'},
+      {e:'🏛️', t:'Un arrêté du préfet', c:'aut', w:'Un acte administratif établi par le préfet.'},
+      {e:'🎁', t:'Une donation reçue par le notaire', c:'aut', w:'Elle doit même obligatoirement l’être : c’est un acte solennel.'},
+      {e:'💸', t:'Une reconnaissance de dette signée chez le notaire, qui la signe aussi', c:'aut', w:'Les parties ont voulu l’authenticité : avec sa copie exécutoire, le créancier pourra faire saisir sans procès.'},
+      {e:'🔑', t:'Un bail signé par le propriétaire et le locataire, sans notaire', c:'non', w:'Un acte sous signature privée.'},
+      {e:'📄', t:'Une promesse de vente signée à l’agence immobilière', c:'non', w:'Un avant-contrat sous signature privée.'},
+      {e:'✒️', t:'Un acte notarié auquel il manque la signature du notaire', c:'non', w:'Défaut de forme : il vaut seulement écrit sous signature privée, s’il est signé des parties (art. 1370).'},
+      {e:'💼', t:'Un contrat de travail signé avec l’employeur', c:'non', w:'Un acte sous signature privée.'}]},
+    {id:'deo1_s3', title:'Ça fait foi jusqu’à quoi ?', intro:'L’acte authentique ne prouve pas tout avec la même force. Ce qu’il contient fait foi…', cats:[{id:'faux', l:'Jusqu’à inscription de faux'}, {id:'pc', l:'Jusqu’à preuve contraire'}], items:[
+      {e:'📅', t:'La date de l’acte', c:'faux', w:'Le notaire l’atteste lui-même : date certaine.'},
+      {e:'🧍', t:'La présence des parties devant le notaire', c:'faux', w:'Un fait que le notaire a personnellement constaté.'},
+      {e:'✍️', t:'Les signatures des parties, apposées devant le notaire', c:'faux', w:'Le notaire les a vues être apposées.'},
+      {e:'📍', t:'Le lieu où l’acte a été signé', c:'faux', w:'Le notaire le constate lui-même.'},
+      {e:'📖', t:'La lecture de l’acte aux parties par le notaire', c:'faux', w:'Un fait que le notaire a personnellement accompli.'},
+      {e:'💬', t:'La déclaration du vendeur : « la maison n’a jamais été inondée »', c:'pc', w:'Le notaire constate que le vendeur l’a dit, pas que c’est vrai.'},
+      {e:'💍', t:'Ce que les parties déclarent sur leur situation de famille', c:'pc', w:'Une déclaration des parties : elle peut être combattue par la preuve contraire.'},
+      {e:'🏷️', t:'La sincérité du prix déclaré par les parties', c:'pc', w:'Le notaire constate le prix annoncé, il ne peut pas garantir qu’il est sincère.'},
+      {e:'🔑', t:'La déclaration qu’aucun bail n’est en cours sur le bien', c:'pc', w:'Une simple déclaration du vendeur.'}]},
+    {id:'deo1_s4', title:'Notaire, avocat, juge ou commissaire de justice ?', intro:'Qui est-ce ?', cats:[{id:'not', l:'Notaire'}, {id:'avo', l:'Avocat'}, {id:'jug', l:'Juge'}, {id:'cj', l:'Commissaire de justice'}], items:[
+      {e:'🤝', t:'Il conseille les deux parties en restant impartial', c:'not', w:'L’impartialité est la marque du notaire.'},
+      {e:'🔏', t:'Il confère l’authenticité à un acte de vente', c:'not', w:'Seul le notaire le peut, pour un acte de vente.'},
+      {e:'🕊️', t:'Il prévient les litiges par le conseil et la médiation', c:'not', w:'Le « magistrat de l’amiable ».'},
+      {e:'🗣️', t:'Il plaide devant le tribunal pour son client', c:'avo', w:'L’avocat représente son client en justice.'},
+      {e:'🛡️', t:'Il défend uniquement les intérêts de son client', c:'avo', w:'L’avocat prend position pour une seule partie.'},
+      {e:'⚖️', t:'Il tranche un litige en appliquant le droit', c:'jug', w:'La fonction juridictionnelle du magistrat.'},
+      {e:'📜', t:'Il rend un jugement', c:'jug', w:'Le jugement est lui-même un acte authentique.'},
+      {e:'📦', t:'Il saisit les biens d’un débiteur grâce à un titre exécutoire', c:'cj', w:'Il fait exécuter les jugements et les copies exécutoires.'},
+      {e:'🔨', t:'Il vend des meubles aux enchères publiques sur décision de justice', c:'cj', w:'L’héritage des anciens commissaires-priseurs judiciaires.'},
+      {e:'📋', t:'Il dresse un inventaire et fixe le prix des meubles', c:'cj', w:'Inventaires et prisées : un rôle du commissaire de justice.'}]}
+  ],
+  cases:[
+    {id:'deo1_c1', title:'« Le notaire, c’est un fonctionnaire ! »', tag:'Statut · expliquer au client', facts:['M. Benali attend à l’accueil de l’étude pour signer l’achat de son appartement. Il te lance : « De toute façon, le notaire, c’est un fonctionnaire. S’il fait une erreur, c’est l’État qui paiera. Et puis pourquoi je le paie, alors ? »'], q:'Que lui réponds-tu ?', steps:[
+      {l:'Les faits', h:'Un client confond le statut du notaire avec celui d’un agent de l’État, et s’interroge sur sa rémunération et sa responsabilité.'},
+      {l:'Le problème de droit', h:'Le notaire est-il un agent de l’État ? Qui le rémunère, et qui répond de ses fautes ?'},
+      {l:'Les règles applicables', h:'<p>Le notaire est un <b>officier public et ministériel</b>, nommé par arrêté du garde des Sceaux publié au Journal officiel, qui prête serment. Il exerce une <b>mission de service public</b> : le service public de l’authenticité, sous le contrôle de l’autorité judiciaire et de sa profession.</p><p>Mais il <b>n’est pas fonctionnaire</b> : il conserve son indépendance, il est rémunéré par ses clients, et il n’engage pas la responsabilité de l’État.</p>'},
+      {l:'L’application aux faits', h:'M. Benali a raison sur un point : le notaire tient son pouvoir de l’État. Mais il paie le notaire parce que c’est lui, le client, qui bénéficie de la prestation : l’authentification et le conseil. Et en cas d’erreur, c’est le notaire qui répond.'},
+      {l:'La conclusion', h:'<p>Ce que tu peux lui dire : <b>« Le notaire est nommé par l’État et exerce une mission de service public : c’est pour cela que son acte a une valeur particulière. Mais ce n’est pas un fonctionnaire : vous le rémunérez selon un tarif fixé par l’État, et c’est lui qui répond de ses erreurs, avec son assurance. »</b></p>'}]},
+    {id:'deo1_c2', title:'Le locataire qui ne paie plus', tag:'Force exécutoire', facts:['Mme Garnier loue un studio à Hugo. Le bail a été reçu par Maître Morel, notaire. Depuis quatre mois, Hugo ne paie plus son loyer.', 'Mme Garnier est découragée : une amie lui a dit qu’il faudrait un procès de plusieurs mois avant de pouvoir récupérer quoi que ce soit.'], q:'Comment Mme Garnier peut-elle récupérer ses loyers impayés ?', steps:[
+      {l:'Les faits', h:'Une bailleresse, titulaire d’un bail notarié, n’est plus payée par son locataire.'},
+      {l:'Le problème de droit', h:'Le créancier qui détient un acte notarié doit-il obtenir un jugement pour faire exécuter l’obligation de payer qu’il contient ?'},
+      {l:'Les règles applicables', h:'L’acte authentique a <b>force exécutoire</b> : le créancier qui produit un acte notarié contenant une obligation de payer peut en poursuivre l’exécution sans recourir aux tribunaux. Il mandate un <b>commissaire de justice</b> avec la <b>copie exécutoire</b> de l’acte.'},
+      {l:'L’application aux faits', h:'Le bail a été reçu par un notaire : c’est un acte authentique, qui contient l’obligation de payer le loyer. Mme Garnier peut demander à Maître Morel la copie exécutoire du bail.'},
+      {l:'La conclusion', h:'<p>Mme Garnier n’a pas besoin de procès pour récupérer l’argent : avec la copie exécutoire, elle mandate un commissaire de justice, qui peut procéder à une saisie.</p><p><b>Le + du prof :</b> pour expulser Hugo, en revanche, il faudra une décision de justice.</p>'}]},
+    {id:'deo1_c3', title:'Une maison, deux acheteurs', tag:'Opposabilité · art. 1198', facts:['Le 3 mars, M. Roux vend sa maison à Anna, chez Maître Leroy. Le 10 mars, il la revend à Bruno, chez un autre notaire. Bruno ignore tout de la première vente.', 'L’acte de Bruno est publié au service de la publicité foncière le 14 mars ; celui d’Anna, le 21 mars.'], q:'Qui est propriétaire de la maison à l’égard des tiers ?', steps:[
+      {l:'Les faits', h:'Un même vendeur vend deux fois le même immeuble à deux acheteurs différents ; le second acheteur publie son acte avant le premier.'},
+      {l:'Le problème de droit', h:'Entre deux acquéreurs successifs d’un même immeuble, lequel est préféré ?'},
+      {l:'Les règles applicables', h:'<p>La signature produit ses effets entre les parties ; la <b>publication</b> au SPF rend l’acte <b>opposable aux tiers</b>.</p><p>Art. 1198 al. 2 C. civ. : celui qui a, le premier, publié son titre d’acquisition passé en la forme authentique est préféré, <b>même si son droit est postérieur</b>, à condition qu’il soit de <b>bonne foi</b>.</p>'},
+      {l:'L’application aux faits', h:'Bruno a signé après Anna, mais il a publié le premier (14 mars contre 21 mars). Il ignorait la première vente : il est de bonne foi.'},
+      {l:'La conclusion', h:'<p><b>Bruno est préféré.</b> Anna ne peut pas lui opposer son achat ; elle peut seulement agir contre M. Roux pour obtenir réparation.</p><p>Si Bruno avait su que la maison était déjà vendue, il n’aurait pas été protégé. Et c’est pour cela que l’étude publie les actes au plus vite.</p>'}]},
+    {id:'deo1_c4', title:'Vendre son terrain avec son avocat ?', tag:'Notaire et avocat', facts:['Mme Petit veut vendre un terrain à son voisin. Pour économiser, elle propose de faire rédiger la vente par son avocat, sans passer chez le notaire.', 'Le voisin hésite et te demande si la vente sera « valable et protégée ».'], q:'Que lui expliques-tu ?', steps:[
+      {l:'Les faits', h:'Une vente d’immeuble envisagée par un acte rédigé par un avocat, sans notaire.'},
+      {l:'Le problème de droit', h:'Une vente d’immeuble conclue sans acte authentique peut-elle être opposable aux tiers ?'},
+      {l:'Les règles applicables', h:'<p>Entre les parties, la propriété se transfère dès leur accord (art. 1196 C. civ.).</p><p>Mais pour être publié au fichier immobilier, un acte doit être reçu <b>en la forme authentique</b> par un notaire (art. 710-1 C. civ.). Seule la publication rend la vente <b>opposable aux tiers</b>. L’avocat, lui, défend les intérêts de son client et ne peut pas conférer l’authenticité.</p>'},
+      {l:'L’application aux faits', h:'L’acte de l’avocat lierait Mme Petit et son voisin. Mais il ne pourrait pas être publié : pour les tiers, Mme Petit resterait propriétaire. Ses créanciers pourraient encore saisir le terrain, et un autre acheteur qui publierait avant lui serait préféré.'},
+      {l:'La conclusion', h:'La vente serait valable entre eux, mais <b>pas protégée</b>. Pour qu’elle soit opposable à tous, il faut un acte authentique, publié par le notaire. Rien n’empêche chacun d’avoir aussi son avocat pour le conseiller.'}]}
+  ]
+});
