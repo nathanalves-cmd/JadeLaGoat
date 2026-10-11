@@ -23,7 +23,7 @@ Le site est aussi un jeu : 12 niveaux de plus en plus durs, une animation et un 
 - `src/` : les sources. Moteur (`20-*.js` à `29-boot.js` : `28c-game.js` pour le jeu, `28e-plus.js` pour la révision espacée, les points faibles, la recherche, l’écoute, la sauvegarde et le hors-ligne), styles (`0*-*.css`), et un fichier de données par cours (`31a-efd1.js`, `33a-immo1.js`, `37a-immo2.js`, `38a-deo1.js`…).
 - `build.py` : assemble tout en une seule page, et produit trois sorties :
   - `docs/index.html` (+ `docs/sw.js`, `docs/fonts/`) : le site publié par GitHub Pages ;
-  - `dist/alves-cances.html` : la même page, au format artifact claude.ai ;
+  - `dist/alves-cances.html` : la même page, au format artifact claude.ai (sans la sauvegarde par fichier, que la copie claude.ai ne permet pas : bloc « sauvegarde » de `28e-plus.js`) ;
   - `dist/Alves-Cances-hors-ligne.html` : le site entier dans un seul fichier, polices comprises, qui s’ouvre sans internet (non versionné).
 
 ## Ajouter un cours
