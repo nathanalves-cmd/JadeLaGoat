@@ -1,6 +1,6 @@
 JLG.glossary([
   /* —— Pratique des opérations immobilières · Séance 3 : conduire un dossier —— */
-  {s:['immo', 'civ'], t:'Action en réduction', d:'L’action des héritiers réservataires pour réduire une donation qui dépasse la part dont le défunt pouvait disposer. Elle se prescrit par 5 ans (ou 2 ans), jamais plus de 10 ans après le décès.', ref:'Art. 921 C. civ.'},
+  {s:['immo', 'civ'], t:'Action en réduction', d:'L’action des héritiers réservataires pour réduire une donation qui dépasse la part dont le défunt pouvait disposer. Elle se prescrit par 5 ans à compter du décès, ou par 2 ans à compter de la découverte de l’atteinte à la réserve, sans jamais dépasser 10 ans après le décès.', ref:'Art. 921 C. civ.'},
   {s:'immo', t:'Brevet (acte en)', d:'Un acte authentique dont le notaire qui le reçoit ne garde pas l’original : c’est souvent le cas des procurations, annexées ensuite à l’acte. Son contraire : l’acte en minute.'},
   {s:'immo', t:'Certification d’identité', d:'La clause par laquelle le notaire certifie l’identité complète des parties, au vu d’un extrait d’acte de naissance ou d’un extrait RNE.'},
   {s:['immo', 'deo'], t:'Clé REAL', d:'La clé sécurisée du notaire, qui contient sa signature électronique : elle lui sert à signer les actes authentiques électroniques.'},
