@@ -1,0 +1,83 @@
+  sorts:[
+    {id:'immo3_s1', title:'Partie, intervenant, représentant ou témoin ?', intro:'À quel titre chaque personne signe-t-elle l’acte ?', cats:[{id:'partie', l:'Partie'}, {id:'intervenant', l:'Intervenant'}, {id:'representant', l:'Représentant'}, {id:'temoin', l:'Témoin'}], items:[
+      {e:'🏠', t:'Le vendeur de la maison', c:'partie'},
+      {e:'🔑', t:'L’acquéreur', c:'partie'},
+      {e:'💍', t:'Le mari de la venderesse, quand la maison vendue (propre à elle) est le logement de la famille', c:'intervenant', w:'Il consent à la vente (art. 215 al. 3), sans être vendeur.'},
+      {e:'🎁', t:'La mère qui a donné la maison avec une interdiction d’aliéner, et qui consent à sa vente', c:'intervenant'},
+      {e:'👪', t:'Le frère du vendeur, héritier réservataire, qui consent à la vente du bien donné', c:'intervenant', w:'Art. 924-4 al. 2 : son accord écarte l’action en réduction.'},
+      {e:'⚖️', t:'Le tuteur d’un majeur qui vend son appartement', c:'representant'},
+      {e:'🏢', t:'Le gérant de la SCI qui achète', c:'representant', w:'La SCI comparaît ; son gérant signe pour elle.'},
+      {e:'✉️', t:'L’ami qui signe pour le vendeur absent, avec une procuration', c:'representant'},
+      {e:'👶', t:'Les parents d’un mineur qui vend un bien hérité', c:'representant'},
+      {e:'📜', t:'Les deux personnes présentes à la lecture d’un testament authentique', c:'temoin'},
+      {e:'👓', t:'La personne de confiance qui accompagne un acheteur malvoyant', c:'temoin'},
+      {e:'🗣️', t:'Les personnes qui attestent la possession d’état dans un acte de notoriété', c:'temoin'},
+      {e:'🖋️', t:'Le donateur et le donataire d’une donation', c:'partie'},
+      {e:'🤝', t:'Les deux coindivisaires qui vendent ensemble', c:'partie'},
+      {e:'💒', t:'L’épouse covendeuse d’une maison commune', c:'partie', w:'Un bien commun se vend à deux (art. 1424) : elle est partie.'}]},
+    {id:'immo3_s2', title:'Toujours, ou pour publier ?', intro:'Cette mention est-elle exigée dans tout acte (décret de 1971), ou en plus pour la publicité foncière (décret de 1955) ?', cats:[{id:'toujours', l:'Toujours (décret de 1971)'}, {id:'spf', l:'Pour publier (décret de 1955)'}], items:[
+      {e:'🪪', t:'Le nom des parties', c:'toujours'},
+      {e:'🔤', t:'Les prénoms des parties', c:'toujours'},
+      {e:'🏠', t:'Le domicile des parties', c:'toujours'},
+      {e:'🔢', t:'Les prénoms dans l’ordre de l’état civil', c:'spf'},
+      {e:'🎂', t:'La date de naissance', c:'spf'},
+      {e:'📍', t:'Le lieu de naissance', c:'spf'},
+      {e:'💼', t:'La profession', c:'spf'},
+      {e:'💍', t:'Le nom du conjoint', c:'spf'},
+      {e:'👥', t:'Le nom et le domicile des témoins', c:'toujours'},
+      {e:'📖', t:'La mention que l’acte a été lu aux parties', c:'toujours'},
+      {e:'🏢', t:'La forme juridique et le siège de la société', c:'spf'},
+      {e:'#️⃣', t:'Le numéro SIREN de la société', c:'spf'}]},
+    {id:'immo3_s3', title:'Procuration authentique ou sous signature privée ?', intro:'L’absent doit signer une procuration. Laquelle suffit ?', cats:[{id:'auth', l:'Authentique'}, {id:'ssp', l:'Sous signature privée'}], items:[
+      {e:'🏦', t:'Pour consentir une hypothèque', c:'auth', w:'Acte solennel : parallélisme des formes.'},
+      {e:'🏗️', t:'Pour signer une VEFA', c:'auth', w:'Ton cours la cite parmi les actes solennels.'},
+      {e:'🎁', t:'Pour faire une donation', c:'auth', w:'La donation est un acte solennel : la procuration doit être notariée.'},
+      {e:'🙌', t:'Pour accepter une donation', c:'auth', w:'La procuration pour accepter une donation est aussi notariée.'},
+      {e:'🏠', t:'Pour vendre une maison', c:'ssp', w:'La vente n’est authentique que pour la publicité foncière.'},
+      {e:'🌾', t:'Pour acheter un terrain', c:'ssp'},
+      {e:'🏢', t:'Pour vendre un appartement en copropriété', c:'ssp'},
+      {e:'🏚️', t:'Pour acheter une grange', c:'ssp'}]},
+    {id:'immo3_s4', title:'Non publié : quelle sanction ?', intro:'L’acte n’a pas été publié au SPF. Que risque-t-on ?', cats:[{id:'inopp', l:'Inopposable aux tiers'}, {id:'di', l:'Des dommages-intérêts'}], items:[
+      {e:'🏠', t:'Une vente', c:'inopp'},
+      {e:'🔁', t:'Un échange', c:'inopp'},
+      {e:'🎁', t:'Une donation entre vifs', c:'inopp'},
+      {e:'🌳', t:'Une constitution d’usufruit', c:'inopp'},
+      {e:'🏢', t:'Un apport d’immeuble en société', c:'inopp'},
+      {e:'📃', t:'Un bail de 15 ans', c:'inopp'},
+      {e:'⏳', t:'Une vente sous condition suspensive', c:'inopp'},
+      {e:'⚰️', t:'Une attestation immobilière après un décès', c:'di', w:'Acte à cause de mort : la sanction est l’octroi de dommages-intérêts.'},
+      {e:'🤝', t:'Une convention d’indivision', c:'di'}]}
+  ],
+  cases:[
+    {id:'immo3_c1', title:'La maison de Colette', tag:'Signataires et intervenants', facts:['Colette GERBLOIS, mariée sans contrat à Jean-Jacques PARMENTIER, vend une maison que ses parents lui ont donnée en 2015.', 'Le couple y habite avec ses enfants.', 'L’acquéreur est la SCI LES TILLEULS, représentée par sa gérante.', 'Les parents de Colette sont vivants ; l’acte de donation contient une clause d’interdiction d’aliéner. Colette a un frère.'], q:'Qui signe l’acte, et à quel titre ?', steps:[
+      {l:'Les parties', h:'Colette (venderesse) et la SCI LES TILLEULS (acquéreuse), dans la clause « comparution ». La SCI comparaît, mais c’est sa gérante qui signe.'},
+      {l:'La nature du bien', h:'Reçue par donation, la maison est un <b>bien propre</b> de Colette : son mari n’est pas covendeur.'},
+      {l:'Le conjoint', h:'Mais c’est le <b>logement de la famille</b> : Jean-Jacques <b>intervient</b> pour consentir à la vente (art. 215 al. 3), sans prendre la qualité de covendeur.'},
+      {l:'Les donateurs', h:'Clause d’interdiction d’aliéner, donateurs vivants : les parents <b>interviennent</b> pour consentir à la vente.'},
+      {l:'Le frère', h:'Héritier réservataire présomptif : il <b>intervient</b> aussi, avec ses parents, pour écarter toute action en réduction ou en revendication (art. 924-4 al. 2), sauf si l’acte de donation contient déjà ce consentement.'},
+      {l:'La gérante', h:'Elle signe pour la SCI en vertu de ses pouvoirs (statuts ou délibération d’assemblée générale annexée) : c’est une représentante.'}]},
+    {id:'immo3_c2', title:'Le vendeur est à Montréal', tag:'Procuration', facts:['Monsieur Matthieu MORREAU vend son appartement de Metz. Il vit à Montréal et ne pourra pas venir le jour de la signature.', 'L’acquéreuse, Madame Anaïs DUPRE, finance l’achat par un prêt garanti par une hypothèque. Elle sera en déplacement le jour J.'], q:'Quelles procurations faut-il ?', steps:[
+      {l:'Le vendeur', h:'La vente n’est authentique que pour les besoins de la publicité foncière : une <b>procuration sous signature privée</b> suffit. Le notaire vérifie l’identité de M. MORREAU : signature certifiée au <b>consulat</b>, ou procuration notariée signée à distance.'},
+      {l:'L’acquéreuse', h:'Pour la vente, une procuration sous signature privée suffirait. Mais elle doit aussi consentir une <b>hypothèque</b>, acte solennel : par parallélisme des formes, sa procuration doit être <b>authentique</b>.'},
+      {l:'Dans l’acte', h:'La clause « présence – représentation » : chacun est « non présent ce jour, mais représenté par… en vertu d’une procuration… dont l’original (ou le brevet) est demeuré annexé ».'},
+      {l:'Le mandataire', h:'Il accepte le mandat en l’exécutant : sa présence à la lecture et à la signature suffit.'}]},
+    {id:'immo3_c3', title:'Une SCI vend', tag:'Personne morale', facts:['La SCI BLANC & BLEU, au capital de 10 000 €, dont le siège est à Avignon, vend un immeuble.', 'Elle est représentée par son gérant, Monsieur Marc AUDEMONT.'], q:'Que doit vérifier et rédiger le notaire ?', steps:[
+      {l:'L’extrait RNE', h:'De moins de 3 mois, issu du registre tenu par l’INPI : dénomination, forme, capital, siège, date de constitution, durée (99 ans au plus), numéro, dirigeants.'},
+      {l:'La comparution', h:'Dénomination, forme juridique (société civile immobilière), capital, siège, constitution, et numéro d’identité (SIREN, RCS).'},
+      {l:'Les pouvoirs du gérant', h:'Les statuts, ou une délibération d’assemblée générale l’autorisant à vendre, dont une copie certifiée conforme est annexée à l’acte.'},
+      {l:'La certification d’identité', h:'La clause « certification d’identité » des personnes morales, au vu de l’extrait RNE, et une copie de la pièce d’identité du gérant.'},
+      {l:'Qui signe ?', h:'La SCI comparaît, mais seul M. AUDEMONT signe, en qualité de représentant.'}]},
+    {id:'immo3_c4', title:'Le dossier LINDT', tag:'Vérifications', facts:['Madame Maellys LINDT, mariée sans contrat à Monsieur Kenzo PONTON le 30 mai 2024 à Toul, vend un studio qu’elle avait acheté en 2020.', 'L’étude a reçu un EHF daté d’il y a 3 mois.'], q:'Quelles vérifications avant de rédiger ?', steps:[
+      {l:'L’état civil', h:'Par COMEDEC : l’acte de naissance (orthographe, ordre des prénoms, mentions en marge, mentions RC) et l’acte de mariage (pas de contrat, pas de changement de régime).'},
+      {l:'Le régime', h:'Mariée en 2024 sans contrat : communauté réduite aux acquêts. Le studio, acheté avant le mariage, est <b>propre</b> : elle vend seule.'},
+      {l:'Le logement de la famille ?', h:'Si le couple y habite, Kenzo doit <b>intervenir</b> (art. 215 al. 3). Sinon, aucune intervention.'},
+      {l:'L’EHF', h:'Il date de 3 mois : la pratique le considère valable 2 mois. Il faut en <b>redemander un</b> (cerfa 3233-SD) au SPF du lieu du studio.'},
+      {l:'Ce que l’EHF doit confirmer', h:'Que Mme LINDT est propriétaire (acte de 2020, notaire, publication), les éventuelles hypothèques à radier, et la chaîne des propriétaires sur 30 ans.'}]},
+    {id:'immo3_c5', title:'Rédige la comparution', tag:'Rédaction', facts:['Monsieur Sébastien Michel Roger LEGRAND, directeur financier, demeure à Charmes (88130), 4 route de la Pinède.', 'Il est né à Essey-lès-Nancy (54270) le 8 juillet 1948.', 'Il est divorcé en premières noces de Madame Lucie Romane AVELANGE (jugement du tribunal judiciaire d’Épinal du 2 mai 2021, passé en force de chose jugée), non remarié, non pacsé, de nationalité française, résident fiscal.'], q:'Rédigez sa comparution.', steps:[
+      {l:'L’identité', h:'« Monsieur Sébastien Michel Roger LEGRAND, directeur financier, » : les prénoms dans l’ordre de l’état civil, le nom en majuscules, la profession.'},
+      {l:'Le domicile et la naissance', h:'« Demeurant à CHARMES (88130), 4 route de la Pinède, Né à ESSEY-LES-NANCY (54270) le 8 juillet 1948, »'},
+      {l:'La situation familiale', h:'« Divorcé en premières noces de Madame Lucie Romane AVELANGE suivant jugement rendu par le tribunal judiciaire d’EPINAL (Vosges) en date du 2 mai 2021 et ayant acquis force de chose jugée, Non remarié depuis et non soumis à un pacte civil de solidarité, »'},
+      {l:'La fin', h:'« De nationalité française, Résident au sens de la réglementation fiscale. »'},
+      {l:'Le contrôle', h:'Les mentions du décret de 1955 y sont : nom, prénoms dans l’ordre, domicile, date et lieu de naissance, profession, et le nom de l’ex-conjoint.'}]}
+  ]
+});

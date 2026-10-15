@@ -50,8 +50,7 @@ function viewTrain(a, b, opt){
     ${quick('outils-contenances', 'calc', 'Additions de contenances', 'Comme dans une vraie désignation.')}
     ${quick('outils-cadastre', 'map', 'Lire un plan cadastral', 'Section, numéro, contenance.')}
     ${chap('immo1') ? `<button class="quick" data-go="ch-immo1" data-open="maison"><span class="ico">${icon('house')}</span><span><b>La ferme aux immeubles</b><span>Nature, destination ou objet ? Trouve-les.</span></span></button>` : ''}
-    ${chap('immo2') ? [['chaine', 'clock', 'Remonte la chaîne des propriétaires', 'L’ordre des actes, l’effet relatif, l’origine.'], ['prescription', 'scale', 'Usucapion : prescrit ou pas ?', 'Bonne foi, juste titre, tolérance.'], ['etages', 'house', 'Qui a le droit de… ?', 'Usufruitier, nu-propriétaire ou usager ?'], ['voisinage', 'tree', 'Le voisin a-t-il le droit ?', 'Arbres, haies et fenêtres.']].map(([w, ic, t, d]) => `<button class="quick" data-go="ch-immo2-jeux" data-open="${w}"><span class="ico">${icon(ic)}</span><span><b>${t}</b><span>${d}</span></span></button>`).join('') : ''}
-    ${chap('deo1') ? [['opposabilite', 'clock', 'La course à la publication', 'Deux acheteurs, une maison : qui l’emporte ?'], ['etude', 'doc', 'Le dossier fait le tour de l’étude', 'Envoie chaque tâche au bon bureau.']].map(([w, ic, t, d]) => `<button class="quick" data-go="ch-deo1-jeux" data-open="${w}"><span class="ico">${icon(ic)}</span><span><b>${t}</b><span>${d}</span></span></button>`).join('') : ''}
+    ${JLG.chapters.filter(c => (c.extraGames || []).length).map(c => c.extraGames.map(x => `<button class="quick" data-go="ch-${c.id}-jeux" data-open="${x.w}"><span class="ico">${icon(x.icon || 'sparkle')}</span><span><b>${x.title}</b><span>${x.sub}</span></span></button>`).join('')).join('')}
     ${quick('outils-famille', 'family', 'Qui peut-on épouser ?', 'L’arbre des empêchements, mariage et PACS.')}
     ${quick('outils-nullite', 'alert', 'Simulateur de nullité', 'Absolue ou relative, qui agit, quel délai.')}
     ${quick('outils-pacs', 'split', 'Séparation ou indivision ?', 'Range les biens du couple pacsé.')}
@@ -67,7 +66,7 @@ const TOOLS = [
   {id:'convert', g:'Notariat & immobilier', t:'Convertisseur ha · a · ca', d:'Passe des m² aux hectares, ares et centiares, comme dans un acte.', w:'convert'},
   {id:'contenances', g:'Notariat & immobilier', t:'Additions de contenances', d:'Additionne des parcelles et retrouve le total à l’are près.', w:'trainer'},
   {id:'clause', g:'Notariat & immobilier', t:'Générateur de clause « désignation »', d:'Remplis les champs : la clause s’écrit toute seule, avec les 4 mentions obligatoires.', w:'builder'},
-  {id:'galerie', g:'Notariat & immobilier', t:'Galerie des clauses du cours', d:'Désignation, effet relatif, origine de propriété et autres clauses : les modèles de ton cours, avec le surligneur.', w:'gallery'},
+  {id:'galerie', g:'Notariat & immobilier', t:'Galerie des clauses du cours', d:'Désignation, effet relatif, origine de propriété, comparution, signature et intervention : les modèles de ton cours, avec le surligneur.', w:'gallery'},
   {id:'cadastre', g:'Notariat & immobilier', t:'Lire un plan cadastral', d:'Touche une parcelle pour lire sa référence cadastrale.', w:'cadastre'},
   {id:'qualif', g:'Notariat & immobilier', t:'Qualifier une opération immobilière', d:'Réponds aux questions : l’arbre te donne la qualification.', w:'qualif'},
   {id:'ventil', g:'Notariat & immobilier', t:'Ventilation des meubles', d:'Pourquoi le notaire liste les meubles avec leur prix : calcule l’assiette taxable.', w:'ventil'},
@@ -78,10 +77,22 @@ const TOOLS = [
   {id:'usucapion', g:'Immobilier · Séance 2', t:'Simulateur d’usucapion', d:'Bonne foi, juste titre, simple tolérance : 10 ans, 30 ans ou jamais.', w:'prescription'},
   {id:'voisinage', g:'Immobilier · Séance 2', t:'Distances entre voisins', d:'Plantations et fenêtres : ce que dit le Code civil.', w:'voisinage'},
   {id:'sol', g:'Immobilier · Séance 2', t:'Du ciel au sous-sol (art. 552)', d:'La coupe d’un terrain : ce que le propriétaire peut faire au-dessus et en dessous.', w:'sol'},
+  {id:'signataires', g:'Immobilier · Séance 3', t:'La table de signature', d:'Parties, intervenants, représentants, témoins, notaire : qui s’assoit où, et qui signe ?', w:'signataires'},
+  {id:'comparution', g:'Immobilier · Séance 3', t:'Générateur de comparution', d:'Choisis la situation : la comparution s’écrit, et le SPF contrôle les six mentions du décret de 1955.', w:'comparution'},
+  {id:'procuration', g:'Immobilier · Séance 3', t:'Quelle procuration ?', d:'L’arbre du parallélisme des formes : authentique ou sous signature privée.', w:'procuration'},
+  {id:'intervenants', g:'Immobilier · Séance 3', t:'Qui doit intervenir à l’acte ?', d:'Le conjoint, le donateur, les héritiers réservataires : le simulateur.', w:'intervenants'},
+  {id:'ehf', g:'Immobilier · Séance 3', t:'Lire un état hypothécaire (EHF)', d:'Touche une zone de l’état : ce qu’elle apprend au notaire, et combien de temps il est valable.', w:'ehf'},
   {id:'couples', g:'Droit civil', t:'Concubinage, PACS ou mariage ?', d:'Compare les trois façons de vivre en couple, critère par critère.', w:'echelle'},
   {id:'famille', g:'Droit civil', t:'Qui peut-on épouser ou pacser ?', d:'Touche un membre de la famille de Léa : interdit, dispense possible ou autorisé.', w:'famille'},
   {id:'nullite', g:'Droit civil', t:'Simulateur de nullité du mariage', d:'Choisis une cause : type de nullité, qui peut agir, délai, effets.', w:'nullite'},
   {id:'pacs', g:'Droit civil', t:'PACS : séparation ou indivision ?', d:'Change de régime et regarde les biens changer de propriétaire.', w:'pacsregime'},
+  {id:'masses', g:'Droit civil · Régimes matrimoniaux', t:'Les biens du couple, régime par régime', d:'Change de régime : les biens de Paul et Julie changent de masse.', w:'masses'},
+  {id:'regimes', g:'Droit civil · Régimes matrimoniaux', t:'Comparer les régimes matrimoniaux', d:'Légal, séparation, participation, universelle : question par question.', w:'regimes'},
+  {id:'remploi', g:'Droit civil · Régimes matrimoniaux', t:'Simulateur de remploi', d:'Fonds propres, déclaration dans l’acte : propre ou commun ?', w:'remploi'},
+  {id:'donation', g:'Droit civil · Régimes matrimoniaux', t:'Donner à un enfant marié', d:'Seul, à deux, ou avec une clause : où va le bien, quels droits ?', w:'donation'},
+  {id:'participation', g:'Droit civil · Régimes matrimoniaux', t:'Calculer une créance de participation', d:'Patrimoines originaires et finaux : qui doit combien ?', w:'participation'},
+  {id:'survivant', g:'Droit civil · Régimes matrimoniaux', t:'Au décès : que reçoit le survivant ?', d:'Partage par moitié, préciput, partage inégal, attribution intégrale.', w:'survivant'},
+  {id:'changement', g:'Droit civil · Régimes matrimoniaux', t:'Le parcours du changement de régime', d:'Acte, information, trois mois d’opposition, homologation si besoin.', w:'changement'},
   {id:'delegation', g:'Déontologie', t:'La journée de l’étude au service de l’État', d:'Les tâches que l’État délègue au notaire : taxes, Télé@ctes, Perval, déclaration de succession.', w:'delegation'},
   {id:'duel', g:'Déontologie', t:'Le duel des actes', d:'Acte sous signature privée contre acte authentique, en quatre manches.', w:'authentique'},
   {id:'publication', g:'Déontologie', t:'La course à la publication (art. 1198)', d:'Deux acheteurs, une maison : le premier qui publie l’emporte, s’il est de bonne foi.', w:'opposabilite'},

@@ -3,7 +3,7 @@ JLG.glossary([
   /* —— Pratique des opérations immobilières · Séance 2 —— */
   {s:'immo', t:'ABF', d:'Architecte des Bâtiments de France : il donne son avis sur les travaux et les divisions aux abords des monuments historiques et dans les sites protégés.'},
   {s:'immo', t:'Absoluité', d:'Le caractère absolu du droit de propriété : la plénitude des pouvoirs du propriétaire sur son bien, dans les limites des lois et des règlements.', ref:'Art. 544 C. civ.'},
-  {s:'immo', t:'Action en revendication', d:'L’action en justice par laquelle le propriétaire réclame son bien à celui qui le possède. Elle est imprescriptible.', ref:'Art. 2227 C. civ.'},
+  {s:'immo', t:'Action en revendication', d:'L’action en justice par laquelle le propriétaire réclame son bien à celui qui le possède. Elle est imprescriptible. Les héritiers réservataires ont aussi une action en revendication contre l’acquéreur d’un bien donné (art. 924-4).', ref:'Art. 2227 C. civ.'},
   {s:['immo', 'deo'], t:'Attestation de propriété immobilière', d:'L’acte notarié qui constate, après un décès, la transmission des immeubles aux héritiers. Elle est publiée au SPF : c’est le titre des héritiers.'},
   {s:'immo', t:'Attribut', d:'Chacun des trois pouvoirs du propriétaire : l’usus (utiliser), le fructus (percevoir les fruits) et l’abusus (disposer).'},
   {s:'immo', t:'Bornage', d:'La fixation des limites entre deux terrains voisins par un géomètre-expert, matérialisée par des bornes.', ref:'Art. 646 C. civ.'},

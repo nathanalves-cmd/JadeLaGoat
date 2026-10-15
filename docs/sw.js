@@ -1,5 +1,5 @@
-/* Alves Cances : hors ligne. Version 197fd2d9e9 (générée par build.py). */
-const V = 'ac-197fd2d9e9';
+/* Alves Cances : hors ligne. Version 23ab058acb (générée par build.py). */
+const V = 'ac-23ab058acb';
 const CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'fonts/bodoni-moda-latin-opsz-normal.woff2', 'fonts/bodoni-moda-latin-opsz-italic.woff2', 'fonts/bricolage-grotesque-latin-opsz-normal.woff2', 'fonts/jetbrains-mono-latin-wght-normal.woff2'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(V).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('ac-') && k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim())); });

@@ -20,7 +20,7 @@ Le site est aussi un jeu : 12 niveaux de plus en plus durs, une animation et un 
 
 ## Organisation
 
-- `src/` : les sources. Moteur (`20-*.js` à `29-boot.js` : `28c-game.js` pour le jeu, `28e-plus.js` pour la révision espacée, les points faibles, la recherche, l’écoute, la sauvegarde et le hors-ligne), styles (`0*-*.css`), et un fichier de données par cours (`31a-efd1.js`, `33a-immo1.js`, `37a-immo2.js`, `38a-deo1.js`…).
+- `src/` : les sources. Moteur (`20-*.js` à `29-boot.js` : `28c-game.js` pour le jeu, `28e-plus.js` pour la révision espacée, les points faibles, la recherche, l’écoute, la sauvegarde et le hors-ligne), styles (`0*-*.css`), et un fichier de données par cours (`31a-efd1.js`, `33a-immo1.js`, `37a-immo2.js`, `38a-deo1.js`, `39a-civ3.js`, `40a-immo3.js`…). Les schémas propres à un cours ont leur fichier de moteur et de style (`28f-widgets-civ3.js` + `08b-civ3.css`, `28g-widgets-immo3.js` + `08c-immo3.css`).
 - `build.py` : assemble tout en une seule page, et produit trois sorties :
   - `docs/index.html` (+ `docs/sw.js`, `docs/fonts/`) : le site publié par GitHub Pages ;
   - `dist/alves-cances.html` : la même page, au format artifact claude.ai (sans la sauvegarde par fichier, que la copie claude.ai ne permet pas : bloc « sauvegarde » de `28e-plus.js`) ;
@@ -29,5 +29,5 @@ Le site est aussi un jeu : 12 niveaux de plus en plus durs, une animation et un 
 ## Ajouter un cours
 
 1. Créer le fichier de données dans `src/` (un appel `JLG.chapter({...})`, sur le modèle des chapitres existants) et sa fiche (`JLG.fiche(...)`).
-2. L’ajouter à la liste `CHAPTERS` de `build.py`, et ajouter une entrée `JLG.log(...)` dans `src/30-subjects.js`.
+2. L’ajouter à la liste `CHAPTERS` de `build.py` (avec ses nouveaux fichiers de schémas, de style ou de lexique s’il en a), et ajouter une entrée `JLG.log(...)` dans `src/30-subjects.js`.
 3. Lancer `python3 build.py`, vérifier, puis commit et push : le site se met à jour tout seul (le service worker change de version à chaque build).

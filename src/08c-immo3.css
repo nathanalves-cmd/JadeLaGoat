@@ -1,0 +1,114 @@
+/* ——— Immobilier, séance 3 : conduire un dossier ——— */
+
+/* 1. La table de signature */
+.w-sg{--rc-partie:var(--accent);--rc-intervenant:#FF9F5A;--rc-representant:#5CC8E0;--rc-temoin:var(--good);--rc-notaire:var(--warn)}
+:root[data-theme="light"] .w-sg{--rc-intervenant:#B4500A;--rc-representant:#0E7F99}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .w-sg{--rc-intervenant:#B4500A;--rc-representant:#0E7F99}}
+.w-sg .r-partie{--rc:var(--rc-partie)} .w-sg .r-intervenant{--rc:var(--rc-intervenant)} .w-sg .r-representant{--rc:var(--rc-representant)} .w-sg .r-temoin{--rc:var(--rc-temoin)} .w-sg .r-notaire{--rc:var(--rc-notaire)}
+.sg-room{position:relative;width:100%;aspect-ratio:1/1;max-height:460px;border-radius:var(--r-l);border:1px solid var(--line);background:radial-gradient(closest-side,var(--accent-soft),transparent 78%),var(--bg-2)}
+@media (min-width:640px){.sg-room{aspect-ratio:16/10}}
+@media (max-width:480px){.sg-room{aspect-ratio:3/4}.sg-table{width:40%;height:27%}}
+.sg-table{position:absolute;left:50%;top:50%;display:grid;place-items:center;width:42%;height:34%;transform:translate(-50%,-50%);border-radius:50%;border:2px solid var(--line-2);background:linear-gradient(160deg,var(--surface-3),var(--surface-2));box-shadow:inset 0 -8px 18px rgba(0,0,0,.18),var(--shadow)}
+.sg-doc{display:grid;justify-items:center;gap:1px;padding:6px 10px;border-radius:8px;background:var(--paper);color:var(--paper-ink);box-shadow:0 6px 14px -8px rgba(0,0,0,.5);transform:rotate(-4deg)}
+.sg-doc svg{width:18px;height:18px;color:#5A28DA}
+.sg-doc b{font-size:.74rem}
+.sg-count{font-style:normal;font-family:var(--font-mono);font-size:.56rem;color:#5E5672;white-space:nowrap}
+.sg-stamp{position:absolute;right:6%;top:2%;width:40px;height:40px;opacity:0;transform:scale(1.8) rotate(-30deg);pointer-events:none;filter:drop-shadow(0 6px 10px var(--glow))}
+.sg-stamp svg{width:100%;height:100%}
+.sg-room.signed .sg-stamp{animation:etStamp .5s cubic-bezier(.2,1.6,.4,1) forwards}
+.sg-seats{position:absolute;inset:0}
+.sg-seat{--rc:var(--rc-partie);position:absolute;display:grid;justify-items:center;gap:3px;width:96px;padding:4px 2px;border:0;border-radius:14px;background:none;color:var(--fg);cursor:pointer;transform:translate(-50%,-50%);animation:sgIn .5s var(--spring) backwards}
+.sg-av{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;border:2px solid var(--rc);background:var(--surface);font-size:1.4rem;box-shadow:0 0 0 4px color-mix(in srgb,var(--rc) 18%,transparent);transition:transform .35s var(--spring),box-shadow .35s}
+.sg-seat b{font-size:.76rem;line-height:1.1;text-align:center}
+.sg-role{display:inline-block;padding:1px 7px;border-radius:999px;border:1px solid color-mix(in srgb,var(--rc) 40%,transparent);background:color-mix(in srgb,var(--rc) 15%,transparent);color:var(--rc);font-size:.6rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap}
+.sg-seat:hover .sg-av,.sg-seat.sel .sg-av{transform:scale(1.1);box-shadow:0 0 0 6px color-mix(in srgb,var(--rc) 30%,transparent)}
+.sg-seat.nosign .sg-av{border-style:dashed;opacity:.6}
+.sg-seat.nosign::after{content:"ne signe pas";font-family:var(--font-mono);font-size:.54rem;color:var(--muted)}
+.sg-sig{width:64px;height:15px;fill:none;stroke:var(--rc);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:300;stroke-dashoffset:300;opacity:0}
+.sg-seat.nosign .sg-sig{display:none}
+.sg-seat.signing .sg-sig{opacity:1;animation:sgSign .75s ease forwards}
+.sg-seat.did .sg-sig{opacity:1;stroke-dashoffset:0}
+.sg-seat.signing .sg-av{transform:scale(1.16)}
+@keyframes sgSign{to{stroke-dashoffset:0}}
+@keyframes sgIn{from{opacity:0;transform:translate(-50%,-50%) scale(.4)}}
+.sg-legend{display:flex;flex-wrap:wrap;gap:6px}
+.sg-legend .sg-role{font-size:.64rem;padding:2px 9px}
+@media (max-width:420px){.sg-seat{width:84px;gap:2px;padding:2px}.sg-av{width:38px;height:38px;font-size:1.15rem}.sg-seat b{font-size:.7rem}.sg-seat .sg-role{font-size:.52rem;padding:1px 5px}.sg-sig{width:54px}}
+.sg-q{font-family:var(--font-display);font-size:1.25rem}
+.sg-pick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:640px){.sg-pick{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.sg-role-btn{--rc:var(--rc-partie);padding:12px 10px;border-radius:14px;border:2px solid color-mix(in srgb,var(--rc) 45%,transparent);background:color-mix(in srgb,var(--rc) 10%,transparent);color:var(--fg);font:inherit;font-weight:700;cursor:pointer;transition:transform .25s var(--spring),box-shadow .25s,border-color .25s}
+.sg-role-btn:hover:not(:disabled){transform:translateY(-2px)}
+.sg-role-btn:disabled{cursor:default}
+.sg-role-btn.got{border-color:var(--good);box-shadow:0 0 0 3px var(--good-soft)}
+.sg-role-btn.nope{border-color:var(--bad);animation:shake .45s ease}
+
+/* 2. La comparution */
+.cp-top{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.cp-top .seg-ctrl{flex:0 0 auto}
+.cp-top .field{flex:1 1 200px}
+.cp-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:end}
+@media (min-width:760px){.cp-fields{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cp-res-tg{grid-column:1/-1;display:flex;align-items:center;gap:8px;font-size:.88rem;cursor:pointer}
+.cp-res-tg input{width:18px;height:18px;accent-color:var(--accent)}
+.cp-res{display:grid;gap:12px}
+@media (min-width:900px){.cp-res{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}}
+.cp-out p{line-height:1.75}
+.cp-note{padding-top:6px;border-top:1px dashed #D9CFE8;font-size:.8rem;color:#5E5672}
+.cp-check{display:grid;gap:10px;padding:14px;border-radius:var(--r-m);background:var(--surface-2);border:1px solid var(--line)}
+.cp-check ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.cp-check li{display:flex;align-items:baseline;gap:8px;font-size:.88rem}
+.cp-check li i{display:inline-grid;place-items:center;flex:0 0 auto;width:20px;height:20px;border-radius:50%;font-style:normal;font-size:.7rem;font-weight:800}
+.cp-check li.ok i{background:var(--good-soft);color:var(--good)}
+.cp-check li.ko i{background:var(--bad-soft);color:var(--bad)}
+.cp-check li.na i{background:var(--surface-3);color:var(--muted)}
+.cp-check li.ko{color:var(--bad);font-weight:650}
+.cp-stamp{display:grid;gap:6px;justify-items:start}
+.cp-st{display:inline-block;padding:5px 12px;border:2px solid currentColor;border-radius:10px;font-family:var(--font-display);font-weight:800;letter-spacing:.05em;text-transform:uppercase;transform:rotate(-3deg)}
+.cp-st.ok{color:var(--good)} .cp-st.ko{color:var(--bad)}
+.cp-st.pop{animation:rpStamp .55s cubic-bezier(.2,1.6,.4,1)}
+.cp-stamp p{font-size:.86rem;color:var(--muted)}
+.cp-pick{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:640px){.cp-pick{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.hl-sw.hl-idt{background:#CDB8FF}.hl-sw.hl-pro{background:#FFE18F}.hl-sw.hl-dom{background:#A9E8CE}.hl-sw.hl-nai{background:#AEDBF7}.hl-sw.hl-civ{background:#FFC6D4}.hl-sw.hl-fis{background:#EBD5BF}
+.hl-on-idt .m-idt{background:#CDB8FF}.hl-on-pro .m-pro{background:#FFE18F}.hl-on-dom .m-dom{background:#A9E8CE}.hl-on-nai .m-nai{background:#AEDBF7}.hl-on-civ .m-civ{background:#FFC6D4}.hl-on-fis .m-fis{background:#EBD5BF}
+
+/* 3. Quelle procuration ? */
+.pc-paper{margin-top:12px;animation:paperIn .5s var(--ease) both}
+.pc-q{animation:rise .35s var(--ease) both}
+
+/* 4. Les intervenants */
+.iv-ctrl{display:grid;gap:12px}
+.iv-g{display:grid;gap:6px;min-width:0}
+.iv-g .seg-ctrl{justify-self:start;max-width:100%}
+.iv-don{display:grid;gap:12px;padding:12px;border-radius:var(--r-m);border:1px dashed var(--accent-line);background:var(--accent-soft);animation:rise .35s var(--ease) both}
+.iv-acte{gap:6px}
+.iv-list{list-style:none;margin:0 0 6px;padding:0;display:grid;gap:8px}
+.iv-list li{display:grid;gap:3px;padding:8px 10px;border-radius:8px;border-left:3px solid #6B3BEA;background:#F6F2FB}
+.iv-list li>span:last-child{font-size:.84rem;color:#4A3F60}
+.iv-list .tag{justify-self:start;border-color:#DCD2EA;background:#EDE6F7;color:#4A3F60}
+.iv-int li{border-left-color:#B4500A}
+.iv-list li.none{border-left-color:#B7A9CE;color:#5E5672;font-style:italic}
+.iv-list li.in{animation:ivIn .5s var(--spring) both}
+@keyframes ivIn{from{opacity:0;transform:translateX(-14px)}}
+.iv-notes{display:grid;gap:6px}
+.iv-notes .w-note{display:flex;align-items:flex-start;gap:8px}
+.iv-notes svg{width:16px;height:16px;flex:0 0 auto;margin-top:2px;color:var(--warn)}
+
+/* 5. L’état hypothécaire hors formalité */
+.ehf-doc{gap:2px;padding:12px}
+.ehf-z{display:grid;gap:2px;width:100%;padding:9px 12px;border:1px solid transparent;border-radius:8px;background:none;color:inherit;font:inherit;font-size:.86rem;line-height:1.4;text-align:left;cursor:pointer;transition:background .25s,border-color .25s}
+.ehf-z:not(:first-child){box-shadow:0 -1px 0 #EEE7F6}
+.ehf-z:hover{background:#F6F2FB}
+.ehf-z.sel{border-color:#6B3BEA;background:#EFE7FD;box-shadow:none}
+.ehf-z b{font-weight:700}
+.ehf-l{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#5E5672}
+.ehf-val{display:grid;gap:12px;align-items:center}
+@media (min-width:640px){.ehf-val{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}}
+.ehf-ring{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center}
+.ehf-ring svg{width:64px;height:64px}
+.ehf-ring circle{fill:none;stroke-width:5;transform:rotate(-90deg);transform-origin:22px 22px}
+.ehf-ring circle:first-child{stroke:var(--surface-3)}
+.ehf-arc{stroke:var(--good);stroke-linecap:round;stroke-dasharray:0 100;transition:stroke-dasharray .5s var(--ease),stroke .3s}
+.ehf-ring.ko .ehf-arc{stroke:var(--bad)}
+.ehf-v{font-size:.88rem}

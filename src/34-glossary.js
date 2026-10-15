@@ -114,7 +114,7 @@ JLG.glossary([
   {s:'immo', t:'Propriété immobilière', d:'Le droit de propriété qui porte sur un immeuble.'},
   {s:'immo', t:'SAFER', d:'Société d’aménagement foncier et d’établissement rural : elle peut préempter les parcelles agricoles.'},
   {s:'immo', t:'Soulte', d:'Somme d’argent versée pour compenser une différence de valeur, dans un échange ou un partage.'},
-  {s:['immo', 'deo'], t:'SPF', d:'Service de la publicité foncière : il publie les actes relatifs aux immeubles pour les rendre opposables aux tiers. Anciennement « bureau des hypothèques ».'},
+  {s:['immo', 'deo'], t:'SPF', d:'Service de la publicité foncière : il publie les actes relatifs aux immeubles pour les rendre opposables aux tiers. Jusqu’au 1er janvier 2013 : la conservation (ou « bureau ») des hypothèques.'},
   {s:['immo', 'civ'], t:'Succession', d:'La transmission du patrimoine d’une personne décédée à ses héritiers ou légataires.'},
   {s:'immo', t:'Tantièmes', d:'La quote-part des parties communes attachée à un lot de copropriété. Ex. : 175/10 000es.'},
   {s:['immo', 'civ'], t:'Testament', d:'Acte par lequel une personne dispose de ses biens pour après sa mort. Il est révocable jusqu’au décès.'},

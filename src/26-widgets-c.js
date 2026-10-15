@@ -129,7 +129,9 @@ const GSETS = {
   designation:{l:'Désignation', head:'Désignation', hl:[['nat', 'Nature'], ['sit', 'Situation'], ['con', 'Contenance'], ['cad', 'Cadastre'], ['meu', 'Meubles'], ['cop', 'Copropriété / lots']]},
   effet:{l:'Effet relatif', head:'Effet relatif', hl:[['act', 'Nature de l’acte'], ['not', 'Notaire'], ['dat', 'Date de l’acte'], ['pub', 'Publication']]},
   origine:{l:'Origine de propriété', head:'Origine de propriété', hl:[['act', 'Nature de l’acte'], ['not', 'Notaire'], ['dat', 'Date de l’acte'], ['pub', 'Publication']]},
-  autres:{l:'Autres clauses', head:'Clause', hl:[['tex', 'Textes de loi'], ['ref', 'Références'], ['dec', 'Déclarations']]}
+  autres:{l:'Autres clauses', head:'Clause', hl:[['tex', 'Textes de loi'], ['ref', 'Références'], ['dec', 'Déclarations']]},
+  comparution:{l:'Comparution', head:'Comparution', hl:[['idt', 'Identité, dénomination'], ['pro', 'Profession, forme'], ['dom', 'Domicile, siège'], ['nai', 'Naissance, constitution'], ['civ', 'Situation familiale'], ['fis', 'Nationalité, immatriculation']]},
+  acte:{l:'Signature et intervention', head:'Clause', hl:[['tex', 'Textes de loi'], ['ref', 'Références'], ['dec', 'Déclarations']]}
 };
 JLG.widget('gallery', (el, o) => {
   const all = []; JLG.chapters.forEach(c => (c.clauses || []).forEach(k => all.push(Object.assign({cid:c.id}, k))));

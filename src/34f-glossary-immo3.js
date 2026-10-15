@@ -1,0 +1,27 @@
+JLG.glossary([
+  /* —— Pratique des opérations immobilières · Séance 3 : conduire un dossier —— */
+  {s:['immo', 'civ'], t:'Action en réduction', d:'L’action des héritiers réservataires pour réduire une donation qui dépasse la part dont le défunt pouvait disposer. Elle se prescrit par 5 ans (ou 2 ans), jamais plus de 10 ans après le décès.', ref:'Art. 921 C. civ.'},
+  {s:'immo', t:'Brevet (acte en)', d:'Un acte authentique dont le notaire qui le reçoit ne garde pas l’original : c’est souvent le cas des procurations, annexées ensuite à l’acte. Son contraire : l’acte en minute.'},
+  {s:'immo', t:'Certification d’identité', d:'La clause par laquelle le notaire certifie l’identité complète des parties, au vu d’un extrait d’acte de naissance ou d’un extrait RNE.'},
+  {s:['immo', 'deo'], t:'Clé REAL', d:'La clé sécurisée du notaire, qui contient sa signature électronique : elle lui sert à signer les actes authentiques électroniques.'},
+  {s:'immo', t:'Clôture d’acte', d:'Le paragraphe final de l’acte (« Dont acte… »), où sont recueillies les signatures après la lecture.'},
+  {s:'immo', t:'COMEDEC', d:'COMmunication Électronique des Données de l’État Civil : l’échange dématérialisé des actes d’état civil entre les notaires et les mairies.'},
+  {s:'immo', t:'Comparution', d:'La clause qui présente les parties à l’acte, avec leur identité complète.'},
+  {s:'immo', t:'EHF', d:'L’état hypothécaire hors formalité : délivré par le SPF hors de toute formalité, il liste les droits, charges et inscriptions publiés sur un immeuble. Demande par le cerfa 3233-SD ; 2 mois de validité en pratique.'},
+  {s:['immo', 'civ'], t:'Interdiction d’aliéner (clause d’)', d:'La clause d’une donation qui interdit au donataire de vendre le bien sans l’accord du donateur, pour une durée limitée (souvent, la vie du donateur).', ref:'Art. 900-1 C. civ.'},
+  {s:'immo', t:'Inopposabilité', d:'L’acte reste valable entre les parties, mais les tiers peuvent l’ignorer : c’est la sanction du défaut de publicité foncière.'},
+  {s:'immo', t:'Intervenant', d:'Une personne qui signe l’acte sans en subir les effets, parce que son accord est nécessaire : le conjoint, pour la vente du logement de la famille.'},
+  {s:'immo', t:'Mandat (procuration)', d:'L’acte par lequel le mandant donne au mandataire le pouvoir d’agir pour lui et en son nom. Le mandataire peut l’accepter en l’exécutant.', ref:'Art. 1984 C. civ.'},
+  {s:'immo', t:'Notaires en concours', d:'Deux notaires qui reçoivent ensemble un acte, chacun conseillant sa partie.'},
+  {s:'immo', t:'Paraphe', d:'Les initiales apposées en bas de chaque page d’un acte papier.'},
+  {s:'immo', t:'Parallélisme des formes', d:'La règle selon laquelle la procuration pour signer un acte solennel doit avoir la même forme : authentique.'},
+  {s:'immo', t:'Partie (à l’acte)', d:'La personne pour qui l’acte produit des effets juridiques. Elle figure dans la comparution.'},
+  {s:'immo', t:'Présence – représentation', d:'La clause qui indique si chaque signataire est présent à l’acte, ou représenté, et par qui.'},
+  {s:'immo', t:'Publicité foncière', d:'L’ensemble des règles qui informent sur la situation juridique des immeubles, tenue par le service de la publicité foncière.'},
+  {s:'immo', t:'Représentant', d:'La personne qui signe pour une partie ou un intervenant (tuteur, gérant, mandataire), sans subir les effets de l’acte.'},
+  {s:'immo', t:'RNE', d:'Le registre national des entreprises, tenu par l’INPI depuis le 1er janvier 2023. Son extrait justifie l’identité d’une personne morale.'},
+  {s:'immo', t:'SCEC', d:'Le service central d’état civil, à Nantes : il tient l’état civil des Français nés à l’étranger.'},
+  {s:'immo', t:'Signataire', d:'Toute personne qui signe l’acte : partie, intervenant, représentant, témoin ou notaire.'},
+  {s:'immo', t:'Témoin (à l’acte)', d:'Une personne appelée à confirmer l’intention des parties : testament authentique, acte de notoriété…'},
+  {s:['immo', 'deo'], t:'TRACFIN', d:'La cellule de renseignement financier qui lutte contre le blanchiment et le financement du terrorisme. Le notaire lui déclare les opérations douteuses.'}
+]);

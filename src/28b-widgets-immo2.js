@@ -2,7 +2,7 @@
 /* =================== SCHÉMAS — IMMOBILIER, SÉANCE 2 =================== */
 const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 const frDate = iso => { const p = String(iso || '').split('-').map(Number); if (!p[0] || !p[1] || !p[2]) return '…'; return (p[2] === 1 ? '1er' : p[2]) + ' ' + MOIS[p[1] - 1] + ' ' + p[0]; };
-const eurN = v => Math.round(v).toLocaleString('fr-FR') + ' €';
+const eurN = v => Math.round(v).toLocaleString('fr-FR') + ' €';
 const keyAct = (node, fn) => node.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fn(e); } });
 
 /* ——— Les trois caractères (triangle) ——— */

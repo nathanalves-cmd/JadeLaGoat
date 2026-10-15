@@ -156,6 +156,8 @@ function viewHome(){
     ${quick('outils-bareme', 'euro', 'Barème de l’usufruit', 'L’article 669 du CGI, en un curseur.')}
     ${quick('outils-galerie', 'doc', 'Les clauses du cours', 'Désignation, effet relatif, origine, autres clauses.')}
     ${quick('outils-famille', 'family', 'Qui peut-on épouser ?', 'L’arbre des empêchements, mariage et PACS.')}
+    ${quick('outils-masses', 'rings', 'Propre ou commun ?', 'Les biens de Paul et Julie, régime par régime.')}
+    ${quick('outils-comparution', 'pen', 'Rédiger une comparution', 'Avec le contrôle des six mentions du SPF.')}
     ${quick('outils-convert', 'calc', 'Convertisseur ha · a · ca', 'Les m² en hectares, ares, centiares.')}
     ${quick('outils-methode', 'scale', 'Méthode du cas pratique', 'Les 5 étapes pour ne jamais sécher.')}
     ${quick('lexique', 'az', 'Lexique', 'Tous les mots-clés, définis simplement.')}
