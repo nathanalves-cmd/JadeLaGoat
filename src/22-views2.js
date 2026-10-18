@@ -98,6 +98,9 @@ const TOOLS = [
   {id:'publication', g:'Déontologie', t:'La course à la publication (art. 1198)', d:'Deux acheteurs, une maison : le premier qui publie l’emporte, s’il est de bonne foi.', w:'opposabilite'},
   {id:'etude', g:'Déontologie', t:'Le parcours d’un dossier dans l’étude', d:'Négociateur, collaborateur, notaire, formaliste, comptable-taxateur : qui fait quoi.', w:'etude'},
   {id:'professions', g:'Déontologie', t:'Notaire, avocat, juge, commissaire de justice', d:'Le comparateur des professions du droit.', w:'pros'},
+  {id:'pieces', g:'Déontologie · Formalités préalables', t:'Le dossier de ton client', d:'Un profil de client, ses pièces, et où les demander : le dossier se remplit pièce par pièce.', w:'pieces'},
+  {id:'urbanisme', g:'Déontologie · Formalités préalables', t:'Les pièces d’urbanisme', d:'CUa, CUb, alignement, numérotage, carrière, DIA : à quoi sert chaque document, et le délai.', w:'urba'},
+  {id:'ddt', g:'Déontologie · Formalités préalables', t:'Quels diagnostics pour ce bien ?', d:'Règle l’année, le type de bien et les installations : le dossier de diagnostic technique se compose tout seul.', w:'ddt'},
   {id:'methode', g:'Méthode', t:'Méthode du cas pratique', d:'Les 5 étapes du raisonnement juridique, avec un exemple.', w:'methode'}
 ];
 function viewOutils(id){

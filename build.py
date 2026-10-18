@@ -28,17 +28,18 @@ CHAPTERS = [
     ("civ2", ["36a-civ2.js", "36b-civ2.js", "36c-civ2.js", "36d-civ2-fiche.js"]),
     ("civ3", ["39a-civ3.js", "39b-civ3.js", "39c-civ3.js", "39d-civ3-fiche.js"]),
     ("deo1", ["38a-deo1.js", "38b-deo1.js", "38c-deo1.js", "38d-deo1-fiche.js"]),
+    ("deo2", ["41a-deo2.js", "41b-deo2.js", "41c-deo2.js", "41d-deo2-fiche.js"]),
 ]
 
-css = "\n".join(r(n) for n in ["01-base.css", "02-pages.css", "03-games.css", "04-widgets.css", "05-fiches-civ.css", "06-immo2.css", "07-game.css", "08-deo.css", "08b-civ3.css", "08c-immo3.css", "09-plus.css"])
+css = "\n".join(r(n) for n in ["01-base.css", "02-pages.css", "03-games.css", "04-widgets.css", "05-fiches-civ.css", "06-immo2.css", "07-game.css", "08-deo.css", "08b-civ3.css", "08c-immo3.css", "08d-forma.css", "09-plus.css"])
 engine = "\n".join(r(n) for n in ["20-core.js", "21-views.js", "22-views2.js", "23-games.js",
                                    "24-widgets-a.js", "25-widgets-b.js", "26-widgets-c.js", "27-fiches.js", "28-widgets-civ.js",
-                                   "28b-widgets-immo2.js", "28c-game.js", "28d-widgets-deo.js", "28e-plus.js", "28f-widgets-civ3.js", "28g-widgets-immo3.js", "29-boot.js"])
+                                   "28b-widgets-immo2.js", "28c-game.js", "28d-widgets-deo.js", "28e-plus.js", "28f-widgets-civ3.js", "28g-widgets-immo3.js", "28h-widgets-forma.js", "29-boot.js"])
 courses = "".join([
     "<!-- ═════════ CONTENU DES COURS : un bloc par chapitre ═════════ -->\n",
     block("MATIERES", "efd immo civ deo", r("30-subjects.js")),
     *[block("CHAPITRE", cid, "".join(r(f) for f in files)) for cid, files in CHAPTERS],
-    block("LEXIQUE", "tous", r("34-glossary.js") + r("34b-glossary-civ.js") + r("34c-glossary-immo2.js") + r("34d-glossary-deo.js") + r("34e-glossary-civ3.js") + r("34f-glossary-immo3.js")),
+    block("LEXIQUE", "tous", r("34-glossary.js") + r("34b-glossary-civ.js") + r("34c-glossary-immo2.js") + r("34d-glossary-deo.js") + r("34e-glossary-civ3.js") + r("34f-glossary-immo3.js") + r("34g-glossary-deo2.js")),
     "<!-- ▼ JLG:NOUVEAUX-COURS ▼ -->\n<!-- ▲ JLG:NOUVEAUX-COURS ▲ -->\n",
 ])
 engine_tag = "<!-- ═════════ MOTEUR DU SITE ═════════ -->\n<script>\n" + engine + "\n</script>\n"

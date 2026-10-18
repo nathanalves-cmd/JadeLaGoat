@@ -2105,6 +2105,89 @@ html.lu-lock{overflow:hidden}
 .ehf-ring.ko .ehf-arc{stroke:var(--bad)}
 .ehf-v{font-size:.88rem}
 
+/* ——— Déontologie, activité 3 : les formalités préalables (pièces, urbanisme, diagnostics) ——— */
+
+/* Défis à choix multiples */
+.fm-q{display:block;font-family:var(--font-display);font-size:1.25rem;line-height:1.25}
+.fm-opts{display:grid;gap:8px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:640px){.fm-opts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fm-opt{padding:12px 14px;border-radius:var(--r-m);border:1px solid var(--line-2);background:var(--bg-2);color:var(--fg);font:inherit;font-weight:620;text-align:left;cursor:pointer;transition:transform .25s var(--spring),border-color .25s,background .25s,box-shadow .25s}
+.fm-opt:hover:not(:disabled){border-color:var(--accent-line);transform:translateY(-2px)}
+.fm-opt:disabled{cursor:default}
+.fm-opt.got{border-color:var(--good);background:var(--good-soft);animation:fmPop .5s var(--spring)}
+.fm-opt.nope{border-color:var(--bad);background:var(--bad-soft);animation:fmShake .4s var(--ease)}
+@keyframes fmPop{0%{transform:scale(.97)}55%{transform:scale(1.03)}100%{transform:none}}
+@keyframes fmShake{0%,100%{transform:none}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* 1. Le dossier de ton client */
+.fm-tabs{max-height:none}
+.fm-list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.fm-pc{animation:fmRise .45s var(--ease) both;animation-delay:var(--d,0ms)}
+@keyframes fmRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.fm-pcb{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;width:100%;padding:12px 14px;border-radius:var(--r-m);border:1px solid var(--line);background:var(--bg-2);color:var(--fg);font:inherit;text-align:left;cursor:pointer;transition:border-color .3s,background .3s,transform .3s var(--spring)}
+.fm-pcb:hover:not(:disabled){border-color:var(--accent-line)}
+.fm-pcb.on{border-color:var(--good);background:var(--good-soft)}
+.fm-pcb:disabled{cursor:default;opacity:.7}
+.fm-ck{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:2px solid var(--line-2);color:transparent;font-weight:800;transition:all .3s var(--spring)}
+.fm-ck svg{width:16px;height:16px}
+.fm-pcb.on .fm-ck{background:var(--good);border-color:var(--good);color:var(--accent-ink);transform:scale(1.1) rotate(-6deg)}
+.is-no .fm-ck{color:var(--faint);border-style:dashed}
+.is-no .fm-tx b{text-decoration:line-through;text-decoration-color:var(--faint)}
+.fm-tx{display:grid;gap:2px;min-width:0}
+.fm-tx b{font-weight:680;line-height:1.3}
+.fm-or{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;color:var(--accent)}
+.fm-why{font-size:.85rem;color:var(--muted);line-height:1.35}
+.fm-bar{height:8px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.fm-bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent-deep),var(--accent),var(--good));transition:width .6s var(--ease)}
+.fm-status{min-height:34px;display:flex;align-items:center}
+.fm-ok{display:flex;align-items:center;gap:10px;animation:fmPop .6s var(--spring)}
+.fm-ok svg{width:34px;height:34px;flex:0 0 auto}
+.fm-ok b{color:var(--good)}
+
+/* 2. Les pièces d’urbanisme */
+.fm-ur{display:grid;gap:12px;min-height:200px}
+.fm-ur.in{animation:fmRise .4s var(--ease) both}
+.fm-ur-head{display:flex;align-items:center;gap:12px}
+.fm-ur-head b{display:block;font-family:var(--font-display);font-size:1.15rem;line-height:1.2}
+.fm-ur-head .muted{font-size:.82rem}
+.fm-badge{display:grid;place-items:center;min-width:64px;padding:10px 12px;border-radius:14px;background:var(--accent);color:var(--accent-ink);font-family:var(--font-mono);font-weight:800;font-size:.86rem;box-shadow:0 8px 20px -10px var(--glow)}
+.fm-ur-grid{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:640px){.fm-ur-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fm-card{padding:12px 14px;border-radius:var(--r-m);background:var(--bg-2);border:1px solid var(--line)}
+.fm-card i{display:block;font-style:normal;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.fm-card p{margin:0;font-size:.93rem;line-height:1.4}
+.fm-gantt{display:grid;gap:6px}
+.fm-g-l{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;color:var(--muted)}
+.fm-g-t{height:10px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.fm-g-t i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent-strong));animation:fmGrow 1s var(--ease) .15s forwards}
+@keyframes fmGrow{to{width:var(--w)}}
+.fm-trap{margin:0;padding:10px 12px;border-radius:var(--r-s);background:var(--warn-soft);font-size:.9rem}
+
+/* 3. Les diagnostics */
+.fm-dd{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:820px){.fm-dd{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start}}
+.fm-dd-in{display:grid;gap:12px}
+.fm-tg{display:grid;gap:8px}
+.fm-tg label{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r-s);border:1px solid var(--line);background:var(--bg-2);font-size:.9rem;cursor:pointer}
+.fm-tg input{accent-color:var(--accent);width:18px;height:18px}
+.fm-dd-count{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.fm-dd-count b{font-family:var(--font-display);font-size:2.4rem;line-height:1;color:var(--accent)}
+.fm-dd-count span{color:var(--muted);font-size:.9rem}
+.fm-dd-list{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.fm-dd-list li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 12px;border-radius:var(--r-s);background:var(--good-soft);border:1px solid transparent;animation:fmRise .4s var(--ease) both;animation-delay:var(--d,0ms)}
+.fm-dd-list li b{display:block;font-size:.92rem}
+.fm-dd-list li small,.fm-dd-no small{display:block;font-size:.76rem;color:var(--muted);line-height:1.3}
+.fm-dd-list li em{font-style:normal;font-family:var(--font-mono);font-size:.68rem;text-align:right;color:var(--fg);max-width:15ch;line-height:1.25}
+.fm-chk{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--good);color:var(--accent-ink)}
+.fm-chk svg{width:14px;height:14px}
+.fm-dd-no{margin-top:10px;font-size:.88rem;color:var(--muted)}
+.fm-dd-no summary{cursor:pointer;font-weight:620}
+.fm-dd-no ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.fm-dd-no li{padding:7px 10px;border-radius:var(--r-s);background:var(--bg-2);opacity:.85}
+.fm-dd-note{margin:10px 0 0;font-size:.82rem;color:var(--faint)}
+@media (max-width:420px){.fm-dd-list li{grid-template-columns:auto minmax(0,1fr)}.fm-dd-list li em{grid-column:2;text-align:left;max-width:none}}
+@media (prefers-reduced-motion:reduce){.fm-pc,.fm-ur.in,.fm-dd-list li,.fm-ok,.fm-opt.got,.fm-opt.nope{animation:none}.fm-g-t i{animation:none;width:var(--w)}.fm-bar i{transition:none}}
+
 /* ——— v4 : programme du jour, recherche globale, écoute, réglages, impression ——— */
 
 /* Programme du jour */
@@ -2657,6 +2740,7 @@ function viewHome(){
     ${quick('outils-famille', 'family', 'Qui peut-on épouser ?', 'L’arbre des empêchements, mariage et PACS.')}
     ${quick('outils-masses', 'rings', 'Propre ou commun ?', 'Les biens de Paul et Julie, régime par régime.')}
     ${quick('outils-comparution', 'pen', 'Rédiger une comparution', 'Avec le contrôle des six mentions du SPF.')}
+    ${quick('outils-ddt', 'search', 'Quels diagnostics ?', 'Le dossier de diagnostic technique d’un bien, en curseurs.')}
     ${quick('outils-convert', 'calc', 'Convertisseur ha · a · ca', 'Les m² en hectares, ares, centiares.')}
     ${quick('outils-methode', 'scale', 'Méthode du cas pratique', 'Les 5 étapes pour ne jamais sécher.')}
     ${quick('lexique', 'az', 'Lexique', 'Tous les mots-clés, définis simplement.')}
@@ -2831,6 +2915,9 @@ const TOOLS = [
   {id:'publication', g:'Déontologie', t:'La course à la publication (art. 1198)', d:'Deux acheteurs, une maison : le premier qui publie l’emporte, s’il est de bonne foi.', w:'opposabilite'},
   {id:'etude', g:'Déontologie', t:'Le parcours d’un dossier dans l’étude', d:'Négociateur, collaborateur, notaire, formaliste, comptable-taxateur : qui fait quoi.', w:'etude'},
   {id:'professions', g:'Déontologie', t:'Notaire, avocat, juge, commissaire de justice', d:'Le comparateur des professions du droit.', w:'pros'},
+  {id:'pieces', g:'Déontologie · Formalités préalables', t:'Le dossier de ton client', d:'Un profil de client, ses pièces, et où les demander : le dossier se remplit pièce par pièce.', w:'pieces'},
+  {id:'urbanisme', g:'Déontologie · Formalités préalables', t:'Les pièces d’urbanisme', d:'CUa, CUb, alignement, numérotage, carrière, DIA : à quoi sert chaque document, et le délai.', w:'urba'},
+  {id:'ddt', g:'Déontologie · Formalités préalables', t:'Quels diagnostics pour ce bien ?', d:'Règle l’année, le type de bien et les installations : le dossier de diagnostic technique se compose tout seul.', w:'ddt'},
   {id:'methode', g:'Méthode', t:'Méthode du cas pratique', d:'Les 5 étapes du raisonnement juridique, avec un exemple.', w:'methode'}
 ];
 function viewOutils(id){
@@ -6545,6 +6632,251 @@ JLG.widget('ehf', el => {
   show('prop'); val();
 });
 
+/* =================== SCHÉMAS — DÉONTOLOGIE, ACTIVITÉ 3 : LES FORMALITÉS PRÉALABLES =================== */
+
+/* Petit moteur de défi à choix multiples, partagé par les trois schémas : o.mode === 'defi'. */
+function fmQuiz(el, cfg){
+  let list = [], k = 0, score = 0, lock = false;
+  const start = () => { list = shuffle(cfg.items).slice(0, cfg.n || 8); k = 0; score = 0; draw(); };
+  const draw = () => {
+    if (k >= list.length) return end();
+    lock = false;
+    const it = list[k], opts = shuffle(it.o);
+    el.innerHTML = `<div class="w fm-defi">
+      <div class="w-head"><span class="eyebrow">${esc(cfg.eyebrow)} · ${k + 1}/${list.length} · ${score} ✓</span><b class="fm-q">${it.q}</b><span class="muted">${esc(cfg.hint)}</span></div>
+      <div class="fm-opts">${opts.map((o, i) => `<button class="fm-opt" data-v="${esc(o)}">${esc(o)}</button>`).join('')}</div>
+      <div class="fm-fb" aria-live="polite"></div></div>`;
+    $('.fm-opts', el).addEventListener('click', e => {
+      const b = e.target.closest('.fm-opt'); if (!b || lock) return; lock = true;
+      const ok = b.dataset.v === it.a;
+      $$('.fm-opt', el).forEach(x => { x.disabled = true; if (x.dataset.v === it.a) x.classList.add('got'); });
+      if (!ok) b.classList.add('nope');
+      if (ok){ score++; addXP(5, e); }
+      $('.fm-fb', el).innerHTML = `<div class="expl"><div class="verdict ${ok ? 'good' : 'bad'}">${ok ? pick(['Bien vu !', 'Exact.', 'Oui !']) : 'Pas tout à fait : ' + esc(it.a)}</div><p>${it.e}</p></div><div class="qnext"><button class="btn btn-primary" id="fmn">${k + 1 < list.length ? 'Suivant' : 'Résultat'}${icon('arrow')}</button></div>`;
+      $('#fmn', el).onclick = () => { k++; draw(); };
+    });
+  };
+  const end = () => {
+    const p = score / list.length; if (p >= .8) confetti(90); addXP(10, {target:el});
+    el.innerHTML = `<div class="result"><div class="eyebrow">${esc(cfg.title)}</div><h2>${score}/${list.length} bonnes réponses</h2><p class="muted">${p === 1 ? cfg.perfect : cfg.again}</p><div class="btn-row" style="justify-content:center"><button class="btn btn-primary" id="fmr">${icon('refresh')}Rejouer</button></div></div>`;
+    $('#fmr', el).onclick = start;
+  };
+  start();
+}
+
+/* 1. Le dossier d’identification : quelles pièces pour quel client ? — ou défi « quelle pièce demander ? » */
+const PC_PROFILES = [
+  {id:'mar', l:'Française mariée', e:'👩', p:[
+    {t:'Carte d’identité ou passeport en cours de validité', o:'Le client', w:'Avec photographie : le notaire vérifie l’identité du comparant.'},
+    {t:'Extrait d’acte de naissance avec filiation', o:'COMEDEC ou service d’état civil', w:'Identité, filiation, et mentions en marge (mariage, PACS, divorce).'},
+    {t:'Acte de mariage récent', o:'Mairie du lieu de célébration ou COMEDEC', w:'Date du mariage, éventuel changement de régime.'},
+    {t:'Copie du contrat de mariage, s’il y en a un', o:'Le notaire détenteur de l’acte', w:'Ce n’est pas la mairie qui le conserve : c’est un acte notarié.'},
+    {t:'Justificatif de résidence principale', o:'Le client', w:'Pour le logement de la famille et les plus-values.'}]},
+  {id:'pol', l:'Ressortissant européen', e:'🇪🇺', p:[
+    {t:'Passeport ou pièce d’identité officielle', o:'Le client', w:'La pièce qui permet de vérifier l’identité.'},
+    {t:'Actes d’état civil, avec traduction si besoin', o:'Autorités du pays d’origine', w:'Selon la situation : traduction appropriée.'},
+    {t:'Titre de séjour', o:'Non exigé', w:'Les ressortissants de l’EEE et les Suisses en sont en principe dispensés.', x:true}]},
+  {id:'etr', l:'Ressortissant hors Europe', e:'🌍', p:[
+    {t:'Passeport ou pièce d’identité officielle', o:'Le client', w:'La pièce qui permet de vérifier l’identité.'},
+    {t:'Actes d’état civil, avec traduction', o:'Autorités du pays d’origine', w:'Selon la situation, accompagnés d’une traduction appropriée.'},
+    {t:'Pièces étrangères sur le mariage ou le divorce', o:'Autorités étrangères', w:'On vérifie leur reconnaissance et leurs effets en France.'}]},
+  {id:'ne', l:'Français né à l’étranger', e:'🛬', p:[
+    {t:'Carte d’identité ou passeport en cours de validité', o:'Le client', w:'Pour vérifier l’identité.'},
+    {t:'Acte de naissance établi ou transcrit en France', o:'Service central d’état civil, à Nantes', w:'Démarches en ligne possibles.'},
+    {t:'Acte de mariage, si marié en France', o:'Mairie du lieu de célébration ou COMEDEC', w:'Un extrait suffit.'}]},
+  {id:'div', l:'Divorcé(e)', e:'📄', p:[
+    {t:'Extrait d’acte de naissance avec mentions', o:'COMEDEC ou service d’état civil', w:'La mention du divorce figure en marge.'},
+    {t:'Jugement de divorce ou convention déposée chez un notaire', o:'Le client ou le notaire dépositaire', w:'Les justificatifs adaptés au type de divorce.'},
+    {t:'Preuve du caractère définitif', o:'Le client ou le greffe', w:'Le divorce doit être définitif.'},
+    {t:'Copie du contrat de mariage ou de l’acte de liquidation', o:'Le notaire détenteur', w:'Pour connaître les droits sur le bien.'}]},
+  {id:'pacs', l:'Pacsée', e:'🤝', p:[
+    {t:'Extrait d’acte de naissance avec mention du PACS', o:'COMEDEC ou service d’état civil', w:'Le PACS est mentionné en marge de l’acte de naissance.'},
+    {t:'Convention de PACS', o:'Les parties, ou le notaire si elle est notariée', w:'Pour connaître le régime choisi.'},
+    {t:'Vérification de la date et d’une éventuelle dissolution', o:'Mention en marge', w:'Depuis le 1er novembre 2017, le PACS s’enregistre en mairie ou devant notaire.'}]},
+  {id:'tut', l:'Majeur sous tutelle', e:'🧑‍⚖️', p:[
+    {t:'Pièce d’identité du majeur', o:'Le tuteur', w:'Pour vérifier l’identité.'},
+    {t:'Décision de tutelle', o:'Le tuteur', w:'On vérifie l’existence et l’étendue de la mesure.'},
+    {t:'Pièce d’identité et pouvoirs du tuteur', o:'Le tuteur', w:'Il représente en principe le majeur.'},
+    {t:'Autorisation du juge ou du conseil de famille', o:'Le tuteur', w:'Pour les actes de disposition notamment.'}]},
+  {id:'min', l:'Mineur non émancipé', e:'🧒', p:[
+    {t:'Acte de naissance du mineur', o:'COMEDEC ou service d’état civil', w:'Identité, filiation.'},
+    {t:'Pièces d’identité des représentants légaux', o:'Les parents', w:'Ils agissent pour l’enfant.'},
+    {t:'Autorisation du juge des tutelles des mineurs', o:'Le juge des tutelles', w:'Selon la nature et la gravité de l’acte.'}]},
+  {id:'sci', l:'Société civile (SCI)', e:'🏢', p:[
+    {t:'Statuts à jour', o:'La société', w:'Objet social et pouvoirs.'},
+    {t:'Extrait Kbis le plus récent possible', o:'Registre du commerce et des sociétés', w:'La carte d’identité de la société.'},
+    {t:'Pièce d’identité du gérant', o:'Le gérant', w:'Justification de l’identité du représentant.'},
+    {t:'Délibération ou compte rendu d’AG autorisant la vente', o:'La société', w:'Si les statuts l’exigent : la preuve de l’autorisation.'},
+    {t:'Annonces BODACC', o:'BODACC', w:'Pour vérifier l’absence de procédure collective.'}]},
+  {id:'ass', l:'Association', e:'🎗️', p:[
+    {t:'Statuts', o:'L’association', w:'Pour connaître l’objet et les pouvoirs.'},
+    {t:'Date et lieu de déclaration ou de dépôt des statuts', o:'Préfecture', w:'Mention d’identification de l’association.'},
+    {t:'Décision autorisant la vente', o:'L’association', w:'Pour les pouvoirs de son représentant.'},
+    {t:'Pièce d’identité du représentant', o:'Le représentant', w:'Justification de son identité.'}]},
+  {id:'pro', l:'Entrepreneur individuel', e:'🛠️', p:[
+    {t:'Pièce d’identité', o:'Le client', w:'Pour vérifier l’identité.'},
+    {t:'Justificatif d’immatriculation au RNE', o:'INPI (registre national des entreprises)', w:'Selon la situation du professionnel.'},
+    {t:'Extrait K ou Kbis récent, s’il existe', o:'Registre du commerce et des sociétés', w:'Statut professionnel et pouvoirs utiles à l’opération.'},
+    {t:'Annonces BODACC', o:'BODACC', w:'Pour vérifier l’existence d’une procédure collective.'}]}
+];
+const PC_DEFI = [
+  {q:'La cliente est mariée sous contrat. Il manque la copie du contrat de mariage : où la demandes-tu ?', a:'Au notaire détenteur de l’acte', o:['À la mairie du mariage', 'Au notaire détenteur de l’acte', 'Au service de la publicité foncière', 'Au tribunal'], e:'Le contrat de mariage est un acte notarié : on le demande au notaire qui l’a reçu, pas à la mairie.'},
+  {q:'Un vendeur polonais présente son passeport. Quelle pièce n’as-tu PAS à exiger systématiquement ?', a:'Un titre de séjour', o:['Une pièce d’identité', 'Un titre de séjour', 'Un acte de naissance traduit si besoin', 'Une pièce établissant son état civil'], e:'Les ressortissants de l’EEE et les Suisses sont en principe dispensés de titre de séjour.'},
+  {q:'Un acquéreur est sous curatelle. Qui l’assiste ?', a:'Le curateur', o:['Le tuteur', 'Le curateur', 'Le maire', 'Le notaire seul'], e:'Sous curatelle, l’assistance du curateur est requise pour les actes prévus par la loi. Sous tutelle, c’est le tuteur qui représente.'},
+  {q:'Une SCI vend un immeuble. Quelle pièce prouve que la vente est autorisée ?', a:'Le compte rendu d’assemblée générale', o:['Le Kbis', 'Le compte rendu d’assemblée générale', 'L’extrait de matrice', 'Le plan cadastral'], e:'Le Kbis identifie la société, il ne prouve pas l’autorisation. La décision des associés, si.'},
+  {q:'Une Française née à l’étranger, dont l’acte est transcrit en France : où demandes-tu son acte de naissance ?', a:'Au SCEC, à Nantes', o:['À la mairie de sa commune actuelle', 'Au SCEC, à Nantes', 'Au SPF', 'Au greffe du tribunal'], e:'Le Service central d’état civil de Nantes, notamment par les démarches en ligne.'},
+  {q:'Un vendeur est divorcé. Que vérifies-tu en plus du jugement ou de la convention ?', a:'Son caractère définitif', o:['Le nombre d’enfants', 'Son caractère définitif', 'Le salaire des époux', 'La durée du mariage'], e:'Le notaire recueille les justificatifs et vérifie qu’ils sont définitifs.'},
+  {q:'Pour vérifier si une société est en redressement judiciaire, tu consultes…', a:'Le BODACC', o:['Le BODACC', 'Le plan cadastral', 'Perval', 'Télé@ctes'], e:'Le BODACC publie les procédures collectives et les rétablissements personnels.'},
+  {q:'Un mineur non émancipé hérite d’un bien et veut le vendre. Qui agit ?', a:'Ses représentants légaux', o:['Lui seul', 'Ses représentants légaux', 'Le maire', 'Son voisin'], e:'Le mineur est représenté, avec l’autorisation du juge des tutelles des mineurs selon la nature de l’acte.'},
+  {q:'Où est mentionné le PACS ?', a:'En marge de l’acte de naissance', o:['Dans l’acte de mariage', 'En marge de l’acte de naissance', 'Au casier judiciaire', 'Au cadastre'], e:'Le PACS est mentionné en marge de l’acte de naissance de chaque partenaire.'},
+  {q:'Qui tient le registre national des entreprises (RNE) ?', a:'L’INPI', o:['L’INSEE', 'L’INPI', 'La préfecture', 'Le notaire'], e:'L’INPI. SIRENE, c’est l’INSEE : ne les confonds pas.'}
+];
+JLG.widget('pieces', (el, o) => {
+  if (o && o.mode === 'defi') return fmQuiz(el, {items:PC_DEFI, n:8, eyebrow:'Défi', hint:'Choisis la bonne réponse.', title:'Quelle pièce demander ?', perfect:'Ton dossier est toujours complet.', again:'Les trois enquêtes : les personnes, le bien, les règles. Relis la fiche et réessaie.'});
+  let cur = 'mar', got = new Set(), xp = false, done = {};
+  const draw = () => {
+    const P = PC_PROFILES.find(x => x.id === cur);
+    el.innerHTML = `<div class="w w-fm">
+      <div class="w-head"><span class="eyebrow">Schéma animé</span><b>Le dossier de ton client</b><span class="muted">Choisis un profil. Touche chaque pièce quand tu l’as reçue : le dossier se remplit.</span></div>
+      <div class="ech-crit fm-tabs" role="tablist" aria-label="Profil du client">${PC_PROFILES.map(x => `<button role="tab" aria-selected="${x.id === cur}" data-p="${x.id}">${x.e} ${x.l}</button>`).join('')}</div>
+      <ol class="fm-list">${P.p.map((x, i) => `<li class="fm-pc${x.x ? ' is-no' : ''}" style="--d:${i * 70}ms"><button class="fm-pcb${got.has(cur + i) ? ' on' : ''}" data-i="${i}" aria-pressed="${got.has(cur + i)}" ${x.x ? 'disabled' : ''}>
+          <span class="fm-ck" aria-hidden="true">${x.x ? '✕' : icon('check')}</span>
+          <span class="fm-tx"><b>${x.t}</b><span class="fm-or">${x.x ? '' : 'Où ? '}${x.o}</span><span class="fm-why">${x.w}</span></span></button></li>`).join('')}</ol>
+      <div class="fm-bar" role="progressbar" aria-label="Pièces réunies" aria-valuemin="0" aria-valuemax="100"><i></i></div>
+      <div class="fm-status" aria-live="polite"></div></div>`;
+    refresh();
+  };
+  const refresh = () => {
+    const P = PC_PROFILES.find(x => x.id === cur), need = P.p.map((x, i) => x.x ? null : i).filter(i => i != null), n = need.filter(i => got.has(cur + i)).length, pct = Math.round(n / need.length * 100);
+    $('.fm-bar i', el).style.width = pct + '%'; $('.fm-bar', el).setAttribute('aria-valuenow', pct);
+    const st = $('.fm-status', el);
+    if (n === need.length){
+      st.innerHTML = `<span class="fm-ok">${sealSVG({ring:false})}<b>Dossier complet : tu peux rédiger.</b></span>`;
+      if (!done[cur]){ done[cur] = 1; addXP(4, {target:el}); }
+    } else st.innerHTML = `<span class="muted">${n}/${need.length} pièces reçues</span>`;
+  };
+  el.addEventListener('click', e => {
+    const t = e.target.closest('[data-p]'); if (t){ cur = t.dataset.p; draw(); return; }
+    const b = e.target.closest('.fm-pcb'); if (!b || b.disabled) return;
+    const key = cur + b.dataset.i; got.has(key) ? got.delete(key) : got.add(key);
+    b.classList.toggle('on'); b.setAttribute('aria-pressed', got.has(key));
+    if (!xp){ xp = true; addXP(2, e); }
+    refresh();
+  });
+  draw();
+});
+
+/* 2. Les pièces d’urbanisme : comparateur — ou défi « le bon certificat » */
+const UR_DOCS = [
+  {id:'cua', l:'CUa', n:'Certificat d’urbanisme d’information', m:1, d:'Les règles d’urbanisme applicables au terrain, les servitudes et les taxes.', r:'Quelle est la constructibilité du terrain ? Quelles règles et quelles taxes s’y appliquent ?', c:'Instruction en principe 1 mois · gratuit · valable 18 mois', t:'Ce n’est pas une autorisation.'},
+  {id:'cub', l:'CUb', n:'Certificat d’urbanisme opérationnel', m:2, d:'Si une opération précise, projetée sur le terrain, est réalisable.', r:'Pourrai-je construire cette maison, à cet endroit ?', c:'Instruction en principe 2 mois · gratuit · valable 18 mois', t:'Il ne remplace pas le permis de construire.'},
+  {id:'ali', l:'Alignement', n:'Certificat d’alignement', m:0, d:'La limite du domaine public routier (État, département ou commune) et des propriétés riveraines.', r:'Où s’arrête ma propriété, où commence la voie publique ?', c:'Délivré par l’autorité administrative', t:'Utile quand le bien borde une route.'},
+  {id:'num', l:'Numérotage', n:'Certificat de numérotage', m:0, d:'L’adresse attribuée à l’immeuble.', r:'Quel est le numéro officiel de ce bien ?', c:'Quand il est nécessaire', t:'L’adresse figure dans la désignation de l’acte.'},
+  {id:'car', l:'Carrière', n:'Certificat de carrière', m:0, d:'La situation du bien au regard des risques du sol et du sous-sol (anciennes carrières, travaux confortatifs).', r:'Y a-t-il des cavités sous ce terrain ?', c:'Selon la zone', t:'Un risque à connaître avant de construire.'},
+  {id:'dia', l:'DIA', n:'Déclaration d’intention d’aliéner', m:2, d:'À déposer en mairie quand la vente est soumise au droit de préemption urbain (DPU) ou à une ZAD.', r:'La commune veut-elle acheter ce bien à ma place ?', c:'Réponse du titulaire sous 2 mois', t:'La DIA n’est pas un certificat : on la dépose, on ne la reçoit pas.'}
+];
+const UR_DEFI = [
+  {q:'L’acheteur veut savoir si le terrain est constructible, de façon générale.', a:'CUa', e:'Le CUa d’information renseigne sur les règles applicables au terrain.'},
+  {q:'L’acheteur veut être sûr de pouvoir bâtir une maison de 120 m² à un endroit précis.', a:'CUb', e:'Le CUb est opérationnel : il se prononce sur le projet.'},
+  {q:'Le terrain borde une route départementale : où s’arrête la propriété ?', a:'Alignement', e:'Le certificat d’alignement détermine la limite du domaine public routier.'},
+  {q:'La vente se fait dans une zone soumise au droit de préemption urbain.', a:'DIA', e:'On dépose une déclaration d’intention d’aliéner en mairie.'},
+  {q:'Il faut attester que l’adresse du bien est le 12, rue des Lilas.', a:'Numérotage', e:'Le certificat de numérotage atteste l’adresse attribuée.'},
+  {q:'On craint des anciennes carrières sous le terrain.', a:'Carrière', e:'Le certificat de carrière renseigne sur les risques du sol et du sous-sol.'},
+  {q:'La vente est dans une zone d’aménagement différé (ZAD).', a:'DIA', e:'ZAD : droit de préemption, donc DIA.'},
+  {q:'Le notaire veut connaître les taxes applicables à un terrain, sans projet précis.', a:'CUa', e:'Le CUa informe sur les règles, les servitudes et les taxes.'},
+  {q:'Le client veut faire valider la faisabilité d’une extension de 40 m².', a:'CUb', e:'C’est un projet précis : un CUb.'},
+  {q:'Le bien a-t-il une limite avec le domaine public routier ?', a:'Alignement', e:'C’est l’objet de l’alignement.'}
+];
+JLG.widget('urba', (el, o) => {
+  if (o && o.mode === 'defi') return fmQuiz(el, {items:UR_DEFI.map(x => { const all = ['CUa', 'CUb', 'Alignement', 'Numérotage', 'Carrière', 'DIA']; return {q:x.q, a:x.a, e:x.e, o:shuffle(all.filter(v => v !== x.a)).slice(0, 3).concat(x.a)}; }), n:8, eyebrow:'Défi', hint:'Quel document demandes-tu ?', title:'Le bon certificat', perfect:'La mairie n’a plus de secrets pour toi.', again:'a = 1 mois (information), b = 2 mois (opérationnel). La DIA, on la dépose : relis la partie 5.'});
+  let cur = 'cua', xp = false;
+  const show = (id) => {
+    cur = id; const d = UR_DOCS.find(x => x.id === id);
+    $$('.fm-tabs button', el).forEach(b => b.setAttribute('aria-selected', b.dataset.u === id));
+    const body = $('.fm-ur', el); body.classList.remove('in'); void body.offsetWidth; body.classList.add('in');
+    const months = d.m ? `<div class="fm-gantt" aria-hidden="true"><span class="fm-g-l">Délai ${d.m} mois</span><div class="fm-g-t"><i style="--w:${d.m / 2 * 100}%"></i></div></div>` : '';
+    body.innerHTML = `<div class="fm-ur-head"><span class="fm-badge">${d.l}</span><div><b>${d.n}</b><span class="muted">${d.c}</span></div></div>
+      <div class="fm-ur-grid"><div class="fm-card"><i>Il dit</i><p>${d.d}</p></div><div class="fm-card"><i>Question du client</i><p>« ${d.r} »</p></div></div>
+      ${months}<p class="fm-trap"><b>À retenir :</b> ${d.t}</p>`;
+  };
+  el.innerHTML = `<div class="w w-fm">
+    <div class="w-head"><span class="eyebrow">Comparateur</span><b>Les pièces d’urbanisme</b><span class="muted">Touche un document : à quoi il sert, et combien de temps il faut attendre.</span></div>
+    <div class="ech-crit fm-tabs" role="tablist" aria-label="Document d’urbanisme">${UR_DOCS.map(d => `<button role="tab" aria-selected="false" data-u="${d.id}">${d.l}</button>`).join('')}</div>
+    <div class="fm-ur" aria-live="polite"></div></div>`;
+  $('.fm-tabs', el).addEventListener('click', e => { const b = e.target.closest('[data-u]'); if (!b) return; show(b.dataset.u); if (!xp){ xp = true; addXP(2, e); } });
+  show('cua');
+});
+
+/* 3. Les diagnostics : un bien, ses diagnostics — ou défi « combien de temps ça vaut ? » */
+const DD_DEFI = [
+  ['Termites', '6 mois', 'Dans une zone délimitée par arrêté préfectoral : 6 mois.'],
+  ['État des risques (ERP)', 'Moins de 6 mois', 'L’ERP doit dater de moins de 6 mois.'],
+  ['Gaz (vente)', '3 ans', 'Installation de plus de 15 ans : 3 ans pour une vente.'],
+  ['Électricité (vente)', '3 ans', 'Installation de plus de 15 ans : 3 ans pour une vente.'],
+  ['Assainissement non collectif', '3 ans', 'Immeuble non raccordé au réseau public : 3 ans.'],
+  ['Audit énergétique', '5 ans', 'Maison classée E, F ou G : 5 ans, à remettre dès la première visite.'],
+  ['DPE', '10 ans', '10 ans (mais les DPE d’avant juillet 2021 ne sont plus utilisables en 2026).'],
+  ['Plomb (CREP), absence de plomb', 'Illimitée', 'Illimitée en l’absence de plomb au seuil réglementaire (1 an si positif).'],
+  ['Amiante réalisé depuis le 1er avril 2013', 'Illimitée', 'Illimitée, même si le résultat est positif.'],
+  ['Superficie loi Carrez', 'Pas de durée légale', 'Pas de durée fixe : on la refait si la superficie a changé.']
+];
+JLG.widget('ddt', (el, o) => {
+  const OPT = ['6 mois', 'Moins de 6 mois', '3 ans', '5 ans', '10 ans', 'Illimitée', 'Pas de durée légale', '1 an'];
+  if (o && o.mode === 'defi') return fmQuiz(el, {items:DD_DEFI.map(([n, a, e]) => ({q:'<span class="muted">Durée de validité :</span> ' + n, a, e, o:shuffle(OPT.filter(v => v !== a && (a !== 'Moins de 6 mois' || v !== '6 mois') && (a !== '6 mois' || v !== 'Moins de 6 mois'))).slice(0, 3).concat(a)})), n:8, eyebrow:'Défi', hint:'Choisis la durée de validité pour une vente.', title:'Combien de temps ça vaut ?', perfect:'Tes diagnostics sont tous à jour.', again:'6 mois : termites et risques. 3 ans : gaz, électricité, assainissement. 10 ans : DPE.'});
+  const S = {year:1962, type:'mai', gaz:true, elec:true, term:true, erp:true, anc:false, dpe:'F'};
+  const calc = () => {
+    const y = S.year, r = [], no = [];
+    const add = (c, id, t, v, why) => (c ? r : no).push({id, t, v, why});
+    add(y < 1949, 'plomb', 'Plomb (CREP)', 'Illimitée si absence de plomb · 1 an si positif', 'Logement construit avant le 1er janvier 1949');
+    add(y < 1997 || (y === 1997), 'amiante', 'Amiante', 'Illimitée si réalisé depuis le 1er avril 2013', y === 1997 ? 'Permis avant le 1er juillet 1997 : à vérifier selon la date du permis' : 'Permis de construire délivré avant le 1er juillet 1997');
+    add(S.term, 'termites', 'Termites', '6 mois', 'Zone délimitée par arrêté préfectoral');
+    add(S.gaz, 'gaz', 'Gaz', '3 ans', 'Installation intérieure de plus de 15 ans');
+    add(S.elec, 'elec', 'Électricité', '3 ans', 'Installation intérieure de plus de 15 ans');
+    add(S.erp, 'erp', 'État des risques (ERP)', 'Moins de 6 mois', 'Bien situé dans une zone concernée par les risques');
+    add(S.anc, 'anc', 'Assainissement non collectif', '3 ans', 'Immeuble non raccordé au réseau public');
+    add(true, 'dpe', 'DPE', '10 ans', 'Logements concernés, sauf exceptions');
+    add(S.type === 'mai' && 'EFG'.includes(S.dpe), 'audit', 'Audit énergétique', '5 ans · dès la première visite', 'Maison individuelle classée E, F ou G');
+    add(S.type === 'app', 'carrez', 'Superficie loi Carrez', 'Pas de durée légale', 'Lot de copropriété');
+    return {r, no};
+  };
+  const draw = () => {
+    const {r, no} = calc();
+    $('.fm-dd-out', el).innerHTML = `<div class="fm-dd-count"><b>${r.length}</b> <span>à fournir dès la promesse de vente</span></div>
+      <ul class="fm-dd-list">${r.map((x, i) => `<li style="--d:${i * 55}ms"><span class="fm-chk">${icon('check')}</span><span><b>${x.t}</b><small>${x.why}</small></span><em>${x.v}</em></li>`).join('')}</ul>
+      ${no.length ? `<details class="fm-dd-no"><summary>${no.length} non concerné${no.length > 1 ? 's' : ''}</summary><ul>${no.map(x => `<li><b>${x.t}</b><small>${x.why}</small></li>`).join('')}</ul></details>` : ''}
+      <p class="fm-dd-note">Le détecteur de fumée est une obligation d’équipement, pas un diagnostic. Mérule et radon : de l’information, pas de diagnostic autonome.</p>`;
+  };
+  el.innerHTML = `<div class="w w-fm">
+    <div class="w-head"><span class="eyebrow">Simulateur</span><b>Quels diagnostics pour ce bien ?</b><span class="muted">Règle la maison : le dossier de diagnostic technique se compose tout seul.</span></div>
+    <div class="fm-dd">
+      <div class="fm-dd-in">
+        <div class="field"><label for="fmy">Année du permis de construire : <b id="fmyv">${S.year}</b></label><input id="fmy" type="range" min="1900" max="2024" step="1" value="${S.year}"></div>
+        <div class="ech-crit fm-type" role="tablist" aria-label="Type de bien"><button role="tab" aria-selected="true" data-t="mai">Maison individuelle</button><button role="tab" aria-selected="false" data-t="app">Appartement (copropriété)</button></div>
+        <div class="fm-tg">
+          <label><input type="checkbox" data-k="gaz" checked> Gaz : plus de 15 ans</label>
+          <label><input type="checkbox" data-k="elec" checked> Électricité : plus de 15 ans</label>
+          <label><input type="checkbox" data-k="term" checked> Zone termites (arrêté)</label>
+          <label><input type="checkbox" data-k="erp" checked> Zone à risques (ERP)</label>
+          <label><input type="checkbox" data-k="anc"> Non raccordé au réseau public</label>
+        </div>
+        <div class="field"><label for="fmd">Étiquette du DPE</label><select id="fmd">${'ABCDEFG'.split('').map(c => `<option${c === S.dpe ? ' selected' : ''}>${c}</option>`).join('')}</select></div>
+      </div>
+      <div class="fm-dd-out" aria-live="polite"></div>
+    </div></div>`;
+  el.addEventListener('input', e => {
+    if (e.target.id === 'fmy'){ S.year = +e.target.value; $('#fmyv', el).textContent = S.year; draw(); }
+    else if (e.target.dataset.k){ S[e.target.dataset.k] = e.target.checked; draw(); }
+    else if (e.target.id === 'fmd'){ S.dpe = e.target.value; draw(); }
+  });
+  let xp = false;
+  el.addEventListener('click', e => {
+    const b = e.target.closest('[data-t]'); if (!b) return;
+    S.type = b.dataset.t; $$('.fm-type button', el).forEach(x => x.setAttribute('aria-selected', x === b)); draw();
+    if (!xp){ xp = true; addXP(2, e); }
+  });
+  draw();
+});
+
 
 /* =================== DÉMARRAGE =================== */
 function boot(data){
@@ -6590,12 +6922,13 @@ JLG.go = go;
 JLG.subject({id:'efd', order:1, code:'BTS CJN · EFD', short:'Droit fondamental', title:'Éléments fondamentaux du droit', desc:'La règle de droit, ses sources, son application dans l’espace et dans le temps, et les droits dont chaque personne est titulaire.'});
 JLG.subject({id:'immo', order:2, code:'Activité 1 · Immobilier', short:'Droit immobilier', title:'Pratique des opérations immobilières', desc:'Les opérations sur les immeubles et le rôle du notaire, les sortes d’immeubles, le droit de propriété et ses démembrements, la division du sol, les clauses « désignation », « effet relatif » et « origine de propriété », puis la conduite d’un dossier : les signataires, la comparution, les procurations, les intervenants et l’état hypothécaire.'});
 JLG.subject({id:'civ', order:3, code:'Droit civil · Unité « Les unions »', short:'Droit civil', title:'Droit civil : les unions', desc:'Concubinage, PACS et mariage : les conditions, les formalités, les effets, les régimes matrimoniaux, et ce que le notaire doit vérifier.'});
-JLG.subject({id:'deo', order:4, code:'Bloc 1 · Activité 1', short:'Déontologie', title:'Accompagner le client selon les règles déontologiques', desc:'Le notaire, officier public et ministériel : sa mission de service public, l’acte authentique et ses effets, l’opposabilité, les métiers de l’étude et les autres professions du droit.'});
+JLG.subject({id:'deo', order:4, code:'Bloc 1 · Activités 1 et 3', short:'Déontologie', title:'Accompagner le client selon les règles déontologiques', desc:'Le notaire, officier public et ministériel : sa mission de service public, l’acte authentique et ses effets, l’opposabilité, les métiers de l’étude et les autres professions du droit, puis les formalités préalables : identifier les personnes et le bien, les pièces d’urbanisme et les diagnostics.'});
 JLG.log({date:'2026-10-06', items:['Ouverture du site : bienvenue Jade !', 'Éléments fondamentaux du droit · Chapitre 1 : Les droits objectifs', 'Éléments fondamentaux du droit · Chapitre 2 : Les droits subjectifs', 'Pratique des opérations immobilières · Séance 1 : Les opérations immobilières et le rôle du notaire']});
 JLG.log({date:'2026-10-08', items:['Nouvelle matière : Droit civil', 'Droit civil · Partie 1 : Le concubinage et le PACS', 'Droit civil · Partie 2 : Le mariage', 'Nouvel onglet Fiches : une fiche bristol à apprendre par matière, avec le mode cache', 'Nouveaux outils : l’arbre des empêchements, le comparateur des couples, le simulateur de nullité']});
 JLG.log({date:'2026-10-10', items:['Le site devient « Alves Cances »', 'Pratique des opérations immobilières · Séance 2 : la nature des biens immobiliers et les titulaires des droits', 'Nouveau : le jeu des 12 niveaux, avec une animation à chaque niveau, des coffres, des jokers, des boosters et 3 quêtes par jour', 'Nouveaux outils : générateur « effet relatif », chaîne des propriétaires sur 30 ans, barème de l’usufruit, simulateur d’usucapion, distances entre voisins, coupe du sol']});
 JLG.log({date:'2026-10-11', items:['Nouvelle matière : Accompagner le client selon les règles déontologiques (bloc 1)', 'Déontologie · Chapitre 1 : Le notaire et l’authenticité des actes', 'Nouveaux schémas : la journée de l’étude au service de l’État, le duel des actes, la course à la publication, le parcours du dossier, les professions du droit', 'Nouveau : ton programme du jour sur l’accueil (révision, défi, points faibles, nouveau cours)', 'Nouveau : la révision espacée, tes flashcards reviennent pile quand tu allais les oublier', 'Nouveau : tes points faibles, chaque question ratée est gardée jusqu’à ce que tu la réussisses', 'Nouveau : la recherche dans tout le site (la loupe, ou Ctrl K sur ordinateur)', 'Nouveau : écouter un cours, une fiche ou une flashcard à voix haute', 'Le site marche maintenant hors ligne une fois ouvert, et s’installe comme une appli', 'Dans Progression > Réglages : sauvegarde de ta progression et thème auto, sombre ou clair', 'Les fiches s’impriment proprement (bouton Imprimer)']});
 JLG.log({date:'2026-10-15', items:['Droit civil · Partie 3 (le mariage, activité 2) : Les régimes matrimoniaux', 'Pratique des opérations immobilières · Séance 3 : Introduction à la conduite d’un dossier en droit des biens', 'Nouveaux schémas : Paul et Julie régime par régime, le remploi, la donation à un enfant marié, la créance de participation, la part du survivant, le parcours du changement de régime', 'Nouveaux outils : la table de signature, le générateur de comparution avec le contrôle du SPF, l’arbre des procurations, le simulateur des intervenants, la lecture d’un état hypothécaire', 'Nouveaux défis : propre ou commun, qui doit combien, qui est qui à la signature, le SPF rejette, qui doit intervenir', 'Galerie des clauses : les comparutions et les clauses de l’acte (certification, clôture, représentation, intervention)']});
+JLG.log({date:'2026-10-18', items:['Accompagner le client selon les règles déontologiques · Activité 3, chapitre 1 : Les formalités préalables', 'Nouveaux schémas : le dossier de ton client (quelles pièces pour quel profil), les pièces d’urbanisme (CUa, CUb, alignement, DIA), le simulateur de diagnostics (DDT)', 'Nouveaux défis : quelle pièce demander, le bon certificat, combien de temps ça vaut', '30 nouveaux mots au lexique : BODACC, Kbis, DPU, ZAD, CREP, DPE, loi Carrez…']});
 
 </script>
 <!-- ▲ JLG:MATIERES efd immo civ deo ▲ -->
@@ -9801,6 +10134,457 @@ JLG.fiche('deo1', [
 
 </script>
 <!-- ▲ JLG:CHAPITRE deo1 ▲ -->
+<!-- ▼ JLG:CHAPITRE deo2 ▼ -->
+<script>
+JLG.chapter({
+  id:'deo2', subject:'deo', order:2, num:'3·1', added:'2026-10-18', minutes:45,
+  kicker:'Activité 3 · Chapitre 1', short:'Les formalités préalables', title:'Les formalités préalables', titleHtml:'Les formalités <em>préalables</em>',
+  intro:'Activité 3 : avant la signature, le collaborateur réunit les pièces et accomplit les formalités qui lui permettront de rédiger l’acte. Qui sont les parties, que peuvent-elles signer, quel est exactement le bien vendu, quelles contraintes pèsent sur lui ? Ce chapitre est ta liste de courses de la préparation d’un dossier : les personnes, le bien, les documents.',
+  objectives:['Identifier une personne physique et vérifier son identité, sa capacité et sa situation matrimoniale', 'Identifier une personne morale et contrôler les pouvoirs de son représentant', 'Désigner précisément un bien (nature, situation, contenance, cadastre)', 'Savoir quelle pièce demander, à qui, pour quel bien', 'Connaître les pièces d’urbanisme et les diagnostics du dossier de diagnostic technique (DDT) et leur durée de validité'],
+  prereq:'le chapitre « Le notaire et l’authenticité des actes » (la publicité foncière, l’EHF) et la séance 3 d’immobilier (comparution, procuration, intervenants). Ici, tu passes de la théorie à la préparation concrète d’un dossier.',
+  traps:[
+    {t:'Pièce d’identité ≠ titre de séjour', h:'Pour une personne de nationalité étrangère, le notaire demande une pièce d’identité officielle (notamment un passeport). Un titre de séjour n’est pas exigé de tout étranger : les ressortissants de l’EEE et les Suisses en sont en principe dispensés.'},
+    {t:'Un acte d’état civil n’a pas de « durée de validité » universelle', h:'Il n’existe pas de règle valable pour toute vente notariale qui dirait « 3 mois » ou « 6 mois ». L’étude cherche des actes assez récents pour lire les mentions en marge (mariage, PACS, divorce…) et connaître la situation actuelle des parties.'},
+    {t:'Le contrat de mariage se demande au notaire, pas à la mairie', h:'La mairie conserve l’acte de mariage. Le contrat de mariage, lui, est un acte notarié : on en demande une copie au notaire qui détient l’acte.'},
+    {t:'Kbis ≠ pouvoirs', h:'L’extrait Kbis identifie la société et ses représentants déclarés. Il ne remplace pas la vérification des pouvoirs et des autorisations prévues par les statuts ou par la loi.'},
+    {t:'Extrait de matrice cadastrale ≠ titre de propriété', h:'La matrice cadastrale est un document fiscal : elle indique les titulaires qui figurent dans la documentation fiscale. Elle ne prouve pas la propriété. Le titre de propriété, c’est l’acte par lequel le vendeur est devenu propriétaire.'},
+    {t:'La DIA n’est pas un certificat', h:'La déclaration d’intention d’aliéner (DIA) est un document qu’on dépose en mairie pour demander à la commune si elle exerce son droit de préemption. Le certificat d’urbanisme, lui, est un document qu’on reçoit.'},
+    {t:'Certificat d’urbanisme ≠ permis de construire', h:'Le CU renseigne sur les règles applicables à un terrain, sans autoriser quoi que ce soit. Il est gratuit, et valable 18 mois.'},
+    {t:'Le locataire n’a pas toujours un droit de préemption', h:'Il ne faut pas supposer que tout locataire peut acheter le logement en priorité. Le notaire vérifie le bail, les congés délivrés et les droits de préemption applicables au cas par cas.'},
+    {t:'Tous les diagnostics n’ont pas une durée', h:'Plomb, amiante, termites, gaz, électricité, DPE : chacun a sa durée (parfois illimitée). La loi Carrez, elle, n’a pas de durée légale : on la refait si la superficie a changé. Quant au détecteur de fumée, c’est une obligation d’équipement, pas un diagnostic.'}
+  ],
+  sections:[
+    {id:'pourquoi', n:'1', eyebrow:'Avant la signature', title:'À quoi servent les formalités préalables ?', blocks:[
+      {t:'p', h:'Avant la signature de l’acte, le collaborateur doit demander de nombreux documents (extraits cadastraux, actes d’état civil…) et accomplir de multiples formalités, qui varient suivant les cas (le droit de préemption, par exemple). Ce sont les <b>formalités préalables</b> qui lui permettent surtout de <b>rédiger</b> l’acte.'},
+      {t:'def', term:'Formalités préalables', h:'Les vérifications, demandes de pièces et démarches accomplies <b>avant la signature</b> de l’acte, pour identifier les personnes et le bien et connaître les contraintes qui pèsent dessus. À distinguer des formalités <b>postérieures</b> (la publication au SPF, accomplie par le formaliste).'},
+      {t:'widget', w:'proc', o:{eyebrow:'Schéma animé', title:'Le dossier avant la signature', sub:'Trois enquêtes, puis la rédaction.', steps:[
+        {t:'Qui sont les parties ?', d:'Identité, état civil, capacité, situation matrimoniale, domicile, profession. Pour une société : statuts, Kbis, pouvoirs du représentant.', tag:'les personnes'},
+        {t:'Quel est exactement le bien ?', d:'Titre de propriété, désignation cadastrale, état hypothécaire, documents de copropriété, location éventuelle.', tag:'le bien'},
+        {t:'Quelles règles et contraintes pèsent sur lui ?', d:'Certificat d’urbanisme, droit de préemption (DIA), alignement, risques, diagnostics du dossier de diagnostic technique (DDT).', tag:'les documents'},
+        {t:'Le collaborateur rédige l’acte', d:'Il a tout ce qu’il faut : comparution, désignation, origine de propriété, déclarations, annexes. Le jour de la signature, le notaire peut authentifier.', tag:'rédaction'}]}},
+      {t:'tip', k:'memo', title:'Les trois questions', h:'<b>QUI</b> signe (les personnes) · <b>QUOI</b> est vendu (le bien) · <b>QUELLES</b> règles s’y appliquent (urbanisme, diagnostics). Si tu as les trois réponses, tu peux rédiger.'},
+      {t:'tip', k:'notaire', h:'Ce chapitre est le quotidien du collaborateur : un dossier de vente, c’est d’abord un dossier de pièces. Un acte qu’on rédige avec des pièces manquantes, c’est un acte qu’on risque de devoir refaire, ou une responsabilité pour le notaire.'}
+    ]},
+    {id:'physiques', n:'2', eyebrow:'Les parties', title:'L’identification des personnes physiques', blocks:[
+      {t:'h3', h:'Les éléments d’identification', small:'SIX MENTIONS'},
+      {t:'p', h:'Pour une personne physique, on indique :'},
+      {t:'chips', groups:[{label:'Dans la comparution', items:[
+        {l:'Le nom', h:'Le nom de famille, tel qu’il figure à l’état civil.'},
+        {l:'Les prénoms', h:'Tous les prénoms, <b>dans l’ordre de l’état civil</b>.'},
+        {l:'Le domicile', h:'Là où la personne habite : à ne pas confondre avec la résidence principale ou le domicile fiscal (voir plus bas).'},
+        {l:'La profession', h:'Sa profession exacte.'},
+        {l:'Date et lieu de naissance', h:'Tels qu’ils figurent dans l’acte de naissance.'},
+        {l:'Le nom du conjoint', h:'<b>S’il y a lieu</b> : une personne mariée est désignée avec son conjoint.'}]}]},
+      {t:'h3', h:'Vérifier l’identité', small:'FRANÇAIS · ÉTRANGER'},
+      {t:'vs', a:{title:'Personne de nationalité française', items:['Une <b>pièce d’identité officielle en cours de validité</b> : carte nationale d’identité ou passeport', 'Elle comporte une <b>photographie</b>', 'Le notaire <b>vérifie l’identité</b> du comparant']}, b:{title:'Personne de nationalité étrangère', items:['Une <b>pièce d’identité officielle</b> (notamment un passeport)', 'Selon la situation : des <b>actes d’état civil</b> accompagnés d’une <b>traduction</b> appropriée', 'Un titre de séjour n’est pas exigé de tout étranger']}},
+      {t:'tip', k:'piege', title:'Pas de titre de séjour pour tout le monde', h:'Les ressortissants de l’Espace économique européen (EEE) et les Suisses en sont <b>en principe dispensés</b>. Ne le réclame pas systématiquement.'},
+      {t:'h3', h:'Les actes d’état civil', small:'IDENTITÉ · FILIATION · MARIAGE'},
+      {t:'p', h:'Le notaire demande des actes d’état civil pour vérifier la capacité, l’identité et la filiation :'},
+      {t:'table', head:['Acte', 'Ce qu’il apporte', 'Où le demander'], rows:[
+        ['<b>Acte de naissance</b>, avec filiation', 'Identité, filiation, mentions en marge (mariage, PACS, divorce…)', 'Par <b>COMEDEC</b> si la commune est raccordée, ou au service d’état civil compétent'],
+        ['<b>Acte de mariage</b> (copie ou extrait)', 'Date du mariage, mention d’un éventuel contrat ou changement de régime, divorce', 'Par COMEDEC, ou à la <b>mairie du lieu de célébration</b>'],
+        ['Français <b>né ou marié à l’étranger</b>, acte établi ou transcrit en France', 'Idem', 'Au <b>Service central d’état civil (SCEC), à Nantes</b>, notamment par les démarches en ligne'],
+        ['Personne <b>née à l’étranger mais mariée en France</b>', 'L’acte de mariage', 'Extrait de l’acte de mariage à la <b>mairie du lieu de célébration</b>, ou par COMEDEC']]},
+      {t:'def', term:'COMEDEC', h:'<b>CO</b>mmunication <b>É</b>lectronique des <b>D</b>onnées de l’<b>É</b>tat <b>C</b>ivil : l’échange dématérialisé des actes d’état civil entre les notaires et les mairies raccordées.'},
+      {t:'tip', k:'piege', title:'« Validité » des actes d’état civil', h:'Il n’existe pas, en règle générale, de durée de validité universelle de 3 ou de 6 mois pour une vente notariale. L’étude recherche des actes <b>suffisamment récents</b> pour vérifier les mentions marginales et la situation actuelle des parties.'},
+      {t:'h3', h:'La capacité juridique', small:'MINEUR · MAJEUR PROTÉGÉ'},
+      {t:'acc', items:[
+        {l:'Mineur non émancipé', h:'Il est <b>représenté par ses représentants légaux</b>. Selon la nature et la gravité de l’acte, l’<b>autorisation du juge des tutelles des mineurs</b> peut être nécessaire (par exemple pour certains actes de disposition).'},
+        {l:'Majeur protégé', h:'Le notaire vérifie <b>l’existence et l’étendue de la mesure de protection</b>, ainsi que les pouvoirs du représentant ou de l’assistant. <b>Sous tutelle</b>, le tuteur représente en principe le majeur ; certains actes, notamment de disposition, exigent l’autorisation du juge ou du conseil de famille. <b>Sous curatelle</b>, l’assistance du curateur est requise pour les actes prévus par la loi.'},
+        {l:'Mandat de protection future', h:'À vérifier aussi : il ne figure <b>pas nécessairement en mention marginale</b>.'}]},
+      {t:'tip', k:'prof', h:'Tu as vu en séance 3 d’immobilier la place du tuteur et du représentant à la signature (la table de signature). Ici, tu apprends à <b>vérifier avant</b> la signature qu’ils ont bien le pouvoir d’agir.'},
+      {t:'h3', h:'La situation matrimoniale', small:'MARIAGE · DIVORCE · PACS'},
+      {t:'p', h:'Le notaire doit connaître le régime matrimonial et la situation de famille de chaque partie : c’est ce qui décide qui est propriétaire, qui doit signer, quel logement est protégé.'},
+      {t:'steps', items:[
+        {l:'Un acte de mariage récent', h:' — et, si nécessaire, une copie du <b>contrat de mariage</b>, à demander <b>au notaire détenteur de l’acte</b> (et non à la mairie).'},
+        {l:'Un changement de régime matrimonial', h:' — la copie de l’<b>acte notarié</b> et, <b>seulement lorsqu’une homologation judiciaire a été nécessaire</b>, la décision correspondante.'},
+        {l:'Un divorce ou une séparation de corps', h:' — les justificatifs adaptés (jugement, convention de divorce déposée au rang des minutes d’un notaire, mention en marge, selon les cas) et la vérification de leur <b>caractère définitif</b>.'},
+        {l:'Un mariage célébré à l’étranger', h:' — l’acte, à chercher auprès des autorités compétentes, ou du SCEC lorsqu’il figure dans l’état civil français.'},
+        {l:'Un divorce prononcé à l’étranger', h:' — vérifier sa <b>reconnaissance et ses effets en France</b> ; demander, si besoin, les pièces étrangères avec les formalités et traductions nécessaires.'}]},
+      {t:'tip', k:'prof', title:'Le divorce sans juge', h:'Dans un divorce par consentement mutuel sans juge, la convention est signée par les époux et leurs avocats, puis <b>déposée au rang des minutes d’un notaire</b>. Le notaire n’en est pas l’auteur : son dépôt lui donne <b>date certaine et force exécutoire</b>.'},
+      {t:'def', term:'Le PACS', h:'Il fait l’objet d’une <b>mention en marge de l’acte de naissance</b>, avec des modalités particulières pour les personnes nées à l’étranger. On vérifie sa date et, le cas échéant, sa <b>dissolution</b>. Depuis le <b>1er novembre 2017</b>, il s’enregistre soit <b>en mairie</b>, soit <b>devant notaire</b>. Le PACS notarié se demande au notaire, les autres aux parties.'},
+      {t:'h3', h:'Le domicile', small:'TROIS NOTIONS'},
+      {t:'p', h:'Il est important de distinguer le <b>domicile</b>, la <b>résidence principale</b> et le <b>domicile fiscal</b>. Pourquoi ? Parce que chacun joue un rôle différent :'},
+      {t:'table', head:['Ce qu’on détermine', 'Notion à regarder'], rows:[
+        ['La protection du <b>logement de la famille</b> (art. 215, alinéa 3, C. civ.)', 'Le logement où vit la famille, <b>indépendamment du seul domicile fiscal</b>'],
+        ['L’<b>habitation principale</b>', 'La résidence principale'],
+        ['Les règles sur les <b>plus-values immobilières</b>', 'La résidence principale (et la situation fiscale)'],
+        ['Le <b>régime fiscal</b> applicable à la mutation', 'La situation du vendeur et de l’acquéreur']]},
+      {t:'p', h:'Justificatifs à demander selon le dossier : une pièce indiquant l’adresse, un avis d’imposition ou un justificatif de résidence principale.'},
+      {t:'h3', h:'Le surendettement et la situation professionnelle', small:'DEUX VÉRIFICATIONS'},
+      {t:'acc', items:[
+        {l:'Surendettement du particulier', h:'On interroge le client et on vérifie les informations publiques pertinentes (notamment le <b>BODACC</b> en cas de rétablissement personnel publié). S’il y a une procédure de surendettement, il faut déterminer <b>précisément ses effets</b> sur la disposition du bien : l’autorisation du juge n’est <b>pas systématique</b>.'},
+        {l:'Situation professionnelle', h:'Si une partie exerce une activité professionnelle : un justificatif d’immatriculation au <b>RNE</b> et, lorsqu’il existe, un <b>extrait K ou Kbis</b> récent. On vérifie le statut professionnel et les pouvoirs utiles à l’opération.'},
+        {l:'Interdiction d’acquérir (habitat indigne)', h:'Pour l’acquéreur d’un bien à usage d’habitation ou d’un fonds de commerce d’un établissement d’hébergement, on vérifie si le <b>contrôle légal de l’interdiction d’acquérir</b> s’applique (lutte contre l’habitat indigne) ; la consultation du <b>bulletin n° 2</b> suit une procédure encadrée.'},
+        {l:'Procédure collective', h:'On vérifie l’existence éventuelle d’une procédure collective (notamment par le <b>BODACC</b>) et ses conséquences sur les pouvoirs de la partie.'}]},
+      {t:'tip', k:'prof', title:'Le RNE', h:'Le <b>registre national des entreprises</b> (RNE) est tenu par l’<b>INPI</b>. Ne le confonds pas avec SIRENE, le répertoire de l’INSEE : on y trouve le numéro SIREN, pas l’immatriculation qui prouve l’existence légale.'},
+      {t:'p', h:'Le meilleur moyen de retenir ces pièces : choisis un profil de client et regarde son dossier se remplir.'},
+      {t:'widget', w:'pieces'}
+    ]},
+    {id:'morales', n:'3', eyebrow:'Les sociétés et les mandataires', title:'Les personnes morales, la représentation et l’intervention', blocks:[
+      {t:'h3', h:'Identifier une personne morale', small:'LA CARTE D’IDENTITÉ DE LA SOCIÉTÉ'},
+      {t:'p', h:'Pour une société, le notaire se fait remettre :'},
+      {t:'list', items:['les <b>statuts à jour</b> (objet social et pouvoirs), les <b>décisions sociales utiles</b> et la justification de l’identité du représentant ;', 'un <b>extrait K bis</b> (extrait d’immatriculation au registre du commerce et des sociétés), <b>le plus récent possible</b> : c’est la <b>carte d’identité de la société</b> ;', 'les renseignements disponibles sur les <b>inscriptions et sûretés</b>, selon la nature et la situation de la société ;', 'si nécessaire, les justificatifs attestant l’<b>absence de procédure collective</b> ou la situation exacte de la société ;', 'un <b>compte rendu d’assemblée générale</b> qui prouve, par exemple, que la vente est autorisée.']},
+      {t:'p', h:'En cas de <b>sauvegarde, redressement ou liquidation judiciaire</b>, on vérifie les annonces <b>BODACC</b> et les décisions de justice : les pouvoirs du dirigeant, de l’administrateur ou du liquidateur dépendent de la procédure et du jugement.'},
+      {t:'p', h:'Pour une <b>association</b> : on note la date et le lieu de déclaration ou de dépôt des statuts (préfecture).'},
+      {t:'tip', k:'piege', title:'Le Kbis ne dit pas tout', h:'Il permet d’<b>identifier</b> les représentants déclarés. Mais il ne remplace pas toujours la vérification des <b>pouvoirs</b> et des <b>autorisations</b> prévus par les statuts ou la loi : le gérant peut être le bon, sans avoir le droit de vendre seul.'},
+      {t:'h3', h:'La procuration', small:'QUAND LA PERSONNE NE SIGNE PAS'},
+      {t:'p', h:'Quand une personne ne signe pas elle-même l’acte, elle peut donner pouvoir à un <b>mandataire</b> par une <b>procuration</b>.'},
+      {t:'vs', a:{title:'Procuration sous signature privée', items:['Possible pour certaines opérations, notamment <b>une vente ordinaire</b>']}, b:{title:'Procuration authentique', items:['<b>Requise</b> dans certains cas, notamment pour consentir <b>une donation</b>', 'Il faut vérifier son mode de conservation et produire, joindre ou annexer l’<b>expédition</b> ou la copie appropriée, selon les exigences de l’acte']}},
+      {t:'tip', k:'prof', h:'Tu as déjà les règles de fond : le parallélisme des formes, le brevet, la procuration à distance. Retiens ici le <b>réflexe de dossier</b> : « Qui signe ? Si ce n’est pas la partie elle-même, où est la procuration, et quelle forme doit-elle avoir ? »'},
+      {t:'h3', h:'Les pouvoirs des personnes morales', small:'STATUTS · ASSEMBLÉES'},
+      {t:'vs', a:{title:'Sociétés civiles', items:['Les pouvoirs résultent des <b>statuts</b>', 'ou des <b>délibérations</b> d’associés']}, b:{title:'Sociétés commerciales', items:['Les pouvoirs résultent des <b>statuts</b>, du <b>compte rendu d’assemblée générale</b> des associés ou des actionnaires, des pouvoirs du conseil d’administration, du PDG ou du directoire', '<b>Selon la forme juridique</b>']}},
+      {t:'h3', h:'L’intervention', small:'EN DEHORS DES COMPARANTS'},
+      {t:'p', h:'D’autres personnes que les comparants peuvent <b>intervenir</b> à l’acte. Elles doivent être <b>nommées, prénommées et qualifiées</b> comme les parties comparantes.'},
+      {t:'list', items:['le <b>tuteur</b> ou le représentant habilité d’un majeur protégé ;', 'le <b>conjoint</b>, pour indiquer qu’il ne s’oppose pas à la convention (vente du logement familial) ;', 'le titulaire du <b>fonds servant</b> ou du <b>fonds dominant</b> quand une servitude doit être modifiée ou supprimée ;', 'un <b>traducteur</b>.']}
+    ]},
+    {id:'bien', n:'4', eyebrow:'Le bien', title:'L’identification du bien', blocks:[
+      {t:'p', h:'Pour chaque dossier, le notaire doit détenir toutes les <b>pièces justificatives de l’identification du bien</b> vendu. Le vendeur remet d’abord la <b>copie de son titre de propriété</b>.'},
+      {t:'h3', h:'La désignation du bien', small:'DÉCRET DU 4 JANVIER 1955'},
+      {t:'quote', ref:'Article 7, 1er alinéa, du décret du 4 janvier 1955', h:'« Tout acte … doit indiquer, pour chacun des immeubles qu’il concerne, la nature, la situation, la contenance et la désignation cadastrale (section, n° du plan et lieu-dit). Le lieu-dit est remplacé par l’indication de la rue et du numéro pour les immeubles situés dans les parties agglomérées des communes urbaines. »'},
+      {t:'chips', groups:[{label:'Les quatre éléments', items:[
+        {l:'La nature', h:'Maison, appartement, terrain à bâtir, lot de copropriété…'},
+        {l:'La situation', h:'L’adresse : commune, rue et numéro.'},
+        {l:'La contenance', h:'La surface : en hectares, ares et centiares pour un terrain.'},
+        {l:'La désignation cadastrale', h:'La <b>section</b>, le <b>numéro du plan</b> et le <b>lieu-dit</b> (remplacé par la rue et le numéro en ville).'}]}]},
+      {t:'list', items:['Le <b>cadastre</b> se présente <b>sous forme de tableau</b> : c’est la présentation communément admise.', 'La <b>description du bien</b> doit être <b>détaillée</b> (pour un immeuble : les constructions et les terrains).']},
+      {t:'p', h:'Tu as vu ces clauses en séance 1. Voici les modèles du cours, avec la désignation surlignée :'},
+      {t:'widget', w:'gallery', o:{set:'designation'}},
+      {t:'h3', h:'Les documents à obtenir', small:'TITRE · CADASTRE · HYPOTHÈQUES'},
+      {t:'acc', items:[
+        {l:'La copie du titre de propriété', h:'Le notaire doit détenir le titre pour vérifier le <b>propriétaire</b>, la <b>désignation</b> et l’<b>origine trentenaire</b>.'},
+        {l:'Les renseignements cadastraux', h:'Ils s’obtiennent auprès des services et portails de la <b>DGFiP</b>, avec, si nécessaire, des documents communaux ou d’un géomètre-expert. Les pièces utiles : <ul><li>l’<b>extrait cadastral modèle 1</b> et les références cadastrales à jour (vérifier la date d’établissement et les exigences de la publicité foncière) ;</li><li>l’<b>extrait de matrice cadastrale</b> : il identifie les titulaires de la documentation fiscale, sans être un titre de propriété ;</li><li>le <b>plan cadastral</b> et, selon le dossier, un plan de situation ou de masse ;</li><li>en cas de <b>division</b> : le <b>document modificatif du parcellaire cadastral</b> et, au besoin, un <b>plan de bornage</b> établi par un géomètre-expert.</li></ul>'},
+        {l:'Les renseignements hypothécaires', h:'On les demande au <b>service de la publicité foncière du ressort de la situation de l’immeuble</b> : c’est l’<b>EHF</b>. On y vérifie : <ul><li>la <b>propriété</b> du bien ;</li><li>l’<b>origine de propriété</b> et la continuité des mutations publiées (reconstitution habituelle sur 30 ans, sans la confondre avec la seule prescription acquisitive) ;</li><li>le <b>démembrement</b> de la propriété ;</li><li>les <b>servitudes</b> ;</li><li>les <b>sûretés</b> (hypothèque) ;</li><li>les <b>actes de copropriété</b> publiés : règlement de copropriété et état descriptif de division.</li></ul>'},
+        {l:'Les documents de copropriété', h:'Si le bien est un lot de copropriété, on réunit aussi les documents de gestion de l’immeuble : c’est l’objet du cours sur la copropriété.'}]},
+      {t:'tip', k:'piege', title:'Matrice ou titre ?', h:'« Le propriétaire figure dans la matrice cadastrale, donc le bien est à lui. » <b>Non.</b> La matrice est une source <b>fiscale</b>. Seuls le titre de propriété et la chaîne des actes publiés prouvent qui est propriétaire.'},
+      {t:'tip', k:'prof', title:'Les charges et documents de gestion', h:'L’état hypothécaire contrôle les actes de copropriété <b>publiés</b> (règlement, état descriptif de division). Les <b>charges</b> et les <b>documents de gestion</b> (procès-verbaux d’assemblée, appels de fonds…) se demandent séparément, au syndic.'},
+      {t:'tip', k:'memo', title:'Le trio du bien', h:'<b>Titre</b> (qui est propriétaire ?) · <b>Cadastre</b> (de quoi parle-t-on ?) · <b>EHF</b> (qu’est-ce qui le grève ?).'}
+    ]},
+    {id:'urbanisme', n:'5', eyebrow:'Les règles qui pèsent sur le bien', title:'Les pièces d’urbanisme', blocks:[
+      {t:'p', h:'Ces pièces permettent d’apprécier les <b>règles d’urbanisme</b> et les <b>contraintes</b> applicables au bien. Leur nécessité et leur annexion à l’acte dépendent de la <b>nature de l’opération</b>.'},
+      {t:'widget', w:'urba'},
+      {t:'acc', items:[
+        {l:'Le certificat d’urbanisme (CU)', h:'Il renseigne sur les <b>règles applicables</b>, les <b>servitudes</b> et les <b>taxes</b> : constructibilité, droits et obligations attachés au terrain. <ul><li><b>CUa</b> d’information : instruction en principe <b>1 mois</b> ;</li><li><b>CUb</b> opérationnel : instruction en principe <b>2 mois</b> ;</li><li>gratuit, valable <b>18 mois</b> ;</li><li>ce n’est <b>pas une autorisation</b> : il ne remplace pas le permis de construire.</li></ul>'},
+        {l:'Le certificat d’alignement', h:'L’<b>alignement</b> est la détermination, par l’autorité administrative, de la <b>limite du domaine public routier</b> (État, département ou commune) et des propriétés riveraines.'},
+        {l:'Le certificat de numérotage', h:'Il atteste, lorsque c’est nécessaire, l’<b>adresse attribuée à l’immeuble</b>.'},
+        {l:'Les arrêtés de mise en sécurité ou de traitement de l’insalubrité', h:'On vérifie l’existence de <b>mesures administratives en vigueur</b> sur le bien.'},
+        {l:'Le certificat de carrière', h:'Il renseigne sur la situation du bien au regard des <b>risques du sol et du sous-sol</b> : anciennes carrières, nature des travaux confortatifs…'},
+        {l:'Le droit de préemption urbain (DPU) ou la zone d’aménagement différé (ZAD)', h:'On vérifie son <b>existence</b> et, si la vente y est soumise, on <b>dépose une déclaration d’intention d’aliéner (DIA)</b>. La DIA n’est pas un certificat.'}]},
+      {t:'tip', k:'prof', title:'Le délai de réponse à la DIA', h:'La commune (ou le titulaire du droit de préemption) dispose de <b>deux mois</b> à compter de la réception de la DIA pour décider. Pendant ce temps, le notaire ne peut pas conclure la vente sans cette réponse : c’est pourquoi on dépose la DIA tôt.'},
+      {t:'tip', k:'memo', title:'CUa ou CUb ?', h:'<b>a</b> comme <b>a</b>ccès à l’information, 1<sup>re</sup> lettre de l’alphabet : <b>1 mois</b>. <b>b</b> comme <b>b</b>âtir (opérationnel), 2<sup>e</sup> lettre : <b>2 mois</b>.'},
+      {t:'tip', k:'ex', title:'À toi de jouer', h:'M. Lenoir vend un terrain. L’acheteur veut savoir s’il pourra y construire une maison de 120 m². <b>Quel document demander ?</b> Un CUb (opérationnel) : il dit si l’opération projetée est réalisable. Le CUa dirait seulement les règles qui s’appliquent au terrain.'}
+    ]},
+    {id:'diagnostics', n:'6', eyebrow:'Le dossier de diagnostic technique', title:'Les diagnostics, la situation locative et les autres renseignements', blocks:[
+      {t:'h3', h:'Le DDT', small:'DOSSIER DE DIAGNOSTIC TECHNIQUE'},
+      {t:'p', h:'Le vendeur communique, selon le bien vendu, les diagnostics exigés dans le <b>dossier de diagnostic technique (DDT)</b>. Certains documents relèvent d’obligations d’information distinctes. Ils sont en principe fournis <b>dès la promesse de vente</b> ; à défaut de promesse, <b>lors de l’acte authentique</b>, sous réserve des obligations de remise plus précoce.'},
+      {t:'widget', w:'ddt'},
+      {t:'table', head:['Diagnostic', 'Immeuble concerné', 'Durée de validité'], rows:[
+        ['<b>Plomb</b> (CREP)', 'Logement construit avant le 1er janvier 1949', 'Illimitée si absence de plomb au seuil réglementaire ; 1 an pour une vente si résultat positif'],
+        ['<b>Amiante</b>', 'Permis de construire délivré avant le 1er juillet 1997', 'Illimitée si diagnostic réalisé depuis le 1er avril 2013, même si positif ; à renouveler si réalisé avant cette date'],
+        ['<b>Termites</b>', 'Bien situé dans une zone délimitée par arrêté préfectoral', '6 mois'],
+        ['<b>Mérule</b> (information)', 'Bien situé dans une zone définie par arrêté préfectoral', 'Information sur le risque ; pas de diagnostic national systématique ni de durée de validité générale'],
+        ['<b>Radon</b>', 'Bien situé dans une zone à potentiel radon de niveau 3', 'Information dans l’ERP ; pas de diagnostic autonome'],
+        ['<b>Gaz</b>', 'Logement : installation intérieure de gaz de plus de 15 ans', '3 ans pour une vente'],
+        ['<b>Électricité</b>', 'Logement : installation intérieure électrique de plus de 15 ans', '3 ans pour une vente'],
+        ['<b>État des risques (ERP)</b>', 'Bien situé dans une zone concernée par les risques prévus par les textes', 'Moins de 6 mois'],
+        ['<b>DPE</b>', 'Logements concernés, sauf exceptions prévues par les textes', '10 ans ; les DPE réalisés avant juillet 2021 ne sont plus utilisables en 2026'],
+        ['<b>Audit énergétique</b>', 'Vente de maison individuelle ou d’immeuble en monopropriété à usage d’habitation classé E, F ou G (cas prévus par la loi)', '5 ans ; à remettre dès la première visite pour les biens concernés'],
+        ['<b>Assainissement non collectif</b>', 'Immeuble d’habitation non raccordé au réseau public de collecte', '3 ans'],
+        ['<b>Superficie loi Carrez</b>', 'Lot(s) de copropriété concernés par l’obligation de mesurage', 'Pas de durée légale fixe ; à refaire si la superficie a changé'],
+        ['<b>Retrait-gonflement des argiles</b>', 'Terrain non bâti constructible en zone d’exposition moyenne ou forte : étude géotechnique dans les cas prévus', 'Étude géotechnique préalable : 30 ans si le sol n’a pas été remanié ; information sur le risque selon le cas'],
+        ['<b>Bruit des aérodromes</b>', 'Bien situé dans une zone du plan d’exposition au bruit (PEB)', 'État des nuisances sonores aériennes : à actualiser selon la situation du bien'],
+        ['<b>Détecteur de fumée</b>', 'Logement : au moins un détecteur normalisé', 'Obligation d’équipement, distincte du DDT ; pas de durée de diagnostic'],
+        ['<b>Débroussaillement</b>', 'Bien situé dans une zone soumise aux obligations légales de débroussaillement', 'Information et fiche dans l’état des risques ; justificatifs selon le cas, à vérifier pour la vente']]},
+      {t:'tip', k:'memo', title:'Les durées à connaître par cœur', h:'<b>6 mois</b> : termites et état des risques. <b>3 ans</b> : gaz, électricité, assainissement non collectif. <b>10 ans</b> : DPE. <b>5 ans</b> : audit énergétique. <b>Illimité</b> : plomb sans plomb, amiante récent.'},
+      {t:'tip', k:'prof', title:'Pourquoi ces diagnostics sont si surveillés', h:'Si un diagnostic obligatoire manque lors de la signature de l’acte authentique, le vendeur <b>ne peut plus s’exonérer de la garantie des vices cachés</b> correspondante, même avec une clause de non-garantie. Pour le notaire, c’est une raison de plus de les demander tôt.'},
+      {t:'tip', k:'prof', title:'La loi Carrez en pratique', h:'Elle concerne les lots de copropriété. Si la superficie réelle est inférieure de <b>plus d’un vingtième</b> (5 %) à celle indiquée dans l’acte, l’acquéreur peut demander une <b>diminution du prix</b>, dans un délai d’<b>un an</b> à compter de l’acte authentique. C’est une mention obligatoire de l’acte.'},
+      {t:'h3', h:'La situation locative', small:'LE BIEN EST-IL LOUÉ ?'},
+      {t:'p', h:'Le notaire vérifie si le bien est <b>loué</b>, la <b>nature du bail</b>, les <b>congés</b> éventuellement délivrés et les <b>droits de préemption</b> applicables.'},
+      {t:'tip', k:'piege', title:'Pas de préemption automatique', h:'<b>Il ne faut pas supposer</b> que tout locataire dispose d’un droit de préemption. Cela dépend du type de bail et de la situation : le notaire vérifie, il ne présume pas.'},
+      {t:'h3', h:'Les autres renseignements demandés au vendeur', small:'CINQ FAMILLES'},
+      {t:'acc', items:[
+        {l:'La construction et les agrandissements', h:'Permis de construire, certificat de conformité, plans…'},
+        {l:'Les biens vendus', h:'Si nécessaire, la <b>liste et la valeur justifiée des meubles</b> vendus séparément de l’immeuble.'},
+        {l:'L’entretien du bien', h:'Certificat de ramonage, facture de pose (et garantie éventuelle) des équipements, coordonnées des entreprises qui contrôlent ces éléments…'},
+        {l:'Les assurances', h:'Assurance habitation, assurances construction et, le cas échéant, <b>assurance dommages-ouvrage</b> et <b>garanties décennales</b>.'},
+        {l:'La fiscalité', h:'Taxes foncières, factures de travaux et <b>facture du notaire</b> qui a établi l’acte par lequel le vendeur est devenu propriétaire (pour les plus-values).'}]},
+      {t:'tip', k:'prof', title:'Pourquoi les factures du vendeur ?', h:'Pour calculer la <b>plus-value</b> imposable, on tient compte du prix d’acquisition, majoré des frais d’acquisition et des travaux. Sans justificatifs, la loi retient des <b>forfaits</b> (7,5 % du prix pour les frais, et 15 % pour les travaux si le bien est détenu depuis plus de 5 ans). C’est pourquoi le notaire demande les factures. La résidence principale est exonérée.'}
+    ]}
+  ],
+  essentials:[
+    'Les <b>formalités préalables</b> se font <b>avant la signature</b> pour permettre au collaborateur de rédiger l’acte : les personnes, le bien, les documents. La publication au SPF est une formalité <b>postérieure</b>.',
+    'Une personne physique s’identifie par son nom, ses prénoms <b>dans l’ordre de l’état civil</b>, son domicile, sa profession, sa date et son lieu de naissance, et le nom de son conjoint s’il y a lieu.',
+    'Pièce d’identité en cours de validité avec photographie pour un Français ; pour un étranger, pièce d’identité (passeport) et, selon le cas, actes d’état civil traduits. <b>Pas de titre de séjour systématique</b>.',
+    'Les actes d’état civil se demandent par <b>COMEDEC</b> ou aux services compétents ; <b>SCEC à Nantes</b> pour les Français nés ou mariés à l’étranger ; pas de « validité » universelle, mais des actes <b>récents</b>.',
+    '<b>Capacité</b> : le mineur est représenté, le majeur protégé est représenté (tutelle) ou assisté (curatelle). <b>Situation matrimoniale</b> : acte de mariage récent, <b>contrat de mariage demandé au notaire</b>, jugement de divorce définitif, PACS en marge de l’acte de naissance.',
+    'Pour une société : <b>statuts à jour, Kbis récent</b> (« carte d’identité de la société »), contrôle des pouvoirs (assemblée, conseil, directoire), BODACC. Le Kbis <b>ne remplace pas</b> la vérification des pouvoirs.',
+    'La <b>procuration</b> peut être sous signature privée (vente ordinaire) ou <b>authentique</b> (donation). Les <b>intervenants</b> (conjoint, tuteur, titulaire d’une servitude, traducteur) sont qualifiés comme les parties.',
+    'Désigner le bien (art. 7 du décret du 4 janvier 1955) : <b>nature, situation, contenance, désignation cadastrale</b>. Pièces : titre de propriété, extrait cadastral modèle 1, matrice (fiscale, pas un titre), plan, <b>EHF</b>, documents de copropriété.',
+    'Pièces d’urbanisme : <b>CUa</b> (information, 1 mois) et <b>CUb</b> (opérationnel, 2 mois), gratuits, valables <b>18 mois</b>, sans valeur d’autorisation ; alignement, numérotage, arrêtés d’insalubrité, carrière ; <b>DPU/ZAD → DIA</b>.',
+    'Le <b>DDT</b> est fourni dès la promesse de vente. Durées clés : termites et ERP 6 mois ; gaz, électricité et assainissement non collectif 3 ans ; DPE 10 ans ; audit énergétique 5 ans ; plomb et amiante parfois illimités ; Carrez sans durée.',
+    'Le notaire vérifie la <b>situation locative</b> (bail, congés, préemption) sans présumer un droit du locataire, et collecte les renseignements du vendeur : construction, meubles, entretien, assurances, fiscalité (factures pour la plus-value).'
+  ],
+  extraGames:[
+    {w:'pieces', title:'Quelle pièce demander ?', sub:'Un client, une situation : choisis la bonne pièce pour ton dossier.', icon:'doc'},
+    {w:'urba', title:'Le bon certificat', sub:'Une situation d’urbanisme s’affiche : quel document demander à la mairie ?', icon:'search'},
+    {w:'ddt', title:'Combien de temps ça vaut ?', sub:'Chaque diagnostic a sa durée de validité : retrouve-la.', icon:'clock'}
+  ],
+  flashcards:[
+    {q:'Qu’est-ce que les formalités préalables ?', a:'Les vérifications, demandes de pièces et démarches accomplies avant la signature, pour identifier les personnes et le bien, et rédiger l’acte.'},
+    {q:'Les formalités préalables se font avant ou après la signature ?', a:'Avant. Les formalités postérieures (comme la publication au SPF) sont accomplies ensuite par le formaliste.'},
+    {q:'Quelles sont les trois grandes familles de vérifications d’un dossier ?', a:'Les personnes (qui signe), le bien (de quoi parle-t-on) et les documents (urbanisme, diagnostics) qui disent quelles règles s’y appliquent.'},
+    {q:'Quels sont les éléments d’identification d’une personne physique ?', a:'Le nom, les prénoms dans l’ordre de l’état civil, le domicile, la profession, la date et le lieu de naissance, et le nom du conjoint s’il y a lieu.'},
+    {q:'Quelles pièces d’identité demande-t-on à une personne de nationalité française ?', a:'Une pièce d’identité officielle en cours de validité, avec photographie : carte nationale d’identité ou passeport.'},
+    {q:'Et à une personne de nationalité étrangère ?', a:'Une pièce d’identité officielle (notamment un passeport) et, selon la situation, des actes d’état civil accompagnés d’une traduction appropriée.'},
+    {q:'Un titre de séjour est-il exigé de tout étranger ?', a:'Non. Les ressortissants de l’EEE et les Suisses en sont en principe dispensés.'},
+    {q:'Que fait le notaire de la pièce d’identité ?', a:'Il vérifie l’identité du comparant.'},
+    {q:'Quels actes d’état civil le notaire demande-t-il ?', a:'La copie intégrale ou l’extrait d’acte de naissance avec filiation, et la copie ou l’extrait d’acte de mariage.'},
+    {q:'Qu’est-ce que COMEDEC ?', a:'La communication électronique des données de l’état civil : l’échange dématérialisé des actes entre les notaires et les mairies raccordées.'},
+    {q:'Existe-t-il une durée de validité universelle (3 ou 6 mois) des actes d’état civil pour une vente ?', a:'Non. L’étude demande des actes suffisamment récents pour vérifier les mentions marginales et la situation actuelle des parties.'},
+    {q:'Où demander l’acte d’un Français né ou marié à l’étranger, établi ou transcrit en France ?', a:'Au Service central d’état civil (SCEC), à Nantes, notamment par les démarches en ligne.'},
+    {q:'Une personne née à l’étranger mais mariée en France : où demander l’acte de mariage ?', a:'À la mairie du lieu de célébration du mariage, ou par COMEDEC.'},
+    {q:'Un mineur non émancipé veut vendre un bien : qui agit ?', a:'Ses représentants légaux. Selon la nature et la gravité de l’acte, l’autorisation du juge des tutelles des mineurs peut être nécessaire.'},
+    {q:'Que vérifie-t-on pour un majeur protégé ?', a:'L’existence et l’étendue de la mesure de protection, et les pouvoirs du représentant ou de l’assistant.'},
+    {q:'Tutelle ou curatelle : qui agit ?', a:'Sous tutelle, le tuteur représente en principe le majeur. Sous curatelle, l’assistance du curateur est requise pour les actes prévus par la loi.'},
+    {q:'Le mandat de protection future figure-t-il toujours en mention marginale ?', a:'Non, pas nécessairement : il faut le vérifier à part.'},
+    {q:'Où demande-t-on une copie du contrat de mariage ?', a:'Au notaire détenteur de l’acte, et non à la mairie.'},
+    {q:'Que demande-t-on en cas de changement de régime matrimonial ?', a:'La copie de l’acte notarié et, seulement si une homologation judiciaire a été nécessaire, la décision correspondante.'},
+    {q:'Que demande-t-on en cas de divorce ou de séparation de corps ?', a:'Les justificatifs adaptés (jugement, convention de divorce déposée au rang des minutes d’un notaire, mention en marge) et la vérification de leur caractère définitif.'},
+    {q:'Que donne le dépôt au rang des minutes d’un notaire de la convention de divorce par consentement mutuel ?', a:'Date certaine et force exécutoire. Le notaire n’en est pas l’auteur.'},
+    {q:'Un divorce a été prononcé à l’étranger : que vérifie-t-on ?', a:'Sa reconnaissance et ses effets en France, avec les pièces et traductions nécessaires.'},
+    {q:'Où le PACS est-il mentionné ?', a:'En marge de l’acte de naissance de chaque partenaire (avec des modalités particulières pour les personnes nées à l’étranger).'},
+    {q:'Depuis quand le PACS s’enregistre-t-il en mairie ou devant notaire ?', a:'Depuis le 1er novembre 2017.'},
+    {q:'Domicile, résidence principale, domicile fiscal : pourquoi les distinguer ?', a:'Pour le logement de la famille (art. 215 al. 3), l’habitation principale, les plus-values immobilières et le régime fiscal de la mutation.'},
+    {q:'Que vérifie-t-on en cas de surendettement ?', a:'Les informations publiques (BODACC si rétablissement personnel) et les effets de la procédure sur la disposition du bien. L’autorisation du juge n’est pas systématique.'},
+    {q:'Quelles pièces demande-t-on à une personne qui exerce une activité professionnelle ?', a:'Un justificatif d’immatriculation au RNE et, s’il existe, un extrait K ou Kbis récent.'},
+    {q:'Qui tient le RNE ?', a:'L’INPI (registre national des entreprises).'},
+    {q:'Que contrôle-t-on pour l’acquéreur d’un bien d’habitation (habitat indigne) ?', a:'Si l’interdiction d’acquérir s’applique ; la consultation du bulletin n° 2 suit une procédure encadrée.'},
+    {q:'Que remet une société au notaire ?', a:'Ses statuts à jour, un Kbis récent, les décisions sociales utiles, la justification de l’identité du représentant, les renseignements sur les sûretés, et au besoin les preuves de l’absence de procédure collective.'},
+    {q:'Le Kbis, c’est quoi ?', a:'L’extrait d’immatriculation au registre du commerce et des sociétés : la carte d’identité de la société.'},
+    {q:'Le Kbis suffit-il pour vérifier les pouvoirs du dirigeant ?', a:'Non. Il identifie les représentants déclarés, mais ne remplace pas toujours la vérification des pouvoirs et des autorisations prévus par les statuts ou la loi.'},
+    {q:'Pourquoi consulte-t-on le BODACC ?', a:'Pour vérifier une procédure collective (sauvegarde, redressement, liquidation) ou un rétablissement personnel, qui modifient les pouvoirs de la partie.'},
+    {q:'Que note-t-on pour une association ?', a:'La date et le lieu de déclaration ou de dépôt des statuts (préfecture).'},
+    {q:'Quelle forme pour une procuration de vente ordinaire ?', a:'Elle peut être sous signature privée. Pour une donation, la procuration doit être authentique.'},
+    {q:'Sociétés civiles : d’où viennent les pouvoirs ?', a:'Des statuts ou des délibérations d’associés.'},
+    {q:'Sociétés commerciales : d’où viennent les pouvoirs ?', a:'Des statuts, des comptes rendus d’assemblées d’associés ou d’actionnaires, des pouvoirs du conseil d’administration, du PDG ou du directoire, selon la forme juridique.'},
+    {q:'Qui peut intervenir à l’acte en plus des comparants ?', a:'Le tuteur ou représentant d’un majeur protégé, le conjoint (logement familial), le titulaire du fonds servant ou dominant, un traducteur.'},
+    {q:'Que doit indiquer tout acte pour chaque immeuble (art. 7 du décret du 4 janvier 1955) ?', a:'La nature, la situation, la contenance et la désignation cadastrale (section, numéro du plan et lieu-dit).'},
+    {q:'Par quoi le lieu-dit est-il remplacé en ville ?', a:'Par la rue et le numéro, pour les immeubles situés dans les parties agglomérées des communes urbaines.'},
+    {q:'Que doit remettre le vendeur au notaire ?', a:'La copie de son titre de propriété.'},
+    {q:'Que vérifie-t-on grâce au titre de propriété ?', a:'Le propriétaire, la désignation et l’origine trentenaire.'},
+    {q:'L’extrait de matrice cadastrale est-il un titre de propriété ?', a:'Non. C’est un document fiscal qui identifie les titulaires de la documentation fiscale.'},
+    {q:'Quelles pièces cadastrales demande-t-on ?', a:'L’extrait cadastral modèle 1, l’extrait de matrice, le plan cadastral, et en cas de division le document modificatif du parcellaire et au besoin un plan de bornage.'},
+    {q:'À qui demande-t-on l’état hypothécaire ?', a:'Au service de la publicité foncière du ressort de la situation de l’immeuble.'},
+    {q:'Que vérifie-t-on dans l’état hypothécaire ?', a:'La propriété, l’origine de propriété (30 ans), le démembrement, les servitudes, les sûretés, et les actes de copropriété publiés (règlement, état descriptif de division).'},
+    {q:'Qu’est-ce qu’un certificat d’urbanisme (CU) ?', a:'Un document qui informe sur les règles applicables à un terrain, les servitudes et les taxes. Ce n’est pas une autorisation.'},
+    {q:'CUa ou CUb ?', a:'CUa : d’information, instruction en principe 1 mois. CUb : opérationnel (pour un projet précis), 2 mois.'},
+    {q:'Durée de validité et coût du certificat d’urbanisme ?', a:'Gratuit, valable 18 mois.'},
+    {q:'Qu’est-ce que l’alignement ?', a:'La détermination par l’autorité administrative de la limite du domaine public routier et des propriétés riveraines.'},
+    {q:'À quoi sert le certificat de numérotage ?', a:'À attester l’adresse attribuée à l’immeuble, lorsque c’est nécessaire.'},
+    {q:'À quoi sert le certificat de carrière ?', a:'À renseigner sur les risques du sol et du sous-sol (anciennes carrières, travaux confortatifs).'},
+    {q:'Qu’est-ce que la DIA ?', a:'La déclaration d’intention d’aliéner : on la dépose en mairie quand la vente est soumise à un droit de préemption (DPU ou ZAD). Ce n’est pas un certificat.'},
+    {q:'Quel est le délai de réponse à une DIA ?', a:'Deux mois à compter de sa réception.'},
+    {q:'Qu’est-ce que le DDT ?', a:'Le dossier de diagnostic technique : l’ensemble des diagnostics que le vendeur communique selon le bien vendu.'},
+    {q:'Quand le DDT est-il fourni ?', a:'Dès la promesse de vente ; à défaut de promesse, lors de l’acte authentique, sous réserve des obligations de remise plus précoce.'},
+    {q:'Plomb (CREP) : quel immeuble, quelle durée ?', a:'Logement construit avant le 1er janvier 1949. Durée illimitée en l’absence de plomb ; 1 an pour une vente si le résultat est positif.'},
+    {q:'Amiante : quel immeuble, quelle durée ?', a:'Permis de construire délivré avant le 1er juillet 1997. Illimitée si le diagnostic a été réalisé depuis le 1er avril 2013, même positif ; à renouveler s’il a été fait avant.'},
+    {q:'Termites : quand et combien de temps ?', a:'Bien situé dans une zone délimitée par arrêté préfectoral. Validité : 6 mois.'},
+    {q:'Gaz et électricité : quand et combien de temps ?', a:'Logement dont l’installation intérieure a plus de 15 ans. Validité : 3 ans pour une vente.'},
+    {q:'Quelle est la durée de l’état des risques (ERP) ?', a:'Moins de 6 mois.'},
+    {q:'Quelle est la durée du DPE ?', a:'10 ans. Les DPE réalisés avant juillet 2021 ne sont plus utilisables en 2026.'},
+    {q:'Audit énergétique : pour quel bien et quelle durée ?', a:'Maison individuelle ou immeuble en monopropriété à usage d’habitation classé E, F ou G, dans les cas prévus par la loi. Validité : 5 ans ; à remettre dès la première visite.'},
+    {q:'Assainissement non collectif : quand et combien de temps ?', a:'Immeuble d’habitation non raccordé au réseau public de collecte. Validité : 3 ans.'},
+    {q:'La loi Carrez a-t-elle une durée de validité ?', a:'Non. Elle ne s’applique qu’aux lots de copropriété ; on la refait si la superficie a changé.'},
+    {q:'Mérule et radon : y a-t-il un diagnostic autonome ?', a:'Non. Pour la mérule, c’est une information sur le risque (zone préfectorale) ; pour le radon, l’information est dans l’ERP (zone de niveau 3).'},
+    {q:'Le détecteur de fumée est-il un diagnostic ?', a:'Non : c’est une obligation d’équipement du logement, distincte du DDT.'},
+    {q:'Que vérifie le notaire sur la situation locative ?', a:'Si le bien est loué, la nature du bail, les congés délivrés et les droits de préemption applicables. Le locataire n’a pas automatiquement un droit de préemption.'},
+    {q:'Pourquoi demande-t-on au vendeur la facture du notaire de son acquisition et ses factures de travaux ?', a:'Pour justifier le prix et les frais d’acquisition et les travaux dans le calcul des plus-values.'},
+    {q:'Quels renseignements demande-t-on au vendeur en plus des diagnostics ?', a:'Construction et agrandissements, liste et valeur des meubles vendus, entretien du bien, assurances (dont dommages-ouvrage et garanties décennales), fiscalité.'}
+  ],
+  quiz:[
+    {q:'Les formalités préalables sont accomplies…', o:['après la signature, par le formaliste', 'avant la signature, pour permettre de rédiger l’acte', 'seulement si le notaire le demande', 'au moment de la publication'], a:1},
+    {q:'Les trois grandes familles de vérifications d’un dossier sont…', o:['les personnes, le bien, les documents', 'le prix, le notaire, la banque', 'le vendeur, l’agence, la commune', 'la signature, la publication, la facture'], a:0},
+    {q:'Dans une comparution, les prénoms d’une personne physique sont indiqués…', o:['dans l’ordre de l’état civil', 'par ordre alphabétique', 'seulement le premier', 'au choix de la personne'], a:0},
+    {q:'Quelle pièce d’identité peut présenter une personne de nationalité française ?', o:['Un permis de chasse', 'Une carte nationale d’identité ou un passeport en cours de validité', 'Un avis d’imposition', 'Une carte de fidélité'], a:1},
+    {q:'Un titre de séjour est exigé de tout étranger qui signe un acte chez le notaire.', tf:true, a:false, e:'Les ressortissants de l’EEE et les Suisses en sont en principe dispensés.'},
+    {q:'Pour une personne de nationalité étrangère, le notaire demande…', o:['uniquement un titre de séjour', 'une pièce d’identité officielle (notamment un passeport) et, selon le cas, des actes d’état civil traduits', 'rien, la confiance suffit', 'un extrait de casier judiciaire'], a:1},
+    {q:'COMEDEC permet…', o:['d’obtenir les actes d’état civil par voie électronique auprès des mairies raccordées', 'de déposer la DIA en mairie', 'de publier les actes au SPF', 'de signer à distance'], a:0},
+    {q:'Un acte de naissance est valable exactement 3 mois pour toute vente notariale.', tf:true, a:false, e:'Il n’existe pas de durée de validité universelle : l’étude veut des actes assez récents pour lire les mentions en marge.'},
+    {q:'Un Français né à l’étranger, dont l’acte est transcrit en France : où demander son acte ?', o:['À la mairie de sa commune actuelle', 'Au Service central d’état civil, à Nantes', 'Au SPF', 'Au tribunal'], a:1},
+    {q:'Une personne née à l’étranger, mariée en France : l’acte de mariage se demande…', o:['au SCEC', 'à la mairie du lieu de célébration (ou par COMEDEC)', 'au notaire de son choix', 'au greffe'], a:1},
+    {q:'Un mineur non émancipé vend un bien : qui agit ?', o:['Un ami de la famille', 'Ses représentants légaux, parfois avec l’autorisation du juge des tutelles', 'Le maire', 'Il signe seul'], a:1},
+    {q:'Sous curatelle, le majeur protégé…', o:['est représenté par le curateur pour tout', 'est assisté par le curateur pour les actes prévus par la loi', 'peut tout faire seul', 'ne peut plus voter'], a:1},
+    {q:'Un mandat de protection future apparaît toujours en mention marginale.', tf:true, a:false, e:'Pas nécessairement : il faut le vérifier à part.'},
+    {q:'Où demande-t-on une copie du contrat de mariage ?', o:['À la mairie du mariage', 'Au notaire détenteur de l’acte', 'Au tribunal', 'Au service de la publicité foncière'], a:1},
+    {q:'En cas de changement de régime matrimonial, on demande la décision de justice…', o:['toujours', 'jamais', 'seulement si une homologation judiciaire a été nécessaire', 'seulement si les enfants sont mineurs'], a:2},
+    {q:'Pour un divorce, le notaire vérifie notamment…', o:['la date du mariage uniquement', 'le caractère définitif du jugement ou de la convention', 'la durée de la procédure', 'le nombre d’enfants'], a:1},
+    {q:'La convention de divorce par consentement mutuel est rédigée par…', o:['le notaire, qui la signe seul', 'les avocats des époux, puis déposée au rang des minutes d’un notaire', 'le juge', 'le maire'], a:1, e:'Le dépôt lui donne date certaine et force exécutoire.'},
+    {q:'Le PACS est mentionné…', o:['en marge de l’acte de naissance', 'dans l’acte de mariage', 'au casier judiciaire', 'au cadastre'], a:0},
+    {q:'Depuis le 1er novembre 2017, le PACS s’enregistre…', o:['au tribunal d’instance', 'en mairie ou devant notaire', 'à la préfecture', 'au SPF'], a:1},
+    {q:'Pourquoi distinguer domicile, résidence principale et domicile fiscal ?', o:['Parce que ça rallonge l’acte', 'Parce qu’ils jouent sur le logement de la famille, les plus-values et le régime fiscal de la vente', 'Parce que le notaire en change tous les ans', 'Il n’y a aucune raison'], a:1},
+    {q:'La protection du logement de la famille (art. 215 al. 3) dépend uniquement du domicile fiscal.', tf:true, a:false, e:'Elle s’apprécie indépendamment du seul domicile fiscal : c’est la réalité du logement familial qui compte.'},
+    {q:'Pour vérifier un rétablissement personnel ou une procédure collective, on consulte…', o:['le BODACC', 'le cadastre', 'le Journal des spectacles', 'Perval'], a:0},
+    {q:'Lors d’une procédure de surendettement, l’autorisation du juge pour vendre est…', o:['toujours exigée', 'jamais exigée', 'pas systématique : on examine les effets de la procédure', 'exigée uniquement pour les terrains'], a:2},
+    {q:'Le RNE est tenu par…', o:['l’INSEE', 'l’INPI', 'le greffe du tribunal de commerce uniquement', 'la mairie'], a:1},
+    {q:'Le Kbis est surnommé…', o:['le livret de famille de la société', 'la carte d’identité de la société', 'le titre de propriété de la société', 'le bulletin n° 2'], a:1},
+    {q:'Le Kbis suffit pour être certain que le gérant peut vendre seul.', tf:true, a:false, e:'Il identifie le représentant déclaré, mais il ne remplace pas la vérification des pouvoirs prévus par les statuts ou la loi.'},
+    {q:'Un compte rendu d’assemblée générale sert à prouver…', o:['la date de naissance du gérant', 'que la vente est autorisée', 'que le bien est loué', 'que l’impôt est payé'], a:1},
+    {q:'Pour une association, on note…', o:['la date et le lieu de déclaration ou de dépôt des statuts (préfecture)', 'son numéro de téléphone', 'le nom du trésorier uniquement', 'son logo'], a:0},
+    {q:'Une procuration pour consentir une donation doit être…', o:['verbale', 'authentique', 'sous signature privée', 'déposée en mairie'], a:1},
+    {q:'Dans les sociétés civiles, les pouvoirs résultent…', o:['des statuts ou des délibérations d’associés', 'du Kbis', 'du cadastre', 'du casier judiciaire'], a:0},
+    {q:'Un traducteur qui assiste à l’acte est…', o:['un intervenant', 'un vendeur', 'un acquéreur', 'un témoin instrumentaire'], a:0},
+    {q:'L’article 7 du décret du 4 janvier 1955 impose d’indiquer pour chaque immeuble…', o:['la nature, la situation, la contenance et la désignation cadastrale', 'le prix, la date et le nom du vendeur', 'la couleur et l’année de construction', 'le nombre de pièces et l’étage'], a:0},
+    {q:'En ville, le lieu-dit est remplacé par…', o:['le code postal', 'la rue et le numéro', 'le nom du quartier', 'le nom du propriétaire'], a:1},
+    {q:'La désignation cadastrale comprend…', o:['la section, le numéro du plan et le lieu-dit', 'la couleur du toit', 'le nom du géomètre', 'le prix au m²'], a:0},
+    {q:'L’extrait de matrice cadastrale…', o:['prouve la propriété', 'identifie les titulaires dans la documentation fiscale, sans être un titre de propriété', 'remplace l’état hypothécaire', 'est délivré par le tribunal'], a:1},
+    {q:'Le vendeur remet au notaire…', o:['la copie de son titre de propriété', 'son bulletin de paie', 'sa carte vitale', 'son permis de conduire seulement'], a:0},
+    {q:'On demande l’état hypothécaire…', o:['à la mairie', 'au service de la publicité foncière du lieu de situation de l’immeuble', 'au tribunal de commerce', 'à la préfecture'], a:1},
+    {q:'L’état hypothécaire permet de vérifier…', o:['les sûretés, servitudes, démembrements et l’origine de propriété', 'la météo', 'la solvabilité de l’acheteur', 'le montant des charges de copropriété'], a:0},
+    {q:'Le CUa est…', o:['un certificat d’information, instruction en principe 1 mois', 'une autorisation de construire', 'un certificat de carrière', 'un diagnostic'], a:0},
+    {q:'Le CUb est…', o:['un certificat opérationnel, instruction en principe 2 mois', 'un certificat de numérotage', 'une DIA', 'gratuit pendant 3 ans'], a:0},
+    {q:'Un certificat d’urbanisme est valable…', o:['6 mois', '18 mois', '10 ans', 'sans limite'], a:1},
+    {q:'Un certificat d’urbanisme autorise à construire.', tf:true, a:false, e:'Ce n’est pas une autorisation, il ne remplace pas le permis de construire.'},
+    {q:'Le certificat d’alignement détermine…', o:['la limite du domaine public routier et des propriétés riveraines', 'l’adresse du bien', 'les risques de carrière', 'le prix du terrain'], a:0},
+    {q:'Le certificat de carrière renseigne sur…', o:['les risques du sol et du sous-sol', 'la rue du bien', 'le droit de préemption', 'la valeur du bien'], a:0},
+    {q:'Pour une vente soumise au droit de préemption urbain, on dépose…', o:['une DIA en mairie', 'un certificat de numérotage', 'un Kbis', 'un CREP'], a:0},
+    {q:'La DIA est un certificat.', tf:true, a:false, e:'C’est une déclaration qu’on dépose, pas un document qu’on reçoit.'},
+    {q:'Le délai de réponse du titulaire du droit de préemption est de…', o:['15 jours', 'deux mois à compter de la réception de la DIA', 'un an', 'trois ans'], a:1},
+    {q:'Le DDT est en principe fourni…', o:['dès la promesse de vente', 'un an après la vente', 'seulement si l’acheteur le demande', 'jamais'], a:0},
+    {q:'Le diagnostic termites est valable…', o:['6 mois', '3 ans', '10 ans', 'sans limite'], a:0},
+    {q:'Le diagnostic gaz (vente) est valable…', o:['6 mois', '3 ans', '10 ans', 'toujours'], a:1},
+    {q:'Le DPE est valable…', o:['6 mois', '3 ans', '10 ans', '30 ans'], a:2},
+    {q:'L’audit énergétique est valable…', o:['6 mois', '3 ans', '5 ans', '30 ans'], a:2},
+    {q:'Le CREP (plomb) concerne les logements construits avant…', o:['le 1er janvier 1949', 'le 1er juillet 1997', '2000', '1900'], a:0},
+    {q:'Le diagnostic amiante concerne les permis de construire délivrés avant…', o:['le 1er janvier 1949', 'le 1er juillet 1997', '2013', '2021'], a:1},
+    {q:'La loi Carrez a une durée de validité fixée à 6 mois.', tf:true, a:false, e:'Pas de durée légale fixe : on la refait si la superficie a changé.'},
+    {q:'Le détecteur de fumée est…', o:['un diagnostic valable 3 ans', 'une obligation d’équipement, distincte du DDT', 'un diagnostic valable 10 ans', 'un certificat d’urbanisme'], a:1},
+    {q:'Le locataire a toujours un droit de préemption sur le logement qu’il occupe.', tf:true, a:false, e:'Il ne faut pas le supposer : cela dépend du bail et de la situation.'},
+    {q:'Pourquoi demande-t-on au vendeur la facture du notaire de son acquisition ?', o:['Pour calculer les plus-values', 'Pour calculer l’impôt sur le revenu', 'Pour vérifier sa signature', 'Pour obtenir un diagnostic'], a:0}
+  ],
+  sorts:[
+    {id:'deo2_s1', title:'Où demander la pièce ?', intro:'Chaque pièce se demande au bon endroit. Où l’obtient-on ?', cats:[{id:'mai', l:'Mairie ou COMEDEC'}, {id:'not', l:'Notaire détenteur'}, {id:'scec', l:'SCEC (Nantes)'}, {id:'spf', l:'Service de la publicité foncière'}, {id:'dgf', l:'DGFiP (cadastre)'}], items:[
+      {e:'💍', t:'La copie d’un acte de mariage célébré à Lyon', c:'mai', w:'Auprès de la mairie du lieu de célébration, ou par COMEDEC.'},
+      {e:'👶', t:'Un extrait d’acte de naissance avec filiation (commune raccordée)', c:'mai', w:'Par COMEDEC ou auprès du service d’état civil compétent.'},
+      {e:'📜', t:'La copie du contrat de mariage de la cliente', c:'not', w:'C’est un acte notarié : on le demande au notaire détenteur, pas à la mairie.'},
+      {e:'🔄', t:'La copie de l’acte de changement de régime matrimonial', c:'not', w:'Un acte notarié : on le demande au notaire qui l’a reçu.'},
+      {e:'🌍', t:'L’acte de naissance d’un Français né à l’étranger, acte transcrit en France', c:'scec', w:'Le Service central d’état civil de Nantes.'},
+      {e:'✈️', t:'L’acte de mariage d’un Français marié à l’étranger, dans l’état civil français', c:'scec', w:'Le SCEC, lorsque l’acte figure dans l’état civil français.'},
+      {e:'🏛️', t:'L’état hypothécaire hors formalité de l’immeuble', c:'spf', w:'Au service de la publicité foncière du ressort de la situation de l’immeuble.'},
+      {e:'⛓️', t:'La liste des hypothèques et servitudes publiées sur la maison', c:'spf', w:'C’est le contenu de l’EHF : il se demande au SPF.'},
+      {e:'🗺️', t:'L’extrait cadastral modèle 1 et le plan cadastral', c:'dgf', w:'Les données cadastrales s’obtiennent auprès des services et portails de la DGFiP.'},
+      {e:'🧾', t:'L’extrait de matrice cadastrale', c:'dgf', w:'Un document de la documentation fiscale : DGFiP.'}]},
+    {id:'deo2_s2', title:'Le bon document d’urbanisme', intro:'Une situation, un document. Lequel demander ?', cats:[{id:'cua', l:'CUa (information)'}, {id:'cub', l:'CUb (opérationnel)'}, {id:'ali', l:'Certificat d’alignement'}, {id:'num', l:'Certificat de numérotage'}, {id:'dia', l:'DIA (à déposer)'}], items:[
+      {e:'📖', t:'Connaître les règles d’urbanisme et les taxes applicables à un terrain', c:'cua', w:'Le CUa d’information : instruction en principe 1 mois.'},
+      {e:'📝', t:'Savoir si un terrain est constructible, de manière générale', c:'cua', w:'Un CUa renseigne sur la constructibilité et les droits attachés au terrain.'},
+      {e:'🏗️', t:'Vérifier qu’une maison de 120 m² précise pourra être construite', c:'cub', w:'Le CUb est opérationnel : il se prononce sur un projet précis. Instruction : 2 mois.'},
+      {e:'🏡', t:'Connaître la faisabilité d’une opération projetée par l’acheteur', c:'cub', w:'C’est tout l’intérêt du CUb.'},
+      {e:'🛣️', t:'Connaître la limite entre la propriété et la rue (domaine public routier)', c:'ali', w:'L’alignement détermine cette limite.'},
+      {e:'📍', t:'Faire attester l’adresse officielle d’un immeuble', c:'num', w:'Le certificat de numérotage.'},
+      {e:'🔢', t:'Faire confirmer le numéro de la rue du bien', c:'num', w:'Il atteste l’adresse attribuée à l’immeuble.'},
+      {e:'🏙️', t:'La vente d’un terrain dans une zone de préemption urbain (DPU)', c:'dia', w:'On dépose en mairie une déclaration d’intention d’aliéner.'},
+      {e:'📬', t:'Demander à la commune si elle veut préempter le bien vendu', c:'dia', w:'C’est le but de la DIA. Elle répond sous deux mois.'},
+      {e:'🏠', t:'La vente d’un bien en zone d’aménagement différé (ZAD)', c:'dia', w:'Droit de préemption : on dépose la DIA.'}]},
+    {id:'deo2_s3', title:'Combien de temps ça vaut ?', intro:'Quelle est la durée de validité de ce diagnostic pour une vente ?', cats:[{id:'six', l:'6 mois'}, {id:'tro', l:'3 ans'}, {id:'cinq', l:'5 ans'}, {id:'dix', l:'10 ans'}, {id:'sans', l:'Illimitée ou pas de durée légale'}], items:[
+      {e:'🐜', t:'Termites', c:'six', w:'6 mois, dans les zones délimitées par arrêté préfectoral.'},
+      {e:'🌊', t:'État des risques (ERP)', c:'six', w:'Moins de 6 mois.'},
+      {e:'🔥', t:'Gaz (installation de plus de 15 ans)', c:'tro', w:'3 ans pour une vente.'},
+      {e:'⚡', t:'Électricité (installation de plus de 15 ans)', c:'tro', w:'3 ans pour une vente.'},
+      {e:'🚽', t:'Assainissement non collectif', c:'tro', w:'3 ans.'},
+      {e:'🔋', t:'Audit énergétique (maison classée E, F ou G)', c:'cinq', w:'5 ans, à remettre dès la première visite.'},
+      {e:'🌡️', t:'DPE', c:'dix', w:'10 ans, mais les DPE d’avant juillet 2021 ne sont plus utilisables.'},
+      {e:'🧪', t:'Plomb (CREP) avec absence de plomb', c:'sans', w:'Illimitée en l’absence de plomb au seuil réglementaire (1 an si positif).'},
+      {e:'🧱', t:'Amiante réalisé depuis le 1er avril 2013', c:'sans', w:'Illimitée, même si positif.'},
+      {e:'📐', t:'Superficie loi Carrez', c:'sans', w:'Pas de durée légale fixe : on la refait si la superficie a changé.'},
+      {e:'🚨', t:'Détecteur de fumée', c:'sans', w:'Une obligation d’équipement, pas de durée de diagnostic.'}]},
+    {id:'deo2_s4', title:'Personne physique ou personne morale ?', intro:'À qui demande-t-on cette pièce ?', cats:[{id:'pp', l:'Personne physique'}, {id:'pm', l:'Personne morale'}], items:[
+      {e:'🛂', t:'Un passeport en cours de validité', c:'pp', w:'La pièce d’identité d’un individu.'},
+      {e:'👶', t:'Un extrait d’acte de naissance avec filiation', c:'pp', w:'Il identifie une personne physique.'},
+      {e:'💍', t:'Un acte de mariage récent', c:'pp', w:'La situation matrimoniale d’une personne physique.'},
+      {e:'🏠', t:'Un justificatif de résidence principale', c:'pp', w:'Le domicile d’une personne physique.'},
+      {e:'⚖️', t:'Le jugement qui place le vendeur sous tutelle', c:'pp', w:'Une mesure de protection d’un majeur.'},
+      {e:'📃', t:'Les statuts à jour', c:'pm', w:'Ils donnent l’objet social et les pouvoirs.'},
+      {e:'🪪', t:'Un extrait Kbis récent', c:'pm', w:'La carte d’identité de la société.'},
+      {e:'🗳️', t:'Le compte rendu d’assemblée générale qui autorise la vente', c:'pm', w:'Il prouve que le dirigeant peut vendre.'},
+      {e:'📰', t:'Les annonces BODACC sur une éventuelle procédure collective', c:'pm', w:'La situation exacte de la société.'},
+      {e:'🏛️', t:'La date et le lieu de dépôt des statuts d’une association', c:'pm', w:'Les mentions d’identification d’une association (préfecture).'}]}
+  ],
+  cases:[
+    {id:'deo2_c1', title:'Sans titre de séjour, pas d’acte ?', tag:'Identité · personne étrangère', facts:['Mme Kowalska, de nationalité polonaise, vend un studio. Elle présente son passeport à l’accueil de l’étude.', 'Ton collègue lui dit : « Sans titre de séjour, nous ne pouvons pas continuer. » Mme Kowalska s’inquiète : elle vit en France depuis dix ans et n’en a jamais eu besoin.'], q:'Ton collègue a-t-il raison ?', steps:[
+      {l:'Les faits', h:'Une vendeuse polonaise présente un passeport. Un collègue exige un titre de séjour.'},
+      {l:'Le problème de droit', h:'Quelles pièces demande-t-on pour vérifier l’identité d’une personne de nationalité étrangère ? Le titre de séjour est-il obligatoire ?'},
+      {l:'Les règles applicables', h:'<p>Pour une personne de nationalité étrangère, on demande une <b>pièce d’identité officielle</b> (notamment un passeport) et, selon la situation, des actes d’état civil accompagnés d’une traduction appropriée.</p><p>Un titre de séjour <b>n’est pas exigé de tout étranger</b> : les ressortissants de l’EEE et les Suisses en sont en principe dispensés.</p>'},
+      {l:'L’application aux faits', h:'La Pologne fait partie de l’Union européenne, donc de l’EEE. Mme Kowalska est dispensée du titre de séjour. Son passeport suffit pour la pièce d’identité.'},
+      {l:'La conclusion', h:'<p>Ton collègue a tort. L’étude vérifie le passeport, demande, si besoin, un acte de naissance avec traduction, et poursuit le dossier.</p>'}]},
+    {id:'deo2_c2', title:'Née à Casablanca, mariée à Lyon', tag:'État civil · où demander ?', facts:['Sophie, de nationalité française, est née à Casablanca (Maroc) : son acte de naissance est transcrit dans les registres français. Elle s’est mariée à Lyon en 2018 avec Karim, sous contrat de mariage reçu par Maître Vidal à Villeurbanne.', 'Elle vend une maison. Tu prépares son dossier.'], q:'Où demandes-tu son acte de naissance, son acte de mariage et son contrat de mariage ?', steps:[
+      {l:'Les faits', h:'Une Française née à l’étranger, mariée en France sous contrat, vend une maison.'},
+      {l:'Le problème de droit', h:'À quel service s’adresser pour chaque document ?'},
+      {l:'Les règles applicables', h:'<p><b>Français né ou marié à l’étranger</b>, dont l’acte est établi ou transcrit dans les registres français : le <b>SCEC, à Nantes</b>.</p><p><b>Acte de mariage</b> : mairie du lieu de célébration, ou COMEDEC.</p><p><b>Contrat de mariage</b> : le notaire qui détient l’acte, <b>pas la mairie</b>.</p>'},
+      {l:'L’application aux faits', h:'L’acte de naissance de Sophie, né à Casablanca mais transcrit en France, se demande au SCEC. Son acte de mariage, célébré à Lyon, à la mairie de Lyon ou par COMEDEC. Son contrat de mariage, à Maître Vidal.'},
+      {l:'La conclusion', h:'<p>Trois pièces, trois endroits : <b>SCEC</b>, <b>mairie de Lyon</b> (ou COMEDEC), <b>Maître Vidal</b>. Pense aussi à vérifier si un changement de régime est mentionné dans l’acte de mariage.</p>'}]},
+    {id:'deo2_c3', title:'La SCI, son gérant et son Kbis', tag:'Personnes morales · pouvoirs', facts:['La SCI Les Tilleuls vend un immeuble. Son gérant, M. Bernard, apporte un Kbis tout neuf, qui le désigne comme gérant.', 'En lisant les statuts, tu remarques une clause : « La vente d’un immeuble de la société doit être autorisée par une décision des associés. » M. Bernard te répond : « Pas besoin, le Kbis montre bien que je suis le gérant. »'], q:'Peut-on préparer l’acte avec le seul Kbis ?', steps:[
+      {l:'Les faits', h:'Un gérant de SCI veut vendre un immeuble avec son seul Kbis, alors que les statuts exigent l’autorisation des associés.'},
+      {l:'Le problème de droit', h:'Le Kbis suffit-il à établir le pouvoir de vendre ?'},
+      {l:'Les règles applicables', h:'<p>Pour une société civile, les pouvoirs résultent des <b>statuts</b> ou des <b>délibérations d’associés</b>.</p><p>Le Kbis permet d’identifier les représentants déclarés, mais il <b>ne remplace pas la vérification des pouvoirs</b> et des autorisations prévus par les statuts ou la loi.</p>'},
+      {l:'L’application aux faits', h:'M. Bernard est bien le gérant, mais la vente d’un immeuble de la société doit être autorisée par les associés. Le Kbis ne prouve pas cette autorisation.'},
+      {l:'La conclusion', h:'<p>Non. Il faut demander la <b>décision (ou le compte rendu d’assemblée générale)</b> des associés qui autorise la vente. Sans elle, la vente pourrait être contestée.</p>'}]},
+    {id:'deo2_c4', title:'Un terrain pour construire', tag:'Urbanisme · quel certificat ?', facts:['M. Ali veut acheter un terrain à Mme Roux pour y construire une maison de 120 m². Il demande : « Est-ce que je pourrai vraiment construire ? »', 'Le terrain se trouve dans une zone soumise au droit de préemption urbain. Il borde une route départementale.'], q:'Quels documents d’urbanisme demandes-tu ?', steps:[
+      {l:'Les faits', h:'Un acquéreur veut construire une maison de 120 m² sur un terrain situé en zone de préemption, en bordure de route départementale.'},
+      {l:'Le problème de droit', h:'Quels documents répondent à la question du client et aux contraintes du terrain ?'},
+      {l:'Les règles applicables', h:'<p>Le <b>CUb</b> (opérationnel) indique si l’opération projetée est réalisable ; instruction en principe 2 mois, gratuit, valable 18 mois. Ce n’est pas une autorisation.</p><p>Le <b>certificat d’alignement</b> détermine la limite du domaine public routier.</p><p>Si la vente est soumise au droit de préemption urbain : <b>DIA</b>, avec deux mois de réponse.</p>'},
+      {l:'L’application aux faits', h:'M. Ali a un projet précis : un CUb. Le terrain borde une route départementale : un certificat d’alignement. Et on est en zone de préemption : la DIA.'},
+      {l:'La conclusion', h:'<p>On demande un <b>CUb</b>, un <b>certificat d’alignement</b> et on dépose une <b>DIA</b> en mairie. Précise à M. Ali que le CUb ne vaut pas permis de construire : il faudra le demander ensuite.</p>'}]},
+    {id:'deo2_c5', title:'La maison de 1962 : quels diagnostics ?', tag:'DDT · quels diagnostics ?', facts:['Mme Aubry vend sa maison individuelle, qu’elle habite. Permis de construire délivré en 1961. Installation de gaz et installation électrique de plus de 15 ans, aucune rénovation. La maison est dans une zone de risque termites délimitée par arrêté préfectoral, et n’est pas raccordée au tout-à-l’égout. Son DPE : classe F.'], q:'Quels diagnostics et documents faut-il demander ?', steps:[
+      {l:'Les faits', h:'Une maison individuelle de 1961, installations vieillissantes, zone termites, assainissement non collectif, étiquette F.'},
+      {l:'Le problème de droit', h:'Quels éléments du DDT s’appliquent ?'},
+      {l:'Les règles applicables', h:'<p><b>Plomb</b> : logement construit avant 1949. <b>Amiante</b> : permis avant le 1er juillet 1997. <b>Termites</b> : zone préfectorale. <b>Gaz, électricité</b> : installations de plus de 15 ans. <b>ANC</b> : immeuble non raccordé au réseau. <b>DPE</b> et <b>audit énergétique</b> (maison individuelle classée E, F ou G). <b>ERP</b>.</p>'},
+      {l:'L’application aux faits', h:'1961 : pas de plomb (après 1949) mais amiante (avant 1997). Zone termites : oui. Gaz et électricité de plus de 15 ans : oui. Non raccordée : assainissement non collectif. Classe F, maison individuelle : DPE et audit énergétique.'},
+      {l:'La conclusion', h:'<p><b>Amiante, termites, gaz, électricité, assainissement non collectif, DPE, audit énergétique</b> et <b>état des risques</b>. Pas de CREP (plomb). Ils sont fournis dès la promesse de vente ; l’audit énergétique, dès la première visite.</p>'}]},
+    {id:'deo2_c6', title:'« J’ai un droit de préemption, non ? »', tag:'Situation locative', facts:['Mme Perrin vend un appartement occupé par M. Colas, son locataire. M. Colas appelle l’étude : « Je suis locataire, donc j’ai un droit de préemption, vous ne pouvez pas vendre à quelqu’un d’autre ! »', 'Tu consultes le dossier : un bail d’habitation est en cours, aucun congé n’a été délivré.'], q:'Que réponds-tu à M. Colas ?', steps:[
+      {l:'Les faits', h:'Un locataire revendique un droit de préemption sur le logement qu’il occupe.'},
+      {l:'Le problème de droit', h:'Tout locataire dispose-t-il d’un droit de préemption ?'},
+      {l:'Les règles applicables', h:'Le notaire vérifie si le bien est loué, la <b>nature du bail</b>, les <b>congés</b> éventuellement délivrés et les <b>droits de préemption</b> applicables. <b>Il ne faut pas supposer</b> que tout locataire a automatiquement un droit de préemption.'},
+      {l:'L’application aux faits', h:'Le bail est en cours et aucun congé n’a été délivré. Le droit de préemption du locataire d’un logement n’existe qu’à certaines conditions, comme un congé donné pour vendre le bien, dans les formes et délais prévus par la loi.'},
+      {l:'La conclusion', h:'<p>Tu ne lui confirmes <b>rien</b> au téléphone : l’étude vérifie le bail et les congés. Si aucun congé pour vendre n’a été délivré, on ne peut pas lui reconnaître automatiquement ce droit. Le notaire reste son interlocuteur pour la suite.</p>'}]}
+  ]
+});
+
+JLG.fiche('deo2', [
+  {id:'avant', t:'Les formalités préalables', items:[
+    {d:'Formalités préalables', v:'Vérifications, pièces et démarches accomplies avant la signature, pour rédiger l’acte. La publication au SPF est postérieure.'},
+    {l:'Les trois enquêtes', num:true, items:['QUI : les personnes (identité, capacité, pouvoirs)', 'QUOI : le bien (titre, cadastre, hypothèques)', 'QUELLES règles : urbanisme et diagnostics']},
+    {p:'Un acte rédigé avec des pièces manquantes est un acte qu’on risque de devoir refaire.'}]},
+  {id:'identite', t:'Les personnes physiques', items:[
+    {l:'Les six mentions', items:['Nom', 'Prénoms (ordre de l’état civil)', 'Domicile', 'Profession', 'Date et lieu de naissance', 'Nom du conjoint, s’il y a lieu']},
+    {kv:[['Français', 'CNI ou passeport en cours de validité, avec photo'], ['Étranger', 'Pièce d’identité (passeport) + actes d’état civil traduits au besoin'], ['Titre de séjour', 'Pas exigé de tout étranger : EEE et Suisses dispensés']]},
+    {p:'Pas de « durée de validité » universelle pour les actes d’état civil : des actes récents.'}]},
+  {id:'etatcivil', t:'État civil et situation de famille', items:[
+    {tab:{head:['Pièce', 'Où la demander'], rows:[['Acte de naissance avec filiation', 'COMEDEC ou service d’état civil'], ['Acte de mariage', 'Mairie du lieu de célébration ou COMEDEC'], ['Français né ou marié à l’étranger', 'SCEC, à Nantes'], ['Contrat de mariage', 'Notaire détenteur de l’acte']]}},
+    {kv:[['PACS', 'En marge de l’acte de naissance ; mairie ou notaire depuis le 1er novembre 2017'], ['Divorce', 'Jugement ou convention déposée chez un notaire, et caractère définitif']]},
+    {kv:[['Mineur', 'Représentants légaux, parfois le juge des tutelles'], ['Tutelle', 'Le tuteur représente'], ['Curatelle', 'Le curateur assiste']]}]},
+  {id:'morales', t:'Personnes morales et pouvoirs', items:[
+    {d:'Kbis', v:'L’extrait d’immatriculation : la carte d’identité de la société. Il ne prouve pas les pouvoirs.'},
+    {l:'Les pièces d’une société', items:['Statuts à jour', 'Kbis le plus récent possible', 'Décisions sociales (compte rendu d’AG)', 'BODACC : procédure collective ?']},
+    {kv:[['Société civile', 'Pouvoirs : statuts ou délibérations d’associés'], ['Société commerciale', 'Statuts, AG, conseil, PDG ou directoire selon la forme'], ['Association', 'Date et lieu de dépôt des statuts (préfecture)']]},
+    {kv:[['Procuration de vente', 'Sous signature privée possible'], ['Procuration pour donation', 'Authentique']]}]},
+  {id:'bien', t:'L’identification du bien', items:[
+    {a:'Art. 7 du décret du 4 janvier 1955', v:'Tout acte indique pour chaque immeuble : la nature, la situation, la contenance et la désignation cadastrale.'},
+    {kv:[['Titre de propriété', 'Qui est propriétaire, désignation, origine trentenaire'], ['Cadastre', 'Extrait modèle 1, plan ; matrice = fiscal, pas un titre'], ['EHF', 'Propriété, servitudes, hypothèques, démembrement, copropriété publiée']]},
+    {m:'Titre, Cadastre, EHF : le trio du bien.'},
+    {p:'Le SPF du lieu de situation de l’immeuble délivre l’état hypothécaire.'}]},
+  {id:'urbanisme', t:'Les pièces d’urbanisme', items:[
+    {tab:{head:['Document', 'À quoi il sert'], rows:[['CUa', 'Règles applicables, servitudes, taxes : 1 mois'], ['CUb', 'Faisabilité d’un projet précis : 2 mois'], ['Alignement', 'Limite du domaine public routier'], ['Numérotage', 'Adresse attribuée à l’immeuble'], ['Carrière', 'Risques du sol et du sous-sol'], ['DIA', 'À déposer si DPU ou ZAD : réponse sous 2 mois']]}},
+    {kv:[['Certificat d’urbanisme', 'Gratuit, valable 18 mois, pas une autorisation']]},
+    {m:'a = 1 mois (1re lettre) ; b = 2 mois (2e lettre).'},
+    {p:'La DIA n’est pas un certificat : on la dépose, on ne la reçoit pas.'}]},
+  {id:'ddt', t:'Les diagnostics et leurs durées', items:[
+    {d:'DDT', v:'Dossier de diagnostic technique : fourni dès la promesse de vente.'},
+    {tab:{head:['Diagnostic', 'Durée'], rows:[['Termites', '6 mois'], ['État des risques (ERP)', 'Moins de 6 mois'], ['Gaz · Électricité · ANC', '3 ans'], ['Audit énergétique', '5 ans'], ['DPE', '10 ans'], ['Plomb (absent) · Amiante récent', 'Illimitée'], ['Carrez · Détecteur de fumée', 'Pas de durée légale']]}},
+    {kv:[['Plomb', 'Avant 1949'], ['Amiante', 'Permis avant le 1er juillet 1997'], ['Gaz, électricité', 'Installation de plus de 15 ans']]},
+    {m:'6 mois : les termites et les risques. 3 ans : gaz, électricité, assainissement. 10 ans : DPE.'}]}
+]);
+
+</script>
+<!-- ▲ JLG:CHAPITRE deo2 ▲ -->
 <!-- ▼ JLG:LEXIQUE tous ▼ -->
 <script>
 JLG.glossary([
@@ -9876,11 +10660,11 @@ JLG.glossary([
   {s:'immo', t:'Bail', d:'Contrat par lequel un bailleur laisse l’usage d’un bien à un locataire contre un loyer. Notarié obligatoirement s’il dépasse 12 ans.'},
   {s:'immo', t:'Bien immeuble', d:'Bien qui ne peut pas être déplacé : immeuble par nature, par destination ou par l’objet.', ref:'Art. 517 C. civ.'},
   {s:'immo', t:'Bien meuble', d:'Bien qui peut se déplacer ou être déplacé. Il peut être corporel (une voiture) ou incorporel (un fonds de commerce).'},
-  {s:'immo', t:'Cadastre', d:'Les documents établis par l’État après des relevés topographiques pour identifier les propriétés (matrice et plan), et l’administration fiscale qui les tient.'},
+  {s:['immo', 'deo'], t:'Cadastre', d:'Les documents établis par l’État après des relevés topographiques pour identifier les propriétés (matrice et plan), et l’administration fiscale qui les tient.'},
   {s:'immo', t:'Cession', d:'La transmission d’un bien ou d’un droit à une autre personne. Ex. : cession d’une part indivise.'},
   {s:'immo', t:'Clause « désignation »', d:'Paragraphe de l’acte qui identifie l’immeuble par ses quatre mentions obligatoires : nature, situation, contenance, références cadastrales.', ref:'Art. 7 décret 4 janv. 1955'},
   {s:'immo', t:'Constitution de servitude', d:'Acte qui crée une servitude : il grève un fonds servant au profit d’un fonds dominant.'},
-  {s:'immo', t:'Contenance', d:'La surface d’un terrain, exprimée en hectares, ares et centiares (1 ha = 10 000 m², 1 a = 100 m², 1 ca = 1 m²).'},
+  {s:['immo', 'deo'], t:'Contenance', d:'La surface d’un terrain, exprimée en hectares, ares et centiares (1 ha = 10 000 m², 1 a = 100 m², 1 ca = 1 m²).'},
   {s:'immo', t:'Convention d’occupation précaire', d:'Occupation d’un bien justifiée par des circonstances particulières, pour une durée incertaine, sans la protection d’un bail.'},
   {s:'immo', t:'Copropriété', d:'Immeuble bâti divisé en lots, chacun composé d’une partie privative et d’une quote-part des parties communes (les tantièmes). Loi du 10 juillet 1965.'},
   {s:'immo', t:'CSI', d:'Contribution de sécurité immobilière : taxe perçue lors de la publication des actes au service de la publicité foncière.'},
@@ -9903,7 +10687,7 @@ JLG.glossary([
   {s:'immo', t:'Licitation', d:'Vente d’un bien indivis, souvent aux enchères, pour sortir de l’indivision (par exemple après un décès).'},
   {s:'immo', t:'Lotissement', d:'Division d’un terrain en plusieurs lots destinés à être bâtis. Il exige en principe un permis d’aménager.'},
   {s:'immo', t:'Mairie', d:'L’interlocuteur pour l’urbanisme (certificats, permis) et le titulaire possible du droit de préemption urbain.'},
-  {s:'immo', t:'Matrice cadastrale', d:'Document écrit qui regroupe les relevés de propriété d’un même propriétaire dans une commune. Délivrée au propriétaire ou à son mandataire.'},
+  {s:['immo', 'deo'], t:'Matrice cadastrale', d:'Document écrit qui regroupe les relevés de propriété d’un même propriétaire dans une commune. Délivrée au propriétaire ou à son mandataire.'},
   {s:'immo', t:'Meubles meublants', d:'Les meubles qui garnissent un logement (électroménager, mobilier…). Listés et estimés à part dans l’acte, ils sortent de l’assiette des taxes.'},
   {s:['immo', 'deo'], t:'Minute', d:'L’original d’un acte authentique, conservé par le notaire.'},
   {s:'immo', t:'Mutation à titre gratuit', d:'Transfert de propriété sans contrepartie financière : donation, succession, legs.'},
@@ -10003,7 +10787,7 @@ JLG.glossary([
   {s:'immo', t:'Démembrement', d:'La répartition des attributs de la propriété entre plusieurs personnes : usufruit et nue-propriété, droit d’usage et d’habitation, servitude.'},
   {s:'immo', t:'Dessous', d:'Le sous-sol du terrain : fondations, canalisations, caves, puits. Il appartient au propriétaire du sol, sauf les mines et les vestiges archéologiques.', ref:'Art. 552 C. civ.'},
   {s:'immo', t:'Dessus', d:'L’espace au-dessus du sol : constructions, plantations, espace aérien. Il appartient au propriétaire du sol, dans les limites du PLU et des servitudes.', ref:'Art. 552 C. civ.'},
-  {s:'immo', t:'DIA', d:'Déclaration d’intention d’aliéner : elle informe la commune titulaire du droit de préemption urbain de la vente projetée. Son silence pendant 2 mois vaut renonciation.'},
+  {s:['immo', 'deo'], t:'DIA', d:'Déclaration d’intention d’aliéner : elle informe la commune titulaire du droit de préemption urbain de la vente projetée. Son silence pendant 2 mois vaut renonciation.'},
   {s:'immo', t:'Division parcellaire', d:'Le découpage d’une parcelle en plusieurs : document d’arpentage du géomètre-expert, nouveaux numéros cadastraux, puis acte publié au SPF.'},
   {s:'immo', t:'Document d’arpentage', d:'Le document établi par un géomètre-expert pour diviser une parcelle ou modifier ses limites ; le cadastre attribue ensuite les nouveaux numéros.'},
   {s:['immo', 'deo'], t:'DPU', d:'Droit de préemption urbain : le droit de la commune d’acheter en priorité un bien vendu dans certaines zones.', ref:'Art. L.211-1 et s. C. urb.'},
@@ -10012,7 +10796,7 @@ JLG.glossary([
   {s:'immo', t:'Droit réel principal', d:'Un droit réel qui porte sur la chose elle-même : la pleine propriété et ses démembrements.'},
   {s:'immo', t:'DUH', d:'Droit d’usage et d’habitation : droit réel temporaire ou viager d’occuper le bien d’autrui (usus), sans en percevoir les fruits ni en disposer.'},
   {s:'immo', t:'Effet relatif', d:'La clause de l’acte (partie normalisée) qui cite le titre du vendeur ou du donateur : la dernière mutation et ses références de publication au SPF.', ref:'Art. 3 décret 4 janv. 1955'},
-  {s:'immo', t:'État des risques (ERP)', d:'Le document annexé à la vente ou au bail qui informe des risques : inondation, séisme, mouvement de terrain, mines, radon…'},
+  {s:['immo', 'deo'], t:'État des risques (ERP)', d:'Le document annexé à la vente ou au bail qui informe des risques : inondation, séisme, mouvement de terrain, mines, radon…'},
   {s:['immo', 'deo'], t:'État hypothécaire (EH)', d:'Le document délivré par le SPF qui liste les actes publiés et les charges (hypothèques, servitudes) d’un immeuble. Lui seul fait foi, pas le cadastre.'},
   {s:'immo', t:'Étude de sol G1', d:'L’étude géotechnique préalable, obligatoire pour vendre un terrain à bâtir situé en zone d’argiles (retrait-gonflement moyen ou fort).'},
   {s:'immo', t:'Exclusivité', d:'Le caractère exclusif du droit de propriété : le propriétaire peut interdire aux autres l’usage de son bien.'},
@@ -10024,7 +10808,7 @@ JLG.glossary([
   {s:'immo', t:'Lot', d:'Une partie d’un ensemble divisé : en copropriété, une partie privative et une quote-part des parties communes ; en lotissement, un terrain à bâtir.'},
   {s:'immo', t:'Mitoyenneté', d:'La copropriété forcée de deux voisins sur ce qui est construit ou planté sur la limite : mur, murette, clôture, haie.'},
   {s:'immo', t:'OFS', d:'Organisme de foncier solidaire : il achète des terrains et les garde, pour en louer des lots sous bail réel solidaire.'},
-  {s:'immo', t:'Origine de propriété', d:'La clause de l’acte (partie développée) qui retrace la chaîne des propriétaires successifs sur au moins 30 ans.'},
+  {s:['immo', 'deo'], t:'Origine de propriété', d:'La clause de l’acte (partie développée) qui retrace la chaîne des propriétaires successifs sur au moins 30 ans.'},
   {s:'immo', t:'Partie développée', d:'La seconde partie de l’acte authentique : les clauses détaillées, dont l’origine de propriété.'},
   {s:'immo', t:'Partie normalisée', d:'La première partie de l’acte authentique, rédigée dans un ordre fixe : tout ce qu’il faut pour la publicité foncière et le calcul des taxes, dont l’effet relatif.'},
   {s:'immo', t:'Perpétuité', d:'Le caractère perpétuel du droit de propriété : il dure autant que le bien, se transmet par succession et ne se perd pas par le non-usage.'},
@@ -10107,9 +10891,9 @@ JLG.glossary([
   {s:'immo', t:'Certification d’identité', d:'La clause par laquelle le notaire certifie l’identité complète des parties, au vu d’un extrait d’acte de naissance ou d’un extrait RNE.'},
   {s:['immo', 'deo'], t:'Clé REAL', d:'La clé sécurisée du notaire, qui contient sa signature électronique : elle lui sert à signer les actes authentiques électroniques.'},
   {s:'immo', t:'Clôture d’acte', d:'Le paragraphe final de l’acte (« Dont acte… »), où sont recueillies les signatures après la lecture.'},
-  {s:'immo', t:'COMEDEC', d:'COMmunication Électronique des Données de l’État Civil : l’échange dématérialisé des actes d’état civil entre les notaires et les mairies.'},
+  {s:['immo', 'deo'], t:'COMEDEC', d:'COMmunication Électronique des Données de l’État Civil : l’échange dématérialisé des actes d’état civil entre les notaires et les mairies.'},
   {s:'immo', t:'Comparution', d:'La clause qui présente les parties à l’acte, avec leur identité complète.'},
-  {s:'immo', t:'EHF', d:'L’état hypothécaire hors formalité : délivré par le SPF hors de toute formalité, il liste les droits, charges et inscriptions publiés sur un immeuble. Demande par le cerfa 3233-SD ; 2 mois de validité en pratique.'},
+  {s:['immo', 'deo'], t:'EHF', d:'L’état hypothécaire hors formalité : délivré par le SPF hors de toute formalité, il liste les droits, charges et inscriptions publiés sur un immeuble. Demande par le cerfa 3233-SD ; 2 mois de validité en pratique.'},
   {s:['immo', 'civ'], t:'Interdiction d’aliéner (clause d’)', d:'La clause d’une donation qui interdit au donataire de vendre le bien sans l’accord du donateur, pour une durée limitée (souvent, la vie du donateur).', ref:'Art. 900-1 C. civ.'},
   {s:'immo', t:'Inopposabilité', d:'L’acte reste valable entre les parties, mais les tiers peuvent l’ignorer : c’est la sanction du défaut de publicité foncière.'},
   {s:'immo', t:'Intervenant', d:'Une personne qui signe l’acte sans en subir les effets, parce que son accord est nécessaire : le conjoint, pour la vente du logement de la famille.'},
@@ -10121,11 +10905,44 @@ JLG.glossary([
   {s:'immo', t:'Présence – représentation', d:'La clause qui indique si chaque signataire est présent à l’acte, ou représenté, et par qui.'},
   {s:'immo', t:'Publicité foncière', d:'L’ensemble des règles qui informent sur la situation juridique des immeubles, tenue par le service de la publicité foncière.'},
   {s:'immo', t:'Représentant', d:'La personne qui signe pour une partie ou un intervenant (tuteur, gérant, mandataire), sans subir les effets de l’acte.'},
-  {s:'immo', t:'RNE', d:'Le registre national des entreprises, tenu par l’INPI depuis le 1er janvier 2023. Son extrait justifie l’identité d’une personne morale.'},
-  {s:'immo', t:'SCEC', d:'Le service central d’état civil, à Nantes : il tient l’état civil des Français nés à l’étranger.'},
+  {s:['immo', 'deo'], t:'RNE', d:'Le registre national des entreprises, tenu par l’INPI depuis le 1er janvier 2023. Son extrait justifie l’identité d’une personne morale.'},
+  {s:['immo', 'deo'], t:'SCEC', d:'Le service central d’état civil, à Nantes : il tient l’état civil des Français nés à l’étranger.'},
   {s:'immo', t:'Signataire', d:'Toute personne qui signe l’acte : partie, intervenant, représentant, témoin ou notaire.'},
   {s:'immo', t:'Témoin (à l’acte)', d:'Une personne appelée à confirmer l’intention des parties : testament authentique, acte de notoriété…'},
   {s:['immo', 'deo'], t:'TRACFIN', d:'La cellule de renseignement financier qui lutte contre le blanchiment et le financement du terrorisme. Le notaire lui déclare les opérations douteuses.'}
+]);
+JLG.glossary([
+  /* —— Accompagner le client selon les règles déontologiques · Activité 3, chapitre 1 : les formalités préalables —— */
+  {s:'deo', t:'Formalités préalables', d:'Les vérifications, demandes de pièces et démarches accomplies avant la signature de l’acte, pour identifier les personnes et le bien et pouvoir rédiger. Elles s’opposent aux formalités postérieures (publication au SPF).'},
+  {s:'deo', t:'BODACC', d:'Le Bulletin officiel des annonces civiles et commerciales : on y vérifie les procédures collectives (sauvegarde, redressement, liquidation) et les rétablissements personnels.'},
+  {s:['deo', 'immo'], t:'Kbis (extrait)', d:'L’extrait d’immatriculation au registre du commerce et des sociétés : la carte d’identité de la société. Il identifie la société et ses représentants déclarés, mais ne remplace pas la vérification des pouvoirs.'},
+  {s:'deo', t:'Mandat de protection future', d:'Un mandat par lequel une personne choisit à l’avance qui la représentera si elle ne peut plus défendre ses intérêts. Il ne figure pas nécessairement en mention marginale : le notaire le vérifie à part.'},
+  {s:'deo', t:'Domicile fiscal', d:'Le lieu où la personne est imposée. À distinguer du domicile et de la résidence principale : il ne détermine pas à lui seul la protection du logement de la famille (art. 215 al. 3 C. civ.).'},
+  {s:['deo', 'immo'], t:'Résidence principale', d:'Le logement où la personne vit habituellement. Elle compte pour l’habitation principale, le logement de la famille et les règles sur les plus-values immobilières.'},
+  {s:'deo', t:'Interdiction d’acquérir (habitat indigne)', d:'La mesure qui interdit à certaines personnes condamnées d’acheter un bien d’habitation ou un fonds de commerce d’hébergement. Le notaire en contrôle l’application, par une procédure encadrée (bulletin n° 2 du casier judiciaire).'},
+  {s:'deo', t:'Bulletin n° 2', d:'Un extrait du casier judiciaire, dont la consultation par le notaire suit une procédure encadrée, notamment pour le contrôle de l’interdiction d’acquérir.'},
+  {s:'deo', t:'Surendettement', d:'La situation d’un particulier qui ne peut plus faire face à ses dettes. Le notaire détermine précisément les effets de la procédure sur la disposition du bien ; l’autorisation du juge n’est pas systématique.'},
+  {s:'deo', t:'Procédure collective', d:'La procédure (sauvegarde, redressement, liquidation judiciaire) ouverte contre une entreprise en difficulté. Les pouvoirs du dirigeant, de l’administrateur ou du liquidateur dépendent de la procédure et du jugement.'},
+  {s:'deo', t:'Extrait cadastral modèle 1', d:'Le document cadastral qui donne les références à jour d’une parcelle, utile à la publicité foncière. On vérifie sa date d’établissement.'},
+  {s:'deo', t:'Document modificatif du parcellaire cadastral', d:'Le document qui, en cas de division, met à jour le cadastre avec les nouvelles parcelles.'},
+  {s:'deo', t:'Origine trentenaire', d:'La reconstitution habituelle, sur trente ans, de la chaîne des propriétaires d’un bien, pour vérifier la continuité des mutations publiées.'},
+  {s:'deo', t:'Certificat d’urbanisme (CU)', d:'Le document qui renseigne sur les règles d’urbanisme, les servitudes et les taxes applicables à un terrain. Gratuit, valable 18 mois. Ce n’est pas une autorisation. Deux sortes : le CUa d’information (instruction en principe 1 mois) et le CUb opérationnel (2 mois).'},
+  {s:'deo', t:'CUa et CUb', d:'CUa : certificat d’urbanisme d’information (règles, servitudes, taxes ; 1 mois). CUb : certificat opérationnel, pour un projet précis (2 mois).'},
+  {s:'deo', t:'Certificat d’alignement', d:'Le document qui détermine la limite du domaine public routier (État, département ou commune) et des propriétés riveraines.'},
+  {s:'deo', t:'Certificat de numérotage', d:'Le document qui atteste, lorsque c’est nécessaire, l’adresse attribuée à un immeuble.'},
+  {s:'deo', t:'Certificat de carrière', d:'Le document qui renseigne sur les risques du sol et du sous-sol : anciennes carrières, nature des travaux confortatifs.'},
+  {s:['deo', 'immo'], t:'Droit de préemption urbain (DPU)', d:'Le droit d’une commune d’acheter en priorité un bien mis en vente dans certaines zones. S’il existe, on dépose une DIA.'},
+  {s:['deo', 'immo'], t:'ZAD (zone d’aménagement différé)', d:'Une zone où la collectivité peut préempter les biens vendus. La vente y est soumise à une déclaration d’intention d’aliéner.'},
+  {s:'deo', t:'DDT (dossier de diagnostic technique)', d:'L’ensemble des diagnostics que le vendeur communique selon le bien vendu. Il est en principe fourni dès la promesse de vente.'},
+  {s:'deo', t:'CREP (plomb)', d:'Le constat de risque d’exposition au plomb, pour les logements construits avant le 1er janvier 1949. Illimité en l’absence de plomb, valable 1 an pour une vente si le résultat est positif.'},
+  {s:'deo', t:'DPE', d:'Le diagnostic de performance énergétique, classé de A à G. Valable 10 ans ; les DPE réalisés avant juillet 2021 ne sont plus utilisables en 2026.'},
+  {s:'deo', t:'Audit énergétique', d:'Le document qui accompagne la vente d’une maison individuelle ou d’un immeuble en monopropriété classé E, F ou G, dans les cas prévus par la loi. Valable 5 ans, à remettre dès la première visite.'},
+  {s:['deo', 'immo'], t:'Loi Carrez', d:'La règle qui impose de mentionner la superficie privative d’un lot de copropriété dans l’acte de vente. Pas de durée de validité fixe : on la refait si la superficie a changé.'},
+  {s:'deo', t:'Mérule', d:'Un champignon qui attaque le bois des constructions. Dans les zones définies par arrêté préfectoral, c’est une information sur le risque, pas un diagnostic autonome.'},
+  {s:'deo', t:'Radon', d:'Un gaz naturel radioactif issu du sol. Pour un bien en zone à potentiel radon de niveau 3, l’information figure dans l’état des risques.'},
+  {s:'deo', t:'Assainissement non collectif', d:'Un système d’assainissement individuel, pour un immeuble d’habitation non raccordé au réseau public de collecte. Le diagnostic est valable 3 ans.'},
+  {s:['deo', 'immo'], t:'Assurance dommages-ouvrage', d:'L’assurance qui permet de réparer rapidement les désordres de construction sans attendre de savoir qui est responsable. Le vendeur en fournit la justification quand elle existe.'},
+  {s:['deo', 'immo'], t:'Garantie décennale', d:'La garantie qui oblige les constructeurs à réparer pendant dix ans les dommages graves qui affectent un ouvrage.'}
 ]);
 
 </script>

@@ -1,0 +1,86 @@
+  sorts:[
+    {id:'deo2_s1', title:'Où demander la pièce ?', intro:'Chaque pièce se demande au bon endroit. Où l’obtient-on ?', cats:[{id:'mai', l:'Mairie ou COMEDEC'}, {id:'not', l:'Notaire détenteur'}, {id:'scec', l:'SCEC (Nantes)'}, {id:'spf', l:'Service de la publicité foncière'}, {id:'dgf', l:'DGFiP (cadastre)'}], items:[
+      {e:'💍', t:'La copie d’un acte de mariage célébré à Lyon', c:'mai', w:'Auprès de la mairie du lieu de célébration, ou par COMEDEC.'},
+      {e:'👶', t:'Un extrait d’acte de naissance avec filiation (commune raccordée)', c:'mai', w:'Par COMEDEC ou auprès du service d’état civil compétent.'},
+      {e:'📜', t:'La copie du contrat de mariage de la cliente', c:'not', w:'C’est un acte notarié : on le demande au notaire détenteur, pas à la mairie.'},
+      {e:'🔄', t:'La copie de l’acte de changement de régime matrimonial', c:'not', w:'Un acte notarié : on le demande au notaire qui l’a reçu.'},
+      {e:'🌍', t:'L’acte de naissance d’un Français né à l’étranger, acte transcrit en France', c:'scec', w:'Le Service central d’état civil de Nantes.'},
+      {e:'✈️', t:'L’acte de mariage d’un Français marié à l’étranger, dans l’état civil français', c:'scec', w:'Le SCEC, lorsque l’acte figure dans l’état civil français.'},
+      {e:'🏛️', t:'L’état hypothécaire hors formalité de l’immeuble', c:'spf', w:'Au service de la publicité foncière du ressort de la situation de l’immeuble.'},
+      {e:'⛓️', t:'La liste des hypothèques et servitudes publiées sur la maison', c:'spf', w:'C’est le contenu de l’EHF : il se demande au SPF.'},
+      {e:'🗺️', t:'L’extrait cadastral modèle 1 et le plan cadastral', c:'dgf', w:'Les données cadastrales s’obtiennent auprès des services et portails de la DGFiP.'},
+      {e:'🧾', t:'L’extrait de matrice cadastrale', c:'dgf', w:'Un document de la documentation fiscale : DGFiP.'}]},
+    {id:'deo2_s2', title:'Le bon document d’urbanisme', intro:'Une situation, un document. Lequel demander ?', cats:[{id:'cua', l:'CUa (information)'}, {id:'cub', l:'CUb (opérationnel)'}, {id:'ali', l:'Certificat d’alignement'}, {id:'num', l:'Certificat de numérotage'}, {id:'dia', l:'DIA (à déposer)'}], items:[
+      {e:'📖', t:'Connaître les règles d’urbanisme et les taxes applicables à un terrain', c:'cua', w:'Le CUa d’information : instruction en principe 1 mois.'},
+      {e:'📝', t:'Savoir si un terrain est constructible, de manière générale', c:'cua', w:'Un CUa renseigne sur la constructibilité et les droits attachés au terrain.'},
+      {e:'🏗️', t:'Vérifier qu’une maison de 120 m² précise pourra être construite', c:'cub', w:'Le CUb est opérationnel : il se prononce sur un projet précis. Instruction : 2 mois.'},
+      {e:'🏡', t:'Connaître la faisabilité d’une opération projetée par l’acheteur', c:'cub', w:'C’est tout l’intérêt du CUb.'},
+      {e:'🛣️', t:'Connaître la limite entre la propriété et la rue (domaine public routier)', c:'ali', w:'L’alignement détermine cette limite.'},
+      {e:'📍', t:'Faire attester l’adresse officielle d’un immeuble', c:'num', w:'Le certificat de numérotage.'},
+      {e:'🔢', t:'Faire confirmer le numéro de la rue du bien', c:'num', w:'Il atteste l’adresse attribuée à l’immeuble.'},
+      {e:'🏙️', t:'La vente d’un terrain dans une zone de préemption urbain (DPU)', c:'dia', w:'On dépose en mairie une déclaration d’intention d’aliéner.'},
+      {e:'📬', t:'Demander à la commune si elle veut préempter le bien vendu', c:'dia', w:'C’est le but de la DIA. Elle répond sous deux mois.'},
+      {e:'🏠', t:'La vente d’un bien en zone d’aménagement différé (ZAD)', c:'dia', w:'Droit de préemption : on dépose la DIA.'}]},
+    {id:'deo2_s3', title:'Combien de temps ça vaut ?', intro:'Quelle est la durée de validité de ce diagnostic pour une vente ?', cats:[{id:'six', l:'6 mois'}, {id:'tro', l:'3 ans'}, {id:'cinq', l:'5 ans'}, {id:'dix', l:'10 ans'}, {id:'sans', l:'Illimitée ou pas de durée légale'}], items:[
+      {e:'🐜', t:'Termites', c:'six', w:'6 mois, dans les zones délimitées par arrêté préfectoral.'},
+      {e:'🌊', t:'État des risques (ERP)', c:'six', w:'Moins de 6 mois.'},
+      {e:'🔥', t:'Gaz (installation de plus de 15 ans)', c:'tro', w:'3 ans pour une vente.'},
+      {e:'⚡', t:'Électricité (installation de plus de 15 ans)', c:'tro', w:'3 ans pour une vente.'},
+      {e:'🚽', t:'Assainissement non collectif', c:'tro', w:'3 ans.'},
+      {e:'🔋', t:'Audit énergétique (maison classée E, F ou G)', c:'cinq', w:'5 ans, à remettre dès la première visite.'},
+      {e:'🌡️', t:'DPE', c:'dix', w:'10 ans, mais les DPE d’avant juillet 2021 ne sont plus utilisables.'},
+      {e:'🧪', t:'Plomb (CREP) avec absence de plomb', c:'sans', w:'Illimitée en l’absence de plomb au seuil réglementaire (1 an si positif).'},
+      {e:'🧱', t:'Amiante réalisé depuis le 1er avril 2013', c:'sans', w:'Illimitée, même si positif.'},
+      {e:'📐', t:'Superficie loi Carrez', c:'sans', w:'Pas de durée légale fixe : on la refait si la superficie a changé.'},
+      {e:'🚨', t:'Détecteur de fumée', c:'sans', w:'Une obligation d’équipement, pas de durée de diagnostic.'}]},
+    {id:'deo2_s4', title:'Personne physique ou personne morale ?', intro:'À qui demande-t-on cette pièce ?', cats:[{id:'pp', l:'Personne physique'}, {id:'pm', l:'Personne morale'}], items:[
+      {e:'🛂', t:'Un passeport en cours de validité', c:'pp', w:'La pièce d’identité d’un individu.'},
+      {e:'👶', t:'Un extrait d’acte de naissance avec filiation', c:'pp', w:'Il identifie une personne physique.'},
+      {e:'💍', t:'Un acte de mariage récent', c:'pp', w:'La situation matrimoniale d’une personne physique.'},
+      {e:'🏠', t:'Un justificatif de résidence principale', c:'pp', w:'Le domicile d’une personne physique.'},
+      {e:'⚖️', t:'Le jugement qui place le vendeur sous tutelle', c:'pp', w:'Une mesure de protection d’un majeur.'},
+      {e:'📃', t:'Les statuts à jour', c:'pm', w:'Ils donnent l’objet social et les pouvoirs.'},
+      {e:'🪪', t:'Un extrait Kbis récent', c:'pm', w:'La carte d’identité de la société.'},
+      {e:'🗳️', t:'Le compte rendu d’assemblée générale qui autorise la vente', c:'pm', w:'Il prouve que le dirigeant peut vendre.'},
+      {e:'📰', t:'Les annonces BODACC sur une éventuelle procédure collective', c:'pm', w:'La situation exacte de la société.'},
+      {e:'🏛️', t:'La date et le lieu de dépôt des statuts d’une association', c:'pm', w:'Les mentions d’identification d’une association (préfecture).'}]}
+  ],
+  cases:[
+    {id:'deo2_c1', title:'Sans titre de séjour, pas d’acte ?', tag:'Identité · personne étrangère', facts:['Mme Kowalska, de nationalité polonaise, vend un studio. Elle présente son passeport à l’accueil de l’étude.', 'Ton collègue lui dit : « Sans titre de séjour, nous ne pouvons pas continuer. » Mme Kowalska s’inquiète : elle vit en France depuis dix ans et n’en a jamais eu besoin.'], q:'Ton collègue a-t-il raison ?', steps:[
+      {l:'Les faits', h:'Une vendeuse polonaise présente un passeport. Un collègue exige un titre de séjour.'},
+      {l:'Le problème de droit', h:'Quelles pièces demande-t-on pour vérifier l’identité d’une personne de nationalité étrangère ? Le titre de séjour est-il obligatoire ?'},
+      {l:'Les règles applicables', h:'<p>Pour une personne de nationalité étrangère, on demande une <b>pièce d’identité officielle</b> (notamment un passeport) et, selon la situation, des actes d’état civil accompagnés d’une traduction appropriée.</p><p>Un titre de séjour <b>n’est pas exigé de tout étranger</b> : les ressortissants de l’EEE et les Suisses en sont en principe dispensés.</p>'},
+      {l:'L’application aux faits', h:'La Pologne fait partie de l’Union européenne, donc de l’EEE. Mme Kowalska est dispensée du titre de séjour. Son passeport suffit pour la pièce d’identité.'},
+      {l:'La conclusion', h:'<p>Ton collègue a tort. L’étude vérifie le passeport, demande, si besoin, un acte de naissance avec traduction, et poursuit le dossier.</p>'}]},
+    {id:'deo2_c2', title:'Née à Casablanca, mariée à Lyon', tag:'État civil · où demander ?', facts:['Sophie, de nationalité française, est née à Casablanca (Maroc) : son acte de naissance est transcrit dans les registres français. Elle s’est mariée à Lyon en 2018 avec Karim, sous contrat de mariage reçu par Maître Vidal à Villeurbanne.', 'Elle vend une maison. Tu prépares son dossier.'], q:'Où demandes-tu son acte de naissance, son acte de mariage et son contrat de mariage ?', steps:[
+      {l:'Les faits', h:'Une Française née à l’étranger, mariée en France sous contrat, vend une maison.'},
+      {l:'Le problème de droit', h:'À quel service s’adresser pour chaque document ?'},
+      {l:'Les règles applicables', h:'<p><b>Français né ou marié à l’étranger</b>, dont l’acte est établi ou transcrit dans les registres français : le <b>SCEC, à Nantes</b>.</p><p><b>Acte de mariage</b> : mairie du lieu de célébration, ou COMEDEC.</p><p><b>Contrat de mariage</b> : le notaire qui détient l’acte, <b>pas la mairie</b>.</p>'},
+      {l:'L’application aux faits', h:'L’acte de naissance de Sophie, né à Casablanca mais transcrit en France, se demande au SCEC. Son acte de mariage, célébré à Lyon, à la mairie de Lyon ou par COMEDEC. Son contrat de mariage, à Maître Vidal.'},
+      {l:'La conclusion', h:'<p>Trois pièces, trois endroits : <b>SCEC</b>, <b>mairie de Lyon</b> (ou COMEDEC), <b>Maître Vidal</b>. Pense aussi à vérifier si un changement de régime est mentionné dans l’acte de mariage.</p>'}]},
+    {id:'deo2_c3', title:'La SCI, son gérant et son Kbis', tag:'Personnes morales · pouvoirs', facts:['La SCI Les Tilleuls vend un immeuble. Son gérant, M. Bernard, apporte un Kbis tout neuf, qui le désigne comme gérant.', 'En lisant les statuts, tu remarques une clause : « La vente d’un immeuble de la société doit être autorisée par une décision des associés. » M. Bernard te répond : « Pas besoin, le Kbis montre bien que je suis le gérant. »'], q:'Peut-on préparer l’acte avec le seul Kbis ?', steps:[
+      {l:'Les faits', h:'Un gérant de SCI veut vendre un immeuble avec son seul Kbis, alors que les statuts exigent l’autorisation des associés.'},
+      {l:'Le problème de droit', h:'Le Kbis suffit-il à établir le pouvoir de vendre ?'},
+      {l:'Les règles applicables', h:'<p>Pour une société civile, les pouvoirs résultent des <b>statuts</b> ou des <b>délibérations d’associés</b>.</p><p>Le Kbis permet d’identifier les représentants déclarés, mais il <b>ne remplace pas la vérification des pouvoirs</b> et des autorisations prévus par les statuts ou la loi.</p>'},
+      {l:'L’application aux faits', h:'M. Bernard est bien le gérant, mais la vente d’un immeuble de la société doit être autorisée par les associés. Le Kbis ne prouve pas cette autorisation.'},
+      {l:'La conclusion', h:'<p>Non. Il faut demander la <b>décision (ou le compte rendu d’assemblée générale)</b> des associés qui autorise la vente. Sans elle, la vente pourrait être contestée.</p>'}]},
+    {id:'deo2_c4', title:'Un terrain pour construire', tag:'Urbanisme · quel certificat ?', facts:['M. Ali veut acheter un terrain à Mme Roux pour y construire une maison de 120 m². Il demande : « Est-ce que je pourrai vraiment construire ? »', 'Le terrain se trouve dans une zone soumise au droit de préemption urbain. Il borde une route départementale.'], q:'Quels documents d’urbanisme demandes-tu ?', steps:[
+      {l:'Les faits', h:'Un acquéreur veut construire une maison de 120 m² sur un terrain situé en zone de préemption, en bordure de route départementale.'},
+      {l:'Le problème de droit', h:'Quels documents répondent à la question du client et aux contraintes du terrain ?'},
+      {l:'Les règles applicables', h:'<p>Le <b>CUb</b> (opérationnel) indique si l’opération projetée est réalisable ; instruction en principe 2 mois, gratuit, valable 18 mois. Ce n’est pas une autorisation.</p><p>Le <b>certificat d’alignement</b> détermine la limite du domaine public routier.</p><p>Si la vente est soumise au droit de préemption urbain : <b>DIA</b>, avec deux mois de réponse.</p>'},
+      {l:'L’application aux faits', h:'M. Ali a un projet précis : un CUb. Le terrain borde une route départementale : un certificat d’alignement. Et on est en zone de préemption : la DIA.'},
+      {l:'La conclusion', h:'<p>On demande un <b>CUb</b>, un <b>certificat d’alignement</b> et on dépose une <b>DIA</b> en mairie. Précise à M. Ali que le CUb ne vaut pas permis de construire : il faudra le demander ensuite.</p>'}]},
+    {id:'deo2_c5', title:'La maison de 1962 : quels diagnostics ?', tag:'DDT · quels diagnostics ?', facts:['Mme Aubry vend sa maison individuelle, qu’elle habite. Permis de construire délivré en 1961. Installation de gaz et installation électrique de plus de 15 ans, aucune rénovation. La maison est dans une zone de risque termites délimitée par arrêté préfectoral, et n’est pas raccordée au tout-à-l’égout. Son DPE : classe F.'], q:'Quels diagnostics et documents faut-il demander ?', steps:[
+      {l:'Les faits', h:'Une maison individuelle de 1961, installations vieillissantes, zone termites, assainissement non collectif, étiquette F.'},
+      {l:'Le problème de droit', h:'Quels éléments du DDT s’appliquent ?'},
+      {l:'Les règles applicables', h:'<p><b>Plomb</b> : logement construit avant 1949. <b>Amiante</b> : permis avant le 1er juillet 1997. <b>Termites</b> : zone préfectorale. <b>Gaz, électricité</b> : installations de plus de 15 ans. <b>ANC</b> : immeuble non raccordé au réseau. <b>DPE</b> et <b>audit énergétique</b> (maison individuelle classée E, F ou G). <b>ERP</b>.</p>'},
+      {l:'L’application aux faits', h:'1961 : pas de plomb (après 1949) mais amiante (avant 1997). Zone termites : oui. Gaz et électricité de plus de 15 ans : oui. Non raccordée : assainissement non collectif. Classe F, maison individuelle : DPE et audit énergétique.'},
+      {l:'La conclusion', h:'<p><b>Amiante, termites, gaz, électricité, assainissement non collectif, DPE, audit énergétique</b> et <b>état des risques</b>. Pas de CREP (plomb). Ils sont fournis dès la promesse de vente ; l’audit énergétique, dès la première visite.</p>'}]},
+    {id:'deo2_c6', title:'« J’ai un droit de préemption, non ? »', tag:'Situation locative', facts:['Mme Perrin vend un appartement occupé par M. Colas, son locataire. M. Colas appelle l’étude : « Je suis locataire, donc j’ai un droit de préemption, vous ne pouvez pas vendre à quelqu’un d’autre ! »', 'Tu consultes le dossier : un bail d’habitation est en cours, aucun congé n’a été délivré.'], q:'Que réponds-tu à M. Colas ?', steps:[
+      {l:'Les faits', h:'Un locataire revendique un droit de préemption sur le logement qu’il occupe.'},
+      {l:'Le problème de droit', h:'Tout locataire dispose-t-il d’un droit de préemption ?'},
+      {l:'Les règles applicables', h:'Le notaire vérifie si le bien est loué, la <b>nature du bail</b>, les <b>congés</b> éventuellement délivrés et les <b>droits de préemption</b> applicables. <b>Il ne faut pas supposer</b> que tout locataire a automatiquement un droit de préemption.'},
+      {l:'L’application aux faits', h:'Le bail est en cours et aucun congé n’a été délivré. Le droit de préemption du locataire d’un logement n’existe qu’à certaines conditions, comme un congé donné pour vendre le bien, dans les formes et délais prévus par la loi.'},
+      {l:'La conclusion', h:'<p>Tu ne lui confirmes <b>rien</b> au téléphone : l’étude vérifie le bail et les congés. Si aucun congé pour vendre n’a été délivré, on ne peut pas lui reconnaître automatiquement ce droit. Le notaire reste son interlocuteur pour la suite.</p>'}]}
+  ]
+});

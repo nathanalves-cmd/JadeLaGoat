@@ -31,3 +31,10 @@ Le site est aussi un jeu : 12 niveaux de plus en plus durs, une animation et un 
 1. Créer le fichier de données dans `src/` (un appel `JLG.chapter({...})`, sur le modèle des chapitres existants) et sa fiche (`JLG.fiche(...)`).
 2. L’ajouter à la liste `CHAPTERS` de `build.py` (avec ses nouveaux fichiers de schémas, de style ou de lexique s’il en a), et ajouter une entrée `JLG.log(...)` dans `src/30-subjects.js`.
 3. Lancer `python3 build.py`, vérifier, puis commit et push : le site se met à jour tout seul (le service worker change de version à chaque build).
+
+## Outils (import / export)
+
+- `node tools/check_data.js` : vérifie les données avant publication (quiz, jeux de tri, cas, schémas, doublons, apostrophes).
+- `node tools/export_site.js [--chapter <id>] [--json]` : exporte l’état du site (ou un chapitre) dans `export/`, lisible par une conversation.
+- `python3 tools/new_chapter.py <id> <matière> <ordre> "<Titre>"` : crée le squelette d’un nouveau chapitre et l’inscrit dans `build.py`.
+- `.claude/skills/help-jade-site/SKILL.md` : le mode d’emploi complet (skill).
