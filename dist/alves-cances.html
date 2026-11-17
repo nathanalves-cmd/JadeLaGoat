@@ -2164,6 +2164,87 @@ html.lu-lock{overflow:hidden}
 @media (max-width:420px){.fm-dd-list li{grid-template-columns:auto minmax(0,1fr)}.fm-dd-list li em{grid-column:2;text-align:left;max-width:none}}
 @media (prefers-reduced-motion:reduce){.fm-pc,.fm-ur.in,.fm-dd-list li,.fm-ok,.fm-opt.got,.fm-opt.nope{animation:none}.fm-g-t i{animation:none;width:var(--w)}.fm-bar i{transition:none}}
 
+/* ——— Immobilier, activité 2 · séance 1 : l’estimation du bien ——— */
+
+/* Les huit règles */
+.ng-grid{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:720px){.ng-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.ng-r{display:grid;gap:6px;align-content:start;justify-items:start;padding:12px;border-radius:var(--r-m);border:1px solid var(--line-2);background:var(--bg-2);color:var(--fg);font:inherit;font-size:.9rem;text-align:left;cursor:pointer;transition:transform .25s var(--spring),border-color .25s,background .25s}
+.ng-r:hover{transform:translateY(-2px)}
+.ng-r.ok{border-color:color-mix(in srgb,var(--good) 45%,var(--line-2))}
+.ng-r.ko{border-color:color-mix(in srgb,var(--bad) 45%,var(--line-2))}
+.ng-r.sel.ok{background:var(--good-soft);border-color:var(--good)}
+.ng-r.sel.ko{background:var(--bad-soft);border-color:var(--bad)}
+.ng-b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;font-size:.8rem;font-weight:800;color:#fff}
+.ng-r.ok .ng-b{background:var(--good)}.ng-r.ko .ng-b{background:var(--bad)}
+
+/* PERVAL */
+.pv-list{display:grid;gap:8px}
+.pv-r{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:10px 12px;border-radius:var(--r-m);border:1px solid var(--line);background:var(--bg-2);cursor:pointer;transition:opacity .3s,border-color .3s}
+.pv-r input{width:20px;height:20px;accent-color:var(--accent)}
+.pv-r.off{opacity:.5}
+.pv-r.odd{border-style:dashed}
+.pv-i{display:grid;min-width:0}.pv-i small{color:var(--muted);font-size:.78rem}
+.pv-p{font-family:var(--font-mono);font-weight:700;font-size:.9rem;white-space:nowrap}
+.pv-m{grid-column:2 / 4;display:flex;align-items:center;gap:8px;font-size:.82rem}
+.pv-m b{font-family:var(--font-mono);white-space:nowrap;color:var(--accent)}
+.pv-bar{flex:1;height:6px;border-radius:99px;background:var(--line);overflow:hidden;display:block}
+.pv-bar u{display:block;height:100%;border-radius:99px;background:var(--accent);transition:width .6s var(--ease)}
+.pv-res,.sf-res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sf-res{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pv-res>div,.sf-res>div{display:grid;gap:2px;padding:10px;border-radius:var(--r-m);background:var(--surface-2);border:1px solid var(--line);min-width:0}
+.pv-res span,.sf-res span{font-size:.74rem;color:var(--muted)}
+.pv-res b,.sf-res b{font-family:var(--font-mono);font-size:clamp(.82rem,3.2vw,1.1rem);overflow-wrap:anywhere}
+.pv-res>div:last-child{border-color:var(--accent-line);background:var(--accent-soft)}
+.pv-n{font-size:.88rem}
+
+/* Surfaces */
+.sf-list{display:grid;gap:6px}
+.sf-r{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;padding:10px 12px;border-radius:var(--r-m);border:1px solid var(--line);background:var(--bg-2);color:var(--fg);font:inherit;font-size:.9rem;text-align:left;cursor:pointer;transition:border-color .25s,background .25s,transform .25s var(--spring)}
+.sf-r:hover{transform:translateY(-1px)}
+.sf-r b{font-family:var(--font-mono);font-size:.84rem;white-space:nowrap}
+.sf-n small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+.sf-ck{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:2px solid var(--line-2);font-weight:800;font-size:.8rem;color:var(--accent-ink);transition:all .25s var(--spring)}
+.sf-r.on{border-color:var(--accent);background:var(--accent-soft)}
+.sf-r.on .sf-ck{background:var(--accent);border-color:var(--accent)}
+.sf-r.good{border-color:var(--good);background:var(--good-soft)}
+.sf-r.bad{border-color:var(--bad);background:var(--bad-soft);animation:fmShake .4s var(--ease)}
+
+/* Méthode par le revenu */
+.cp-eq{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;align-items:center;justify-items:stretch}
+@media (min-width:640px){.cp-eq{grid-template-columns:1fr auto 1fr auto 1.2fr}}
+.cp-eq>div{display:grid;gap:2px;padding:10px;border-radius:var(--r-m);background:var(--surface-2);border:1px solid var(--line);min-width:0}
+.cp-eq .big{border-color:var(--accent-line);background:var(--accent-soft)}
+.cp-eq span{font-size:.74rem;color:var(--muted)}
+.cp-eq b{font-family:var(--font-mono);font-size:clamp(.9rem,3.6vw,1.2rem);overflow-wrap:anywhere}
+.cp-eq i{font-style:normal;font-family:var(--font-mono);font-weight:800;color:var(--accent);text-align:center}
+.cp-bar{position:relative;height:10px;border-radius:99px;background:var(--line)}
+.cp-zone{position:absolute;top:0;bottom:0;border-radius:99px;background:color-mix(in srgb,var(--good) 55%,transparent);transition:left .4s var(--ease),width .4s var(--ease)}
+.cp-pt{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-shadow:var(--shadow);transition:left .3s var(--ease)}
+
+/* Décence */
+.dc-dpe{display:flex;flex-wrap:wrap;gap:6px}
+.dpe{width:40px;height:40px;border-radius:10px;border:2px solid transparent;color:#fff;font-weight:800;font-size:1rem;cursor:pointer;transition:transform .25s var(--spring),border-color .25s,box-shadow .25s}
+.dpe[aria-pressed="true"]{border-color:var(--fg);transform:scale(1.12);box-shadow:var(--shadow)}
+.dpe-A{background:#2e9d5a}.dpe-B{background:#52b34a}.dpe-C{background:#8ab82c;color:#1c2a05}.dpe-D{background:#e5c81d;color:#2b2503}.dpe-E{background:#f09a28;color:#2f1c02}.dpe-F{background:#e8602b}.dpe-G{background:#c2362e}
+.dc-stamp{padding:12px 14px;border-radius:var(--r-m);font-family:var(--font-display);font-weight:800;font-size:1.15rem;text-align:center;animation:fmPop .5s var(--spring)}
+.dc-stamp.ok{background:var(--good-soft);border:2px solid var(--good)}.dc-stamp.ko{background:var(--bad-soft);border:2px solid var(--bad)}
+.dc-ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.dc-ul li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;padding:8px 10px;border-radius:var(--r-m);background:var(--bg-2);border:1px solid var(--line);font-size:.9rem}
+.dc-ul li b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;color:#fff;font-size:.78rem}
+.dc-ul li.ok b{background:var(--good)}.dc-ul li.ko b{background:var(--bad)}
+.dc-ul small{display:block;color:var(--muted);font-size:.8rem}
+
+/* Frise des ventes */
+.vt-line{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:0}
+.vt-line li{flex:1 1 0;display:flex;align-items:center;min-width:0}
+.vt-line li+li::before{content:"";flex:1;height:3px;background:var(--line-2);border-radius:2px}
+.vt-d{display:grid;place-items:center;width:34px;height:34px;flex:0 0 auto;border-radius:50%;border:2px solid var(--line-2);background:var(--bg-2);color:var(--fg);font-weight:800;font-size:.82rem;cursor:pointer;transition:all .3s var(--spring)}
+.vt-d.done{background:var(--good);border-color:var(--good);color:#fff}
+.vt-d.cur{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:scale(1.18);box-shadow:0 6px 16px -8px var(--glow)}
+.vt-out .w-card{min-height:112px}
+@media (prefers-reduced-motion:reduce){.sf-r.bad,.dc-stamp{animation:none}}
+
 /* ——— v4 : programme du jour, recherche globale, écoute, réglages, impression ——— */
 
 /* Programme du jour */
@@ -2871,6 +2952,12 @@ const TOOLS = [
   {id:'procuration', g:'Immobilier · Séance 3', t:'Quelle procuration ?', d:'L’arbre du parallélisme des formes : authentique ou sous signature privée.', w:'procuration'},
   {id:'intervenants', g:'Immobilier · Séance 3', t:'Qui doit intervenir à l’acte ?', d:'Le conjoint, le donateur, les héritiers réservataires : le simulateur.', w:'intervenants'},
   {id:'ehf', g:'Immobilier · Séance 3', t:'Lire un état hypothécaire (EHF)', d:'Touche une zone de l’état : ce qu’elle apprend au notaire, et combien de temps il est valable.', w:'ehf'},
+  {id:'negoc', g:'Immobilier · Activité 2', t:'Négociation notariale : permis ou interdit ?', d:'Les huit règles de l’article 7.1.2.2 du règlement professionnel du notariat.', w:'negoc'},
+  {id:'perval', g:'Immobilier · Activité 2', t:'Estimer un T2 avec PERVAL', d:'Coche les ventes comparables, change la surface : prix au m², valeur vénale, prix arrondi.', w:'perval'},
+  {id:'surfaces', g:'Immobilier · Activité 2', t:'Quelle surface retenir ?', d:'Habitable ou pondérée : touche les pièces qui comptent, puis vérifie.', w:'surfaces'},
+  {id:'capital', g:'Immobilier · Activité 2', t:'Capitaliser un loyer', d:'Loyer, charges, taux : la valeur vénale par la méthode du revenu.', w:'capital'},
+  {id:'decence', g:'Immobilier · Activité 2', t:'Ce logement est-il décent ?', d:'Surface, hauteur, DPE, sous-sol : louable ou non, selon la date du bail.', w:'decence'},
+  {id:'ventes', g:'Immobilier · Activité 2', t:'Enchères ou Immo-interactif', d:'Le déroulé de chaque vente, étape par étape.', w:'ventes'},
   {id:'couples', g:'Droit civil', t:'Concubinage, PACS ou mariage ?', d:'Compare les trois façons de vivre en couple, critère par critère.', w:'echelle'},
   {id:'famille', g:'Droit civil', t:'Qui peut-on épouser ou pacser ?', d:'Touche un membre de la famille de Léa : interdit, dispense possible ou autorisé.', w:'famille'},
   {id:'nullite', g:'Droit civil', t:'Simulateur de nullité du mariage', d:'Choisis une cause : type de nullité, qui peut agir, délai, effets.', w:'nullite'},
@@ -6820,6 +6907,265 @@ JLG.widget('ddt', (el, o) => {
   draw();
 });
 
+/* =================== SCHÉMAS — IMMOBILIER, ACTIVITÉ 2 · SÉANCE 1 : L’ESTIMATION DU BIEN =================== */
+
+const frN = (v, d = 0) => Number(v).toLocaleString('fr-FR', {minimumFractionDigits:d, maximumFractionDigits:d});
+const eurR = v => frN(Math.round(v)) + ' €';
+const round100 = v => Math.round(v / 100) * 100;
+
+/* 1. Les huit règles de la négociation notariale (art. 7.1.2.2 du règlement professionnel) */
+JLG.widget('negoc', el => {
+  const R = [
+    {k:'mandat', ok:1, t:'Un mandat écrit', d:'Le notaire doit être mandaté <b>par écrit</b>. Le mandat indique le <b>mode de calcul des honoraires</b>, la personne qui les paiera (vendeur, acquéreur, bailleur, locataire), une <b>durée raisonnable</b> (souvent 3 mois), et une copie est remise au mandant.'},
+    {k:'contrat', ok:1, t:'En vue d’un contrat', d:'On ne négocie qu’<b>en vue de la réalisation d’un contrat</b>, l’acte de vente définitif, avec réserve et dignité envers tous les clients.'},
+    {k:'demarchage', ok:0, t:'Pas de démarchage', d:'Il est <b>interdit</b> de rechercher de nouveaux clients, directement ou par personne interposée, pour recueillir un mandat.'},
+    {k:'annonces', ok:0, t:'Pas d’annonces générales', d:'Interdiction d’annonces <b>sans bien précis</b> : biens à vendre ou à louer en général, capitaux à placer ou à emprunter.'},
+    {k:'supports', ok:1, t:'Les supports, selon les usages', d:'Tout support publicitaire est possible, <b>dans le respect des usages</b> définis par les instances de la profession.'},
+    {k:'vitrine', ok:0, t:'Pas de vitrine de boutique', d:'On n’affiche pas les annonces dans une <b>vitrine formant devanture de boutique</b>. Seule la profession peut faire de la publicité informative générale sur le notariat.'},
+    {k:'groupe', ok:1, t:'Se grouper', d:'Plusieurs notaires peuvent <b>mettre des moyens en commun</b> et tenir un fichier commun des offres. Le groupement ne négocie pas lui-même.'},
+    {k:'succursale', ok:0, t:'Pas de succursale dédiée', d:'Interdit d’ouvrir une succursale qui ne fait que de la négociation et qui a une <b>entrée distincte</b> de l’office.'}
+  ];
+  el.innerHTML = `<div class="w w-negoc">
+    <div class="w-head"><span class="eyebrow">Document interactif</span><b>Huit règles, permis ou interdit</b><span class="muted">Touche une règle pour la lire. Vert : permis ; rouge : interdit.</span></div>
+    <div class="ng-grid">${R.map(r => `<button class="ng-r ${r.ok ? 'ok' : 'ko'}" data-k="${r.k}"><span class="ng-b">${r.ok ? '✓' : '✕'}</span><b>${r.t}</b></button>`).join('')}</div>
+    <div class="ng-out" aria-live="polite"></div></div>`;
+  const out = $('.ng-out', el), seen = new Set();
+  const show = k => { const r = R.find(x => x.k === k); $$('.ng-r', el).forEach(b => b.classList.toggle('sel', b.dataset.k === k)); out.innerHTML = `<div class="w-card"><b class="w-t">${r.t}</b><p>${r.d}</p></div>`; seen.add(k); if (seen.size === R.length && !el.__done){ el.__done = true; addXP(5, {target:out}); } };
+  el.addEventListener('click', e => { const b = e.target.closest('.ng-r'); if (b) show(b.dataset.k); });
+  show('mandat');
+});
+
+/* 2. La comparaison directe : le prix au m² — ou défi « le bon prix au m² » */
+JLG.widget('perval', (el, o) => {
+  if (o && o.mode === 'defi'){
+    const items = [];
+    for (let i = 0; i < 14; i++){
+      const p1 = 1500 + 100 * Math.floor(Math.random() * 25), p2 = p1 + 100 * (1 + Math.floor(Math.random() * 6));
+      const s1 = 40 + Math.floor(Math.random() * 25), s2 = 40 + Math.floor(Math.random() * 25), S = 40 + Math.floor(Math.random() * 50);
+      const avg = (p1 + p2) / 2, good = round100(avg * S);
+      const opts = [...new Set([good, round100(p1 * S), round100(p2 * S), round100((p1 * s1 + p2 * s2) / 2)])];
+      while (opts.length < 4) opts.push(good + 1000 * (opts.length + 1));
+      items.push({q:`Deux ventes dans PERVAL : <b>${eurR(p1 * s1)}</b> pour ${s1} m², et <b>${eurR(p2 * s2)}</b> pour ${s2} m². Quelle valeur vénale (arrondie à la centaine) pour un bien de <b>${S} m²</b> ?`, a:eurR(good), o:opts.map(eurR), e:`Prix au m² : ${frN(p1)} € et ${frN(p2)} €, moyenne ${frN(avg, 2)} €/m². Valeur : ${frN(avg, 2)} × ${S} = ${frN(avg * S, 2)} €, soit ${eurR(good)}.`});
+    }
+    return fmQuiz(el, {items, n:8, eyebrow:'Défi', hint:'Prix au m² de chaque vente, moyenne, puis surface.', title:'Le bon prix au m²', perfect:'Tu estimes comme un notaire.', again:'Rappelle-toi : prix ÷ surface pour chaque vente, moyenne, puis × surface du bien.'});
+  }
+  const V = [
+    {a:'rue Haguenauer', d:'23/08/2026', p:111900, s:48.08, y:1976},
+    {a:'rue Cyfflé', d:'01/09/2026', p:125000, s:46.43, y:1972},
+    {a:'boulevard Joffre', d:'29/09/2026', p:131300, s:45.35, y:1962},
+    {a:'boulevard Joffre', d:'28/10/2026', p:131800, s:50.04, y:1962},
+    {a:'place Stanislas (hôtel particulier)', d:'12/10/2026', p:240000, s:44.5, y:1760, odd:1}
+  ];
+  el.innerHTML = `<div class="w w-pv">
+    <div class="w-head"><span class="eyebrow">Simulateur</span><b>Estimer un T2 à Nancy avec PERVAL</b><span class="muted">Coche les ventes comparables, change la surface, regarde la valeur vénale.</span></div>
+    <div class="pv-list">${V.map((v, i) => `<label class="pv-r${v.odd ? ' odd' : ''}"><input type="checkbox" data-i="${i}" ${v.odd ? '' : 'checked'}><span class="pv-i"><b>${v.a}</b><small>${v.d} · ${frN(v.s, 2)} m² · ${v.y}</small></span><span class="pv-p">${eurR(v.p)}</span><span class="pv-m"><i class="pv-bar"><u style="width:${Math.min(100, v.p / v.s / 60)}%"></u></i><b>${frN(v.p / v.s, 2)} €/m²</b></span></label>`).join('')}</div>
+    <label class="rp-f"><span>Surface du bien à estimer : <output class="pv-s">49,42</output> m²</span><input type="range" min="30" max="90" step="0.01" value="49.42"></label>
+    <div class="pv-res" aria-live="polite"><div><span>Prix moyen</span><b class="pv-avg">—</b></div><div><span>Valeur vénale</span><b class="pv-val">—</b></div><div><span>Prix affiché</span><b class="pv-fin">—</b></div></div>
+    <p class="pv-n muted"></p></div>`;
+  const calc = () => {
+    const on = $$('input[type=checkbox]', el).filter(c => c.checked).map(c => V[+c.dataset.i]);
+    const S = +$('input[type=range]', el).value; $('.pv-s', el).textContent = frN(S, 2);
+    $$('.pv-r', el).forEach(r => r.classList.toggle('off', !$('input', r).checked));
+    if (!on.length){ $('.pv-avg', el).textContent = $('.pv-val', el).textContent = $('.pv-fin', el).textContent = '—'; $('.pv-n', el).textContent = 'Retiens au moins une vente.'; return; }
+    const avg = on.reduce((t, v) => t + v.p / v.s, 0) / on.length, val = avg * S;
+    countTo($('.pv-avg', el), avg, n => frN(n, 2) + ' €/m²'); countTo($('.pv-val', el), val, n => frN(n, 2) + ' €'); countTo($('.pv-fin', el), round100(val), n => eurR(round100(n)));
+    const odd = $('.pv-r.odd input', el).checked;
+    $('.pv-n', el).innerHTML = odd ? '<b>Attention :</b> l’hôtel particulier de la place Stanislas n’est pas comparable (type, époque, style). Il fait grimper la moyenne : retire-le.' : `Moyenne des ${on.length} ventes : total des prix au m² ÷ ${on.length}. Le prix affiché est arrondi : ni dizaines d’euros, ni centimes.`;
+    if (!odd && on.length === 4 && Math.abs(S - 49.42) < .005 && !el.__done){ el.__done = true; addXP(5, {target:el}); }
+  };
+  el.addEventListener('input', calc); el.addEventListener('change', calc); calc();
+});
+
+/* 3. Ça compte ou pas ? Habitable, Carrez, pondérée — ou défi */
+JLG.widget('surfaces', (el, o) => {
+  if (o && o.mode === 'defi'){
+    const Y = 'Oui, ça compte', N = 'Non, ça ne compte pas';
+    const q = (t, ok, e) => ({q:t, a:ok ? Y : N, o:[Y, N], e});
+    const items = [
+      q('Une <b>cave</b> compte-t-elle dans la surface habitable ?', 0, 'Caves, sous-sols, garages, remises : exclus.'),
+      q('Un <b>garage</b> compte-t-il dans la surface habitable ?', 0, 'Exclu de la surface habitable (et de la loi Carrez).'),
+      q('Une <b>loggia ouverte</b> compte-t-elle dans la surface habitable ?', 0, 'Terrasses, loggias, balcons : exclus.'),
+      q('Une <b>véranda</b> compte-t-elle dans la surface habitable ?', 0, 'Exclue de la surface habitable. Elle peut compter dans la superficie Carrez (local clos et couvert).'),
+      q('Une <b>véranda</b> peut-elle compter dans la superficie Carrez ?', 1, 'Oui : c’est un local clos et couvert (art. 4-1 du décret de 1967).'),
+      q('Un <b>salon de 20 m²</b> compte-t-il dans la surface habitable ?', 1, 'Une pièce à vivre compte, murs et cloisons déduits.'),
+      q('Une <b>salle d’eau</b> compte-t-elle dans la surface habitable ?', 1, 'Oui, comme toute pièce habitable.'),
+      q('Dans une chambre mansardée, la partie de <b>moins de 1,80 m</b> de hauteur compte-t-elle ?', 0, 'Les parties de moins de 1,80 m sont exclues.'),
+      q('Des <b>combles non aménagés</b> comptent-ils dans la surface habitable ?', 0, 'Seuls les combles aménagés peuvent compter.'),
+      q('Un lot de <b>6 m²</b> compte-t-il dans la loi Carrez ?', 0, 'Les lots de moins de 8 m² ne sont pas comptés.'),
+      q('Un <b>garage</b> compte-t-il dans la surface pondérée ?', 0, 'Dans la grille de pondération, les garages ne sont pas pris en compte.'),
+      {q:'Quel est le coefficient d’un <b>sas d’entrée couvert et fermé</b> ?', a:'0,70', o:['0,70', '0,50', '0,40', '1'], e:'Un porche couvert et ouvert : 0,50.'},
+      {q:'Quel est le coefficient d’un <b>balcon</b> de plus de 1 m de saillie et plus de 2 m² ?', a:'0,40', o:['0,40', '0,60', '0,70', '1'], e:'Comme les terrasses accessibles. Les loggias : 0,60.'},
+      {q:'Quel est le coefficient du <b>rez-de-chaussée aménagé</b> ?', a:'1', o:['1', '0,50', '0,70', '0,15'], e:'Le rez-de-chaussée non aménagé (caves, communs) : 0,50.'},
+      {q:'Quel est le coefficient d’une <b>loggia</b> (ou salle ouverte sur deux faces) ?', a:'0,60', o:['0,60', '0,40', '0,50', '1'], e:'0,40 pour balcons et terrasses.'}
+    ];
+    return fmQuiz(el, {items, n:8, eyebrow:'Défi', hint:'Surface habitable, Carrez ou pondérée : applique la règle.', title:'Ça compte ou pas ?', perfect:'Tu mesures au centimètre près.', again:'Exclus de la surface habitable : cave, garage, terrasse, loggia, balcon, véranda, parties sous 1,80 m.'});
+  }
+  const SETS = {
+    hab:{l:'Habitable', p:5045, u:'Appartement à Strasbourg · 5 045 €/m²', rows:[
+      {n:'Entrée', s:4.75, ok:1, w:'Pièce habitable.'}, {n:'Cuisine', s:8.25, ok:1, w:'Pièce habitable.'}, {n:'Salon – salle à manger', s:20.44, ok:1, w:'Pièce habitable.'},
+      {n:'Loggia', s:7.5, ok:0, w:'Exclue : loggias, balcons et terrasses ne comptent pas.'},
+      {n:'Chambre mansardée 1 (10,14 m² dont 1,11 sous 1,80 m)', s:9.03, ok:1, w:'10,14 − 1,11 = 9,03 m² : la partie sous 1,80 m est exclue.'},
+      {n:'Chambre mansardée 2 (11,89 m² dont 1,72 sous 1,80 m)', s:10.17, ok:1, w:'11,89 − 1,72 = 10,17 m².'},
+      {n:'Salle d’eau avec WC', s:6.12, ok:1, w:'Pièce habitable.'},
+      {n:'Cave', s:3.8, ok:0, w:'Exclue : caves, sous-sols, remises.'}, {n:'Garage', s:11, ok:0, w:'Exclu : garage.'}]},
+    pon:{l:'Pondérée', p:2491, u:'Chalet à Gérardmer · 2 491 €/m²', rows:[
+      {n:'Sas d’entrée couvert et fermé (2,70 m²) · coef. 0,70', s:1.89, ok:1, w:'2,70 × 0,70 = 1,89 m² pondérés.'},
+      {n:'Cuisine (7,82 m²) · coef. 1', s:7.82, ok:1, w:'Rez-de-chaussée aménagé : coefficient 1.'},
+      {n:'Salon – salle à manger (22,10 m²) · coef. 1', s:22.1, ok:1, w:'Rez-de-chaussée aménagé : coefficient 1.'},
+      {n:'Chambre avec salle de bains (16,79 m²) · coef. 1', s:16.79, ok:1, w:'Rez-de-chaussée aménagé : coefficient 1.'},
+      {n:'Garage attenant (9,89 m²)', s:9.89, ok:0, w:'Les garages ne sont pas pris en compte.'}]}
+  };
+  let cur = 'hab', picked = new Set(), checked = false;
+  el.innerHTML = `<div class="w w-sf">
+    <div class="w-head"><span class="eyebrow">Simulateur</span><b>Quelle surface retenir ?</b><span class="muted">Touche les lignes qui comptent, puis vérifie.</span></div>
+    <div class="seg-ctrl sf-tabs" role="tablist">${Object.entries(SETS).map(([k, s]) => `<button role="tab" data-k="${k}" aria-selected="${k === cur}">${s.l}</button>`).join('')}</div>
+    <p class="muted sf-u"></p><div class="sf-list"></div>
+    <div class="sf-res" aria-live="polite"><div><span class="sf-lab">Surface retenue</span><b class="sf-tot">0 m²</b></div><div><span>Valeur vénale</span><b class="sf-val">0 €</b></div></div>
+    <div class="btn-row"><button class="btn btn-primary sf-chk">Vérifier</button><button class="btn sf-rst">Recommencer</button></div></div>`;
+  const draw = () => {
+    const S = SETS[cur]; $('.sf-u', el).textContent = S.u;
+    $('.sf-list', el).innerHTML = S.rows.map((r, i) => `<button class="sf-r${picked.has(i) ? ' on' : ''}${checked ? (picked.has(i) === !!r.ok ? ' good' : ' bad') : ''}" data-i="${i}" aria-pressed="${picked.has(i)}"><span class="sf-ck">${picked.has(i) ? '✓' : ''}</span><span class="sf-n">${r.n}${checked ? `<small>${r.w}</small>` : ''}</span><b>${frN(r.s, 2)} m²</b></button>`).join('');
+    const tot = [...picked].reduce((t, i) => t + S.rows[i].s, 0);
+    countTo($('.sf-tot', el), tot, n => frN(n, 2) + ' m²'); countTo($('.sf-val', el), tot * S.p, n => eurR(n));
+  };
+  el.addEventListener('click', e => {
+    const t = e.target.closest('.sf-tabs button'); if (t){ cur = t.dataset.k; picked = new Set(); checked = false; $$('.sf-tabs button', el).forEach(b => b.setAttribute('aria-selected', b === t)); return draw(); }
+    const r = e.target.closest('.sf-r'); if (r && !checked){ const i = +r.dataset.i; picked.has(i) ? picked.delete(i) : picked.add(i); return draw(); }
+    if (e.target.closest('.sf-chk')){ checked = true; draw(); const S = SETS[cur], okAll = S.rows.every((x, i) => picked.has(i) === !!x.ok); if (okAll && !el['__d' + cur]){ el['__d' + cur] = 1; addXP(5, e); confetti(40); } }
+    if (e.target.closest('.sf-rst')){ picked = new Set(); checked = false; draw(); }
+  });
+  draw();
+});
+
+/* 4. La méthode par le revenu */
+JLG.widget('capital', el => {
+  const CAT = {
+    IIA:{l:'II A', lo:2, hi:4}, IIB:{l:'II B', lo:2, hi:4}, IIC:{l:'II C', lo:3, hi:6}, IIIA:{l:'III A', lo:4, hi:7}, IIIB:{l:'III B', lo:5, hi:10}, IV:{l:'IV', lo:8, hi:12}, PRO:{l:'Local professionnel', lo:6, hi:10}
+  };
+  let cat = 'IIB';
+  el.innerHTML = `<div class="w w-cap">
+    <div class="w-head"><span class="eyebrow">Simulateur</span><b>Capitaliser un loyer</b><span class="muted">Valeur vénale = (loyer hors charges × 12) ÷ taux.</span></div>
+    <div class="rp-tgs cp-cat">${Object.entries(CAT).map(([k, c]) => `<button class="rp-tg" data-k="${k}" aria-pressed="${k === cat}">${c.l}</button>`).join('')}</div>
+    <label class="rp-f"><span>Loyer mensuel charges comprises : <output class="cp-l">1 370 €</output></span><input class="cp-lo" type="range" min="300" max="3000" step="10" value="1370"></label>
+    <label class="rp-f"><span>Charges : <output class="cp-c">120 €</output></span><input class="cp-ch" type="range" min="0" max="400" step="5" value="120"></label>
+    <label class="rp-f"><span>Taux de capitalisation : <output class="cp-t">3 %</output> <small class="cp-rg muted"></small></span><input class="cp-tx" type="range" min="2" max="12" step="0.5" value="3"></label>
+    <div class="cp-eq"><div><span>Loyer net par mois</span><b class="cp-n">1 250 €</b></div><i>× 12</i><div><span>Revenu annuel net</span><b class="cp-a">15 000 €</b></div><i>÷ taux</i><div class="big"><span>Valeur vénale</span><b class="cp-v">500 000 €</b></div></div>
+    <div class="cp-bar"><i class="cp-zone"></i><u class="cp-pt"></u></div>
+    <p class="cp-n2 muted" aria-live="polite"></p></div>`;
+  const calc = () => {
+    const l = +$('.cp-lo', el).value, c = +$('.cp-ch', el).value, t = +$('.cp-tx', el).value, C = CAT[cat], net = Math.max(0, l - c), an = net * 12, v = an / (t / 100);
+    $('.cp-l', el).textContent = eurR(l); $('.cp-c', el).textContent = eurR(c); $('.cp-t', el).textContent = frN(t, 1).replace(',0', '') + ' %'; $('.cp-rg', el).textContent = `(usage : ${C.lo} à ${C.hi} %)`;
+    countTo($('.cp-n', el), net, eurR); countTo($('.cp-a', el), an, eurR); countTo($('.cp-v', el), round100(v), n => eurR(round100(n)));
+    const z = $('.cp-zone', el), pt = $('.cp-pt', el); z.style.left = (C.lo - 2) / 10 * 100 + '%'; z.style.width = (C.hi - C.lo) / 10 * 100 + '%'; pt.style.left = (t - 2) / 10 * 100 + '%';
+    const ok = t >= C.lo && t <= C.hi;
+    $('.cp-n2', el).innerHTML = (ok ? 'Le taux est dans la fourchette d’usage de cette catégorie.' : '<b>Hors fourchette d’usage</b> : un taux isolé change la valeur de beaucoup, recoupe avec la comparaison.') + (c >= l ? ' Les charges dépassent le loyer : rien à capitaliser.' : '') + ` Avec les charges oubliées, on trouverait ${eurR(round100(l * 12 / (t / 100)))} : trop haut.`;
+    if (cat === 'IIB' && l === 1370 && c === 120 && t === 3 && !el.__done){ el.__done = true; addXP(5, {target:el}); }
+  };
+  el.addEventListener('input', calc);
+  el.addEventListener('click', e => { const b = e.target.closest('.cp-cat .rp-tg'); if (b){ cat = b.dataset.k; $$('.cp-cat .rp-tg', el).forEach(x => x.setAttribute('aria-pressed', x === b)); const C = CAT[cat]; $('.cp-tx', el).value = Math.round((C.lo + C.hi) / 2 * 2) / 2; calc(); } });
+  calc();
+});
+
+/* 5. Le logement décent : louable ou non ? — ou défi */
+JLG.widget('decence', (el, o) => {
+  const rule = (s, h, dpe, y, sous) => {
+    const r = [];
+    const surf = (s >= 9 && h >= 2.2) || s * h >= 20;
+    r.push({ok:surf, t:`Pièce principale : ${frN(s, 1)} m² sous ${frN(h, 2)} m = ${frN(s * h, 1)} m³`, w:surf ? 'Il faut 9 m² et 2,20 m, ou 20 m³ : c’est bon.' : 'Il faut 9 m² et 2,20 m de hauteur, ou 20 m³.'});
+    const bad = ({G:2025, F:2028, E:2034})[dpe], en = !bad || y < bad;
+    r.push({ok:en, t:`DPE ${dpe}, bail en ${y}`, w:en ? 'Louable : la classe n’est pas encore exclue.' : `Les logements ${dpe} sont exclus de la location depuis ${bad}.`});
+    r.push({ok:!sous, t:sous ? 'Logement en sous-sol' : 'Logement hors sous-sol', w:sous ? 'Interdit de louer en sous-sol.' : 'Pas d’interdiction à ce titre.'});
+    return r;
+  };
+  if (o && o.mode === 'defi'){
+    const Y = 'Oui, louable', N = 'Non, indécent';
+    const mk = (s, h, dpe, y, sous) => { const r = rule(s, h, dpe, y, sous), ok = r.every(x => x.ok), bad = r.find(x => !x.ok); return {q:`Pièce principale de <b>${frN(s, 1)} m²</b> pour <b>${frN(h, 2)} m</b> de hauteur, DPE <b>${dpe}</b>, bail signé en <b>${y}</b>${sous ? ', logement en <b>sous-sol</b>' : ''}. Peut-on le louer ?`, a:ok ? Y : N, o:[Y, N], e:ok ? 'Tous les critères testés sont remplis.' : bad.w};};
+    const items = [mk(8.5, 2.5, 'D', 2026), mk(8, 2.4, 'C', 2026), mk(12, 2.5, 'G', 2026), mk(12, 2.5, 'G', 2024), mk(18, 2.5, 'F', 2026), mk(18, 2.5, 'F', 2028), mk(20, 2.5, 'E', 2033), mk(20, 2.5, 'E', 2034), mk(15, 2.5, 'C', 2026, true), mk(9, 2.2, 'D', 2026), mk(9, 2.1, 'D', 2026), mk(8, 2.6, 'B', 2026)];
+    return fmQuiz(el, {items, n:8, eyebrow:'Défi', hint:'Surface, DPE à la date du bail, sous-sol.', title:'Louable ou non ?', perfect:'Aucun logement indécent ne t’échappe.', again:'9 m² et 2,20 m ou 20 m³. G exclu en 2025, F en 2028, E en 2034. Jamais de sous-sol.'});
+  }
+  let st = {s:9, h:2.5, dpe:'D', y:2026, sous:false};
+  el.innerHTML = `<div class="w w-dc">
+    <div class="w-head"><span class="eyebrow">Simulateur</span><b>Ce logement est-il décent ?</b><span class="muted">Règle le logement : le décret du 30 janvier 2002 et le calendrier DPE jugent.</span></div>
+    <label class="rp-f"><span>Surface de la pièce principale : <output class="dc-s">9 m²</output></span><input class="dc-si" type="range" min="5" max="20" step="0.5" value="9"></label>
+    <label class="rp-f"><span>Hauteur sous plafond : <output class="dc-h">2,50 m</output></span><input class="dc-hi" type="range" min="1.9" max="3" step="0.05" value="2.5"></label>
+    <div class="dc-dpe" role="group" aria-label="Classe DPE">${'ABCDEFG'.split('').map(l => `<button class="dpe dpe-${l}" data-l="${l}" aria-pressed="${l === 'D'}">${l}</button>`).join('')}</div>
+    <div class="seg-ctrl dc-y" role="tablist">${[2026, 2028, 2034].map(y => `<button role="tab" data-y="${y}" aria-selected="${y === 2026}">Bail en ${y}</button>`).join('')}</div>
+    <div class="rp-tgs"><button class="rp-tg dc-sous" aria-pressed="false">Logement en sous-sol</button></div>
+    <div class="dc-out" aria-live="polite"></div></div>`;
+  const draw = () => {
+    $('.dc-s', el).textContent = frN(st.s, 1) + ' m²'; $('.dc-h', el).textContent = frN(st.h, 2) + ' m';
+    const r = rule(st.s, st.h, st.dpe, st.y, st.sous), ok = r.every(x => x.ok);
+    $('.dc-out', el).innerHTML = `<div class="dc-stamp ${ok ? 'ok' : 'ko'}">${ok ? 'Décent : louable' : 'Indécent : pas louable'}</div><ul class="dc-ul">${r.map(x => `<li class="${x.ok ? 'ok' : 'ko'}"><b>${x.ok ? '✓' : '✕'}</b><span>${x.t}<small>${x.w}</small></span></li>`).join('')}</ul><p class="muted">Test limité à trois critères : il faut aussi la sécurité, l’absence de nuisibles et les équipements.</p>`;
+    if (!ok && !el.__bad){ el.__bad = 1; } if (ok && el.__bad && !el.__done){ el.__done = 1; addXP(5, {target:el}); }
+  };
+  el.addEventListener('input', e => { if (e.target.matches('.dc-si')) st.s = +e.target.value; if (e.target.matches('.dc-hi')) st.h = +e.target.value; draw(); });
+  el.addEventListener('click', e => {
+    const d = e.target.closest('.dpe'); if (d){ st.dpe = d.dataset.l; $$('.dpe', el).forEach(x => x.setAttribute('aria-pressed', x === d)); draw(); }
+    const y = e.target.closest('.dc-y button'); if (y){ st.y = +y.dataset.y; $$('.dc-y button', el).forEach(x => x.setAttribute('aria-selected', x === y)); draw(); }
+    const s = e.target.closest('.dc-sous'); if (s){ st.sous = !st.sous; s.setAttribute('aria-pressed', st.sous); draw(); }
+  });
+  draw();
+});
+
+/* 6. Enchères en salle ou Immo-interactif — ou défi */
+JLG.widget('ventes', (el, o) => {
+  if (o && o.mode === 'defi'){
+    const E = 'Enchères en salle', I = 'Immo-interactif';
+    const q = (t, a, e) => ({q:t, a, o:[E, I], e});
+    const items = [
+      q('Le vendeur choisit l’offre qui lui convient le mieux.', I, 'Pas forcément la plus haute.'),
+      q('Le dernier enchérisseur emporte le bien après deux feux de 30 secondes.', E, 'Si personne ne surenchérit pendant la minute.'),
+      q('L’acquéreur peut se rétracter pendant 10 jours.', I, 'Après le compromis. L’adjudicataire, lui, ne peut pas.'),
+      q('Un procès-verbal d’adjudication est signé.', E, 'L’adjudicataire n’a aucun droit de rétractation.'),
+      q('Le notaire reçoit un mandat exclusif de 6 à 8 semaines.', I, 'La vente complète dure environ 45 jours.'),
+      q('Une surenchère de 10 % est possible dans les 10 jours.', E, 'Puis une nouvelle séance de vente est organisée.'),
+      q('Les offres se déposent pendant 24 heures sur internet.', I, 'En direct, en temps réel, sur immobilier.notaires.fr.'),
+      q('La mise à prix est inférieure d’au moins 30 % à la valeur vénale.', E, 'Pour rendre le bien attractif (ton cours).'),
+      q('L’acquéreur n’a ni à se déplacer ni à déposer d’argent.', I, 'Une inscription et un agrément électronique suffisent.'),
+      q('Chaque candidat remet un chèque de banque (20 % de la mise à prix, ton cours).', E, 'C’est la consignation.'),
+      q('Le bien est attribué au plus offrant.', E, 'Le plus offrant devient l’adjudicataire.'),
+      q('Après la vente en ligne, on signe un compromis chez le notaire.', I, 'Avec les conditions suspensives (prêt, préemption…).')
+    ];
+    return fmQuiz(el, {items, n:8, eyebrow:'Défi', hint:'Enchères en salle ou Immo-interactif ?', title:'Enchères ou Immo-interactif ?', perfect:'Tu connais ces deux ventes sur le bout des doigts.', again:'Enchères : plus offrant, pas de rétractation. Immo-interactif : le vendeur choisit, compromis, 10 jours.'});
+  }
+  const T = {
+    ench:{l:'Enchères en salle', s:[
+      {t:'Expertise et mise à prix', d:'Une expertise fixe la valeur vénale. La mise à prix est inférieure d’au moins 30 % (ton cours).'},
+      {t:'Cahier des charges', d:'Caractéristiques du bien, modalités de la vente, diagnostics, état hypothécaire.'},
+      {t:'Publicité et visites', d:'Presse locale ou spécialisée, sites web, puis visites aux dates fixées.'},
+      {t:'L’audience', d:'Pièce d’identité et chèque de banque (20 % de la mise à prix) ; une plaquette permet d’enchérir.'},
+      {t:'Les feux', d:'Silence : deux feux de 30 secondes. Sans nouvelle enchère, le dernier enchérisseur est adjudicataire.'},
+      {t:'La surenchère', d:'10 jours pour surenchérir d’au moins 10 % : nouvelle séance avec une mise à prix majorée.'},
+      {t:'Le paiement', d:'Pas de rétractation. Prix payé sous 45 jours (ton cours).'}]},
+    inter:{l:'Immo-interactif', s:[
+      {t:'Mandat exclusif', d:'Le vendeur signe un mandat de 6 à 8 semaines au plus avec le notaire.'},
+      {t:'Annonce et visites', d:'Annonce sur immobilier.notaires.fr (photos, diagnostics, plans) puis ailleurs ; visites pendant 3 à 4 semaines.'},
+      {t:'Agrément', d:'Chaque visiteur signe une demande d’agrément, s’inscrit et reçoit un agrément électronique.'},
+      {t:'24 heures d’offres', d:'Les offres sont déposées en direct, en temps réel. Aucun argent n’est déposé d’avance.'},
+      {t:'Le vendeur choisit', d:'Pas forcément la plus haute offre : celle qui lui convient le mieux.'},
+      {t:'Compromis', d:'Signé chez le notaire, avec 10 jours de rétractation et les conditions suspensives.'}]}
+  };
+  let cur = 'ench', k = 0;
+  el.innerHTML = `<div class="w w-vt">
+    <div class="w-head"><span class="eyebrow">Frise interactive</span><b>Le déroulé d’une vente notariale</b><span class="muted">Choisis la vente, puis avance étape par étape.</span></div>
+    <div class="seg-ctrl vt-tabs" role="tablist">${Object.entries(T).map(([i, v]) => `<button role="tab" data-k="${i}" aria-selected="${i === cur}">${v.l}</button>`).join('')}</div>
+    <ol class="vt-line"></ol><div class="vt-out" aria-live="polite"></div>
+    <div class="btn-row"><button class="btn vt-prev">Précédent</button><button class="btn btn-primary vt-next">Suivant</button></div></div>`;
+  const draw = () => {
+    const S = T[cur].s; k = Math.max(0, Math.min(S.length - 1, k));
+    $('.vt-line', el).innerHTML = S.map((s, i) => `<li><button class="vt-d${i < k ? ' done' : ''}${i === k ? ' cur' : ''}" data-i="${i}" aria-label="Étape ${i + 1} : ${esc(s.t)}"><span>${i + 1}</span></button></li>`).join('');
+    $('.vt-out', el).innerHTML = `<div class="w-card"><span class="eyebrow">Étape ${k + 1} sur ${S.length}</span><b class="w-t">${S[k].t}</b><p>${S[k].d}</p></div>`;
+    $('.vt-prev', el).disabled = k === 0; $('.vt-next', el).disabled = k === S.length - 1;
+    if (k === S.length - 1){ el['__e' + cur] = 1; if (el.__eench && el.__einter && !el.__done){ el.__done = 1; addXP(5, {target:el}); } }
+  };
+  el.addEventListener('click', e => {
+    const t = e.target.closest('.vt-tabs button'); if (t){ cur = t.dataset.k; k = 0; $$('.vt-tabs button', el).forEach(b => b.setAttribute('aria-selected', b === t)); return draw(); }
+    const d = e.target.closest('.vt-d'); if (d){ k = +d.dataset.i; return draw(); }
+    if (e.target.closest('.vt-next')){ k++; draw(); } if (e.target.closest('.vt-prev')){ k--; draw(); }
+  });
+  draw();
+});
+
 
 /* =================== DÉMARRAGE =================== */
 function boot(data){
@@ -6872,6 +7218,7 @@ JLG.log({date:'2026-10-10', items:['Le site devient « Alves Cances »', 'Pratiq
 JLG.log({date:'2026-10-11', items:['Nouvelle matière : Accompagner le client selon les règles déontologiques (bloc 1)', 'Déontologie · Chapitre 1 : Le notaire et l’authenticité des actes', 'Nouveaux schémas : la journée de l’étude au service de l’État, le duel des actes, la course à la publication, le parcours du dossier, les professions du droit', 'Nouveau : ton programme du jour sur l’accueil (révision, défi, points faibles, nouveau cours)', 'Nouveau : la révision espacée, tes flashcards reviennent pile quand tu allais les oublier', 'Nouveau : tes points faibles, chaque question ratée est gardée jusqu’à ce que tu la réussisses', 'Nouveau : la recherche dans tout le site (la loupe, ou Ctrl K sur ordinateur)', 'Nouveau : écouter un cours, une fiche ou une flashcard à voix haute', 'Le site marche maintenant hors ligne une fois ouvert, et s’installe comme une appli', 'Dans Progression > Réglages : sauvegarde de ta progression et thème auto, sombre ou clair', 'Les fiches s’impriment proprement (bouton Imprimer)']});
 JLG.log({date:'2026-10-15', items:['Droit civil · Partie 3 (le mariage, activité 2) : Les régimes matrimoniaux', 'Pratique des opérations immobilières · Séance 3 : Introduction à la conduite d’un dossier en droit des biens', 'Nouveaux schémas : Paul et Julie régime par régime, le remploi, la donation à un enfant marié, la créance de participation, la part du survivant, le parcours du changement de régime', 'Nouveaux outils : la table de signature, le générateur de comparution avec le contrôle du SPF, l’arbre des procurations, le simulateur des intervenants, la lecture d’un état hypothécaire', 'Nouveaux défis : propre ou commun, qui doit combien, qui est qui à la signature, le SPF rejette, qui doit intervenir', 'Galerie des clauses : les comparutions et les clauses de l’acte (certification, clôture, représentation, intervention)']});
 JLG.log({date:'2026-10-18', items:['Accompagner le client selon les règles déontologiques · Activité 3, chapitre 1 : Les formalités préalables', 'Nouveaux schémas : le dossier de ton client (quelles pièces pour quel profil), les pièces d’urbanisme (CUa, CUb, alignement, DIA), le simulateur de diagnostics (DDT)', 'Nouveaux défis : quelle pièce demander, le bon certificat, combien de temps ça vaut', '30 nouveaux mots au lexique : BODACC, Kbis, DPU, ZAD, CREP, DPE, loi Carrez…']});
+JLG.log({date:'2026-11-17', items:['Pratique des opérations immobilières · Activité 2, séance 1 : L’estimation du bien immobilier', 'Nouveaux schémas : les huit règles de la négociation notariale, l’estimation d’un T2 avec PERVAL, quelle surface retenir, capitaliser un loyer, ce logement est-il décent, le déroulé des enchères et d’Immo-interactif', 'Nouveaux défis : le bon prix au m², ça compte ou pas, louable ou non, enchères ou Immo-interactif', '27 nouveaux mots au lexique : valeur vénale, expertise, Notexpert, surenchère, mise à prix…', 'Le + du prof : les références du cours corrigées (règlement du 29 janvier 2024, décret de 2002, loi ALUR du 24 mars 2014, zones tendues, Carrez, enchères)']});
 
 </script>
 <!-- ▲ JLG:MATIERES efd immo civ deo ▲ -->
@@ -10528,6 +10875,414 @@ JLG.fiche('deo2', [
 
 </script>
 <!-- ▲ JLG:CHAPITRE deo2 ▲ -->
+<!-- ▼ JLG:CHAPITRE immo4 ▼ -->
+<script>
+JLG.chapter({
+  id:'immo4', subject:'immo', order:4, num:'A2·S1', added:'2026-11-17', minutes:55,
+  kicker:'Activité 2 · Séance 1', short:'Estimer un bien', title:'L’estimation du bien immobilier', titleHtml:'L’estimation <em>du bien immobilier</em>',
+  intro:'Avant de vendre ou de louer, il faut un prix. Cette séance t’apprend à connaître le marché, à comprendre ce qu’est la négociation immobilière notariale, à utiliser les bases de données des notaires (PERVAL et BIEN), puis à calculer une valeur vénale avec trois méthodes : par comparaison, par les surfaces et par le revenu. Tu verras aussi comment fixer un loyer, ce qu’est une expertise, et deux façons de vendre aux enchères.',
+  objectives:['Décrire le marché immobilier et savoir pourquoi le négociateur doit le connaître', 'Connaître le cadre de la négociation immobilière notariale (activité accessoire et réglementée)', 'Utiliser PERVAL / BIEN pour estimer une valeur vénale', 'Calculer une valeur vénale : comparaison directe, m² habitable, m² pondéré, par le revenu', 'Fixer un loyer : décence du logement et encadrement', 'Distinguer estimation et expertise, enchères notariales et vente interactive'],
+  prereq:'<a href="#ch-immo1" data-go="ch-immo1">les opérations immobilières</a> (Activité 1) ; les biens (Bloc 7, Notion 6) ; <a href="#ch-deo2" data-go="ch-deo2">les formalités préalables</a> (diagnostics, urbanisme).',
+  traps:[
+    {t:'Estimation ≠ expertise', h:'L’estimation est gratuite, sans valeur officielle, et peu détaillée. L’expertise est un rapport écrit, payant, rédigé par un expert qui engage sa responsabilité.'},
+    {t:'Valeur vénale ≠ prix de mise en vente', h:'La valeur vénale, c’est le prix auquel le bien pourrait se vendre dans des conditions normales de marché. Aux enchères, la mise à prix de départ est volontairement plus basse (au moins 30 % de moins, d’après ton cours).'},
+    {t:'Surface habitable ≠ surface Carrez ≠ surface pondérée', h:'Trois surfaces, trois usages. La loi Carrez sert à la vente d’un lot de copropriété ; la surface habitable sert au bail et à la décence ; la surface pondérée est une méthode d’estimation.'},
+    {t:'Un prix « rond »', h:'Le prix calculé ne doit pas comporter de dizaines d’euros, encore moins de centimes : on arrondit (130 329,78 € devient 130 300 €).'},
+    {t:'Les fruits ≠ le produit', h:'Le produit est versé une seule fois (le prix de vente). Les fruits reviennent périodiquement (les loyers). La méthode par le revenu transforme les fruits en capital.'},
+    {t:'Loyer charges comprises', h:'Pour la méthode par le revenu, on retire les charges du loyer : on capitalise le loyer hors charges (1 370 € − 120 € = 1 250 €).'},
+    {t:'Zones tendues ≠ zonage A/B/C', h:'Deux listes de communes différentes. Les zones tendues (décret du 25 août 2023) jouent sur le préavis et l’encadrement des loyers. Le zonage A/B/C (arrêté du 5 juillet 2024) sert au PTZ et au logement intermédiaire.'},
+    {t:'Adjudicataire : pas de rétractation', h:'Contrairement à l’acquéreur d’un compromis (10 jours), l’adjudicataire ne peut pas se rétracter. L’acheteur d’une vente interactive, lui, signe un compromis : il garde ses 10 jours.'},
+    {t:'Enchères : judiciaires ou volontaires', h:'Les règles de la saisie immobilière sont dans un texte (code des procédures civiles d’exécution). Celles des ventes volontaires viennent du cahier des conditions de vente et des usages. Ton cours mélange les deux.'}
+  ],
+  sections:[
+    {id:'marche', n:'1', eyebrow:'Le décor', title:'Le marché immobilier', blocks:[
+      {t:'p', h:'Le négociateur immobilier doit <b>bien connaître le marché</b> du bien qu’il évalue : pour informer ses clients et fixer un prix de vente ou un loyer <b>en adéquation avec ceux déjà pratiqués</b> localement.'},
+      {t:'h3', h:'Les grandes lignes'},
+      {t:'list', items:['<b>Les volumes.</b> Le million de ventes par an est franchi en 2019. Le pic date de 2021 : environ <b>1,25 million</b> de ventes sur douze mois (ton cours dit « 1,2 million »). Après la hausse des taux, les ventes baissent en 2022-2023, repartent à partir d’octobre 2024, et tournent autour de <b>950 000</b> ventes sur douze mois en 2025-2026.', '<b>Les prix.</b> Forte hausse pendant les années de crise, puis légère baisse depuis fin 2023. À Paris, le mètre carré est redescendu <b>sous 10 000 €</b> : environ 9 600 € en 2026.', '<b>Les types de biens.</b> La crise du Covid-19 a fait monter les prix des <b>maisons</b> plus vite que ceux des appartements : un certain exode urbain.', '<b>Les acteurs.</b> Particuliers entre eux (« PAP »), agents immobiliers, mandataires de réseaux, notaires.']},
+      {t:'tip', k:'prof', title:'Les chiffres de ton cours, mis à jour', h:'Ton cours donne des parts de marché : particuliers 25 à 45 %, agents 45 %, notaires 15 %. Ces proportions ne sont pas des statistiques officielles. Le « 15 % » pour les notaires date des années 1990 : les estimations récentes sont bien plus basses (de l’ordre de quelques pour cent). Retiens : la négociation notariale est une <b>part minoritaire et décroissante</b> du marché, variable selon les régions. Autres précisions : le Covid a causé la plus forte récession de l’après-guerre, avec un PIB en recul de <b>7,5 % en 2020</b> ; et le nombre de ventes a surtout doublé depuis le creux de 2009, pas 2008.'},
+      {t:'tip', k:'info', h:'La notion de <b>marché</b>, du point de vue économique, est développée en seconde année (Bloc 8, Environnement de l’activité notariale).'}
+    ]},
+    {id:'negociation', n:'2', eyebrow:'Le cadre', title:'La négociation immobilière notariale', blocks:[
+      {t:'h3', h:'Une activité traditionnelle, mais accessoire'},
+      {t:'p', h:'Le notaire a le <b>monopole de la rédaction de l’acte authentique de vente</b>. Certains notaires proposent en plus, <b>en amont</b>, un service de <b>négociation immobilière</b> : accompagner le client dès la mise en vente ou en location. Beaucoup de biens viennent de successions ou de divorces.'},
+      {t:'p', h:'En 1997, la FNAIM, la CNAB et l’UNIT contestent cette activité. Le <b>Conseil d’État</b>, le <b>23 février 2000</b>, la valide : elle est légale, mais <b>accessoire</b> et strictement réglementée.'},
+      {t:'quote', ref:'Conseil d’État, 23 février 2000', h:'Le statut des notaires « ne prohibe pas l’exercice, à titre purement accessoire, d’activités de négociation immobilière pratiquées à l’occasion ou en vue de la réception d’un acte ».'},
+      {t:'h3', h:'Les règles : le règlement professionnel du notariat', small:'ART. 7.1.2.2'},
+      {t:'p', h:'Le cadre actuel est le <b>règlement professionnel du notariat</b>, approuvé par arrêté du <b>29 janvier 2024</b> (en vigueur depuis le 1er février 2024), avec le code de déontologie des notaires. Son article 7.1.2.2 « La négociation » pose huit règles :'},
+      {t:'widget', w:'negoc'},
+      {t:'tip', k:'prof', title:'Deux corrections', h:'Ton cours date le règlement du « 29 mai 2024 » : l’arrêté est du <b>29 janvier 2024</b>. Il renvoie aussi à l’article 26 du décret de 1971 et à une annexe du « règlement national » : c’est l’ancien dispositif, avant 2024. Pour la publicité, les usages sont ceux définis par les <b>instances de la profession</b> ; l’interdiction de la « publicité personnelle » relève d’une autre règle du règlement (communication).'},
+      {t:'h3', h:'Pourquoi choisir un notaire négociateur ?'},
+      {t:'table', head:['Atout', 'Pourquoi ?'], rows:[
+        ['<b>Spécialiste du droit immobilier</b>', 'Il connaît le marché local, les prix de vente et de location. Son recours est obligatoire pour l’acte de vente.'],
+        ['<b>Bon conseil</b>', 'Prêts immobiliers, et obligation d’un notaire pour toute sûreté hypothécaire.'],
+        ['<b>Un vaste réseau</b>', 'Particuliers, entreprises, associations, collectivités : tous les domaines de la vie familiale, patrimoniale et professionnelle.'],
+        ['<b>Honoraires</b>', 'Ton cours : 3 à 6 % pour les notaires, 4 à 8 % pour les agents. Libres depuis le 1er mars 2016, plus d’émoluments fixés par décret.'],
+        ['<b>Bases de données et portails</b>', 'PERVAL / BIEN, immobilier.notaires.fr, immonot.com : de quoi estimer et diffuser.'],
+        ['<b>Gain de temps</b>', 'Diagnostics, droits de préemption à purger, pièces des personnes et de l’immeuble : tout s’anticipe.']]},
+      {t:'tip', k:'prof', title:'Les honoraires, avec nuances', h:'Depuis le décret du 26 février 2016, la négociation fait partie des prestations à <b>honoraires libres</b> : aucun plafond légal, un mandat écrit obligatoire, TVA à 20 %. Les fourchettes « 3 à 6 % » et « 4 à 8 % » sont des <b>ordres de grandeur</b> : précise toujours « TTC » et « selon l’office ».'}
+    ]},
+    {id:'bases', n:'3', eyebrow:'Les données', title:'Les bases de données notariales', blocks:[
+      {t:'h3', h:'PERVAL en province, BIEN en Île-de-France'},
+      {t:'p', h:'Dès 1994, les notaires recensent leurs ventes dans une base qui sert à <b>estimer la valeur vénale</b> des biens (succession, donation, partage, conseil patrimonial…). D’abord régionale, elle devient nationale en 1998, et couvre la Corse et l’outre-mer à partir de 2005. On parle du fichier <b>PERVAL</b> pour la province et du fichier <b>BIEN</b> pour l’Île-de-France.'},
+      {t:'def', term:'Immeuble', h:'En droit, le mot englobe tous les biens immobiliers : terrain nu ou à bâtir, garage, maison, lot de copropriété, local commercial, parcelle agricole ou boisée…'},
+      {t:'p', h:'La <b>loi du 28 mars 2011</b> (n° 2011-331) a rendu l’alimentation de la base <b>obligatoire</b> : c’est une mission de service public. Les notaires contribuent « à la diffusion des informations relatives aux mutations d’immeubles à titre onéreux » et transmettent au Conseil supérieur du notariat les données nécessaires (article 6 de la loi du 25 ventôse an XI).'},
+      {t:'vs', a:{title:'Quand transmettre ?', items:['<b>30 jours</b> après la signature (ou la remise) d’un <b>avant-contrat</b>', '<b>60 jours</b> après la signature de l’<b>acte authentique</b>']}, b:{title:'Quoi ?', items:['L’acte, le bien, le prix', 'Les taxes, les frais et les commissions', 'Le notaire est rémunéré pour cette transmission : une formalité tarifée']}},
+      {t:'tip', k:'prof', title:'Perval, déjà vu', h:'Le délai de 30 et 60 jours vient du décret du 3 septembre 2013. Tu as déjà croisé Perval dans <a href="#ch-deo1" data-go="ch-deo1">le chapitre sur l’authenticité</a> et <a href="#ch-deo2" data-go="ch-deo2">sur les formalités</a> : c’est une tâche déléguée par l’État au notaire.'},
+      {t:'h3', h:'Les statistiques notariales'},
+      {t:'p', h:'Les notaires publient des <b>statistiques</b> sur les ventes et les tendances, nationales et locales : le Conseil supérieur du notariat fait un état des lieux trimestriel, et les <b>indices Notaires-INSEE</b> sont publiés avec l’INSEE. Les notes de conjoncture des notaires citent depuis 2026 la « base des références immobilières ». Le portail grand public est <b>immobilier.notaires.fr</b> (rubrique prix et tendances).'},
+      {t:'tip', k:'prof', title:'À ne pas recopier', h:'Ton cours cite deux adresses « immobilier.statistiques… », « 20 millions de ventes » et un label de l’Autorité de la statistique publique. Je n’ai pas pu confirmer ces éléments : ne les cite pas à un examen sans vérifier auprès de ton professeur.'}
+    ]},
+    {id:'vente', n:'4', eyebrow:'Calculer', title:'L’estimation du prix de vente', blocks:[
+      {t:'def', term:'Valeur vénale', h:'Le prix auquel un bien pourrait se vendre dans les conditions normales du marché, par le jeu de l’offre et de la demande. L’estimation de la valeur vénale se fait <b>par comparaison</b> (la méthode la plus utilisée, reconnue par l’administration et les tribunaux) ou <b>par le revenu</b>.'},
+      {t:'h3', h:'A. La comparaison directe (ou « par le marché »)'},
+      {t:'p', h:'On retient les biens <b>vendus récemment</b>, dans le <b>même secteur</b>, aux <b>caractéristiques similaires</b> : même type, surface habitable proche, terrain comparable, date de construction proche, style, état, équipements (piscine…), commodités (commerces, transports, écoles).'},
+      {t:'steps', items:[{l:'Pour chaque bien de la base : <b>prix de vente ÷ surface</b> = prix au m².'}, {l:'Prix moyen au m² = <b>total des prix au m² ÷ nombre de biens</b>.'}, {l:'Valeur vénale = <b>prix moyen au m² × surface habitable</b> du bien à estimer.'}, {l:'On <b>arrondit</b> : pas de dizaines d’euros ni de centimes.'}]},
+      {t:'widget', w:'perval'},
+      {t:'tip', k:'astuce', title:'L’exercice du cours : un T2 à Nancy', h:'T2 de 49,42 m² au centre-ville. Quatre ventes dans PERVAL : 111 900 € pour 48,08 m² (2 327 €/m²), 125 000 € pour 46,43 m² (2 692 €/m²), 131 300 € pour 45,35 m² (2 895 €/m²), 131 800 € pour 50,04 m² (2 634 €/m²). Moyenne : environ <b>2 637 €/m²</b>. Valeur : 2 637,19 × 49,42 = 130 329,78 €, soit <b>130 300 €</b>.'},
+      {t:'h3', h:'B. Les comparaisons indirectes'},
+      {t:'p', h:'On compare avec une <b>unité de mesure adaptée</b> au bien : le <b>m²</b> pour un terrain, le <b>m² pondéré</b> pour un immeuble bâti, le <b>m² loi Carrez</b> pour un lot d’habitation en copropriété.'},
+      {t:'widget', w:'surfaces'},
+      {t:'h3', h:'Le m² « loi Carrez » et la surface habitable'},
+      {t:'p', h:'Ton cours définit la <b>surface habitable</b> (art. R. 156-1 du Code de la construction et de l’habitation, depuis le décret du 30 juin 2021) : la surface de plancher construite, après déduction des murs et cloisons, embrasures de portes et fenêtres, marches et cages d’escaliers, gaines. Le <b>volume habitable</b> : la surface habitable × la hauteur sous plafond.'},
+      {t:'list', items:['<b>Dimensions minimales</b> d’un logement neuf : au moins <b>14 m² et 33 m³ par habitant</b> pour les 4 premiers, puis <b>10 m² et 23 m³</b> par habitant en plus.', '<b>Ne comptent pas</b> : combles non aménagés, caves, sous-sols, remises, garages, terrasses, loggias, balcons, séchoirs extérieurs, vérandas, volumes vitrés, locaux communs, dépendances, et les parties de moins de <b>1,80 m</b> de hauteur.']},
+      {t:'tip', k:'prof', title:'Carrez ou habitable : ne confonds pas', h:'Ton cours définit le « m² Carrez » avec l’article R. 156-1. En réalité, la <b>superficie Carrez</b> vient de l’article 46 de la loi du 10 juillet 1965 et de l’<b>article 4-1 du décret du 17 mars 1967</b> : superficie des planchers des <b>locaux clos et couverts</b>, après déduction des murs, cloisons, marches, gaines et embrasures, sans les parties de moins de 1,80 m. Les lots de moins de <b>8 m²</b> ne comptent pas, ni les caves, garages et places de stationnement. Différence : une <b>véranda</b> ou une loggia fermée compte dans la Carrez, jamais dans la surface habitable. De plus, la règle des 14 m² / 33 m³ s’applique à tout logement construit, pas seulement en copropriété.'},
+      {t:'tip', k:'astuce', title:'L’exercice du cours : Strasbourg, la Petite France', h:'5 045 €/m². Pièces : entrée 4,75 ; cuisine 8,25 ; salon 20,44 ; loggia 7,50 (exclue) ; chambre 10,14 dont 1,11 sous 1,80 m ; chambre 11,89 dont 1,72 sous 1,80 m ; salle d’eau 6,12 ; cave et garage (exclus). Surface habitable : 4,75 + 8,25 + 20,44 + 9,03 + 10,17 + 6,12 = <b>58,76 m²</b>. Valeur : 58,76 × 5 045 = 296 444 €, soit <b>296 400 €</b>.'},
+      {t:'h3', h:'Le m² pondéré'},
+      {t:'p', h:'On affecte un <b>coefficient</b> aux niveaux et dépendances d’un immeuble bâti. La somme des surfaces multipliées par leurs coefficients donne la <b>surface hors œuvre pondérée</b>.'},
+      {t:'table', head:['Partie du bâtiment', 'Coefficient'], rows:[
+        ['Plancher bas du rez-de-chaussée sur terre-plein', '0,15'],
+        ['Sur vide sanitaire sans galerie de visite', '0,20'],
+        ['Sur vide sanitaire d’au moins 1 m avec galerie de visite', '0,30'],
+        ['Sur sous-sol d’au moins 2,20 m', '0,70'],
+        ['Rez-de-chaussée non aménagé (communs, caves)', '0,50'],
+        ['Rez-de-chaussée aménagé, étage habitable', '1'],
+        ['Comble utilisable (1,80 m min) avec escalier / avec trappe', '0,20 / 0,10'],
+        ['Loggias et salles ouvertes sur deux faces', '0,60'],
+        ['Terrasses accessibles, balcons de plus de 1 m de saillie et plus de 2 m²', '0,40'],
+        ['Escalier extérieur de plus de 5 marches, palier non fermé / fermé', '0,50 / 1'],
+        ['Porche couvert et fermé de plus de 1 m² (sas d’entrée) / couvert et ouvert', '0,70 / 0,50'],
+        ['Garages', 'Non pris en compte']]},
+      {t:'tip', k:'prof', title:'Un usage, pas un texte actuel', h:'Ces coefficients viennent d’un ancien arrêté de 1974 sur les primes à la construction. Je n’ai pas pu vérifier cette annexe. Et la notion de « SHON » a été remplacée par la <b>surface de plancher</b> en 2012. Présente-les comme une <b>grille de pondération usuelle</b>, pas comme une règle en vigueur.'},
+      {t:'tip', k:'astuce', title:'L’exercice du cours : le chalet de Gérardmer', h:'2 491 €/m², plain-pied. Sas d’entrée couvert et fermé : 2,70 × 0,70 = 1,89. Cuisine 7,82 + salon 22,10 + chambre avec salle de bains 16,79 : tout à 1. Le garage de 9,89 m² ne compte pas. Surface pondérée : 1,89 + 46,71 = <b>48,60 m²</b>. Valeur : 48,60 × 2 491 = 121 062,60 €, soit <b>121 100 €</b>. (L’ouverture de 0,85 m² avec garde-corps fait partie des 16,79 m² : je ne la compte pas à part.)'},
+      {t:'h3', h:'C. La méthode par le revenu'},
+      {t:'vs', a:{title:'Le produit', items:['Versé <b>une seule fois</b>', 'C’est le <b>prix de vente</b>']}, b:{title:'Les fruits', items:['Reviennent <b>périodiquement</b>', 'Ce sont les <b>loyers</b>, mensuels ou annuels']}},
+      {t:'p', h:'On <b>capitalise</b> le loyer : valeur vénale = <b>revenu annuel net ÷ taux de capitalisation</b>. Le revenu annuel net : le loyer mensuel <b>hors charges</b> × 12. La difficulté est le <b>taux</b>, usuellement entre 4 et 6 % (de 2 à 12 % selon la catégorie).'},
+      {t:'widget', w:'capital'},
+      {t:'p', h:'Les locaux sont classés en catégories (loi du 1er septembre 1948) selon la qualité de la construction, le confort et l’équipement : <b>exceptionnelle</b> ou de luxe, <b>I</b>, <b>II A, II B, II C</b>, <b>III A, III B</b>, <b>IV</b>. Le <b>décret du 27 juin 2025</b> (modifiant le décret de 1948) a majoré les prix de base au m² de la valeur locative mensuelle, depuis le 1er juillet 2025.'},
+      {t:'table', head:['Catégorie', 'Agglo parisienne : 10 premiers m² (corrigés)', 'Agglo parisienne : m² suivants', 'Hors Paris : 10 premiers m²', 'Hors Paris : m² suivants'], rows:[
+        ['<b>II A</b>', '14,00', '8,31', '11,43', '6,82'],
+        ['<b>II B</b>', '9,62', '5,16', '7,88', '4,29'],
+        ['<b>II C</b>', '7,38', '3,90', '6,01', '3,23'],
+        ['<b>III A</b>', '4,46', '2,36', '3,65', '2,04'],
+        ['<b>III B</b>', '2,64', '1,37', '2,17', '1,14'],
+        ['<b>IV</b>', '0,26', '0,12', '0,26', '0,12']]},
+      {t:'tip', k:'prof', title:'Les taux ne sont pas dans un texte', h:'Les prix de base du tableau sont exacts (décret n° 2025-592). En revanche, les <b>taux de capitalisation par catégorie</b> (II A et II B : 2 à 4 % ; II C : 3 à 6 % ; III A : 4 à 7 % ; III B : 5 à 10 % ; IV : 8 à 12 %) sont des <b>usages d’expertise</b>, pas une règle légale. Ces prix sont révisés chaque année : vérifie la dernière version avant de les utiliser.'},
+      {t:'tip', k:'astuce', title:'L’exercice du cours : un II B à Paris', h:'Loyer de 1 370 € charges comprises, dont 120 € de charges. Loyer net : 1 250 € × 12 = <b>15 000 €</b> par an. Taux retenu : 3 % (la fourchette II B à Paris est de 2 à 4 %). Valeur vénale : 15 000 ÷ 0,03 = <b>500 000 €</b>.'},
+      {t:'p', h:'Cette méthode convient aux biens <b>loués</b>. Elle ne convient pas aux biens non loués, à un loyer pas récemment révisé ou volontairement minoré. Le taux est <b>plus élevé</b> pour les locaux professionnels ou commerciaux, dont les loyers sont plus élevés.'},
+      {t:'tip', k:'notaire', h:'Recouper <b>plusieurs méthodes</b> permet de calculer un prix juste : le notaire compare, vérifie, puis arrondit.'}
+    ]},
+    {id:'location', n:'5', eyebrow:'Louer', title:'L’estimation du prix de location', blocks:[
+      {t:'h3', h:'Le principe : le loyer est libre'},
+      {t:'p', h:'Le bailleur fixe librement le loyer, mais il tient compte des <b>loyers pratiqués</b> sur le marché local et du type de bien. Un bien se loue plus cher en ville qu’à la campagne (l’écart s’est atténué depuis 2020), et un local commercial plus cher qu’un logement.'},
+      {t:'h3', h:'Seul un logement décent peut être loué'},
+      {t:'p', h:'La notion de <b>décence</b> vient de la loi SRU du 13 décembre 2000. Ses caractéristiques sont fixées par le <b>décret du 30 janvier 2002</b>.'},
+      {t:'tip', k:'prof', h:'Ton cours écrit « décret du 30 janvier <b>2022</b> » : c’est une coquille. Le décret est le <b>n° 2002-120 du 30 janvier 2002</b>.'},
+      {t:'widget', w:'decence'},
+      {t:'acc', items:[
+        {l:'1. Une surface minimale', h:'Une <b>pièce principale</b> d’au moins <b>9 m²</b> et <b>2,20 m</b> de hauteur sous plafond, ou un volume d’au moins <b>20 m³</b>. En colocation (bail commun), ton cours indique <b>16 m² pour deux colocataires, plus 9 m²</b> par colocataire supplémentaire.'},
+        {l:'2. Pas de risque pour la sécurité et la santé', h:'Interdiction de louer en <b>sous-sol</b> ; pas de matériaux dangereux ; ouvertures donnant sur l’air libre ; fenêtres avec garde-corps ; clos et couvert en bon état ; installations aux normes.'},
+        {l:'3. Pas de nuisibles ni de parasites', h:'Rats, souris, cafards, punaises de lit, termites, fourmis charpentières…'},
+        {l:'4. Une performance énergétique minimale', h:'Seuil de <b>450 kWh d’énergie finale par m² et par an</b> en 2023-2024. Puis un critère par classe DPE (voir ci-dessous).'},
+        {l:'5. Des équipements', h:'Chauffage adapté, eau potable à pression suffisante, évacuations avec siphon, cuisine ou coin cuisine avec évier, WC séparé de la pièce où l’on mange, équipement de toilette, électricité suffisante.'}]},
+      {t:'tip', k:'prof', title:'Plomb et amiante : des dates de diagnostic', h:'Ton cours dit que le plomb et l’amiante sont interdits « depuis 1949 » et « depuis 1997 ». Ce sont des <b>dates de référence des diagnostics</b> : constat de risque d’exposition au plomb pour les logements construits <b>avant le 1er janvier 1949</b>, repérage de l’amiante pour les permis délivrés <b>avant le 1er juillet 1997</b>. L’amiante est interdit depuis le <b>1er janvier 1997</b>.'},
+      {t:'h3', h:'Le calendrier énergétique'},
+      {t:'table', head:['Date', 'Ce qui change pour la location (métropole)'], rows:[
+        ['<b>1er janvier 2023</b>', 'Seuil de 450 kWh/m²/an : les logements « G+ » ne peuvent plus être loués.'],
+        ['<b>1er janvier 2025</b>', 'Le critère devient la classe DPE : les logements classés <b>G</b> ne sont plus décents.'],
+        ['<b>1er janvier 2028</b>', 'Les logements classés <b>F</b> sont exclus.'],
+        ['<b>1er janvier 2034</b>', 'Les logements classés <b>E</b> sont exclus.']]},
+      {t:'tip', k:'prof', title:'À jour au 17 novembre 2026', h:'Ce calendrier est toujours en vigueur. Deux points bougent : le coefficient de conversion de l’électricité du DPE est à 1,9 depuis le 1er janvier 2026 (1,7 prévu au 1er janvier 2027), et un projet de loi, voté au Sénat en juillet 2026 mais <b>pas définitivement adopté</b>, pourrait assouplir l’interdiction de louer les logements F et G contre un engagement de travaux. Vérifie avant un examen.'},
+      {t:'h3', h:'L’encadrement des loyers en zone tendue'},
+      {t:'p', h:'Les <b>zones tendues</b> sont des agglomérations où la demande de logements dépasse l’offre. Pour éviter des loyers excessifs, la loi limite le loyer : il ne doit pas dépasser un plafond, avec rajustement et sanctions possibles.'},
+      {t:'tip', k:'prof', title:'Ce qu’il faut distinguer', h:'1) La loi <b>ALUR</b> est du <b>24 mars 2014</b> (n° 2014-366), et non du 27 mars. 2) Le dispositif actuel d’encadrement du <b>niveau</b> des loyers est une <b>expérimentation</b> (loi ELAN de 2018, prolongée par la loi 3DS) limitée à quelques territoires volontaires : Paris, Lille, Lyon-Villeurbanne, Montpellier, Bordeaux, Pays basque et d’autres. Le préfet fixe un <b>loyer de référence</b>, un loyer de référence <b>majoré</b> (+ 20 %, c’est le plafond) et <b>minoré</b> (− 30 %). 3) L’encadrement de l’<b>évolution</b> des loyers à la relocation, lui, s’applique dans les zones tendues.'},
+      {t:'tip', k:'piege', title:'Actualité : un vote cette semaine', h:'L’expérimentation prend fin le <b>24 novembre 2026</b>, sauf loi contraire. Le Sénat a voté une prolongation jusqu’en novembre 2028 ; l’Assemblée nationale devait voter les 18 et 19 novembre. Au 17 novembre 2026, <b>rien n’est définitif</b>.'},
+      {t:'tip', k:'prof', title:'Deux listes de communes', h:'Ton cours mélange deux textes. Les <b>zones tendues</b> viennent du décret du 10 mai 2013 (28 agglomérations, environ 1 150 communes, 4,6 millions de logements d’après ton cours), élargies par le <b>décret n° 2023-822 du 25 août 2023</b>. L’<b>arrêté du 5 juillet 2024</b>, lui, révise le <b>zonage A/B/C</b> : 688 communes passent en zones A ou B1, ce qui joue sur le PTZ et le logement intermédiaire, pas sur l’encadrement des loyers. Le total de « 1 837 communes » n’est donc pas fiable.'}
+    ]},
+    {id:'expertise', n:'6', eyebrow:'Aller plus loin', title:'L’expertise et le label Notexpert', blocks:[
+      {t:'vs', a:{title:'L’estimation', items:['<b>Gratuite</b>', 'Aucun caractère formel ou officiel', 'Peu détaillée']}, b:{title:'L’expertise', items:['Rapport <b>écrit, formel et officiel</b>', '<b>Payante</b> (honoraires)', 'L’expert engage sa <b>responsabilité</b>']}},
+      {t:'p', h:'L’expertise a un contenu minimal imposé par les normes d’évaluation et la <b>Charte de l’expertise en évaluation immobilière</b> : la mission, le bien et sa situation, son appréciation qualitative, l’étude du marché et l’<b>évaluation explicite de la valeur vénale</b>.'},
+      {t:'list', items:['L’expert est <b>impartial</b>, avec des compétences <b>techniques</b> (matériaux, bâtiment, marché) et <b>juridiques</b> (lois, urbanisme), et une assurance de responsabilité civile professionnelle.', 'Il peut être notaire, agent immobilier, administrateur de biens, géomètre, architecte…', 'Il est requis par les <b>tribunaux</b> (partages litigieux), l’<b>administration fiscale</b> (succession, impôt sur la fortune immobilière) ou les <b>banques</b> (prêt-relais).']},
+      {t:'h3', h:'Le réseau Notexpert'},
+      {t:'p', h:'Le <b>réseau Notexpert®</b> réunit des notaires et collaborateurs ayant une formation approfondie en expertise immobilière et pratiquant cette activité <b>depuis plus de deux ans</b>. Ils adhèrent à la Charte et suivent les règles de <b>TEGoVA</b> (The European Group of Valuers’ Associations). Le Conseil supérieur du notariat a créé le <b>label Notexpert</b> pour reconnaître les notaires experts.'},
+      {t:'tip', k:'prof', h:'Ton cours dit que TEGoVA regroupe « 72 associations dans 37 pays » : selon son site, ce sont aujourd’hui <b>79 associations dans 42 pays</b>. Retiens plutôt « plusieurs dizaines d’associations dans plus de 40 pays ».'}
+    ]},
+    {id:'encheres', n:'7', eyebrow:'Vendre autrement', title:'Les ventes aux enchères et les ventes interactives', blocks:[
+      {t:'h3', h:'Les ventes aux enchères notariales'},
+      {t:'p', h:'Vente publique par <b>adjudication</b>, dans une salle de ventes (conseil régional, chambre départementale, mairie du lieu du bien). La séance est <b>ouverte à tous</b> ; les acquéreurs font des offres au <b>notaire adjudicateur</b>, et le bien est attribué au <b>plus offrant</b> : l’<b>adjudicataire</b>, qui signe un procès-verbal d’adjudication.'},
+      {t:'widget', w:'ventes'},
+      {t:'list', items:['<b>Le prix de départ.</b> Une expertise fixe la valeur vénale. La mise à prix est inférieure d’<b>au moins 30 %</b> (ton cours), pour rendre le bien attractif.', '<b>Le cahier des charges.</b> Caractéristiques du bien, modalités de la vente, diagnostics, état hypothécaire. Publicité sur tous supports, puis visites.', '<b>L’audience.</b> Pièce d’identité et chèque de banque de <b>20 % de la mise à prix</b> (la « consignation », d’après ton cours). Une plaquette permet d’enchérir.', '<b>La fin des enchères.</b> Silence : le notaire allume deux « <b>feux</b> » de 30 secondes. Sans nouvelle enchère pendant cette minute, le dernier enchérisseur emporte le bien. Pour la vente ordonnée par le juge, on compte 90 secondes.', '<b>La surenchère.</b> Pendant <b>10 jours</b>, toute personne peut surenchérir d’au moins <b>10 %</b> : nouvelle séance, avec une mise à prix égale au prix adjugé majoré de 10 %.', '<b>Le paiement.</b> L’adjudicataire définitif paie le prix dans un délai de <b>45 jours</b> (ton cours).']},
+      {t:'tip', k:'piege', title:'Pas de rétractation', h:'L’adjudicataire ne peut pas revenir sur sa décision, contrairement à l’acquéreur « classique » qui, sous conditions, a un délai de rétractation de 10 jours.'},
+      {t:'tip', k:'prof', title:'Enchères volontaires ou saisie immobilière', h:'Ton cours mélange deux régimes. Pour une <b>saisie immobilière</b> (code des procédures civiles d’exécution) : enchères closes 90 secondes après la dernière (R. 322-45), garantie de <b>10 %</b> de la mise à prix, au minimum 3 000 € (R. 322-41), surenchère du dixième dans les 10 jours (R. 322-50 et suivants), prix consigné dans les <b>2 mois</b> (R. 322-56). Pour une <b>vente notariale volontaire</b>, les feux de 30 secondes, la consignation de 20 %, le paiement en 45 jours et la décote d’au moins 30 % viennent du cahier des conditions de vente et des usages : retiens ceux de ton cours, mais sache qu’ils ne sont pas dans la loi. « France Domaine » est devenu la Direction de l’immobilier de l’État en 2016 ; l’AGRASC gère les biens saisis ou confisqués.'},
+      {t:'p', h:'Les enchères s’utilisent après un divorce, une succession, un surendettement, l’entrée d’une personne âgée en établissement… mais aussi pour que l’État et les collectivités vendent leur patrimoine privé (immeuble reçu par donation ou succession vacante).'},
+      {t:'h3', h:'Les ventes interactives : Immo-interactif'},
+      {t:'p', h:'Créée en 2009 selon ton cours, la vente <b>Immo-interactif</b> (ex-« vente notariale interactive », VNI) est une <b>salle des ventes virtuelle</b>. Elle vend un bien <b>en 45 jours environ</b> grâce à des offres déposées sur internet, à mi-chemin entre la vente classique et les enchères.'},
+      {t:'steps', items:[{l:'<b>Le mandat exclusif</b> : le vendeur signe avec le notaire un mandat de <b>6 à 8 semaines</b> au plus.'}, {l:'<b>L’annonce</b> sur immobilier.notaires.fr (photos, diagnostics, urbanisme, plans), puis sur d’autres sites, dans la presse, en vitrine et avec un panneau « à vendre ». Les <b>visites</b> durent 3 à 4 semaines.'}, {l:'<b>La demande d’agrément</b> : chaque visiteur signe qu’il connaît les conditions de la vente, puis s’inscrit sur le site et reçoit un <b>agrément électronique</b> pour faire des offres.'}, {l:'<b>La vente en ligne</b> : pendant <b>24 heures</b>, les offres sont déposées en direct, en temps réel (l’office peut choisir 24, 36 ou 48 heures).'}, {l:'<b>Le choix du vendeur</b> : il ne retient pas forcément l’offre la plus haute, mais celle qui lui convient le mieux.'}, {l:'<b>Le compromis</b> chez le notaire, avec le délai de <b>rétractation de 10 jours</b> et les conditions suspensives (prêt, préemption urbaine, préemption du locataire).'}]},
+      {t:'tip', k:'prof', title:'Pas de surcoût, des avantages', h:'Vendeur : le conseil et la maîtrise juridique du notaire, aucun surcoût par rapport à une vente classique, une vente rapide, une diffusion mondiale. Acquéreur : il n’a pas à se déplacer, n’avance aucun argent, reçoit des informations juridiques et techniques complètes, et ajuste son offre en temps réel. L’adresse « immo-interactif.fr » n’a pas pu être vérifiée : le service est hébergé sur immobilier.notaires.fr. Ne le confonds pas avec « 36h-immo », une plateforme privée.'}
+    ]}
+  ],
+  essentials:[
+    'Le négociateur doit <b>connaître le marché</b> local pour fixer un prix ou un loyer cohérent.',
+    'La négociation immobilière est une activité <b>traditionnelle mais accessoire</b> du notaire, encadrée par le <b>règlement professionnel du notariat</b> (art. 7.1.2.2) : mandat écrit, pas de démarchage, pas d’annonces générales.',
+    'Les ventes sont recensées dans <b>PERVAL</b> (province) et <b>BIEN</b> (Île-de-France), alimentés par les notaires : <b>30 jours</b> après un avant-contrat, <b>60 jours</b> après l’acte.',
+    'La <b>valeur vénale</b> = prix moyen au m² des biens comparables × surface du bien. On arrondit.',
+    'Trois surfaces à ne pas confondre : <b>habitable</b> (bail, décence), <b>loi Carrez</b> (vente d’un lot de copropriété), <b>pondérée</b> (estimation, coefficients usuels).',
+    'Méthode par le revenu : <b>(loyer mensuel hors charges × 12) ÷ taux de capitalisation</b>.',
+    'Un loyer est <b>libre</b>, mais le logement doit être <b>décent</b> (décret du 30 janvier 2002) et, dans certains territoires, le loyer est encadré.',
+    'Estimation (gratuite, informelle) ≠ <b>expertise</b> (payante, écrite, engage la responsabilité de l’expert) ; <b>Notexpert</b> : label des notaires experts.',
+    'Enchères notariales : mise à prix décotée, feux de 30 secondes, surenchère du dixième sous 10 jours, <b>pas de rétractation</b>. Immo-interactif : mandat de 6 à 8 semaines, 24 heures d’offres, le vendeur <b>choisit</b>, rétractation de 10 jours.'
+  ],
+  extraGames:[
+    {w:'perval', title:'Le bon prix au m²', sub:'Trouve la valeur vénale avec les ventes de la base PERVAL.', icon:'euro'},
+    {w:'surfaces', title:'Ça compte ou pas ?', sub:'Habitable, Carrez, pondérée : quelle pièce, quelle surface ?', icon:'grid'},
+    {w:'decence', title:'Louable ou non ?', sub:'Décence, DPE, surface minimale : le logement peut-il être loué ?', icon:'house'},
+    {w:'ventes', title:'Enchères ou Immo-interactif ?', sub:'Retrouve la bonne règle pour chaque vente.', icon:'scale'}
+  ],
+  flashcards:[
+    {q:'Que doit connaître le négociateur immobilier avant d’estimer un bien ?', a:'Le marché local : les prix et les loyers déjà pratiqués, pour fixer un prix en adéquation avec lui.'},
+    {q:'Le marché immobilier : quel est le pic de transactions ?', a:'2021, environ 1,25 million de ventes sur douze mois (ton cours dit 1,2 million). Le million est dépassé dès 2019.'},
+    {q:'Qu’a provoqué la crise Covid sur les prix ?', a:'Une hausse plus marquée pour les maisons que pour les appartements : un certain exode urbain.'},
+    {q:'Prix du m² à Paris : où en est-on ?', a:'Redescendu sous 10 000 € depuis fin 2023 : environ 9 600 € en 2026.'},
+    {q:'Quel est le monopole du notaire en matière de vente ?', a:'La rédaction de l’acte authentique de vente. La négociation, elle, est concurrencée.'},
+    {q:'Pourquoi la négociation notariale est-elle une activité accessoire ?', a:'Le Conseil d’État (23 février 2000) l’admet seulement à titre accessoire, à l’occasion ou en vue de la réception d’un acte.'},
+    {q:'Qui a contesté la négociation notariale en 1997 ?', a:'La FNAIM, la CNAB et l’UNIT (intermédiaires immobiliers).'},
+    {q:'Quel texte actuel encadre la négociation notariale ?', a:'Le règlement professionnel du notariat, approuvé par arrêté du 29 janvier 2024, article 7.1.2.2.'},
+    {q:'Que doit contenir le mandat de négociation ?', a:'Un écrit, le mode de calcul des honoraires, la personne qui les paie, une durée raisonnable (souvent 3 mois). Une copie est remise au mandant.'},
+    {q:'Pourquoi le notaire ne peut-il pas démarcher ?', a:'Le règlement interdit de rechercher des clients, directement ou par personne interposée, pour recueillir un mandat.'},
+    {q:'Qu’est-ce qu’une annonce générale (interdite) ?', a:'Une annonce sans identification d’un bien particulier : biens à vendre ou à louer, capitaux à placer ou à emprunter.'},
+    {q:'Les notaires peuvent-ils se grouper pour négocier ?', a:'Oui, en mettant des moyens en commun (fichier commun des offres). Mais le groupement ne négocie pas lui-même.'},
+    {q:'Un notaire peut-il ouvrir une succursale dédiée à la négociation ?', a:'Non : interdit si elle a une entrée distincte de l’office.'},
+    {q:'Les honoraires de négociation sont-ils réglementés ?', a:'Non, libres depuis le 1er mars 2016 (avant, émolument fixé par décret). Ton cours : 3 à 6 % pour les notaires, 4 à 8 % pour les agents.'},
+    {q:'Comment s’appellent les bases de données de ventes notariales ?', a:'PERVAL pour la province, BIEN pour l’Île-de-France.'},
+    {q:'Quelle loi rend obligatoire l’alimentation de PERVAL / BIEN ?', a:'La loi n° 2011-331 du 28 mars 2011 (art. 6 de la loi de ventôse an XI : mission de service public).'},
+    {q:'Quels sont les délais de transmission à PERVAL ?', a:'30 jours après un avant-contrat, 60 jours après l’acte authentique.'},
+    {q:'À quoi sert la base PERVAL / BIEN ?', a:'À estimer la valeur vénale d’un bien : succession, donation, partage, conseil patrimonial.'},
+    {q:'Qu’est-ce que la valeur vénale ?', a:'Le prix auquel un bien pourrait se vendre dans des conditions normales de marché.'},
+    {q:'Quelle méthode d’estimation est la plus utilisée ?', a:'La comparaison : reconnue par l’administration et les tribunaux.'},
+    {q:'Que doivent avoir en commun les biens comparés ?', a:'Même type, surface et terrain voisins, construction proche, même état, même secteur, équipements et commodités analogues, vendus récemment.'},
+    {q:'Les trois temps de la comparaison directe ?', a:'Prix ÷ surface pour chaque bien ; moyenne des prix au m² ; moyenne × surface du bien à estimer.'},
+    {q:'Pourquoi arrondit-on le prix calculé ?', a:'Un prix de vente ne comporte ni dizaines d’euros ni centimes : 130 329,78 € devient 130 300 €.'},
+    {q:'Quelle unité pour comparer des terrains ? des immeubles bâtis ? des lots de copropriété ?', a:'Le mètre carré ; le mètre carré pondéré ; le mètre carré loi Carrez.'},
+    {q:'Définis la surface habitable.', a:'La surface de plancher construite, moins les murs, cloisons, embrasures, marches, cages d’escalier et gaines (art. R. 156-1 CCH).'},
+    {q:'Quelles surfaces ne comptent pas dans la surface habitable ?', a:'Combles non aménagés, caves, sous-sols, remises, garages, terrasses, loggias, balcons, vérandas, communs, et parties de moins de 1,80 m.'},
+    {q:'Quelles sont les dimensions minimales d’un logement ?', a:'14 m² et 33 m³ par habitant pour les 4 premiers, 10 m² et 23 m³ pour chaque habitant en plus.'},
+    {q:'Où se trouve la définition de la surface Carrez ?', a:'Art. 46 de la loi du 10 juillet 1965 et art. 4-1 du décret du 17 mars 1967 : locaux clos et couverts, hors parties sous 1,80 m.'},
+    {q:'Quel est le seuil de la loi Carrez pour un lot ?', a:'Les lots de moins de 8 m² ne sont pas comptés.'},
+    {q:'Une véranda compte-t-elle dans la surface habitable ? dans la Carrez ?', a:'Non pour la surface habitable. Elle peut compter dans la Carrez (local clos et couvert).'},
+    {q:'Que mesure le m² pondéré ?', a:'La somme des surfaces hors œuvre affectées de coefficients de pondération : la surface hors œuvre pondérée.'},
+    {q:'Quels coefficients pour un sas d’entrée couvert et fermé ? un balcon ? une terrasse ? un garage ?', a:'0,70 ; 0,40 (plus de 1 m de saillie, plus de 2 m²) ; 0,40 ; garage non pris en compte.'},
+    {q:'Quel coefficient pour le rez-de-chaussée aménagé ?', a:'1. Rez-de-chaussée non aménagé (caves, communs) : 0,50.'},
+    {q:'Quelle est la formule de la méthode par le revenu ?', a:'Valeur vénale = revenu annuel net ÷ taux de capitalisation.'},
+    {q:'Produit ou fruits ? Qui est quoi ?', a:'Le produit est versé une fois (le prix). Les fruits reviennent périodiquement (les loyers).'},
+    {q:'Pourquoi retire-t-on les charges du loyer ?', a:'On capitalise le revenu net : le loyer hors charges, comme 1 370 € − 120 € = 1 250 €.'},
+    {q:'Taux de capitalisation usuel ?', a:'Entre 4 et 6 % en général ; de 2 à 12 % selon la catégorie. Plus élevé pour un local professionnel ou commercial.'},
+    {q:'Quelles sont les catégories de logement de la loi de 1948 ?', a:'Exceptionnelle (luxe), I, II A, II B, II C, III A, III B, IV : selon la qualité de la construction, le confort et l’équipement.'},
+    {q:'Quand la méthode par le revenu ne convient-elle pas ?', a:'Bien non loué, loyer non révisé récemment ou volontairement minoré.'},
+    {q:'Le loyer est-il libre ?', a:'En principe oui, mais il tient compte du marché ; il est encadré dans certains territoires.'},
+    {q:'Quel texte fixe les caractéristiques du logement décent ?', a:'Le décret n° 2002-120 du 30 janvier 2002 (la notion vient de la loi SRU du 13 décembre 2000).'},
+    {q:'Surface minimale d’une pièce principale décente ?', a:'9 m² et 2,20 m de hauteur, ou 20 m³ de volume.'},
+    {q:'Quels logements ne peuvent plus être loués selon le DPE ?', a:'Les G depuis 2025. Les F à partir de 2028, les E à partir de 2034. En 2023-2024 : seuil de 450 kWh/m²/an.'},
+    {q:'Les cinq critères de la décence ?', a:'Surface minimale, sécurité et santé, pas de nuisibles, performance énergétique, équipements.'},
+    {q:'Qu’est-ce qu’une zone tendue ?', a:'Une agglomération où la demande de logements dépasse l’offre.'},
+    {q:'Quel plafond fixe l’encadrement du niveau des loyers ?', a:'Le loyer de référence majoré : le loyer de référence + 20 %. Le minoré est − 30 %.'},
+    {q:'Quelle date de loi pour ALUR ?', a:'24 mars 2014 (n° 2014-366). Ton cours dit 27 mars : c’est inexact.'},
+    {q:'Estimation ou expertise : où est la différence ?', a:'L’estimation est gratuite et sans caractère officiel. L’expertise est un rapport écrit, payant, engageant la responsabilité de l’expert.'},
+    {q:'Que contient une expertise ?', a:'La mission, le bien et sa situation, l’appréciation qualitative, l’étude du marché, l’évaluation explicite de la valeur vénale.'},
+    {q:'Qui demande une expertise ?', a:'Le tribunal (partage), l’administration fiscale (succession, IFI), les banques (prêt-relais).'},
+    {q:'Qu’est-ce que Notexpert ?', a:'Un réseau (et label du CSN) de notaires et collaborateurs formés à l’expertise immobilière, avec plus de deux ans de pratique ; règles de TEGoVA.'},
+    {q:'Ordre de grandeur d’une mise à prix aux enchères notariales ?', a:'Inférieure d’au moins 30 % à la valeur vénale (d’après ton cours).'},
+    {q:'Comment finissent les enchères ?', a:'Deux feux de 30 secondes : si personne ne surenchérit, le dernier enchérisseur est adjudicataire. Vente judiciaire : 90 secondes.'},
+    {q:'Qui peut surenchérir après l’adjudication ?', a:'Toute personne, dans les 10 jours, d’au moins 10 % : nouvelle séance de vente.'},
+    {q:'L’adjudicataire peut-il se rétracter ?', a:'Non. L’acquéreur d’un compromis (vente interactive, vente classique) garde un délai de rétractation de 10 jours.'},
+    {q:'Durée du mandat dans Immo-interactif ?', a:'Mandat exclusif de 6 à 8 semaines au plus.'},
+    {q:'Déroulé d’Immo-interactif ?', a:'Mandat exclusif, annonce et visites (3 à 4 semaines), agrément électronique, 24 heures d’offres en ligne, le vendeur choisit, compromis.'},
+    {q:'Dans Immo-interactif, le vendeur doit-il choisir l’offre la plus haute ?', a:'Non : il choisit celle qui lui convient le mieux.'},
+    {q:'Quels avantages pour l’acquéreur d’une vente interactive ?', a:'Pas de déplacement, pas d’argent déposé d’avance, informations juridiques et techniques, offre ajustée en temps réel.'}
+  ],
+  quiz:[
+    {q:'La valeur vénale est…', o:['le prix demandé par le vendeur', 'le prix auquel le bien pourrait se vendre dans des conditions normales de marché', 'la valeur fiscale du bien', 'le prix du dernier achat'], a:1, e:'Elle se calcule par comparaison ou par le revenu.'},
+    {q:'La négociation immobilière est, pour le notaire, une activité…', o:['principale', 'accessoire', 'interdite', 'réservée aux notaires salariés'], a:1, e:'Le Conseil d’État l’a admise à titre accessoire (23 février 2000).'},
+    {q:'Quel texte actuel encadre la négociation notariale ?', o:['le décret de 1971 seul', 'le règlement professionnel du notariat (art. 7.1.2.2)', 'la loi Hoguet', 'le code de commerce uniquement'], a:1, e:'Arrêté du 29 janvier 2024 : le règlement remplace l’ancien règlement national.'},
+    {q:'Le mandat de négociation doit être…', o:['verbal', 'écrit, avec le mode de calcul des honoraires', 'toujours exclusif', 'gratuit'], a:1, e:'Il indique aussi qui paie les honoraires et sa durée.'},
+    {q:'Le notaire peut démarcher des clients pour obtenir un mandat.', tf:true, a:false, e:'Le démarchage direct ou par personne interposée est interdit.'},
+    {q:'Les honoraires de négociation du notaire sont…', o:['fixés par décret', 'libres depuis le 1er mars 2016', 'plafonnés à 3 %', 'égaux à ceux des agents'], a:1, e:'Auparavant, c’était un émolument fixé par décret.'},
+    {q:'PERVAL est la base des ventes…', o:['d’Île-de-France', 'de province', 'des enchères', 'des locations'], a:1, e:'L’Île-de-France a la base BIEN.'},
+    {q:'Quelle loi rend obligatoire l’alimentation de PERVAL / BIEN ?', o:['la loi du 28 mars 2011', 'la loi Macron de 2015', 'la loi ALUR', 'la loi Carrez'], a:0, e:'Loi n° 2011-331 : modernisation des professions juridiques et judiciaires.'},
+    {q:'Un avant-contrat est signé le 3 mars. Au plus tard, les données sont transmises…', o:['sous 30 jours', 'sous 60 jours', 'sous un an', 'à la signature de l’acte'], a:0, e:'30 jours pour l’avant-contrat, 60 jours après l’acte authentique.'},
+    {q:'La base PERVAL sert à estimer une valeur vénale.', tf:true, a:true, e:'Elle recense les ventes notariales : succession, donation, partage, conseil.'},
+    {q:'Quatre ventes à 2 000, 2 100, 2 200 et 2 300 €/m² : le prix moyen est…', o:['2 100 €/m²', '2 150 €/m²', '2 200 €/m²', '2 300 €/m²'], a:1, e:'Total 8 600 ÷ 4 = 2 150 €/m².'},
+    {q:'Avec 2 150 €/m², un bien de 60 m² vaut…', o:['129 000 €', '120 000 €', '135 000 €', '215 000 €'], a:0, e:'2 150 × 60 = 129 000 €.'},
+    {q:'Le prix de vente calculé de 130 329,78 € s’annonce…', o:['130 329,78 €', '130 330 €', '130 300 €', '130 000,78 €'], a:2, e:'Ni centimes, ni dizaines d’euros.'},
+    {q:'Pour comparer un lot d’habitation en copropriété, on préfère…', o:['le m² pondéré', 'le m² loi Carrez', 'l’hectare', 'le m³'], a:1, e:'Le m² pondéré sert aux immeubles bâtis, le m² nu pour les terrains.'},
+    {q:'Une cave compte dans la surface habitable.', tf:true, a:false, e:'Caves, garages, remises, terrasses, loggias, balcons et vérandas sont exclus.'},
+    {q:'Une partie d’une chambre de moins de 1,80 m de hauteur…', o:['compte à moitié', 'ne compte pas', 'compte entièrement', 'compte si elle est vitrée'], a:1, e:'Les parties de moins de 1,80 m sont exclues (habitable et Carrez).'},
+    {q:'Dimensions minimales d’un logement pour les 4 premiers habitants ?', o:['9 m² et 20 m³', '14 m² et 33 m³ par habitant', '10 m² et 23 m³ par habitant', '16 m² en tout'], a:1, e:'10 m² et 23 m³ valent pour chaque habitant en plus.'},
+    {q:'La superficie Carrez est définie par…', o:['l’art. R. 156-1 du CCH', 'l’art. 46 de la loi de 1965 et l’art. 4-1 du décret de 1967', 'la loi SRU', 'l’arrêté de 1974'], a:1, e:'Ton cours cite R. 156-1, qui définit la surface habitable.'},
+    {q:'Un lot de copropriété de 6 m² est pris en compte dans la loi Carrez.', tf:true, a:false, e:'Les lots de moins de 8 m² ne sont pas comptés.'},
+    {q:'Surface habitable : entrée 5 m², séjour 20 m², cave 4 m², balcon 6 m². Total ?', o:['25 m²', '35 m²', '29 m²', '20 m²'], a:0, e:'Cave et balcon sont exclus : 5 + 20 = 25 m².'},
+    {q:'Un sas d’entrée couvert et fermé de 3 m² compte, en m² pondéré, pour…', o:['3 m²', '2,1 m²', '1,5 m²', '0 m²'], a:1, e:'Coefficient 0,70 : 3 × 0,70 = 2,1 m².'},
+    {q:'Un garage attenant dans le calcul du m² pondéré…', o:['compte à 0,50', 'n’est pas pris en compte', 'compte à 1', 'compte à 0,40'], a:1, e:'Les garages sont exclus.'},
+    {q:'Un balcon de 4 m² dépassant de 1,20 m compte, en pondéré, pour…', o:['1,6 m²', '4 m²', '2,4 m²', '0 m²'], a:0, e:'Coefficient 0,40 : 4 × 0,40 = 1,6 m².'},
+    {q:'La méthode par le revenu consiste à…', o:['multiplier le loyer par 12', 'diviser le revenu annuel net par un taux de capitalisation', 'multiplier le loyer par le taux', 'comparer des ventes'], a:1, e:'Valeur = revenu net annuel ÷ taux.'},
+    {q:'Loyer mensuel 900 €, dont 100 € de charges, taux 4 %. Valeur vénale ?', o:['270 000 €', '240 000 €', '216 000 €', '200 000 €'], a:1, e:'(900 − 100) × 12 = 9 600 € par an ; 9 600 ÷ 0,04 = 240 000 €. On ne capitalise pas les charges.'},
+    {q:'Les fruits d’un immeuble sont…', o:['le prix de vente', 'les loyers', 'les diagnostics', 'les charges'], a:1, e:'Les fruits sont périodiques ; le produit est unique.'},
+    {q:'Le taux de capitalisation est généralement plus élevé pour…', o:['les logements de luxe', 'les locaux professionnels ou commerciaux', 'les maisons', 'les terrains'], a:1, e:'Leurs loyers sont plus élevés.'},
+    {q:'Les taux de capitalisation par catégorie sont fixés par un texte.', tf:true, a:false, e:'Ce sont des usages d’expertise, pas une règle légale.'},
+    {q:'Le prix de base du m² de la valeur locative (loi de 1948) a été revalorisé par…', o:['le décret du 27 juin 2025', 'la loi ALUR', 'l’arrêté du 5 juillet 2024', 'le décret du 30 janvier 2002'], a:0, e:'Décret n° 2025-592, modifiant le décret du 10 décembre 1948.'},
+    {q:'Le décret qui fixe les caractéristiques du logement décent date du…', o:['30 janvier 2002', '30 janvier 2022', '13 décembre 2000', '24 mars 2014'], a:0, e:'Décret n° 2002-120. La loi SRU du 13 décembre 2000 a posé la notion.'},
+    {q:'Une pièce principale décente a…', o:['au moins 9 m² et 2,20 m de hauteur, ou 20 m³', 'au moins 14 m²', 'au moins 16 m²', 'au moins 7 m²'], a:0, e:'Les 16 m² concernent deux colocataires.'},
+    {q:'Un logement classé G peut-il être loué en 2026 ?', o:['oui, toujours', 'non, depuis le 1er janvier 2025', 'oui jusqu’en 2028', 'seulement en zone tendue'], a:1, e:'F en 2028, E en 2034.'},
+    {q:'La loi ALUR date du…', o:['27 mars 2014', '24 mars 2014', '28 mars 2011', '6 juillet 1989'], a:1, e:'Loi n° 2014-366.'},
+    {q:'En zone d’encadrement, le plafond du loyer est…', o:['le loyer de référence', 'le loyer de référence majoré (+ 20 %)', 'le loyer minoré', 'libre'], a:1, e:'Le minoré (− 30 %) sert pour le complément de loyer.'},
+    {q:'Quelle date marque la fin prévue de l’expérimentation d’encadrement des loyers ?', o:['24 novembre 2026', '1er janvier 2028', '1er mars 2016', '30 janvier 2002'], a:0, e:'Sauf prolongation par la loi (un vote était attendu les 18 et 19 novembre 2026).'},
+    {q:'L’estimation immobilière est…', o:['payante et officielle', 'gratuite et sans caractère formel', 'toujours requise par le juge', 'un rapport engageant la responsabilité de l’expert'], a:1, e:'L’expertise est le rapport formel, payant.'},
+    {q:'Qui peut requérir une expertise immobilière ?', o:['le tribunal', 'l’administration fiscale', 'une banque', 'tous les trois'], a:3, e:'Partage litigieux, succession ou IFI, prêt-relais.'},
+    {q:'Notexpert est…', o:['un diagnostic immobilier', 'un réseau et label de notaires experts', 'une base de données', 'un portail d’annonces'], a:1, e:'Créé par le Conseil supérieur du notariat.'},
+    {q:'Aux enchères notariales, la mise à prix est inférieure à la valeur vénale d’au moins…', o:['5 %', '10 %', '30 %', '50 %'], a:2, e:'D’après ton cours : pour rendre le bien attractif.'},
+    {q:'Après l’adjudication, la surenchère est possible pendant…', o:['48 heures', '10 jours', '2 mois', '45 jours'], a:1, e:'Au moins 10 % de plus que le prix adjugé.'},
+    {q:'L’adjudicataire peut se rétracter dans les 10 jours.', tf:true, a:false, e:'Aucune rétractation. Elle existe pour l’acquéreur d’un compromis.'},
+    {q:'Dans Immo-interactif, le vendeur retient…', o:['l’offre la plus haute obligatoirement', 'l’offre qui lui convient le mieux', 'la première offre', 'l’offre tirée au sort'], a:1, e:'Il n’est pas tenu de choisir le mieux-disant.'},
+    {q:'Le mandat d’une vente interactive dure…', o:['3 mois', '6 à 8 semaines au plus', '1 an', '24 heures'], a:1, e:'La vente en ligne dure 24 heures (selon ton cours), la vente complète environ 45 jours.'},
+    {q:'Une vente interactive aboutit à…', o:['un procès-verbal d’adjudication', 'un compromis de vente', 'une vente sans acte', 'un bail'], a:1, e:'Puis les 10 jours de rétractation de l’acquéreur.'},
+    {q:'Dans une saisie immobilière, la garantie à déposer est de…', o:['20 % de la mise à prix', '10 % de la mise à prix, au moins 3 000 €', '30 % du prix', '5 % de la valeur'], a:1, e:'Le chiffre de 20 % de ton cours vient des ventes volontaires.'}
+  ],
+  sorts:[
+    {id:'immo4_s1', title:'Estimation ou expertise ?', intro:'Une estimation, ou une expertise immobilière ?', cats:[{id:'est', l:'Estimation'}, {id:'exp', l:'Expertise'}], items:[
+      {e:'🆓', t:'Elle est gratuite', c:'est'},
+      {e:'💶', t:'Elle est payante (honoraires)', c:'exp'},
+      {e:'📄', t:'Un rapport écrit, formel et officiel', c:'exp'},
+      {e:'💬', t:'Aucun caractère formel ou officiel', c:'est'},
+      {e:'🔍', t:'Peu de détails, une fourchette de prix', c:'est'},
+      {e:'⚖️', t:'Demandée par le tribunal pour un partage litigieux', c:'exp'},
+      {e:'🏛️', t:'Demandée par l’administration fiscale pour une succession', c:'exp'},
+      {e:'🏦', t:'Demandée par une banque pour un prêt-relais', c:'exp'},
+      {e:'🛡️', t:'L’expert engage sa responsabilité', c:'exp', w:'Il a aussi une assurance de responsabilité civile professionnelle.'},
+      {e:'🏷️', t:'Le négociateur la fait pour fixer un prix de mise en vente', c:'est'},
+      {e:'📊', t:'Contient une étude du marché et l’évaluation explicite de la valeur vénale', c:'exp'},
+      {e:'🎓', t:'Notexpert : label des notaires qui la réalisent', c:'exp'}]},
+    {id:'immo4_s2', title:'Quelle méthode, quelle unité ?', intro:'Pour estimer chaque bien, quelle méthode ou quelle unité de mesure ?', cats:[{id:'dir', l:'Comparaison directe'}, {id:'carrez', l:'m² habitable / Carrez'}, {id:'pond', l:'m² pondéré'}, {id:'rev', l:'Par le revenu'}], items:[
+      {e:'🏘️', t:'Une moyenne de prix au m² de ventes PERVAL récentes, multipliée par la surface', c:'dir'},
+      {e:'🏢', t:'Un appartement en copropriété, estimé à la surface de ses pièces à vivre', c:'carrez'},
+      {e:'🏚️', t:'Un chalet plain-pied, avec des coefficients selon les niveaux et dépendances', c:'pond'},
+      {e:'🏠', t:'Un appartement loué 1 250 € par mois hors charges', c:'rev'},
+      {e:'📈', t:'Valeur = revenu annuel net ÷ taux de capitalisation', c:'rev'},
+      {e:'🧮', t:'On additionne les surfaces × coefficients (0,70, 0,40, 1…)', c:'pond'},
+      {e:'📏', t:'On retire les surfaces sous 1,80 m, les caves et les garages', c:'carrez'},
+      {e:'🔎', t:'On cherche des biens de même type, même secteur, vendus récemment', c:'dir'},
+      {e:'🏬', t:'Un immeuble de rapport entièrement loué', c:'rev'},
+      {e:'🚫', t:'Les garages ne comptent pas', c:'pond', w:'Dans la grille de pondération, les garages ne sont pas pris en compte. (Ils sont aussi exclus de la surface habitable.)'}]},
+    {id:'immo4_s3', title:'Enchères notariales ou vente interactive ?', intro:'À quelle vente correspond chaque caractéristique ?', cats:[{id:'ench', l:'Enchères en salle'}, {id:'inter', l:'Immo-interactif'}], items:[
+      {e:'🏛️', t:'Une salle de ventes (chambre, mairie, conseil régional)', c:'ench'},
+      {e:'💻', t:'Une salle des ventes virtuelle sur immobilier.notaires.fr', c:'inter'},
+      {e:'🕯️', t:'Les feux de 30 secondes', c:'ench'},
+      {e:'⏱️', t:'24 heures d’offres en direct sur internet', c:'inter'},
+      {e:'🏆', t:'Le plus offrant devient adjudicataire', c:'ench'},
+      {e:'🤝', t:'Le vendeur choisit l’offre qui lui convient le mieux', c:'inter'},
+      {e:'🚫', t:'Aucun droit de rétractation', c:'ench'},
+      {e:'📝', t:'Un compromis de vente, puis 10 jours de rétractation', c:'inter'},
+      {e:'📉', t:'Une mise à prix décotée d’au moins 30 % de la valeur vénale', c:'ench'},
+      {e:'✍️', t:'Un mandat exclusif de 6 à 8 semaines', c:'inter'},
+      {e:'💳', t:'Chèque de banque de 20 % de la mise à prix (ton cours)', c:'ench'},
+      {e:'⬆️', t:'Surenchère d’au moins 10 % dans les 10 jours', c:'ench'},
+      {e:'🚪', t:'L’acquéreur n’a pas à se déplacer ni à déposer d’argent', c:'inter'}]},
+    {id:'immo4_s4', title:'Négociation du notaire : permis ou interdit ?', intro:'Que prévoit l’article 7.1.2.2 du règlement professionnel du notariat ?', cats:[{id:'ok', l:'Permis'}, {id:'ko', l:'Interdit'}], items:[
+      {e:'📝', t:'Négocier avec un mandat écrit', c:'ok'},
+      {e:'📣', t:'Démarcher des propriétaires pour obtenir un mandat', c:'ko'},
+      {e:'📰', t:'Publier une annonce pour un bien précis, avec les usages de la profession', c:'ok'},
+      {e:'🏘️', t:'Publier une annonce générale de biens à vendre', c:'ko'},
+      {e:'💰', t:'Publier une annonce de capitaux à placer ou à emprunter', c:'ko'},
+      {e:'🪟', t:'Afficher des annonces dans une vitrine formant devanture de boutique', c:'ko'},
+      {e:'🤝', t:'Se grouper à plusieurs notaires avec un fichier commun d’offres', c:'ok'},
+      {e:'🏪', t:'Ouvrir une succursale pour la négociation, avec entrée distincte', c:'ko'},
+      {e:'🪧', t:'Poser le panonceau notarial', c:'ok', w:'Le panonceau est autorisé ; l’affichage en vitrine de boutique ne l’est pas.'},
+      {e:'⏳', t:'Un mandat d’une durée raisonnable', c:'ok'},
+      {e:'🎯', t:'Négocier en vue de la réalisation d’un contrat', c:'ok'}]}
+  ],
+  cases:[
+    {id:'immo4_c1', title:'Un T2 à Nancy', tag:'Comparaison directe', facts:['Un client veut vendre son T2 de 49,42 m² au centre-ville de Nancy.', 'Quatre ventes récentes dans PERVAL : 111 900 € pour 48,08 m² ; 125 000 € pour 46,43 m² ; 131 300 € pour 45,35 m² ; 131 800 € pour 50,04 m².'], q:'Quelle valeur vénale annoncer ?', steps:[
+      {l:'Les comparables', h:'Quatre T2 vendus récemment, dans le même secteur, d’une surface voisine : c’est la <b>comparaison directe</b> avec la base PERVAL.'},
+      {l:'Le prix au m² de chaque vente', h:'111 900 ÷ 48,08 = 2 327,37 ; 125 000 ÷ 46,43 = 2 692,22 ; 131 300 ÷ 45,35 = 2 895,26 ; 131 800 ÷ 50,04 = 2 633,89.'},
+      {l:'La moyenne', h:'Total des prix au m² ÷ 4 = <b>2 637,19 €/m²</b>.'},
+      {l:'La valeur vénale', h:'2 637,19 × 49,42 = <b>130 329,78 €</b>.'},
+      {l:'L’arrondi', h:'On n’affiche ni centimes ni dizaines d’euros : <b>130 300 €</b>.'}]},
+    {id:'immo4_c2', title:'La Petite France à Strasbourg', tag:'Surface habitable', facts:['Appartement en copropriété, prix moyen du quartier : 5 045 €/m².', 'Entrée 4,75 m² ; cuisine 8,25 m² ; salon 20,44 m² ; loggia 7,50 m² ; salle d’eau 6,12 m².', 'Deux chambres mansardées : 10,14 m² (dont 1,11 m² sous 1,80 m) et 11,89 m² (dont 1,72 m² sous 1,80 m).', 'Une cave de 3,80 m² et un garage de 11 m².'], q:'Quelle surface habitable retenir, et quelle valeur vénale ?', steps:[
+      {l:'Ce qu’on exclut', h:'La <b>loggia</b>, la <b>cave</b> et le <b>garage</b> ne comptent pas (R. 156-1), ni les parties de chambre de moins de 1,80 m.'},
+      {l:'Les chambres', h:'10,14 − 1,11 = <b>9,03 m²</b> ; 11,89 − 1,72 = <b>10,17 m²</b>.'},
+      {l:'La surface habitable', h:'4,75 + 8,25 + 20,44 + 9,03 + 10,17 + 6,12 = <b>58,76 m²</b>.'},
+      {l:'La valeur vénale', h:'58,76 × 5 045 = <b>296 444 €</b>, soit environ <b>296 400 €</b>.'},
+      {l:'Le + du prof', h:'En vente d’un lot de copropriété, c’est la <b>superficie Carrez</b> qui figure dans l’acte (art. 4-1 du décret de 1967). Elle exclut cave, garage et parties sous 1,80 m ; une loggia <b>fermée</b> pourrait y compter, pas une loggia ouverte. Ici, retiens la surface habitable de l’exercice.'}]},
+    {id:'immo4_c3', title:'Le chalet de Gérardmer', tag:'M² pondéré', facts:['Chalet de plain-pied, prix moyen : 2 491 €/m².', 'Sas d’entrée couvert et fermé : 2,70 m² ; cuisine : 7,82 m² ; salon / salle à manger : 22,10 m².', 'Chambre avec salle de bains / WC : 16,79 m² (dont une petite ouverture de 0,85 m² avec garde-corps).', 'Garage attenant : 9,89 m².'], q:'Quelle surface pondérée, et quelle valeur ?', steps:[
+      {l:'Les coefficients', h:'Rez-de-chaussée aménagé : <b>1</b>. Sas couvert et fermé : <b>0,70</b>. Garage : <b>non pris en compte</b>.'},
+      {l:'Le sas', h:'2,70 × 0,70 = <b>1,89 m²</b>.'},
+      {l:'Les pièces', h:'7,82 + 22,10 + 16,79 = <b>46,71 m²</b> à 1.'},
+      {l:'La surface pondérée', h:'1,89 + 46,71 = <b>48,60 m²</b>.'},
+      {l:'La valeur', h:'48,60 × 2 491 = 121 062,60 €, soit environ <b>121 100 €</b>.'}]},
+    {id:'immo4_c4', title:'Un II B à Paris', tag:'Méthode par le revenu', facts:['Appartement de catégorie II B à Paris, loué 1 370 € par mois charges comprises.', 'Les charges (entretien, éclairage des parties communes, avances gaz et électricité) : 120 € par mois.', 'Taux de capitalisation retenu : 3 % (fourchette II B à Paris : 2 à 4 %).'], q:'Quelle valeur vénale ?', steps:[
+      {l:'Pourquoi cette méthode ?', h:'Le bien est <b>loué</b>, avec un loyer récent : on peut capitaliser les fruits.'},
+      {l:'Le loyer net', h:'1 370 − 120 = <b>1 250 €</b> par mois, hors charges.'},
+      {l:'Le revenu annuel net', h:'1 250 × 12 = <b>15 000 €</b>.'},
+      {l:'La valeur vénale', h:'15 000 ÷ 0,03 = <b>500 000 €</b>.'},
+      {l:'La prudence', h:'À 2 %, on trouverait 750 000 € ; à 4 %, 375 000 €. Le taux change tout : le notaire recoupe avec la comparaison.'}]},
+    {id:'immo4_c5', title:'Un studio à louer', tag:'Décence et loyer', facts:['Madame BENOIT loue un studio : une pièce de 8,5 m² avec 2,50 m de hauteur sous plafond.', 'Diagnostic de performance énergétique : classe F. Bail à signer en novembre 2026.', 'Le studio est situé dans un territoire où le loyer est encadré.'], q:'Peut-elle le louer, et à quel prix maximum ?', steps:[
+      {l:'La surface', h:'8,5 m² est inférieur à 9 m². Mais le décret accepte <b>9 m² et 2,20 m</b> <b>ou</b> un volume de <b>20 m³</b> : 8,5 × 2,50 = 21,25 m³. Critère rempli.'},
+      {l:'L’énergie', h:'Classe F : elle reste louable en 2026 (les G sont exclus depuis le 1er janvier 2025). Mais les F seront exclus à partir de 2028, sauf évolution de la loi : elle doit prévoir des travaux.'},
+      {l:'Les autres critères', h:'Sécurité et santé, absence de nuisibles, équipements (cuisine avec évier, WC séparé, électricité) : à vérifier.'},
+      {l:'Le plafond', h:'Dans un territoire d’encadrement, le loyer ne dépasse pas le <b>loyer de référence majoré</b> (+ 20 %), sauf complément de loyer pour un caractère exceptionnel.'},
+      {l:'L’actualité', h:'L’expérimentation prend fin le <b>24 novembre 2026</b> sauf prolongation : le vote était attendu les 18 et 19 novembre. Le notaire vérifie la loi en vigueur à la date du bail.'}]}
+  ]
+});
+JLG.fiche('immo4', [
+  {id:'marche', t:'Le marché et la négociation', items:[
+    {d:'Négociation immobilière notariale', v:'Activité traditionnelle mais accessoire du notaire (Conseil d’État, 23 février 2000), encadrée par le règlement professionnel du notariat (art. 7.1.2.2, arrêté du 29 janvier 2024).'},
+    {l:'Les règles', items:['Mandat écrit : honoraires, débiteur, durée raisonnable', 'Pas de démarchage', 'Pas d’annonces générales ni de vitrine de boutique', 'Groupement et fichier commun autorisés', 'Pas de succursale dédiée avec entrée distincte']},
+    {kv:[['Honoraires', 'Libres depuis le 1er mars 2016 (ton cours : 3 à 6 %, agents 4 à 8 %)'], ['Pic des ventes', '2021 : environ 1,25 million sur douze mois'], ['Paris', 'Sous 10 000 €/m² depuis fin 2023']]},
+    {x:'Le 15 % de parts de marché des notaires : dépassé, retiens « minoritaire et décroissant »'}]},
+  {id:'perval', t:'PERVAL et BIEN', items:[
+    {kv:[['PERVAL', 'Province'], ['BIEN', 'Île-de-France'], ['Loi', 'Loi du 28 mars 2011 : alimentation obligatoire'], ['Délais', '30 jours (avant-contrat), 60 jours (acte)']]},
+    {p:'Elle sert à estimer la valeur vénale : succession, donation, partage, conseil patrimonial.'},
+    {a:'Art. 6 loi de ventôse an XI', v:'Les notaires contribuent à la diffusion des informations sur les mutations d’immeubles'}]},
+  {id:'comparaison', t:'Comparaison directe', items:[
+    {d:'Valeur vénale', v:'Prix auquel le bien pourrait se vendre dans des conditions normales de marché.'},
+    {l:'Les quatre calculs', num:true, items:['Prix ÷ surface = prix au m² de chaque vente', 'Total des prix au m² ÷ nombre de ventes = moyenne', 'Moyenne × surface du bien = valeur vénale', 'Arrondir : pas de dizaines ni de centimes']},
+    {tab:{head:['Exemple Nancy', 'Résultat'], rows:[['Prix moyen', '2 637,19 €/m²'], ['Surface', '49,42 m²'], ['Valeur', '130 329,78 € → 130 300 €']]}},
+    {m:'Comparer : même type, même secteur, même époque, même état'}]},
+  {id:'surfaces', t:'Surfaces', items:[
+    {tab:{head:['Surface', 'Sert à', 'Texte'], rows:[['Habitable', 'Bail, décence', 'Art. R. 156-1 CCH'], ['Carrez', 'Vente d’un lot de copropriété', 'Loi 1965, décret 1967, art. 4-1'], ['Pondérée', 'Estimation d’un immeuble bâti', 'Grille d’usage (arrêté de 1974)']]}},
+    {kv:[['Hors habitable', 'Combles non aménagés, caves, sous-sols, garages, terrasses, loggias, balcons, vérandas, parties sous 1,80 m'], ['Carrez', 'Locaux clos et couverts ; lots de moins de 8 m² écartés'], ['Dimensions', '14 m² et 33 m³ par habitant (4 premiers), 10 m² et 23 m³ ensuite']]},
+    {x:'Une véranda compte dans la Carrez, jamais dans la surface habitable'}]},
+  {id:'ponderee', t:'Le m² pondéré', items:[
+    {tab:{head:['Partie', 'Coef.'], rows:[['Rez-de-chaussée aménagé, étage habitable', '1'], ['Sas couvert et fermé', '0,70'], ['Loggia ou salle ouverte sur deux faces', '0,60'], ['Porche couvert et ouvert', '0,50'], ['Terrasse, balcon (1 m de saillie, 2 m²)', '0,40'], ['Garage', 'Exclu']]}},
+    {p:'Chalet de Gérardmer : 1,89 + 46,71 = 48,60 m², soit 121 100 € à 2 491 €/m².'}]},
+  {id:'revenu', t:'Méthode par le revenu', items:[
+    {d:'Formule', v:'Valeur vénale = (loyer mensuel hors charges × 12) ÷ taux de capitalisation'},
+    {kv:[['Produit', 'Versé une fois : le prix'], ['Fruits', 'Périodiques : les loyers'], ['Taux usuel', '4 à 6 % (2 à 12 % selon catégorie)']]},
+    {tab:{head:['Catégorie', 'Taux (usage)'], rows:[['II A, II B', '2 à 4 %'], ['II C', '3 à 6 %'], ['III A', '4 à 7 %'], ['III B', '5 à 10 %'], ['IV', '8 à 12 %']]}},
+    {p:'Paris, II B : (1 370 − 120) × 12 = 15 000 € ; ÷ 3 % = 500 000 €.'},
+    {x:'Les taux ne sont pas dans la loi : ce sont des usages d’expertise'}]},
+  {id:'location', t:'Louer : décence et encadrement', items:[
+    {a:'Décret n° 2002-120 du 30 janvier 2002', v:'Logement décent : surface, sécurité et santé, pas de nuisibles, énergie, équipements'},
+    {kv:[['Pièce principale', '9 m² et 2,20 m, ou 20 m³'], ['Colocation (ton cours)', '16 m² pour deux, + 9 m² par colocataire'], ['G', 'Exclu depuis le 1er janvier 2025'], ['F / E', 'Exclus en 2028 / 2034']]},
+    {kv:[['Loi ALUR', '24 mars 2014'], ['Plafond', 'Loyer de référence majoré (+ 20 %)'], ['Zones tendues', 'Décret du 25 août 2023'], ['Zonage A/B/C', 'Arrêté du 5 juillet 2024 (PTZ)']]},
+    {x:'Encadrement du niveau : expérimentation jusqu’au 24 novembre 2026, prolongation en discussion'}]},
+  {id:'expertise', t:'Estimation ou expertise', items:[
+    {tab:{head:['', 'Estimation', 'Expertise'], rows:[['Prix', 'Gratuite', 'Payante'], ['Forme', 'Informelle', 'Rapport écrit officiel'], ['Responsabilité', 'Non', 'Oui (assurance)'], ['Demandeur', 'Le vendeur', 'Tribunal, fisc, banque']]}},
+    {p:'Notexpert : réseau et label du CSN ; plus de deux ans de pratique ; règles de TEGoVA.'}]},
+  {id:'ventes', t:'Enchères et vente interactive', items:[
+    {tab:{head:['', 'Enchères en salle', 'Immo-interactif'], rows:[['Lieu', 'Salle de ventes', 'Salle virtuelle'], ['Fin', 'Feux de 30 s (2 feux)', '24 heures d’offres'], ['Qui décide', 'Le plus offrant', 'Le vendeur'], ['Acte', 'Procès-verbal d’adjudication', 'Compromis'], ['Rétractation', 'Aucune', '10 jours'], ['Délais', 'Surenchère 10 % sous 10 jours', 'Mandat 6 à 8 semaines']]}},
+    {m:'Enchères : on gagne en dernier. Interactif : on choisit.'}]}
+]);
+
+</script>
+<!-- ▲ JLG:CHAPITRE immo4 ▲ -->
 <!-- ▼ JLG:LEXIQUE tous ▼ -->
 <script>
 JLG.glossary([
@@ -10886,6 +11641,37 @@ JLG.glossary([
   {s:'deo', t:'Assainissement non collectif', d:'Un système d’assainissement individuel, pour un immeuble d’habitation non raccordé au réseau public de collecte. Le diagnostic est valable 3 ans.'},
   {s:['deo', 'immo'], t:'Assurance dommages-ouvrage', d:'L’assurance qui permet de réparer rapidement les désordres de construction sans attendre de savoir qui est responsable. Le vendeur en fournit la justification quand elle existe.'},
   {s:['deo', 'immo'], t:'Garantie décennale', d:'La garantie qui oblige les constructeurs à réparer pendant dix ans les dommages graves qui affectent un ouvrage.'}
+]);
+JLG.glossary([
+  /* —— Pratique des opérations immobilières · Activité 2, séance 1 : l’estimation du bien immobilier —— */
+  {s:'immo', t:'Valeur vénale', d:'Le prix auquel un bien pourrait se vendre dans les conditions normales du marché, par le jeu de l’offre et de la demande. C’est ce que le notaire estime.'},
+  {s:'immo', t:'Estimation immobilière', d:'Une évaluation gratuite, sans caractère formel ni officiel, et peu détaillée. À distinguer de l’expertise.'},
+  {s:'immo', t:'Expertise immobilière', d:'Un rapport écrit, formel et officiel, payant, rédigé par un expert qui engage sa responsabilité. Elle contient la mission, le bien, l’étude du marché et l’évaluation explicite de la valeur vénale.'},
+  {s:'immo', t:'Notexpert', d:'Le réseau et le label du Conseil supérieur du notariat pour les notaires et collaborateurs experts en évaluation immobilière, formés et ayant plus de deux ans de pratique.'},
+  {s:'immo', t:'TEGoVA', d:'The European Group of Valuers’ Associations : le groupement européen d’associations d’experts immobiliers, dont les règles méthodologiques et déontologiques inspirent la Charte de l’expertise.'},
+  {s:'immo', t:'BIEN (base)', d:'La base de données des ventes notariales d’Île-de-France. Sa jumelle de province s’appelle PERVAL.'},
+  {s:'immo', t:'Comparaison directe', d:'Méthode d’estimation par le marché : on calcule le prix moyen au m² de biens semblables, vendus récemment dans le même secteur, puis on le multiplie par la surface du bien à estimer.'},
+  {s:'immo', t:'Surface habitable', d:'La surface de plancher construite, après déduction des murs, cloisons, embrasures, marches, cages d’escaliers et gaines. Elle exclut caves, garages, terrasses, loggias, vérandas et les parties de moins de 1,80 m de hauteur.'},
+  {s:'immo', t:'Mètre carré pondéré', d:'Méthode d’estimation d’un immeuble bâti : on multiplie chaque surface par un coefficient (rez-de-chaussée aménagé 1, sas fermé 0,70, balcon 0,40…), la somme donnant la surface hors œuvre pondérée.'},
+  {s:'immo', t:'Méthode par le revenu', d:'Estimation d’un bien loué : valeur vénale = revenu annuel net (loyer hors charges × 12) ÷ taux de capitalisation.'},
+  {s:'immo', t:'Taux de capitalisation', d:'Le pourcentage qui relie le revenu annuel d’un immeuble à sa valeur. Usuellement 4 à 6 %, plus élevé pour les locaux professionnels. Un usage d’expertise, pas un texte.'},
+  {s:'immo', t:'Fruits et produit', d:'Le produit est versé une seule fois (le prix de vente). Les fruits reviennent périodiquement (les loyers).'},
+  {s:'immo', t:'Valeur locative', d:'Le loyer qu’un local pourrait rapporter. Pour les logements de la loi de 1948, elle se calcule d’après des prix de base par catégorie et par m² de surface corrigée.'},
+  {s:'immo', t:'Logement décent', d:'Un logement qui répond aux caractéristiques du décret du 30 janvier 2002 : surface minimale, sécurité et santé, pas de nuisibles, performance énergétique, équipements. Seul un logement décent peut être loué.'},
+  {s:'immo', t:'Zone tendue', d:'Une agglomération où la demande de logements dépasse l’offre. Les communes concernées sont fixées par le décret du 10 mai 2013, élargi par celui du 25 août 2023.'},
+  {s:'immo', t:'Loyer de référence majoré', d:'Dans les territoires d’encadrement des loyers, le plafond que le loyer ne peut dépasser : le loyer de référence augmenté de 20 %. Le loyer de référence minoré est inférieur de 30 %.'},
+  {s:'immo', t:'Complément de loyer', d:'Une somme ajoutée au loyer plafonné, possible seulement pour un logement aux caractéristiques exceptionnelles de localisation ou de confort.'},
+  {s:'immo', t:'Vente aux enchères notariale', d:'Une vente publique par adjudication, ouverte à tous, organisée par un notaire dans une salle de ventes. Le bien est attribué au plus offrant.'},
+  {s:'immo', t:'Adjudicataire', d:'La personne qui a fait la dernière enchère et emporte le bien. Elle signe un procès-verbal d’adjudication et ne bénéficie d’aucun droit de rétractation.'},
+  {s:'immo', t:'Mise à prix', d:'Le prix de départ des enchères. Elle est inférieure à la valeur vénale (d’au moins 30 % d’après ton cours) pour rendre le bien attractif.'},
+  {s:'immo', t:'Surenchère', d:'Une enchère supplémentaire après l’adjudication : dans les 10 jours, toute personne peut offrir au moins 10 % de plus que le prix adjugé, ce qui impose une nouvelle séance de vente.'},
+  {s:'immo', t:'Consignation', d:'Le chèque de banque ou certifié remis au notaire avant les enchères (20 % de la mise à prix, d’après ton cours). Dans une saisie immobilière, c’est une garantie de 10 %, au minimum 3 000 €.'},
+  {s:'immo', t:'Feux (enchères)', d:'Deux petites mèches artificielles de 30 secondes que le notaire allume quand il observe un silence. Si personne n’enchérit durant cette minute, le dernier enchérisseur emporte le bien.'},
+  {s:'immo', t:'Immo-interactif', d:'Le service de vente notariale interactive : une salle des ventes virtuelle sur le portail immobilier.notaires.fr, avec 24 heures d’offres en ligne. Le vendeur choisit librement l’acquéreur.'},
+  {s:'immo', t:'Mandat exclusif', d:'Le mandat par lequel le vendeur confie la vente d’un bien à un seul professionnel. Dans Immo-interactif, il dure 6 à 8 semaines au plus.'},
+  {s:['immo', 'deo'], t:'Négociation immobilière', d:'Le service par lequel le notaire accompagne son client dans la vente ou la location d’un bien. Activité traditionnelle mais accessoire, encadrée par l’article 7.1.2.2 du règlement professionnel du notariat.'},
+  {s:'immo', t:'Démarchage', d:'Le fait de rechercher de nouveaux clients pour recueillir un mandat, directement ou par personne interposée. Interdit au notaire négociateur.'},
+  {s:'immo', t:'Loi de 1948', d:'La loi du 1er septembre 1948 sur les loyers. Elle classe les logements en catégories (exceptionnelle, I, II A à IV) selon la qualité de la construction, le confort et l’équipement.'}
 ]);
 
 </script>
